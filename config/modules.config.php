@@ -15,4 +15,5 @@ return [
     'Zend\Validator',
     'Application',
     'Stoneweb',
-];
+    'Stonelink',
+    ];

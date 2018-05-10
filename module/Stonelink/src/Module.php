@@ -1,7 +1,8 @@
 <?php
-namespace Stoneweb;
+namespace Stonelink;
 
 use Zend\ModuleManager\Feature\ConfigProviderInterface;
+use Stonelink\StonelinkController;
 
 class Module implements ConfigProviderInterface
 {

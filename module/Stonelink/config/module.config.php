@@ -1,6 +1,6 @@
 <?php
 
-namespace Stoneweb;
+namespace Stonelink;
 
 use Zend\Router\Http\Segment;
 use Zend\ServiceManager\Factory\InvokableFactory;
@@ -8,23 +8,23 @@ use Zend\ServiceManager\Factory\InvokableFactory;
 return [
     'controllers' => [
         'factories' => [
-            Controller\StonewebController::class => InvokableFactory::class,
+            Controller\StonelinkController::class => InvokableFactory::class,
         ],
     ],
     
     // The following section is new and should be added to your file:
     'router' => [
         'routes' => [
-            'stoneweb' => [
+            'stonelink' => [
                 'type'    => Segment::class,
                 'options' => [
-                    'route' => '/stoneweb[/:action[/:id]]',
+                    'route' => '/stonelink[/:action[/:id]]',
                     'constraints' => [
                         'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
                         'id'     => '[0-9]+',
                     ],
                     'defaults' => [
-                        'controller' => Controller\StonewebController::class,
+                        'controller' => Controller\StonelinkController::class,
                         'action'     => 'index',
                     ],
                 ],
@@ -34,7 +34,7 @@ return [
     //the following section speaks about ...
     'view_manager' => [
         'template_path_stack' => [
-            'stoneweb' => __DIR__ . '/../view',
+            'stonelink' => __DIR__ . '/../view',
         ],
     ],
 ];
