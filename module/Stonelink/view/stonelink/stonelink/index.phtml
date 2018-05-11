@@ -1,0 +1,37 @@
+<?php
+// module/Album/view/album/album/index.phtml:
+
+$title = 'My albums';
+$this->headTitle($title);
+?>
+<h1><?= $this->escapeHtml($title) ?></h1>
+<p>
+    <a href="<?= $this->url('album', ['action' => 'add']) ?>">Display the facilities table data</a>
+</p>
+
+<table class="table">
+<tr>
+    <th>Facility_c</th>
+    <th>Facility_n</th>
+    <th>Province</th>
+    <th>County</th>
+    <th>District</th>
+    <th>Division</th>
+    <th>&nbsp;</th>
+</tr>
+<?php foreach ($albums as $stonelink) : ?>
+    <tr>
+        <td><?= $this->escapeHtml($stonelink->facility_c) ?></td>
+        <td><?= $this->escapeHtml($stonelink->facility_n) ?></td>
+        <td><?= $this->escapeHtml($stonelink->province) ?></td>
+        <td><?= $this->escapeHtml($stonelink->county) ?></td>
+        <td><?= $this->escapeHtml($stonelink->district) ?></td>
+        <td><?= $this->escapeHtml($stonelink->division) ?></td>
+        
+        <td>
+            <a href="<?= $this->url('stonelink', ['action' => 'edit', 'id' => $stonelink->gid]) ?>">Edit</a>
+            <a href="<?= $this->url('stonelink', ['action' => 'delete', 'id' => $stonelink->gid]) ?>">Delete</a>
+        </td>
+    </tr>
+<?php endforeach; ?>
+</table>
