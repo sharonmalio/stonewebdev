@@ -1,11 +1,8 @@
-<?php
-
+<?php 
 namespace Stonelink\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
-
-// Add the following import:
 use Stonelink\Model\StonelinkTable;
 
 
@@ -16,47 +13,29 @@ class StonelinkController extends AbstractActionController
     private $table;
     
     // Add this constructor:
-    public function __construct(kenya_maps_2015_health_facilities $table)
+    public function __construct(StonelinkTable $table)
     {
-        $this->kenya_maps_2015_health_facilities = $table;
+        $this->table = $table;
     }
     
     public function indexAction()
     {
         return new ViewModel([
-            'facilities' => $this->kenya_maps_2015_health_facilities->fetchAll(),
+            'hospitals' => $this->table->fetchAll(),
         ]);
     }
-    
-    public function displayAction()
+
+    public function addAction()
     {
         
     }
     
-    public function findnearestAction()
+    public function editAction()
     {
         
     }
     
-    public function searchfacilityAction()
-    {
-        
-    }
-    public function searchclinicianAction()
-    {
-        
-    }
-    
-    public function bookappointmentAction()
-    {
-        
-    }
-    
-    public function payAction()
-    {
-        
-    }
-    public function rateAction()
+    public function deleteAction()
     {
         
     }

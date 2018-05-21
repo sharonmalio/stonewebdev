@@ -21,7 +21,6 @@
 	"autoload" : {
 		"psr-4" : {
 			"Application\\" : "module/Application/src/",
-			"Stoneweb\\":"module/Stoneweb/src/",
 			"Stonelink\\":"module/Stonelink/src/"
 		}
 	},

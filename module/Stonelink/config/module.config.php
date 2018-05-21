@@ -1,16 +1,17 @@
-<?php
-
+<?php 
 namespace Stonelink;
 
 use Zend\Router\Http\Segment;
-use Zend\ServiceManager\Factory\InvokableFactory;
+
+
 
 return [
-    'controllers' => [
-        'factories' => [
-            Controller\StonelinkController::class => InvokableFactory::class,
-        ],
-    ],
+    
+//     'controllers' => [
+//         'factories' => [
+//             Controller\StonelinkController::class => InvokableFactory::class,
+//         ],
+//     ],
     
     // The following section is new and should be added to your file:
     'router' => [
@@ -31,7 +32,7 @@ return [
             ],
         ],
     ],
-    //the following section speaks about ...
+
     'view_manager' => [
         'template_path_stack' => [
             'stonelink' => __DIR__ . '/../view',

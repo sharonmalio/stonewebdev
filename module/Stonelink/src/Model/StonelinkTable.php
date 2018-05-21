@@ -1,4 +1,4 @@
-<?php
+<?php 
 namespace Stonelink\Model;
 
 use RuntimeException;
@@ -18,7 +18,7 @@ class StonelinkTable
         return $this->tableGateway->select();
     }
 
-    public function getAlbum($gid)
+    public function getHospital($gid)
     {
         $gid = (int) $gid;
         $rowset = $this->tableGateway->select(['gid' => $gid]);
@@ -33,37 +33,42 @@ class StonelinkTable
         return $row;
     }
 
-    public function saveAlbum(StonelinkAlbum $stonelinkalbum)
+    public function saveHospital(Stonelink $stonelink)
     {
         $data = [
-            'facility_c' => $stonelinkalbum->facility_c,
-            'facility_n'  => $stonelinkalbum->facility_n,
-            'province'  => $stonelinkalbum->province,
-            'county'  => $stonelinkalbum->county,
-            'district'  => $stonelinkalbum->district,
-            'division'  => $stonelinkalbum->division,
+            'facility_c' => $stonelink->facility_c,
+            'facility_n'  => $stonelink->facility_n,
+            'province' => $stonelink->province,
+            'county' => $stonelink->county,
+            'district' => $stonelink->district,
+            'division' => $stonelink->division,
+            'sublocatio' => $stonelink->sublocatio,
+            'constituen' => $stonelink->constituen,
+            'nearest_to' => $stonelink->nearest_to,
+            'longitude' => $stonelink->longitude,
+            'latitude' => $stonelink->latitude,
             
         ];
 
-        $gid = (int) $stonelinkalbum->gid;
+        $gid = (int) $stonelink->gid;
 
         if ($gid === 0) {
             $this->tableGateway->insert($data);
             return;
         }
 
-        if (! $this->getAlbum($gid)) {
+        if (! $this->getHospital($gid)) {
             throw new RuntimeException(sprintf(
                 'Cannot update album with identifier %d; does not exist',
-                $id
+                $gid
             ));
         }
 
         $this->tableGateway->update($data, ['gid' => $gid]);
     }
 
-    public function deleteAlbum($gid)
+    public function deleteHospital($gid)
     {
-        $this->tableGateway->delete(['id' => (int) $gid]);
+        $this->tableGateway->delete(['gid' => (int) $gid]);
     }
 }
