@@ -8,7 +8,7 @@ use Zend\View\Model\ViewModel;
 // Add the following import:
 use Stonelink\Model\StonelinkTable;
 
-  
+
 class StonelinkController extends AbstractActionController
 {
     
@@ -16,15 +16,15 @@ class StonelinkController extends AbstractActionController
     private $table;
     
     // Add this constructor:
-    public function __construct(StonelinkTable $table)
+    public function __construct(kenya_maps_2015_health_facilities $table)
     {
-        $this->stonelinktable = $table;
+        $this->kenya_maps_2015_health_facilities = $table;
     }
-
+    
     public function indexAction()
     {
         return new ViewModel([
-            'facilities' => $this->stonelinktable->fetchAll(),
+            'facilities' => $this->kenya_maps_2015_health_facilities->fetchAll(),
         ]);
     }
     
