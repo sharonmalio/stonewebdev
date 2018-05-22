@@ -25,7 +25,7 @@ return [
                         'id'     => '[0-9]+',
                     ],
                     'defaults' => [
-                        'controller' => Controller\StonelinkController::class,
+                        'controller' =>Controller\StonelinkController::class,
                         'action'     => 'index',
                     ],
                 ],

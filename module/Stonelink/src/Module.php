@@ -20,10 +20,10 @@ class Module implements ConfigProviderInterface
         return [
             'factories' => [
                 Model\StonelinkTable::class => function($container) {
-                    $tableGateway = $container->get(Model\AlbumTableGateway::class);
+                    $tableGateway = $container->get(Model\StonelinkKenyaMapsHealthFacilitiesTable::class);
                     return new Model\StonelinkTable($tableGateway);
                 },
-                Model\AlbumTableGateway::class => function ($container) {
+                Model\StonelinkKenyaMapsHealthFacilitiesTable::class => function ($container) {
                     $dbAdapter = $container->get(AdapterInterface::class);
                     $resultSetPrototype = new ResultSet();
                     $resultSetPrototype->setArrayObjectPrototype(new Model\Stonelink());
