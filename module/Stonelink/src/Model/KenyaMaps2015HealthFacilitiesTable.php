@@ -166,7 +166,7 @@ class KenyaMaps2015HealthFacilitiesTable
 
 	public function saveKenyaMaps2015HealthFacilities(KenyaMaps2015HealthFacilities $kenyamaps2015healthfacilities)
 	{
-		$data = array(
+		$data = [
 			'gid'=>$kenyamaps2015healthfacilities->gid,
 			'facility_c'=>$kenyamaps2015healthfacilities->facility_c,
 			'facility_n'=>$kenyamaps2015healthfacilities->facility_n,
@@ -221,7 +221,7 @@ class KenyaMaps2015HealthFacilitiesTable
 			'longitude'=>$kenyamaps2015healthfacilities->longitude,
 			'latitude'=>$kenyamaps2015healthfacilities->latitude,
 			'the_geom'=>$kenyamaps2015healthfacilities->the_geom,
-			);
+			];
 
 			$id = (int)$kenyamaps2015healthfacilities->kenya_maps_2015_health_facilities_id;
 			if ($id == 0) {

@@ -5,7 +5,9 @@ use Zend\Db\Adapter\AdapterInterface;
 use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\TableGateway\TableGateway;
 use Zend\ModuleManager\Feature\ConfigProviderInterface;
+use Stonelink\Model\KenyaMaps2015HealthFacilitiesTable;
 
+use Stonelink\Model\KenyaMaps2015HealthFacilities;
 
 
 
@@ -19,15 +21,15 @@ class Module implements ConfigProviderInterface
     {
         return [
             'factories' => [
-                Model\StonelinkTable::class => function($container) {
-                    $tableGateway = $container->get(Model\StonelinkKenyaMapsHealthFacilitiesTable::class);
-                    return new Model\StonelinkTable($tableGateway);
+                Model\KenyaMaps2015HealthFacilitiesTable::class => function($container) {
+                    $tableGateway = $container->get(Model\KenyaMaps2015HealthFacilitiesTable::class);
+                    return new Model\KenyaMaps2015HealthFacilitiesTable($tableGateway);
                 },
-                Model\StonelinkKenyaMapsHealthFacilitiesTable::class => function ($container) {
+                Model\KenyaMaps2015HealthFacilitiesTable::class => function ($container) {
                     $dbAdapter = $container->get(AdapterInterface::class);
                     $resultSetPrototype = new ResultSet();
-                    $resultSetPrototype->setArrayObjectPrototype(new Model\Stonelink());
-                    return new TableGateway('stonelink', $dbAdapter, null, $resultSetPrototype);
+                    $resultSetPrototype->setArrayObjectPrototype(new Model\KenyaMaps2015HealthFacilities());
+                    return new TableGateway('kenya_maps_2015_health_facilities', $dbAdapter, null, $resultSetPrototype);
                 },
             ],
         ];
@@ -39,11 +41,11 @@ class Module implements ConfigProviderInterface
             'factories' => [
                 Controller\StonelinkController::class => function($container) {
                     return new Controller\StonelinkController(
-                        $container->get(Model\StonelinkTable::class)
+                        $container->get(Model\KenyaMaps2015HealthFacilitiesTable::class)
                         );
                 },
-           ],
-        ];
+                ],
+                ];
     }
 }
 

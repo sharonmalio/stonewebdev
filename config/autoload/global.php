@@ -21,7 +21,7 @@ return [
         'dsn'            => 'pgsql:host=localhost;port=5432;dbname=stonelink',
         'user' => 'postgres',
         'password' => 'malio1234',
-        'database' => 'stonelink',
+
     ],
     'service_manager' =>[
         'factories' => [
