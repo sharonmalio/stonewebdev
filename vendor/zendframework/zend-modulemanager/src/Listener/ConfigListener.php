@@ -43,7 +43,7 @@ class ConfigListener extends AbstractListener implements
     protected $mergedConfig = [];
 
     /**
-     * @var Config
+     * @var Config|null
      */
     protected $mergedConfigObject;
 
@@ -83,13 +83,12 @@ class ConfigListener extends AbstractListener implements
 
         if ($this->skipConfig) {
             // We already have the config from cache, no need to collect or merge.
-            return $this;
+            return;
         }
 
         $this->listeners[] = $events->attach(ModuleEvent::EVENT_LOAD_MODULE, [$this, 'onLoadModule']);
         $this->listeners[] = $events->attach(ModuleEvent::EVENT_LOAD_MODULES, [$this, 'onLoadModules'], -1000);
         $this->listeners[] = $events->attach(ModuleEvent::EVENT_MERGE_CONFIG, [$this, 'onMergeConfig'], 1000);
-        return $this;
     }
 
     /**
@@ -115,8 +114,8 @@ class ConfigListener extends AbstractListener implements
     {
         $module = $e->getModule();
 
-        if (!$module instanceof ConfigProviderInterface
-            && !is_callable([$module, 'getConfig'])
+        if (! $module instanceof ConfigProviderInterface
+            && ! is_callable([$module, 'getConfig'])
         ) {
             return $this;
         }
@@ -274,10 +273,10 @@ class ConfigListener extends AbstractListener implements
             $paths = ArrayUtils::iteratorToArray($paths);
         }
 
-        if (!is_array($paths)) {
+        if (! is_array($paths)) {
             throw new Exception\InvalidArgumentException(
                 sprintf(
-                    'Argument passed to %::%s() must be an array, '
+                    'Argument passed to %s::%s() must be an array, '
                     . 'implement the Traversable interface, or be an '
                     . 'instance of Zend\Config\Config. %s given.',
                     __CLASS__,
@@ -302,7 +301,7 @@ class ConfigListener extends AbstractListener implements
      */
     protected function addConfigPath($path, $type)
     {
-        if (!is_string($path)) {
+        if (! is_string($path)) {
             throw new Exception\InvalidArgumentException(
                 sprintf(
                     'Parameter to %s::%s() must be a string; %s given.',
@@ -328,7 +327,7 @@ class ConfigListener extends AbstractListener implements
             $config = ArrayUtils::iteratorToArray($config);
         }
 
-        if (!is_array($config)) {
+        if (! is_array($config)) {
             throw new Exception\InvalidArgumentException(
                 sprintf(
                     'Config being merged must be an array, '

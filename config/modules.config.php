@@ -13,6 +13,9 @@
 return [
     'Zend\Router',
     'Zend\Validator',
+    'Zend\InputFilter',
+    'Zend\Hydrator',
+    'Zend\Db',
     'Application',
     'Stonelink',
     ];
