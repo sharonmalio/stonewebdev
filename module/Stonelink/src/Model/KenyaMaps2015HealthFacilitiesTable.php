@@ -44,7 +44,7 @@ class KenyaMaps2015HealthFacilitiesTable
 	{
 		$platform = $this->getAdapter()->getPlatform();
 		$table = $platform->quoteIdentifier($this->getTable());
-		$orderCol = $platform->quoteIdentifier('kenya_maps_2015_health_facilities_id');
+		$orderCol = $platform->quoteIdentifier('gid');
 		$stmt = $this->getAdapter()->createStatement("SELECT * FROM $table ORDER BY $orderCol DESC");
 		$result = $stmt->execute();
 		$result->buffer();
@@ -132,7 +132,7 @@ class KenyaMaps2015HealthFacilitiesTable
 	public function getKenyaMaps2015HealthFacilities($id)
 	{
 		$id  = (int) $id;
-		$rowset = $this->tableGateway->select(array('kenya_maps_2015_health_facilities_id' => $id));
+		$rowset = $this->tableGateway->select(array('gid' => $id));
 		$row = $rowset->current();
 		if (!$row) {
 			throw new RuntimeException(sprintf(
@@ -148,7 +148,7 @@ class KenyaMaps2015HealthFacilitiesTable
 		$id  = (int) $id;
 		$platform = $this->getAdapter()->getPlatform();
 		$table = $platform->quoteIdentifier($this->getTable());
-		$Col = $platform->quoteIdentifier('kenya_maps_2015_health_facilities_id');
+		$Col = $platform->quoteIdentifier('gid');
 		$stmt = $this->getAdapter()->CreateStatement(
 			"SELECT *  FROM $table WHERE $Col = $id");
 		$result = $stmt->execute();
@@ -223,13 +223,13 @@ class KenyaMaps2015HealthFacilitiesTable
 			'the_geom'=>$kenyamaps2015healthfacilities->the_geom,
 			];
 
-			$id = (int)$kenyamaps2015healthfacilities->kenya_maps_2015_health_facilities_id;
+			$id = (int)$kenyamaps2015healthfacilities->gid;
 			if ($id == 0) {
 				$this->tableGateway->insert($data);
 				return $this->tableGateway->lastInsertValue;
 		} else {
 			if ($this->getKenyaMaps2015HealthFacilities($id)) {
-				$this->tableGateway->update($data, array('kenya_maps_2015_health_facilities_id' => $id));
+				$this->tableGateway->update($data, array('gid' => $id));
 			} else {
 					throw new RuntimeException(sprintf(
 					        'Could not find row with identifier %d',
@@ -241,7 +241,7 @@ class KenyaMaps2015HealthFacilitiesTable
 
 	public function updateKenyaMaps2015HealthFacilities($data,$id)
 	{
-		$this->tableGateway->update($data, array('kenya_maps_2015_health_facilities_id' => $id));
+		$this->tableGateway->update($data, array('gid' => $id));
 	}
 
 	public function conditionalUpdateKenyaMaps2015HealthFacilities($data,array $condition)
@@ -251,7 +251,7 @@ class KenyaMaps2015HealthFacilitiesTable
 
 	public function deleteKenyaMaps2015HealthFacilities($id)
 	{
-		$this->tableGateway->delete(array('kenya_maps_2015_health_facilities_id' => $id));
+		$this->tableGateway->delete(array('gid' => $id));
 	}
 
 	public function getDistinctCol($Col)
@@ -290,7 +290,7 @@ class KenyaMaps2015HealthFacilitiesTable
 	{
 		$platform = $this->getAdapter()->getPlatform();
 		$Col = $platform->quoteIdentifier($Col); 
-		$id = $platform->quoteIdentifier('kenya_maps_2015_health_facilities_id');
+		$id = $platform->quoteIdentifier('gid');
 		$table = $platform->quoteIdentifier($this->getTable());
 		$stmt = $this->getAdapter()->CreateStatement("SELECT $Col,$id FROM $table");
 		$result = $stmt->execute();

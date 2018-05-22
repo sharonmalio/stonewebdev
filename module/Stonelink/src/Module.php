@@ -29,7 +29,9 @@ class Module implements ConfigProviderInterface
                     $dbAdapter = $container->get(AdapterInterface::class);
                     $resultSetPrototype = new ResultSet();
                     $resultSetPrototype->setArrayObjectPrototype(new Model\KenyaMaps2015HealthFacilities());
-                    return new TableGateway('kenya_maps_2015_health_facilities', $dbAdapter, null, $resultSetPrototype);
+                    //return new TableGateway('kenya_maps_2015_health_facilities', $dbAdapter, null, $resultSetPrototype);
+                    $tableGateway = new TableGateway('kenya_maps_2015_health_facilities', $dbAdapter, null, $resultSetPrototype);
+                    return new KenyaMaps2015HealthFacilitiesTable($tableGateway);
                 },
             ],
         ];
