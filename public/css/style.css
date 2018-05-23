@@ -1,13 +1,18 @@
 body {
 	padding-top: 60px;
-	padding-bottom: 1000px;
+	padding-bottom: 40px;
 }
     
 
 .navbar-color {
      background-color: 	#50c1cf !important;
+     margin: 0 !important;
+     padding-bottom: 10px;
 }
-
+.text-body {
+	text-color:black !important;
+	
+}
 .navbar-default {
   background-color:	#50c1cf;
   background-image: none;
@@ -16,14 +21,15 @@ body {
  
   /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
-      #map {
-        height: 100%;
+#mapid {
+  height: 100%;
       }
       /* Optional: Makes the sample page fill the window. */
-      html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
+html, body {
+    height: 100%;
+   	margin: 0;
+    padding: 0;
+    padding-top: 50px;
       }
 .zf-green {
 	color: #68b604;
