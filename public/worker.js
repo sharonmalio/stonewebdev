@@ -3,7 +3,8 @@ var resources = [
   '/css/bootstrap.min.css',
   '/css/bootstrap.css',
   '/js/jquery-3.1.0.min.js',
-  '/manifest.json'
+  '/manifest.json',
+  '/stonelink',
   
 ];
 

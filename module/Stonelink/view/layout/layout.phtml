@@ -15,6 +15,22 @@
 <meta name="msapplication-TileColor" content="#da532c">
 <meta name="msapplication-config" content="/img/browserconfig.xml">
 <meta name="theme-color" content="#ffffff">
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <title>Using MySQL and PHP with Google Maps</title>
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
       
         
         <?= $this->headTitle('stoneweb')->setSeparator(' - ')->setAutoEscape(false) ?>
@@ -22,8 +38,6 @@
         <?= $this->headMeta()
             ->appendName('viewport', 'width=device-width, initial-scale=1.0')
             ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
-            ->appendName("viewport", "initial-scale=1.0, user-scalable=no")
-            ->appendName("content-type", "text/html; charset=UTF-8")
         ?>
 
         <!-- Le styles -->
@@ -41,7 +55,7 @@
         ?>
     </head>
     <body>
-        <nav class="navbar navbar-fixed-top navbar-default" role="navigation">
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -49,25 +63,20 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                  
+                   <a class="navbar-brand" href="<?= $this->url('home') ?>">
+                        <img src="<?= $this->basePath('img/favicon-16x16.png') ?>" height="28" alt="Zend Framework <?= \Stonelink\Module::VERSION ?>"/>&nbsp;Stoneweb
+                    </a> 
                 </div>
-                <div class="collapse navbar-collapse navbar-left">
-                    <ul class="nav  navbar-nav float-right float-md-right">
+                <div class="collapse navbar-collapse float-right float-md-right">
+                    <ul class="nav  navbar-nav ">
                         <li class="active"><a href="<?= $this->url('home') ?>">Home</a></li>
                     </ul>
-                     <ul class="nav navbar-nav float-right float-md-right">
+                     <ul class="nav navbar-nav">
                         <li class="active"><a href="<?= $this->url('home') ?>">Stonelink</a></li>
                     </ul>
-                     <ul class="nav navbar-nav float-right float-md-right">
+                     <ul class="nav navbar-nav">
                         <li class="active"><a href="<?= $this->url('home') ?>">Stonechat</a></li>
                     </ul>
-                </div>
-                
-                 <div>
-                <ul class="nav navbar-nav navbar-right">
-                  <li><a href="#"><span class="glyphicon glyphicon-user active"></span> Sign Up</a></li>
-                  <li><a href="#"><span class="glyphicon glyphicon-log-in active" ></span> Sign In</a></li>
-    			</ul>
                 </div>
             </div>
         </nav>
