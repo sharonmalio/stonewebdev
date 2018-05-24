@@ -3,7 +3,9 @@ body {
 	padding-bottom: 40px;
 }
     
-
+navbar-nav li a{
+	color: black;
+}
 .navbar-color {
      background-color: 	#50c1cf !important;
      margin: 0 !important;
@@ -21,7 +23,7 @@ body {
   /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
 #mapid {
-  height: 100%;
+  height: 800px;
       }
 
 #form {

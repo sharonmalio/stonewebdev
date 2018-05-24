@@ -3,26 +3,28 @@ $( document ).ready(function() {
     console.log( "ready!" );
     
     var mymap = L.map('mapid').setView([3.121832846, 35.587164318], 13);
+    
 
     $(document).ready(initialize);
 
     function initialize(){
-    L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={pk.eyJ1Ijoia2FuaW5pbWFsaW8iLCJhIjoiY2poamh4ZjllMDB4ZTM2cWtoM2V3bWd1ZyJ9.rnF81uaCjIFtaEAfQ1ytBg}', {
+    L.tileLayer('https://external.fnbo4-1.fna.fbcdn.net/map_tile.php?v=29&x={x}&y={y}&z={z}&language=en_GB?access_token={pk.eyJ1Ijoia2FuaW5pbWFsaW8iLCJhIjoiY2poamh4ZjllMDB4ZTM2cWtoM2V3bWd1ZyJ9.rnF81uaCjIFtaEAfQ1ytBg}', {
         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">KenyaHealthFacilitiess</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
         maxZoom: 18,
         id: 'mapbox.streets',
         accessToken: 'pk.eyJ1Ijoia2FuaW5pbWFsaW8iLCJhIjoiY2poamh4ZjllMDB4ZTM2cWtoM2V3bWd1ZyJ9.rnF81uaCjIFtaEAfQ1ytBg'
     }).addTo(mymap);
 
-    getData();
     }
 
     var popup = L.popup()
     .setLatLng([3.121832846, 35.587164318])
     .setContent("I am a standalone popup.")
     .openOn(mymap);
+    
+    var marker = L.marker([3.121832846, 35.587164318]).addTo(mymap);
 
-    marker.bindPopup("<b>Want the info</b><br>on the postgresdb.").openPopup();
+     marker.bindPopup("<b>Want the info</b><br>on the postgresdb").openPopup();
 
     var popup = L.popup();
 
@@ -45,6 +47,7 @@ $( document ).ready(function() {
     			mapData(data);
     		}
     	})
+
     };
     function mapData(data){
     	//remove existing map layers
@@ -57,15 +60,11 @@ $( document ).ready(function() {
     }
 
     //create geojson container object
-    var geojson = {
+    var geojson ={ 
     	"type": "FeatureCollection",
     	"features": []
     };
-
-    //split data into features
-    var dataArray = data.split(", ;");
-    dataArray.pop();
-
 });
+ 
 
 
