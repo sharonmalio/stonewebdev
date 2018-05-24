@@ -9,9 +9,8 @@ body {
      margin: 0 !important;
      padding-bottom: 10px;
 }
-.text-body {
-	text-color:black !important;
-	
+.navbar-collapse li a {
+    color: black;
 }
 .navbar-default {
   background-color:	#50c1cf;
@@ -24,11 +23,6 @@ body {
 #mapid {
   height: 100%;
       }
-#map {
-	height: 100%;
-	width: 80%;
-	display: inline-block;
-}
 
 #form {
 	height: 100%;

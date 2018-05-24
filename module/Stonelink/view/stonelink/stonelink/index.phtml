@@ -6,8 +6,17 @@ $title = 'baby steps till I get there';
 $this->headTitle($title);
 ?>
 <h1><?= $this->escapeHtml($title) ?></h1>
-<body>
-<div id="mapid"></div>
-<?php include(${js/stonelink.js}); ?>
-</body>
+
+
+
+
+<div id="form">
+	<form action="javascript:submitQuery()">
+         <label for="distance">Show features within</label>
+         <input type="text" name="distance"></input>
+         <label for="featname">km of features named</label>
+         <input type="text" name="featname"></input>
+         <input type="submit" value="Submit"></input>
+     </form>
+</div>
 
