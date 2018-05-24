@@ -4,8 +4,6 @@ var resources = [
   '/css/bootstrap.css',
   '/js/jquery-3.1.0.min.js',
   '/manifest.json',
-  '/stonelink',
-  
 ];
 
 // Open + Cache + Verify cache

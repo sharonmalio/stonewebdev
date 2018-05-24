@@ -34,10 +34,12 @@
 	    .setContent("I am a standalone popup.")
 	    .openOn(mymap);
 	    
-	    var marker = L.marker([3.121832846, 35.587164318]).addTo(mymap);
-
-	     marker.bindPopup("<b>Want the info</b><br>on the postgresdb").openPopup();
-
+	    <?php foreach ($hospitals as $stonelink) : ?>
+	    var marker;
+        	L.marker([<?= $this-> escapeHtml  ($stonelink->latitude)?>, <?= $this-> escapeHtml ($stonelink->longitude)?>]).addTo(mymap)
+            .bindPopup("<b><?= $this->escapeHtml($stonelink->facility_c)?></b><br>").openPopup();
+<?php endforeach; ?>
+        
 	    var popup = L.popup();
 
 	    function onMapClick(e) {
@@ -78,8 +80,5 @@
 	    };
 	});
 	 
-
-
-
 
  </script>
