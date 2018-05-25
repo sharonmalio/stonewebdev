@@ -89,9 +89,28 @@ html, body {
 }
 
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
-@media screen and (max-height: 450px) {
-    .sidenav {padding-top: 12px;}
-    .sidenav a {font-size: 10px;}
+@media screen and (max-height: 40.5em) {
+    .sidenav {padding-top: 12px;  width: auto;
+    float: none;}
+    .sidenav a {font-size: 10px;  width: auto;
+    float: none;}
+    .sidenav ul li a {
+    padding: 2px 2px 2px 4px;
+    text-decoration: none;
+    font-size: 10px;
+    color: #111 ;
+    display: block;
+    font-family:Serif;
+    transition: 0.3s;
+    width: auto;
+    float: none;
+}
+@media screen and (max-width: 40.5em) {
+  .product-img {
+    width: auto;
+    float: none;
+  }
+}
 }
 .btn-success {
 	background-color: #57a900;
