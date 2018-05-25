@@ -3,7 +3,7 @@
 $dbHost = ($_SERVER['SERVER_PORT']==8085) ? '10.0.2.2' : 'localhost';
 $dbParams = array(
     'database' => 'stonelink',
-    'username' => 'smalio',
+    'username' => 'postgres',
     'password' => 'malio1234',
     'hostname' => $dbHost
 );

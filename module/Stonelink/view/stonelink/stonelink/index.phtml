@@ -1,7 +1,13 @@
 
+<?php
+// module/Album/view/album/album/index.phtml:
+
+?>
 
 
 <div id="mapid"></div>
+
+<div id="main"></div>
        
 
  <script>
@@ -10,7 +16,7 @@
 		
 	    console.log( "ready!" );
 	    
-	    var mymap = L.map('mapid').setView([3.121832846, 35.587164318], 8);
+	    var mymap = L.map('mapid').setView([3.121832846, 35.587164318], 13);
 	    
 
 	    $(document).ready(initialize);
@@ -30,16 +36,15 @@
 	    .setContent("I am a standalone popup.")
 	    .openOn(mymap);
 	    
-	    <?php foreach ($hospitals as $stonelink) : ?>
-    	    var marker;
-            	L.marker([<?= $this-> escapeHtml  ($stonelink->latitude)?>, <?= $this-> escapeHtml ($stonelink->longitude)?>]).addTo(mymap)
-            	
-                .bindPopup("<b><?= $this->escapeHtml($stonelink->facility_n)?>,<?= $this->escapeHtml($stonelink->type)?>,<?= $this->escapeHtml($stonelink->county)?> </b><br>").openPopup();
-        <?php endforeach; ?>
+	    <?php //foreach ($hospitals as $stonelink) : ?>
+	    var marker;
+        	L.marker([<?= $this-> escapeHtml  ($stonelink->latitude)?>, <?= $this-> escapeHtml ($stonelink->longitude)?>]).addTo(mymap)
+            .bindPopup("<b><?= $this->escapeHtml($stonelink->facility_c)?><br>Facility Type:<?= $this->escapeHtml($stonelink->type)?><br>Facility County: <?= $this->escapeHtml($stonelink->county)?><a href="<?= $this->url('home') ?>">Book an Appontment</a></b><br>").openPopup();
+<?php //endforeach; ?>
         
 	    var popup = L.popup();
 
-	    function onMapClick(e) {ss
+	    function onMapClick(e) {
 	        popup
 	            .setLatLng(e.latlng)
 	            .setContent("You clicked the map at " + e.latlng.toString())
@@ -76,6 +81,14 @@
 	    	"features": []
 	    };
 	});
-	 
+	
+	 function openNav() {
+	    document.getElementById("mySidenav").style.width = "200px";
+	}
+
+	/* Set the width of the side navigation to 0 */
+	function closeNav() {
+	    document.getElementById("mySidenav").style.width = "0";
+	}
 
  </script>

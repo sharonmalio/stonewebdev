@@ -1,25 +1,23 @@
-body {
-	padding-top: 60px;
-	padding-bottom: 40px;
-}
+
     
 navbar-nav li a{
 	color: black;
 }
 .navbar-color {
-     background-color: 	#50c1cf !important;
+     background-color: 	#003366 !important;
      margin: 0 !important;
      padding-bottom: 10px;
 }
 .navbar-collapse li a {
-    color: black;
+    color: #111;
 }
-.navbar-default {
-  background-color:	#50c1cf;
-  background-image: none;
-  background-repeat: no-repeat;
+.navcolor li a {
+  color:#ffffff;
  }
  
+ .navbar-center li a {
+    text-align: center;
+	}
   /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
 #mapid {
@@ -34,7 +32,8 @@ navbar-nav li a{
 }
       /* Optional: Makes the sample page fill the window. */
 html, body {
-    height: 100%;
+    height: 100px;
+    width: 100px;
    	margin: 0;
     padding: 0;
     padding-top: 50px;
@@ -42,7 +41,58 @@ html, body {
 .zf-green {
 	color: #68b604;
 }
+/* The side navigation menu */
+.sidenav {
+    height: 100%; /* 100% Full-height */
+    width: 0; /* 0 width - change this with JavaScript */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Stay on top */
+    top: 53px; 
+    bottom:100px;/* Stay at the top */
+    left: 0;
+    background-color: #f1f1f1; /* Black*/
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 60px; /* Place content 60px from the top */
+    transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+}
 
+/* The navigation menu links */
+.sidenav ul li a {
+    padding: 4px 4px 4px 8px;
+    text-decoration: none;
+    font-size: 20px;
+    color: #111 ;
+    display: block;
+    font-family:Serif;
+    transition: 0.3s;
+    
+}
+
+/* When you mouse over the navigation links, change their color */
+.sidenav ul li a:hover {
+    color: #f1f1f1;
+}
+
+/* Position and style the close button (top right corner) */
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    Left: 160px;
+    font-size: 36px;
+    margin-left: 0px;
+}
+
+/* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+#main {
+    transition: margin-left .5s;
+    padding: 20px;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+    .sidenav {padding-top: 12px;}
+    .sidenav a {font-size: 10px;}
+}
 .btn-success {
 	background-color: #57a900;
 	background-image: -moz-linear-gradient(top, #70d900, #57a900);

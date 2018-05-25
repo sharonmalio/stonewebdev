@@ -58,33 +58,26 @@
         ?>
     </head>
     <body>
-        <nav class="navbar navbar-color navbar-fixed-top text-body" role="navigation">
+        <nav class="navbar navbar-color navbar-fixed-top " role="navigation">
             <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                  
-                </div>
-                <div class="collapse navbar-collapse navbar-left text-body ">
-                    <ul class="nav  navbar-nav">
-                        <li class="active"><a href="<?= $this->url('home') ?>">HomeHome</a></li>
-                    </ul>
-                     <ul class="nav navbar-nav ">
-                        <li class="active"><a href="<?= $this->url('home') ?>">Stonelink</a></li>
-                    </ul>
-                     <ul class="nav navbar-nav ">
-                        <li class="active"><a href="<?= $this->url('home') ?>">Stonechat</a></li>
-                    </ul>
-                </div>
                 
-                 <div>
-                <ul class="nav navbar-nav navbar-right ">
-                  <li><a href="#"><span class="glyphicon glyphicon-user active"></span> Sign Up</a></li>
-                  <li><a href="#"><span class="glyphicon glyphicon-log-in active" ></span> Sign In</a></li>
-    			</ul>
+                <div class="sidenav "  id="mySidenav" >
+                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                    <ul class="nav  navbar-nav">
+                        <li class="active"><a href="<?= $this->url('home') ?>">Home</a><br></li>
+                    </ul><br><br><br>
+                     <ul class="nav navbar-nav  ">
+                        <li class="active"><a href="<?= $this->url('home') ?>">Stonelink</a><br></li>
+                    </ul><br><br><br>
+                     <ul class="nav navbar-nav ">
+                        <li class="active"><a href="<?= $this->url('home') ?>">Stonechat</a><br></li>
+                    </ul>
+                </div>
+                <span style="font-size:30px;cursor:pointer; color:#ffffff;" class= "navbar-left" onclick="openNav()">&#9776;</span>
+                <div>
+                 <ul class="nav navbar-nav navcolor navbar-center">
+                        <li class="active"><a href="<?= $this->url('home') ?>">Stonelink</a><br></li>
+                    </ul>
                 </div>
             </div>
         </nav>

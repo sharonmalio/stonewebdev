@@ -1,3 +1,4 @@
+
 <?php
 /**
  * Global Configuration Override
@@ -11,7 +12,6 @@
  * file.
  */
 
-// config/autoload/global.php
 
 
 return [
@@ -28,4 +28,6 @@ return [
             'Zend\Db\Adapter\Adapter' => 'Zend\Db\Adapter\AdapterServiceFactory',
         ],
     ],
+    
+   
 ];
