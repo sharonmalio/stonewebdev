@@ -19,7 +19,7 @@
 
      var markers = [
      	<?php foreach ($hospitals as $stonelink) : ?>
-     	[<?= $this->escapeHtml($stonelink->latitude)?>,  <?= $this->escapeHtml($stonelink->longitude)?>, "<?= $this->escapeHtml($stonelink->facility_n)?>"],
+     	[<?= $this->escapeHtml($stonelink->latitude)?>,  <?= $this->escapeHtml($stonelink->longitude)?>, "<?= $this->escapeHtml($stonelink->facility_n)?>", "<?= $this->escapeHtml($stonelink->type)?>"],
      	<?php endforeach; ?>
      			];
 
@@ -31,6 +31,7 @@
      	var marker = L.marker(new L.LatLng(a[0], a[1]), { title: title });
      	marker.bindPopup(title);
      	markerClusterGroup.addLayer(marker);
+     	
      }
 
      mymap.addLayer(markerClusterGroup);

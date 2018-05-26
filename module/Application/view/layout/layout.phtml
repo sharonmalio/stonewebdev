@@ -69,18 +69,18 @@
             <div class="container">
                 
                 <div class="sidenav "  id="mySidenav" >
-                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                <a href="javascript:void(0)" style="color:black;"class="closebtn" onclick="closeNav()">&times;</a>
                     <ul class="nav  navbar-nav">
                         <li class="active"><a href="<?= $this->url('home') ?>">Home</a></li>
                     </ul><br>
-                    <ul class="nav navbar-nav  ">
+                    <ul class="nav navbar-nav  navbar-left">
                         <li class="active"><a href="<?= $this->url('home') ?>">Stonelink</a></li>
                     </ul><br>
                      <ul class="nav navbar-nav ">
                         <li class="active"><a href="<?= $this->url('home') ?>">Stonechat</a></li>
                     </ul><br>
                 </div>
-                <span style="font-size:30px;cursor:pointer; color:#ffffff;" class= "navbar-left" onclick="openNav()">&#9776;</span>
+                <span class= "navbar-left navbar-sticks" onclick="openNav()">&#9776;</span>
                
             </div>
         </nav>

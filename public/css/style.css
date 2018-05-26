@@ -122,22 +122,27 @@ html, body {
     transition: margin-left .5s;
     padding: 20px;
 }
+.navbar-sticks{
+	font-size:30px;
+	cursor:pointer; 
+	color:#ffffff;
+	 }
 
-/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+/* On smaller screens, like a phone where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
 @media screen and (max-height: 40.5em) {
-    .sidenav {padding-top: 12px;  width: auto;
-    float: none; margin-left:10px;
+    .sidenav {
+    padding-top: 12px; 
+  	width: auto;
+    float: none; 
+    margin-left:10px;
   	height: 100%; /* 100% Full-height */
     width: 0; /* 0 width - change this with JavaScript */
-    position: fixed; /* Stay in place */
-    z-index: -1; /* Stay on top */
-    top: 53px; 
-    bottom:100px;/* Stay at the top */
-    left: 0;
-    background-color: #ffffff; /* Black*/
-    overflow-x: hidden; /* Disable horizontal scroll */
-    padding-top: 30px; /* Place content 60px from the top */
-    transition: 0.5s;}
+ }
+ .navbar-sticks{
+  font-size:30px;
+  cursor:pointer;
+  color:#ffffff; 
+  }
     .sidenav a {font-size: 10px;  width: auto;
     float: none;}
     .sidenav ul li a {
@@ -169,11 +174,17 @@ html, body {
   .sidenav ul li a {
     margin-left: 40px;
     float: none;
-    font-size: 15px;
+    font-size: 20px;
     padding-top: 0;
+
   }
+  .navbar-sticks{
+  font-size:30px;
+  cursor:pointer;
+  color:#ffffff; }
+  
   .sidenav {
-    height: 100%; /* 100% Full-height */
+    height: 40%; /* 100% Full-height */
     width: 0; /* 0 width - change this with JavaScript */
     position: fixed; /* Stay in place */
     z-index: -1; /* Stay on top */
@@ -182,7 +193,7 @@ html, body {
     left: 0;
     background-color: #ffffff; /* Black*/
     overflow-x: hidden; /* Disable horizontal scroll */
-    overflow-y: hidden; /* Disable vertical scroll */
+/* Disable vertical scroll */
     padding-top: 30px; /* Place content 60px from the top */
     transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
 }
@@ -203,7 +214,7 @@ html, body {
 
 .btn-success:hover, .btn-success:active, .btn-success.active,
 	.btn-success.disabled, .btn-success[disabled] {
-	background-color: #57a900;
+	background-color: #ffffff;
 }
 
 div.container a.navbar-brand>img {
