@@ -18,10 +18,12 @@ navbar-nav li a{
  .navbar-center li a {
     text-align: center;
 	}
+
   /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
 #mapid {
   height: 640px;
+  width: 0x;
       }
 
 #form {
@@ -30,14 +32,45 @@ navbar-nav li a{
 	float: right;
 	padding: 40px 2%;
 }
+
+
+
       /* Optional: Makes the sample page fill the window. */
 html, body {
-    height: 100px;
-    width: 100px;
+    height: 100%;
+    width: 100%;
    	margin: 0;
     padding: 0;
-    padding-top: 50px;
+  
       }
+      
+      .hide-menu {
+    background-color:#336ca6;
+    position: absolute;
+    top:0;
+    right:0;
+    z-index: 1;
+    width: 300px;
+    height: 100%;
+    -webkit-transform: translate3d(300px,0,0);
+    -moz-transform: translate3d(300px,0,0);
+    -o-transform: translate3d(300px,0,0);
+    -ms-transform: translate3d(300px,0,0);
+    transform: translate3d(300px,0,0);      
+    -webkit-transition: all 0.3s linear;
+    -moz-transition: all 0.3s linear;
+    -ms-transition: all 0.3s linear;
+    -o-transition: all 0.3s linear;
+    transition: all 0.3s linear;
+}
+
+.show-menu {
+    -webkit-transform: translate3d(0,0,0);
+    -moz-transform: translate3d(0,0,0);
+    -o-transform: translate3d(0,0,0);
+    -ms-transform: translate3d(0,0,0);
+    transform: translate3d(0,0,0);
+ }  
 .zf-green {
 	color: #68b604;
 }
@@ -46,18 +79,19 @@ html, body {
     height: 100%; /* 100% Full-height */
     width: 0; /* 0 width - change this with JavaScript */
     position: fixed; /* Stay in place */
-    z-index: 1; /* Stay on top */
+    z-index: -1; /* Stay on top */
     top: 53px; 
     bottom:100px;/* Stay at the top */
     left: 0;
-    background-color: #f1f1f1; /* Black*/
+    background-color: #ffffff; /* Black*/
     overflow-x: hidden; /* Disable horizontal scroll */
-    padding-top: 60px; /* Place content 60px from the top */
+    overflow-y: hidden; /* Disable horizontal scroll */
+    padding-top: 48px; /* Place content 60px from the top */
     transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
 }
 
 /* The navigation menu links */
-.sidenav ul li a {
+.sidenav ul li a{
     padding: 4px 4px 4px 8px;
     text-decoration: none;
     font-size: 20px;
@@ -65,11 +99,12 @@ html, body {
     display: block;
     font-family:Serif;
     transition: 0.3s;
+    content: "\A";
     
 }
 
 /* When you mouse over the navigation links, change their color */
-.sidenav ul li a:hover {
+.sidenav ul li a :hover{
     color: #f1f1f1;
 }
 
@@ -91,7 +126,18 @@ html, body {
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
 @media screen and (max-height: 40.5em) {
     .sidenav {padding-top: 12px;  width: auto;
-    float: none;}
+    float: none; margin-left:10px;
+  	height: 100%; /* 100% Full-height */
+    width: 0; /* 0 width - change this with JavaScript */
+    position: fixed; /* Stay in place */
+    z-index: -1; /* Stay on top */
+    top: 53px; 
+    bottom:100px;/* Stay at the top */
+    left: 0;
+    background-color: #ffffff; /* Black*/
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 30px; /* Place content 60px from the top */
+    transition: 0.5s;}
     .sidenav a {font-size: 10px;  width: auto;
     float: none;}
     .sidenav ul li a {
@@ -104,12 +150,42 @@ html, body {
     transition: 0.3s;
     width: auto;
     float: none;
+    margin: 10px;
+  
+    }
+    
+    html, body {
+    height: 100%;
+    width: 100%;
+   	margin: 100px;
+    padding: 0;
+    }
+    #mapid {
+	  height: 640px;
+	  width: 0x;
+      }
 }
 @media screen and (max-width: 40.5em) {
-  .product-img {
-    width: auto;
+  .sidenav ul li a {
+    margin-left: 40px;
     float: none;
+    font-size: 15px;
+    padding-top: 0;
   }
+  .sidenav {
+    height: 100%; /* 100% Full-height */
+    width: 0; /* 0 width - change this with JavaScript */
+    position: fixed; /* Stay in place */
+    z-index: -1; /* Stay on top */
+    top: 53px; 
+    bottom:100px;/* Stay at the top */
+    left: 0;
+    background-color: #ffffff; /* Black*/
+    overflow-x: hidden; /* Disable horizontal scroll */
+    overflow-y: hidden; /* Disable vertical scroll */
+    padding-top: 30px; /* Place content 60px from the top */
+    transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+}
 }
 }
 .btn-success {

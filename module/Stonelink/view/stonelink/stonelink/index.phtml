@@ -4,7 +4,7 @@
 <div id="mapid"></div>
 
 <div id="main"></div>
-       
+<div class="menu-button" id="menu-button"></div>
 
  <script>
 
@@ -43,9 +43,28 @@
 	    }
 	    mymap.on('click', onMapClick);
 	});
-  
+ 	function openNav() {
+	 	    document.getElementById("mySidenav").style.width = "200px";
+	 	}
+	 
+	 	/* Set the width of the side navigation to 0 */
+	function closeNav() {
+	 	    document.getElementById("mySidenav").style.width = "0";
+	 	}
 
-
+	 $('#menu-button').click(function(e){
+		    e.stopPropagation();
+		    $('#hide-menu').toggleClass('show-menu');
+		    });
+		    
+		    $('#hide-menu').click(function(e){
+		        e.stopPropagation();
+		    });
+		    
+		    $('body,html').click(function(e){
+		       $('#hide-menu').removeClass('show-menu');
+		    });
+ 	
 
 
  </script>
