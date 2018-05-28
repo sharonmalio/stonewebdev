@@ -46,9 +46,10 @@
     	    L.circle(e.latlng, radius).addTo(mymap);
     	}
      
-	    var popup = L.popup();
-	    function onMapClick(L) {
-	        popup
+	   
+	    var onMapClick = function(L) {
+	    	var popup = L.popup();
+	        	popup
 	            .setLatLng(L.latlng)
 	            .setContent("You are within " + radius + " meters from this point" + e.latlng.toString())
 	            .openOn(mymap);
