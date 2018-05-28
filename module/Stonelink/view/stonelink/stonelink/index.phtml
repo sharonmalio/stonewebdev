@@ -11,37 +11,55 @@
          id: 'mapbox.streets',
          accessToken: 'pk.eyJ1Ijoia2FuaW5pbWFsaW8iLCJhIjoiY2poamh4ZjllMDB4ZTM2cWtoM2V3bWd1ZyJ9.rnF81uaCjIFtaEAfQ1ytBg'
      });
-	    var mymap = L.map('mapid', {center: [-1.121832846, 36.587164318], zoom:6.5, layers: tiles});
-     var markers = [
-     	<?php foreach ($hospitals as $stonelink) : ?>
-     	[<?= $this->escapeHtml($stonelink->latitude)?>, 
-     	 <?= $this->escapeHtml($stonelink->longitude)?>, 
-     	 "<?= $this->escapeHtml($stonelink->facility_n)?>", 
-     	 "<?= $this->escapeHtml($stonelink->owner)?>",
-     	 "<?= $this->escapeHtml($stonelink->county)?>",
-     	 "<?= $this->escapeHtml($stonelink->type)?>"
-     	 ],
-     	<?php endforeach; ?>
-     ];
+		 var mymap = L.map('mapid', {center: [-1.121832846, 36.587164318], zoom:6.5, layers: tiles});
+		      	var markers = [
+         	<?php foreach ($hospitals as $stonelink) : ?>
+             	[<?= $this->escapeHtml($stonelink->latitude)?>, 
+             	 <?= $this->escapeHtml($stonelink->longitude)?>, 
+             	 "<?= $this->escapeHtml($stonelink->facility_n)?>", 
+             	 "<?= $this->escapeHtml($stonelink->county)?>",
+             	 "<?= $this->escapeHtml($stonelink->type)?>",
+             	 "<?= $this->escapeHtml($stonelink->owner)?>"
+             	 ],
+         	 
+         	<?php endforeach; ?>
+     	];
+     mymap.locate({setView: true, maxZoom: 16});
+     
+     
      var markerClusterGroup = L.markerClusterGroup();
      for (var i = 0; i < markers.length; i++) {
      	var a = markers[i];
-     	var title = 'Name:'+' '+ a[2]+'<br>'+'County:'+ ' '+ a[3]+'<br>'+'Type:'+' '+ a[4]+'<br>'+ 'Owner:'+' '+a[5];
+     	var title = 'Name:'+' '+ a[2]+'<br>'+'County:'+ ' '+ a[3]+'<br>'+'Type:'+' ' + a[4]+'<br>'+ 'Owner:'+' ' +a[5];
      	var marker = L.marker(new L.LatLng(a[0], a[1]), { title: title });
      	marker.bindPopup(title);
      	markerClusterGroup.addLayer(marker);
      }
-     
      mymap.addLayer(markerClusterGroup);
+     function onLocationFound(e) {
+    	    var radius = e.accuracy / 2;
+
+    	    L.marker(e.latlng).addTo(mymap)
+    	        .bindPopup("You are within " + radius + " meters from this point").openPopup();
+
+    	    L.circle(e.latlng, radius).addTo(map);
+    	}
+     
 	    var popup = L.popup();
-	    function onMapClick(e) {
+	    function onMapClick(L) {
 	        popup
-	            .setLatLng(e.latlng)
-	            .setContent("You clicked the map at " + e.latlng.toString())
+	            .setLatLng(L.latlng)
+	            .setContent("You are within " + radius + " meters from this point" + e.latlng.toString())
 	            .openOn(mymap);
+	        e.circle(e.latlng, radius).addTo(mymap);
 	    }
+	    mymap.on('locationfound', onLocationFound);
 	    mymap.on('click', onMapClick);
 	});
+ function onLocationError(e) {
+	    alert(e.message);
+	}
+		
  	function openNav() {
 	 	    document.getElementById("mySidenav").style.width = "200px";
 	 	}

@@ -16,16 +16,16 @@ return [
     // The following section is new and should be added to your file:
     'router' => [
         'routes' => [
-            'stonelink' => [
+            'home' => [
                 'type'    => Segment::class,
                 'options' => [
-                    'route' => '/stonelink[/:action[/:id]]',
+                    'route' => '/home[/:action[/:id]]',
                     'constraints' => [
                         'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
                         'id'     => '[0-9]+',
                     ],
                     'defaults' => [
-                        'controller' =>Controller\StonelinkController::class,
+                        'controller' =>Controller\HomeController::class,
                         'action'     => 'index',
                     ],
                 ],
@@ -41,7 +41,7 @@ return [
         'exception_template'       => 'error/index',
         'template_map' => [
             'layout/layout'           => __DIR__ . '/../view/layout/home-layout.phtml',
-            'application/index/index' => __DIR__ . '/../view/home/home/index.phtml',
+            'home/index/index' => __DIR__ . '/../view/home/home/index.phtml',
             'error/404'               => __DIR__ . '/../view/error/404.phtml',
             'error/index'             => __DIR__ . '/../view/error/index.phtml',
         ],
