@@ -1,13 +1,9 @@
-
-
-
 <div id="mapid"></div>
 
 <div id="main"></div>
 <div class="menu-button" id="menu-button"></div>
 
  <script>
-
  $( document ).ready(function() {
 		var tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png?v=29&x={x}&y={y}&z={z}&language=en_GB?access_token={pk.eyJ1Ijoia2FuaW5pbWFsaW8iLCJhIjoiY2poamh4ZjllMDB4ZTM2cWtoM2V3bWd1ZyJ9.rnF81uaCjIFtaEAfQ1ytBg}', {
          attribution: 'Map data © <a href="https://www.openstreetmap.org/">KenyaHealthFacilitiess</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -16,24 +12,26 @@
          accessToken: 'pk.eyJ1Ijoia2FuaW5pbWFsaW8iLCJhIjoiY2poamh4ZjllMDB4ZTM2cWtoM2V3bWd1ZyJ9.rnF81uaCjIFtaEAfQ1ytBg'
      });
 	    var mymap = L.map('mapid', {center: [-1.121832846, 36.587164318], zoom:6.5, layers: tiles});
-
      var markers = [
      	<?php foreach ($hospitals as $stonelink) : ?>
-     	[<?= $this->escapeHtml($stonelink->latitude)?>,  <?= $this->escapeHtml($stonelink->longitude)?>, "<?= $this->escapeHtml($stonelink->facility_n)?>", "<?= $this->escapeHtml($stonelink->type)?>"],
+     	[<?= $this->escapeHtml($stonelink->latitude)?>, 
+     	 <?= $this->escapeHtml($stonelink->longitude)?>, 
+     	 "<?= $this->escapeHtml($stonelink->facility_n)?>", 
+     	 "<?= $this->escapeHtml($stonelink->owner)?>",
+     	 "<?= $this->escapeHtml($stonelink->county)?>",
+     	 "<?= $this->escapeHtml($stonelink->type)?>"
+     	 ],
      	<?php endforeach; ?>
-     			];
-
+     ];
      var markerClusterGroup = L.markerClusterGroup();
-
      for (var i = 0; i < markers.length; i++) {
      	var a = markers[i];
-     	var title = a[2];
+     	var title = 'Name:'+' '+ a[2]+'<br>'+'County:'+ ' '+ a[3]+'<br>'+'Type:'+' '+ a[4]+'<br>'+ 'Owner:'+' '+a[5];
      	var marker = L.marker(new L.LatLng(a[0], a[1]), { title: title });
      	marker.bindPopup(title);
      	markerClusterGroup.addLayer(marker);
-     	
      }
-
+     
      mymap.addLayer(markerClusterGroup);
 	    var popup = L.popup();
 	    function onMapClick(e) {
@@ -52,7 +50,6 @@
 	function closeNav() {
 	 	    document.getElementById("mySidenav").style.width = "0";
 	 	}
-
 	 $('#menu-button').click(function(e){
 		    e.stopPropagation();
 		    $('#hide-menu').toggleClass('show-menu');
@@ -66,6 +63,4 @@
 		       $('#hide-menu').removeClass('show-menu');
 		    });
  	
-
-
  </script>

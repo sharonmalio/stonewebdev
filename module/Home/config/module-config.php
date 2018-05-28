@@ -40,8 +40,8 @@ return [
         'not_found_template'       => 'error/404',
         'exception_template'       => 'error/index',
         'template_map' => [
-            'layout/layout'           => __DIR__ . '/../view/layout/stonelink-layout.phtml',
-            'application/index/index' => __DIR__ . '/../view/stonelink/stonelink/index.phtml',
+            'layout/layout'           => __DIR__ . '/../view/layout/home-layout.phtml',
+            'application/index/index' => __DIR__ . '/../view/home/home/index.phtml',
             'error/404'               => __DIR__ . '/../view/error/404.phtml',
             'error/index'             => __DIR__ . '/../view/error/index.phtml',
         ],
