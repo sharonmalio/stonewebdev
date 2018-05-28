@@ -51,7 +51,7 @@
 	    	var popup = L.popup();
 	        	popup
 	            .setLatLng(L.latlng)
-	            .setContent("You are within " + radius + " meters from this point" + e.latlng.toString())
+	            .setContent("You are here, <br> approximately " + radius + " meters from this point" + e.latlng.toString())
 	            .openOn(mymap);
 	        e.circle(e.latlng, radius).addTo(mymap);
 	    }
