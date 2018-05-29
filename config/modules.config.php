@@ -16,6 +16,7 @@ return [
     'Zend\InputFilter',
     'Zend\Hydrator',
     'Zend\Db',
+    'Zend\Form',
     'Application',
     'Stonelink',
    

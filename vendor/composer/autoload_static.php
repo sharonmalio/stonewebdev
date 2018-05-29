@@ -6,6 +6,10 @@ namespace Composer\Autoload;
 
 class ComposerStaticInit895333d59e09dc3407e78df597458b53
 {
+    public static $files = array (
+        '34901568a1e26d13dd475cb2c85e0284' => __DIR__ . '/..' . '/zendframework/zend-form/autoload/formElementManagerPolyfill.php',
+    );
+
     public static $prefixLengthsPsr4 = array (
         'Z' => 
         array (
@@ -21,6 +25,7 @@ class ComposerStaticInit895333d59e09dc3407e78df597458b53
             'Zend\\InputFilter\\' => 17,
             'Zend\\Hydrator\\' => 14,
             'Zend\\Http\\' => 10,
+            'Zend\\Form\\' => 10,
             'Zend\\Filter\\' => 12,
             'Zend\\EventManager\\' => 18,
             'Zend\\Escaper\\' => 13,
@@ -96,6 +101,10 @@ class ComposerStaticInit895333d59e09dc3407e78df597458b53
         'Zend\\Http\\' => 
         array (
             0 => __DIR__ . '/..' . '/zendframework/zend-http/src',
+        ),
+        'Zend\\Form\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/zendframework/zend-form/src',
         ),
         'Zend\\Filter\\' => 
         array (

@@ -1,0 +1,62 @@
+<?php
+// module/Album/view/album/album/add.phtml:
+
+$title = 'Book Appointment';
+$this->headTitle($title);
+?>
+<h1><?= $this->escapeHtml($title) ?></h1>
+<?php
+$form->setAttribute('action', $this->url('appointments', ['action' => 'add']));
+$form->prepare();
+
+echo $this->form()->openTag($form);
+echo $this->formHidden($form->get('id'));
+
+echo $this->formRow($form->get('firstname'));
+$album->setAttribute('class', 'form-control');
+$album->setAttribute('placeholder', 'Album title');
+
+echo $this->formRow($form->get('secondname'));
+$album->setAttribute('class', 'form-control');
+$album->setAttribute('placeholder', 'Album title');
+
+echo $this->formRow($form->get('gender'));
+$album->setAttribute('class', 'form-control');
+$album->setAttribute('placeholder', 'Album title');
+
+echo $this->formRow($form->get('phonenumber'));
+$album->setAttribute('class', 'form-control');
+$album->setAttribute('placeholder', 'Album title');
+
+echo $this->formRow($form->get('email'));
+$album->setAttribute('class', 'form-control');
+$album->setAttribute('placeholder', 'Album title');
+
+echo $this->formRow($form->get('hospital'));
+$album->setAttribute('class', 'form-control');
+$album->setAttribute('placeholder', 'Album title');
+
+echo $this->formRow($form->get('date'));
+$album->setAttribute('class', 'form-control');
+$album->setAttribute('placeholder', 'Album title');
+
+echo $this->formRow($form->get('specialty'));
+$album->setAttribute('class', 'form-control');
+$album->setAttribute('placeholder', 'Album title');
+
+echo $this->formRow($form->get('time'));
+$album->setAttribute('class', 'form-control');
+$album->setAttribute('placeholder', 'Album title');
+
+echo $this->formRow($form->get('reason'));
+$album->setAttribute('class', 'form-control');
+$album->setAttribute('placeholder', 'Album title');
+
+echo $this->formSubmit($form->get('submit'));
+$album->setAttribute('class', 'form-control');
+$album->setAttribute('placeholder', 'Album title');
+echo $this->form()->closeTag();
+
+$album = $form->get('title');
+$album->setAttribute('class', 'form-control');
+$album->setAttribute('placeholder', 'Album title');
