@@ -30,6 +30,21 @@ return [
                     ],
                 ],
             ],
+            
+            'appointments' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route' => '/stonelink[/:action[/:id]]',
+                    'constraints' => [
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'id'     => '[0-9]+',
+                    ],
+                    'defaults' => [
+                        'controller' =>Controller\AppointmentsController::class,
+                        'action'     => 'index',
+                    ],
+                ],
+            ],
         ],
     ],
 
@@ -42,8 +57,8 @@ return [
         'template_map' => [
             'layout/layout'           => __DIR__ . '/../view/layout/stonelink-layout.phtml',
             'stonelink/index/index' => __DIR__ . '/../view/stonelink/stonelink/index.phtml',
-            'error/404'               => __DIR__ . '/../view/error/404.phtml',
-            'error/index'             => __DIR__ . '/../view/error/index.phtml',
+            //'error/404'               => __DIR__ . '/../view/error/404.phtml',
+            //'error/index'             => __DIR__ . '/../view/error/index.phtml',
         ],
         'template_path_stack' => [
             __DIR__ . '/../view',

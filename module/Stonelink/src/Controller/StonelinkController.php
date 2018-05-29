@@ -26,11 +26,8 @@ class StonelinkController extends AbstractActionController
         ]);
     }
 
-    public function bookappointmentAction()
-    {
+ 
         
-    }
-    
     public function editAction()
     {
         
