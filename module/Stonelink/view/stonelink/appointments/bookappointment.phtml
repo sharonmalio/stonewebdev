@@ -1,0 +1,18 @@
+<?php
+// module/Album/view/album/album/add.phtml:
+$title = 'Book Appointment';
+$this->headTitle($title);
+?>
+<h1><?= $this->escapeHtml($title) ?></h1>
+<?php
+
+// $this->form->setAttribute('action', $this->url('appointments', [
+//     'action' => 'add'
+// ]));
+// $form->prepare();
+?>
+
+<div class="panel-body">
+  <?php echo $this->form?>
+</div>
+

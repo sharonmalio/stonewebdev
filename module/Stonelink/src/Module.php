@@ -44,7 +44,7 @@ class Module implements ConfigProviderInterface
                     return new Controller\StonelinkController($container->get(Model\KenyaMaps2015HealthFacilitiesTable::class));
                 },
                 Controller\AppointmentsController::class => function ($container) {
-                    return new Controller\AppointmentsController($container->get(Model\KenyaMaps2015HealthFacilitiesTable::class));
+                    return new Controller\AppointmentsController();
                 }
             ]
         
