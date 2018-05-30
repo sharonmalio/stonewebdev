@@ -16,6 +16,21 @@ return [
     // The following section is new and should be added to your file:
     'router' => [
         'routes' => [
+            
+            'appointment' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route' => '/stonelink[/:action[/:id]]',
+                    'constraints' => [
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'id'     => '[0-9]+',
+                    ],
+                    'defaults' => [
+                        'controller' =>Controller\AppointmentsController::class,
+                        'action'     => 'index',
+                    ],
+                ],
+            ],
             'stonelink' => [
                 'type'    => Segment::class,
                 'options' => [
@@ -31,20 +46,7 @@ return [
                 ],
             ],
             
-            'appointments' => [
-                'type'    => Segment::class,
-                'options' => [
-                    'route' => '/stonelink[/:action[/:id]]',
-                    'constraints' => [
-                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                        'id'     => '[0-9]+',
-                    ],
-                    'defaults' => [
-                        'controller' =>Controller\AppointmentsController::class,
-                        'action'     => 'index',
-                    ],
-                ],
-            ],
+          
         ],
     ],
 

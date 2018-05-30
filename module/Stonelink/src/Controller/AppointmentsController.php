@@ -4,6 +4,7 @@ namespace Stonelink\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 
 use Zend\View\Model\ViewModel;
+use Zend\Form;
 
 use Stonelink\Model\KenyaMaps2015HealthFacilitiesTable;
 use Stonelink\Form\AppointmentForm;
@@ -27,12 +28,10 @@ class AppointmentsController extends AbstractActionController
             'hospitals' => $this->table->fetchAll(),
         ]);
     }
-
-    public function bookappointmentAction()
-    
+    //We instantiate AppoinmentForm and set the label on the submit button to "Add"
+    public function addAction()
     {
         $form = new AppointmentForm();
-        
         $form->get('submit')->setValue('Add');
         
         $request = $this->getRequest();
@@ -40,18 +39,20 @@ class AppointmentsController extends AbstractActionController
         if (! $request->isPost()) {
             return ['form' => $form];
         }
-        $appointment = new appointments();
+        //We create an Appoinment instance, and pass its input filter on to the form
+        $appointment = new Appointment();
         $form->setInputFilter($appointment->getInputFilter());
         $form->setData($request->getPost());
-        
+        //If form validation fails, we want to redisplay the form
         if (! $form->isValid()) {
             return ['form' => $form];
         }
         
         $appointment->exchangeArray($form->getData());
-        $this->table->saveAlbum($appointment);
-        return $this->redirect()->toRoute('stonelink');
+        $this->table->saveAppointment($appointment);
+        return $this->redirect()->toRoute('appointment');
     }
+    
     public function editappointmentAction()
     {
         
