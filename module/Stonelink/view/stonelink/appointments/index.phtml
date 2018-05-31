@@ -1,0 +1,25 @@
+<?php
+
+
+$title = 'Add new appointment';
+$this->headTitle($title);
+?>
+<h1><?= $this->escapeHtml($title) ?></h1>
+<?php
+$form->setAttribute('action', $this->url('appointment', ['action' => 'add']));
+$form->prepare();
+
+echo $this->form()->openTag($form);
+echo $this->formHidden($form->get('appointment_id'));
+echo $this->formRow($form->get('first_name'));
+echo $this->formRow($form->get('last_name'));
+echo $this->formRow($form->get('gender'));
+echo $this->formRow($form->get('phone_number'));
+echo $this->formRow($form->get('email'));
+echo $this->formRow($form->get('hospital_name'));
+echo $this->formRow($form->get('specialty'));
+echo $this->formRow($form->get('appointment_date'));
+echo $this->formRow($form->get('appointment_time'));
+echo $this->formRow($form->get('appointment_reason'));
+echo $this->formSubmit($form->get('submit'));
+echo $this->form()->closeTag();

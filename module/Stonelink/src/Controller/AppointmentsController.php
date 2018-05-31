@@ -12,40 +12,34 @@ class AppointmentsController extends AbstractActionController
     // Add this property:
     private $table;
 
-    public function bookappointmentAction()
-    
+    public function addAction()
     {
-        return new ViewModel();
-//         $request = $this->getRequest();
-//         $form = new AppointmentForm();
+        //instantiate AppointmentForm and set the label on the submit button to "Add"
+        $form = new AppointmentForm();
+        $form->get('submit')->setValue('Add');
+        //If the request is not a POST request, then no form data has been 
+        //submitted, and we need to display the form
+        $request = $this->getRequest();
         
-//         $form->get('submit')->setValue('Add');
+        if (! $request->isPost()) {
+            return ['form' => $form];
+        }
+        //create an Appointment instance, and pass its input filter on to the form;
+        $appointment = new AppointmentForm();
+        $form->setInputFilter($appointment->getInputFilter());
+        $form->setData($request->getPost());
         
-//         var_dump($request);
-//         exit();
-//         if (! $request->isPost()) {
-//             echo "Not Post";
-//             exit();
-//             return [
-//                 'form' => $form
-//             ];
-//         }
-//         return array(
-//             'form' => $form
-//         );
-        // $appointment = new appointments();
-        // $form->setInputFilter($appointment->getInputFilter());
-        // $form->setData($request->getPost());
+        //if it is invalid return form
+        if (! $form->isValid()) {
+            return ['form' => $form];
+        }
         
-        // if (! $form->isValid()) {
-        // return ['form' => $form];
-        // }
-        
-        // $appointment->exchangeArray($form->getData());
-        // $this->table->saveAlbum($appointment);
-        // return $this->redirect()->toRoute('stonelink');
+        $appointment->exchangeArray($form->getData());
+        $this->table->saveAppointment($appointment);
+        //we redirect back to the list of appointments using the Redirect
+        return $this->redirect()->toRoute('appointment');
     }
-
+    
     public function editappointmentAction()
     {}
 

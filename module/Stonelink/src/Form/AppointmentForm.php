@@ -11,74 +11,75 @@ class AppointmentForm extends Form
         parent::__construct('');
         
         $this->add([
-            'name' => 'id',
+            'name' => 'appointment_id',
             'type' => 'hidden'
         ]);
         $this->add([
-            'firstname' => 'name',
+            'name' => 'first_name',
             'type' => 'text',
             'options' => [
                 'label' => 'First Name'
             ]
         ]);
         $this->add([
-            'lastname' => 'name',
+            'name' => 'last_name',
             'type' => 'text',
             'options' => [
                 'label' => 'Second Name'
             ]
         ]);
         $this->add([
-            'gender' => 'gender',
+            'name' => 'gender',
             'type' => 'text',
             'options' => [
                 'label' => 'Gender'
             ]
         ]);
         $this->add([
-            'phonenumber' => 'number',
+            'name' => 'phone_number',
             'type' => 'number',
             'options' => [
                 'label' => 'Phone Number'
             ]
         ]);
         $this->add([
-            'emailaddress' => 'email',
+            'name' => 'email_address',
             'type' => 'text',
             'options' => [
-                'label' => 'Email'
+                'label' => 'Email Address'
             ]
         ]);
         $this->add([
-            'hospitalname' => 'title',
+            'name' => 'hospital_name',
             'type' => 'text',
             'options' => [
                 'label' => 'Hospital Name'
             ]
         ]);
         $this->add([
-            'date' => 'date',
-            'type' => 'date',
-            'options' => [
-                'label' => 'Date'
-            ]
-        ]);
-        $this->add([
-            'specialty' => 'title',
+            'name' => 'specialty',
             'type' => 'text',
             'options' => [
-                'label' => 'Specialty'
+                'label' => 'Specialty of the doctor'
             ]
         ]);
         $this->add([
-            'time' => 'time',
+            'name' => 'date',
+            'type' => 'date',
+            'options' => [
+                'label' => 'Date of appointment'
+            ]
+        ]);
+        $this->add([
+            'name' => 'appointment_time',
             'type' => 'time',
             'options' => [
-                'label' => 'Time of Appointment'
+                'label' => 'Appointment time'
             ]
         ]);
+        
         $this->add([
-            'reason' => 'reason',
+            'name' => 'appointment_reason',
             'type' => 'text',
             'options' => [
                 'label' => 'Reason for Appointment'

@@ -37,4 +37,11 @@ class StonelinkController extends AbstractActionController
     {
         
     }
+    public function testAction()
+    {
+        
+        echo \Stonelink\Model\KenyaMaps2015HealthFacilitiesTable::class;
+        exit;
+        
+    }
 }

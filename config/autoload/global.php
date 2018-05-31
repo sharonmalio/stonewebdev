@@ -15,19 +15,6 @@
 
 
 return [
-    // ...
-    'db' =>[
-        'driver'         => 'Pdo',
-        'dsn'            => 'pgsql:host=localhost;port=5432;dbname=stonelink',
-        'user' => 'postgres',
-        'password' => 'malio1234',
-
-    ],
-    'service_manager' =>[
-        'factories' => [
-            'Zend\Db\Adapter\Adapter' => 'Zend\Db\Adapter\AdapterServiceFactory',
-        ],
-    ],
-    
+  
    
 ];
