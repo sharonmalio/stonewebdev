@@ -31,9 +31,9 @@ return [
                 'child_routes' => [
                     'default' => [
                         'type' => 'Segment',
-                        'options' =>[
-                            'route' => '/registry[:controller[/:action]]',
-                            'constraints' =>[
+                        'options' => [
+                            'route' => '/stonelink[:controller[/:action]]',
+                            'constraints' => [
                                 'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
                                 'action' => '[a-zA-Z][a-zA-Z0-9_-]*'
                             ],
@@ -41,9 +41,9 @@ return [
                         ]
                     ],
                     'appointments' => [
-                        'type' => 'Segment',
+                        'type' => Segment::class,
                         'options' => [
-                            'route' => '/registry[/:action][/id/:id][/page/:page][/order_by/:order_by][/:order]',
+                            'route' => '/stonelink[/:action[/:id]]',
                             'constraints' => [
                                 'action' => '(?!\bpage\b)(?!\border_by\b)[a-zA-Z][a-zA-Z0-9_-]*',
                                 'id' => '[0-9]+',
@@ -52,31 +52,31 @@ return [
                                 'order' => 'ASC|DESC'
                             ],
                             'defaults' => [
-                                'controller' => 'Stonelink\Controller\AppointmentsController',
+                                'controller' => Controller\AppointmentsController::class,
                                 'action' => 'index'
                             ]
                         ]
-                    ],
-                    
+                    ]
+                
+                ]
+            
             ]
-        
-        ]
-    ],
-    'view_manager' => [
-        'display_not_found_reason' => true,
-        'display_exceptions' => true,
-        'doctype' => 'HTML5',
-        'not_found_template' => 'error/404',
-        'exception_template' => 'error/index',
-        'template_map' => [
-            'layout/layout' => __DIR__ . '/../view/layout/stonelink-layout.phtml',
-            'stonelink/index/index' => __DIR__ . '/../view/stonelink/stonelink/index.phtml',
-            'error/404' => __DIR__ . '/../view/error/404.phtml',
-            'error/index' => __DIR__ . '/../view/error/index.phtml',
         ],
-        'template_path_stack' => [
-            __DIR__ . '/../view'
+        'view_manager' => [
+            'display_not_found_reason' => true,
+            'display_exceptions' => true,
+            'doctype' => 'HTML5',
+            'not_found_template' => 'error/404',
+            'exception_template' => 'error/index',
+            'template_map' => [
+                'layout/layout' => __DIR__ . '/../view/layout/stonelink-layout.phtml',
+                'stonelink/index/index' => __DIR__ . '/../view/stonelink/stonelink/index.phtml',
+                'error/404' => __DIR__ . '/../view/error/404.phtml',
+                'error/index' => __DIR__ . '/../view/error/index.phtml'
+            ],
+            'template_path_stack' => [
+                __DIR__ . '/../view'
+            ]
         ]
     ]
-]
-  ]  
+];
