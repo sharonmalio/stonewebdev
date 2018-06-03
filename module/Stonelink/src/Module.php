@@ -3,6 +3,7 @@ namespace Stonelink;
 
 use Zend\ModuleManager\Feature\ConfigProviderInterface;
 
+
 class Module implements ConfigProviderInterface
 {
 

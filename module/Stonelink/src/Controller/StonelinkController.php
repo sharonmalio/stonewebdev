@@ -1,12 +1,11 @@
 <?php 
 namespace Stonelink\Controller;
 
+use Stonelink\Model\AppointmentTable;
+use Stonelink\Model\Appointment;
+use Stonelink\Model\KenyaMaps2015HealthFacilitiesTable;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
-
-use Stonelink\Model\KenyaMaps2015HealthFacilitiesTable;
-use Stonelink\Model\Appointment;
-use Zend\Form;
 
 class StonelinkController extends AbstractActionController
 {
@@ -19,10 +18,10 @@ class StonelinkController extends AbstractActionController
     {
         $this->table = $table;
     }
-    public function __construct(AppointmentTable $table)
-    {
-        $this->table = $table;
-    }
+//     public function __construct(AppointmentTable $table)
+//     {
+//         $this->table = $table;
+//     }
     
     public function indexAction()
     {
@@ -32,8 +31,10 @@ class StonelinkController extends AbstractActionController
     }
     public function addAction()
     {
+        $this->view->form = $form;
+        
         //instantiate AppointmentForm and set the label on the submit button to "Add"
-        $form = new AppointmentForm();
+        $form = new Appointment();
         $form->get('submit')->setValue('Add');
         //If the request is not a POST request, then no form data has been
         //submitted, and we need to display the form
@@ -43,7 +44,7 @@ class StonelinkController extends AbstractActionController
             return ['form' => $form];
         }
         //create an Appointment instance, and pass its input filter on to the form;
-        $appointment = new AppointmentForm();
+        $appointment = new Appointment();
         $form->setInputFilter($appointment->getInputFilter());
         $form->setData($request->getPost());
         
@@ -55,7 +56,7 @@ class StonelinkController extends AbstractActionController
         $appointment->exchangeArray($form->getData());
         $this->table->saveAppointment($appointment);
         //we redirect back to the list of appointments using the Redirect
-        return $this->redirect()->toRoute('appointment');
+        return $this->redirect()->toRoute('stonelink');
     }
     
         
@@ -68,11 +69,5 @@ class StonelinkController extends AbstractActionController
     {
         
     }
-    public function testAction()
-    {
-        
-        echo \Stonelink\Model\KenyaMaps2015HealthFacilitiesTable::class;
-        exit;
-        
-    }
+   
 }
