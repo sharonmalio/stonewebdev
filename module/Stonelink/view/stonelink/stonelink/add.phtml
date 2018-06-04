@@ -1,0 +1,127 @@
+<div id="form"> </div>
+
+
+<?php
+
+
+$first_name = $form->get('first_name');
+$first_name->setAttribute('class', 'form-control');
+$first_name->setAttribute('placeholder', 'First Name');
+
+$last_name = $form->get('last_name');
+$last_name->setAttribute('class', 'form-control');
+$last_name->setAttribute('placeholder', 'Last Name');
+
+$gender = $form->get('gender');
+$gender->setAttribute('class', 'form-control');
+$gender->setAttribute('placeholder', 'Gender');
+
+$phone_number = $form->get('phone_number');
+$phone_number->setAttribute('class', 'form-control');
+$phone_number->setAttribute('placeholder', 'Phone Number');
+
+$email_address = $form->get('email_address');
+$email_address->setAttribute('class', 'form-control');
+$email_address->setAttribute('placeholder', 'Email Address');
+
+$hospital_name = $form->get('hospital_name');
+$hospital_name->setAttribute('class', 'form-control');
+$hospital_name->setAttribute('placeholder', 'Hospital Name');
+
+$specialty = $form->get('specialty');
+$specialty->setAttribute('class', 'form-control');
+$specialty->setAttribute('placeholder', 'Doctors skills');
+
+$appointment_date = $form->get('appointment_date');
+$appointment_date->setAttribute('class', 'form-control');
+$appointment_date->setAttribute('placeholder', 'Date of Appointment');
+
+$appointment_time = $form->get('appointment_time');
+$appointment_time->setAttribute('class', 'form-control');
+$appointment_time->setAttribute('placeholder', 'Tome of Appointment');
+
+$appointment_reason = $form->get('appointment_reason');
+$appointment_reason->setAttribute('class', 'form-control');
+$appointment_reason->setAttribute('placeholder', 'Reason for Appointment');
+// This provides CSS classes for the submit button:
+$submit = $form->get('submit');
+//$submit->setAttribute('class', 'btn btn-primary');
+
+//$form->setAttribute('action', $this->url('appointment', ['action' => 'add']));
+$form->setAttribute('action', $this->url('stonelink', array('action' => 'add')));
+$form->prepare();
+
+echo $this->form()->openTag($form);
+?>
+<?php // Wrap the elements in divs marked as form groups, and render the
+      // label, element, and errors separately within ?>
+<div class="form-group">
+    <?= $this->formLabel($first_name) ?>
+    <?= $this->formElement($first_name) ?>
+    <?= $this->formElementErrors()->render($first_name, ['class' => 'help-block']) ?>
+</div>
+
+<div class="form-group">
+    <?= $this->formLabel($last_name) ?>
+    <?= $this->formElement($last_name) ?>
+    <?= $this->formElementErrors()->render($last_name, ['class' => 'help-block']) ?>
+</div>
+
+<div class="form-group">
+    <?= $this->formLabel($gender) ?>
+    <?= $this->formElement($gender) ?>
+    <?= $this->formElementErrors()->render($gender, ['class' => 'help-block']) ?>
+    
+</div>
+
+<div class="form-group">
+    <?= $this->formLabel($phone_number) ?>
+    <?= $this->formElement($phone_number) ?>
+    <?= $this->formElementErrors()->render($phone_number, ['class' => 'help-block']) ?>
+</div>
+
+<div class="form-group">
+    <?= $this->formLabel($email_address) ?>
+    <?= $this->formElement($email_address) ?>
+    <?= $this->formElementErrors()->render($email_address, ['class' => 'help-block']) ?>
+</div>
+
+<div class="form-group">
+    <?= $this->formLabel($specialty) ?>
+    <?= $this->formElement($specialty) ?>
+    <?= $this->formElementErrors()->render($specialty, ['class' => 'help-block']) ?>
+</div>
+
+<div class="form-group">
+    <?= $this->formLabel($appointment_date) ?>
+    <?= $this->formElement($appointment_date) ?>
+    <?= $this->formElementErrors()->render($appointment_date, ['class' => 'help-block']) ?>
+</div>
+
+<div class="form-group">
+    <?= $this->formLabel($appointment_time) ?>
+    <?= $this->formElement($appointment_time) ?>
+    <?= $this->formElementErrors()->render($appointment_time, ['class' => 'help-block']) ?>
+</div>
+
+<div class="form-group">
+    <?= $this->formLabel($appointment_reason) ?>
+    <?= $this->formElement($appointment_reason) ?>
+    <?= $this->formElementErrors()->render($appointment_reason, ['class' => 'help-block']) ?>
+</div>
+
+<?php
+
+echo $this->formSubmit($submit);
+//echo $this->formHidden($form->get('appointment_id'));
+echo $this->form()->closeTag();
+?>
+<script>
+function openNav() {
+    document.getElementById("mySidenav").style.width = "200px";
+}
+
+/* Set the width of the side navigation to 0 */
+function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+}</script>

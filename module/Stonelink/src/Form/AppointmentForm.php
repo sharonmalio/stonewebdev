@@ -1,85 +1,84 @@
 <?php
 namespace Stonelink\Form;
-
-use Zend\Form;
-
-class BookAppointmentForm extends Form
+use Zend\Form\Form;
+class AppointmentForm extends Form
 {
-
     public function __construct($name = null)
     {
-        parent::__construct('appointment');//should be the name of the form
-        //there are the form elements
+        parent::__construct('');
+        
         $this->add([
-            'name' => 'id',
+            'name' => 'appointment_id',
             'type' => 'hidden'
         ]);
+        
+        
         $this->add([
-            'fname' => 'name',
+            'name' => 'first_name',
             'type' => 'text',
             'options' => [
                 'label' => 'First Name'
             ]
         ]);
         $this->add([
-            'lname' => 'name',
+            'name' => 'last_name',
             'type' => 'text',
             'options' => [
-                'label' => 'Second Name'
+                'label' => 'Last Name'
             ]
         ]);
         $this->add([
-            'gender' => 'gender',
+            'name' => 'gender',
             'type' => 'text',
             'options' => [
                 'label' => 'Gender'
             ]
         ]);
         $this->add([
-            'phone_number' => 'number',
+            'name' => 'phone_number',
             'type' => 'number',
             'options' => [
                 'label' => 'Phone Number'
             ]
         ]);
         $this->add([
-            'email' => 'email',
+            'name' => 'email_address',
             'type' => 'text',
             'options' => [
-                'label' => 'Email'
+                'label' => 'Email Address'
             ]
         ]);
         $this->add([
-            'hospital' => 'title',
+            'name' => 'hospital_name',
             'type' => 'text',
             'options' => [
                 'label' => 'Hospital Name'
             ]
         ]);
         $this->add([
-            'specialty' => 'title',
+            'name' => 'specialty',
             'type' => 'text',
             'options' => [
-                'label' => 'Specialty'
+                'label' => 'Specialty of the doctor'
             ]
         ]);
         $this->add([
-            'appointment_date' => 'date',
+            'name' => 'appointment_date',
             'type' => 'date',
             'options' => [
-                'label' => 'Date'
+                'label' => 'Date of appointment'
             ]
         ]);
-       
         $this->add([
-            'appointment_time' => 'time',
+            'name' => 'appointment_time',
             'type' => 'time',
             'options' => [
-                'label' => 'Time of Appointment'
+                'label' => 'Appointment time'
             ]
         ]);
+        
         $this->add([
-            'reason' => 'reason',
+            'name' => 'appointment_reason',
             'type' => 'text',
             'options' => [
                 'label' => 'Reason for Appointment'
@@ -93,5 +92,5 @@ class BookAppointmentForm extends Form
                 'id' => 'submitbutton'
             ]
         ]);
-    }// end of the form elements
+    }
 }

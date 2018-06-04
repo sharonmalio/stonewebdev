@@ -1,5 +1,6 @@
-<div id="mapid"></div>
 
+<div id="mapid" class= "mt-0"></div>
+<div id="form" class= "navbar"> </div>
 <div id="main"></div>
 <div class="menu-button" id="menu-button"></div>
 
@@ -39,10 +40,8 @@
      
      var onLocationFound = function (e) {
     	    var radius = e.accuracy / 2;
-
     	    L.marker(e.latlng).addTo(mymap)
     	        .bindPopup("You are here, approximately " + radius + " meters from this point").openPopup();
-
     	    L.circle(e.latlng, radius).addTo(mymap);
     	}
      

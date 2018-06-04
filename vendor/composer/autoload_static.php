@@ -23,6 +23,7 @@ class ComposerStaticInit895333d59e09dc3407e78df597458b53
             'Zend\\ModuleManager\\' => 19,
             'Zend\\Loader\\' => 12,
             'Zend\\InputFilter\\' => 17,
+            'Zend\\I18n\\' => 10,
             'Zend\\Hydrator\\' => 14,
             'Zend\\Http\\' => 10,
             'Zend\\Form\\' => 10,
@@ -93,6 +94,10 @@ class ComposerStaticInit895333d59e09dc3407e78df597458b53
         'Zend\\InputFilter\\' => 
         array (
             0 => __DIR__ . '/..' . '/zendframework/zend-inputfilter/src',
+        ),
+        'Zend\\I18n\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/zendframework/zend-i18n/src',
         ),
         'Zend\\Hydrator\\' => 
         array (

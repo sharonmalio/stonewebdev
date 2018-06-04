@@ -21,7 +21,8 @@
 		"zendframework/zend-servicemanager" : "^3.3.1",
 		"zendframework/zend-inputfilter": "^2.8",
 		"zendframework/zend-form": "^2.12",
-		"zendframework/zend-router": "^3.0"
+		"zendframework/zend-router": "^3.0",
+		"zendframework/zend-i18n": "^2.9"
 	},
 	"autoload" : {
 		"psr-4" : {

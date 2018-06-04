@@ -4,53 +4,78 @@
 VAGRANTFILE_API_VERSION = '2'
 
 @script = <<SCRIPT
-# Install dependencies
+DOCUMENT_ROOT_ZEND="/var/www/html/stonewebdev"
+apt-get install software-properties-common
+add-apt-repository ppa:ondrej/php5-5.6
 apt-get update
-apt-get install -y apache2 git curl php7.0 php7.0-bcmath php7.0-bz2 php7.0-cli php7.0-curl php7.0-intl php7.0-json php7.0-mbstring php7.0-opcache php7.0-soap php7.0-sqlite3 php7.0-xml php7.0-xsl php7.0-zip libapache2-mod-php7.0
+apt-get upgrade
+apt-get install -y apache2 git curl php5-cli php5 php5-intl libapache2-mod-php5 php5-mysql php5-mysql php5-sqlite
+echo "
+<VirtualHost *:80>
+    ServerName stonewebdev.localhost
+    
+    ServerAdmin kaninimalio@gmail.com
+    DocumentRoot $DOCUMENT_ROOT_ZEND
 
-# Configure Apache
-echo '<VirtualHost *:80>
-	DocumentRoot /var/www/public
-	AllowEncodedSlashes On
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+    
+</VirtualHost>
+" > /etc/apache2/sites-available/stonewebdev.conf
+DIRECTORIES_CONF_FILE="/etc/apache2/conf-available/directories.conf"
+if [ ! -f $DIRECTORIES_CONF_FILE ]
+ then
+ echo "
 
-	<Directory /var/www/public>
-		Options +Indexes +FollowSymLinks
-		DirectoryIndex index.php index.html
-		Order allow,deny
-		Allow from all
-		AllowOverride All
-	</Directory>
+<Directory />
+        Options FollowSymLinks
+        AllowOverride All
+        Require all denied
+</Directory>
 
-	ErrorLog ${APACHE_LOG_DIR}/error.log
-	CustomLog ${APACHE_LOG_DIR}/access.log combined
-</VirtualHost>' > /etc/apache2/sites-available/000-default.conf
+<Directory /usr/share>
+        AllowOverride All
+        Require all granted
+</Directory>
+
+<Directory /var/www/>
+        Options Indexes FollowSymLinks
+        AllowOverride All
+        Require all granted
+</Directory>
+" > $DIRECTORIES_CONF_FILE
+ a2enconf directories
+fi
+php5enmod mysqli
 a2enmod rewrite
+a2dissite 000-default
+a2ensite stonewebdev
 service apache2 restart
+STONEWEBDEV_WWW_DIR="/var/www/html/stonewebdev"
+STONEWEBDEV_PUBLIC_DIR="/vagrant/Sites/stonewebdev/public"
+rm -R $STONEWEBDEV_WWW_DIR
+mkdir -p $STONEWEBDEV_WWW_DIR
+for f in $( ls $STONEWEBDEV_PUBLIC_DIR );
+ do sudo ln -s $STONEWEBDEV_PUBLIC_DIR/$f $STONEWEBDEV_WWW_DIR  
+done;
+ln -s $STONEWEBDEV_PUBLIC_DIR/.htaccess $STONEWEBDEV_WWW_DIR 
+cd "$HOME"
+wget https://phar.phpunit.de/phpunit.phar
+chmod +x phpunit.phar
+sudo mv phpunit.phar /usr/local/bin/phpunit
 
-if [ -e /usr/local/bin/composer ]; then
-    /usr/local/bin/composer self-update
-else
-    curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-fi
-
-# Reset home directory of vagrant user
-if ! grep -q "cd /var/www" /home/vagrant/.profile; then
-    echo "cd /var/www" >> /home/vagrant/.profile
-fi
-
-echo "** [ZF] Run the following command to install dependencies, if you have not already:"
-echo "    vagrant ssh -c 'composer install'"
-echo "** [ZF] Visit http://localhost:8080 in your browser for to view the application **"
+echo "** [ZEND] Visit http://localhost:8085 in your browser for to view the application **"
 SCRIPT
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-  config.vm.box = 'bento/ubuntu-16.04'
-  config.vm.network "forwarded_port", guest: 80, host: 8080
-  config.vm.synced_folder '.', '/var/www'
+  config.vm.box = 'ubuntu/trusty64'
+  config.vm.network "forwarded_port", guest: 80, host: 8085
+  config.vm.hostname = "stonewebdev.localhost"
+  config.vm.synced_folder '.', '/vagrant/Sites/stonewebdev'
   config.vm.provision 'shell', inline: @script
 
   config.vm.provider "virtualbox" do |vb|
     vb.customize ["modifyvm", :id, "--memory", "1024"]
-    vb.customize ["modifyvm", :id, "--name", "ZF Application - Ubuntu 16.04"]
   end
+
 end
