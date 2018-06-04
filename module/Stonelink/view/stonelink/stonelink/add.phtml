@@ -3,7 +3,7 @@ $title = 'Add new appointment';
 $this->headTitle($title);
 
 ?>
-<h1><?= $this->escapeHtml($title) ?></h1>
+
 <?php
 $form->setAttribute('action', $this->url('stonelink', array('action' => 'add')));
 $form->prepare();
@@ -54,9 +54,9 @@ $appointment_reason->setAttribute('class', 'form-control');
 $appointment_reason->setAttribute('placeholder', 'Reason for Appointment');
 // This provides CSS classes for the submit button:
 $submit = $form->get('submit');
-$submit->setAttribute('class', 'btn btn-primary');
+//$submit->setAttribute('class', 'btn btn-primary');
 
-$form->setAttribute('action', $this->url('appointment', ['action' => 'add']));
+//$form->setAttribute('action', $this->url('appointment', ['action' => 'add']));
 $form->prepare();
 
 echo $this->form()->openTag($form);
@@ -112,13 +112,13 @@ echo $this->form()->openTag($form);
     <?= $this->formElementErrors()->render($appointment_time, ['class' => 'help-block']) ?>
 </div>
 
-
 <div class="form-group">
     <?= $this->formLabel($appointment_reason) ?>
     <?= $this->formElement($appointment_reason) ?>
     <?= $this->formElementErrors()->render($appointment_reason, ['class' => 'help-block']) ?>
 </div>
 <?php
+
 echo $this->formSubmit($submit);
-echo $this->formHidden($form->get('id'));
+//echo $this->formHidden($form->get('appointment_id'));
 echo $this->form()->closeTag();

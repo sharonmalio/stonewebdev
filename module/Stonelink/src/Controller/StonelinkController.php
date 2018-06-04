@@ -6,7 +6,7 @@ use Stonelink\Model\Appointment;
 use Stonelink\Model\KenyaMaps2015HealthFacilitiesTable;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
-
+use Stonelink\Form\AppointmentForm;
 class StonelinkController extends AbstractActionController
 {
     
@@ -31,10 +31,10 @@ class StonelinkController extends AbstractActionController
     }
     public function addAction()
     {
-        $this->view->form = $form;
+       
         
         //instantiate AppointmentForm and set the label on the submit button to "Add"
-        $form = new Appointment();
+        $form = new AppointmentForm();
         $form->get('submit')->setValue('Add');
         //If the request is not a POST request, then no form data has been
         //submitted, and we need to display the form
