@@ -34,8 +34,6 @@
 
 <!-- </script> -->
 
-
-        
         <?= $this->headTitle('stoneweb')->setSeparator(' - ')->setAutoEscape(false) ?>
 
         <?= $this->headMeta()
@@ -73,7 +71,7 @@
                         <li class="active"><a href="<?= $this->url('home') ?>">Home</a></li>
                     </ul>
                     <ul class="nav navbar-nav ">
-                        <li class="active"><a href="<?= $this->url('home') ?>">Book Appointment</a></li>
+                        <li class="active"><a href="<?=$this->url('stonelink/stonelink', array('action' => 'add'));?>">Book Appointment</a></li>
                     </ul>
                      <ul class="nav navbar-nav ">
                         <li class="active"><a href="<?= $this->url('home') ?>">Search Clinician</a></li>

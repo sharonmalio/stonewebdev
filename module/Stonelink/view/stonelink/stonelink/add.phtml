@@ -1,18 +1,9 @@
-<?php
-$title = 'Add new appointment';
-$this->headTitle($title);
+<div id="form"> </div>
 
-?>
 
 <?php
-$form->setAttribute('action', $this->url('stonelink', array('action' => 'add')));
-$form->prepare();
-// This provides a default CSS class and placeholder text for the title element:
-$appointment = $form->get('first_name');
-$appointment->setAttribute('class', 'form-control');
-$appointment->setAttribute('placeholder', 'Appointments title');
 
-// This provides a default CSS class and placeholder text for the artist element:
+
 $first_name = $form->get('first_name');
 $first_name->setAttribute('class', 'form-control');
 $first_name->setAttribute('placeholder', 'First Name');
@@ -57,6 +48,7 @@ $submit = $form->get('submit');
 //$submit->setAttribute('class', 'btn btn-primary');
 
 //$form->setAttribute('action', $this->url('appointment', ['action' => 'add']));
+$form->setAttribute('action', $this->url('stonelink', array('action' => 'add')));
 $form->prepare();
 
 echo $this->form()->openTag($form);
@@ -64,9 +56,9 @@ echo $this->form()->openTag($form);
 <?php // Wrap the elements in divs marked as form groups, and render the
       // label, element, and errors separately within ?>
 <div class="form-group">
-    <?= $this->formLabel($appointment) ?>
-    <?= $this->formElement($appointment) ?>
-    <?= $this->formElementErrors()->render($appointment, ['class' => 'help-block']) ?>
+    <?= $this->formLabel($first_name) ?>
+    <?= $this->formElement($first_name) ?>
+    <?= $this->formElementErrors()->render($first_name, ['class' => 'help-block']) ?>
 </div>
 
 <div class="form-group">
@@ -117,8 +109,19 @@ echo $this->form()->openTag($form);
     <?= $this->formElement($appointment_reason) ?>
     <?= $this->formElementErrors()->render($appointment_reason, ['class' => 'help-block']) ?>
 </div>
+
 <?php
 
 echo $this->formSubmit($submit);
 //echo $this->formHidden($form->get('appointment_id'));
 echo $this->form()->closeTag();
+?>
+<script>
+function openNav() {
+    document.getElementById("mySidenav").style.width = "200px";
+}
+
+/* Set the width of the side navigation to 0 */
+function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+}</script>

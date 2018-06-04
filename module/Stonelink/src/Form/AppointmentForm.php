@@ -1,6 +1,6 @@
 <?php
 namespace Stonelink\Form;
-use Zend\Form;
+use Zend\Form\Form;
 class AppointmentForm extends Form
 {
     public function __construct($name = null)
@@ -11,6 +11,8 @@ class AppointmentForm extends Form
             'name' => 'appointment_id',
             'type' => 'hidden'
         ]);
+        
+        
         $this->add([
             'name' => 'first_name',
             'type' => 'text',
@@ -22,7 +24,7 @@ class AppointmentForm extends Form
             'name' => 'last_name',
             'type' => 'text',
             'options' => [
-                'label' => 'Second Name'
+                'label' => 'Last Name'
             ]
         ]);
         $this->add([

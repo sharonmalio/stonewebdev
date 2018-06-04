@@ -1,32 +1,44 @@
 <?php
 namespace Stonelink;
+
 use Zend\Router\Http\Segment;
 use Stonelink\Controller\StonelinkController;
-
 return [
-//     'controllers' => [
-//         'factories' => [
-//             Controller\StonelinkController::class => InvokableFactory::class
-//         ]
-//     ],
-// The following section is new and should be added to your file:
+    // 'controllers' => [
+    // 'factories' => [
+    // Controller\StonelinkController::class => InvokableFactory::class
+    // ]
+    // ],
+    // The following section is new and should be added to your file:
     'router' => [
         'routes' => [
             'stonelink' => [
-                'type'    => Segment::class,
+                'type' => Segment::class,
                 'options' => [
-                    'route' => '/stonelink[/:action[/:id]]',
-                    'constraints' => [
-                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                        'id'     => '[0-9]+',
-                    ],
+                    'route' => '/stonelink',
                     'defaults' => [
                         'controller' => StonelinkController::class,
-                        'action'     => 'index',
-                    ],
+                        'action' => 'index'
+                    ]
                 ],
-            ],
-        ],
+                'may_terminate' => true,
+                'child_routes' => [
+                    'stonelink' => [
+                        'type' => 'segment',
+                        'options' => [
+                            'route' => '/stonelink/[:action]',
+                            'constraints' => [
+                                'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                            ],
+                            'defaults' => [
+                                'controller' => StonelinkController::class,
+                                'action' => 'index'
+                            ]
+                        ]
+                    ]
+                ]
+            ]
+        ]
     ],
     
     'view_manager' => [
@@ -46,3 +58,4 @@ return [
         ]
     ]
 ];
+    

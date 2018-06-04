@@ -16,6 +16,7 @@ return array(
     'Zend\\ModuleManager\\' => array($vendorDir . '/zendframework/zend-modulemanager/src'),
     'Zend\\Loader\\' => array($vendorDir . '/zendframework/zend-loader/src'),
     'Zend\\InputFilter\\' => array($vendorDir . '/zendframework/zend-inputfilter/src'),
+    'Zend\\I18n\\' => array($vendorDir . '/zendframework/zend-i18n/src'),
     'Zend\\Hydrator\\' => array($vendorDir . '/zendframework/zend-hydrator/src'),
     'Zend\\Http\\' => array($vendorDir . '/zendframework/zend-http/src'),
     'Zend\\Form\\' => array($vendorDir . '/zendframework/zend-form/src'),
