@@ -1,4 +1,5 @@
 <div id="form"> </div>
+<div class="col-4"></div>
 
 
 <?php
@@ -53,12 +54,11 @@ $form->prepare();
 
 echo $this->form()->openTag($form);
 ?>
-<?php // Wrap the elements in divs marked as form groups, and render the
-      // label, element, and errors separately within ?>
+
 <div class="form-group">
     <?= $this->formLabel($first_name) ?>
     <?= $this->formElement($first_name) ?>
-    <?= $this->formElementErrors()->render($first_name, ['class' => 'help-block']) ?>
+    <?= $this->formElementErrors()->render($first_name, ['class' => 'help-block', 'id' =>'form-shape']) ?>
 </div>
 
 <div class="form-group">
@@ -111,6 +111,7 @@ echo $this->form()->openTag($form);
 </div>
 
 <?php
+
 
 echo $this->formSubmit($submit);
 //echo $this->formHidden($form->get('appointment_id'));

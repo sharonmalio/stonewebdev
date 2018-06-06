@@ -12,7 +12,6 @@ class AppointmentForm extends Form
             'type' => 'hidden'
         ]);
         
-        
         $this->add([
             'name' => 'first_name',
             'type' => 'text',

@@ -163,6 +163,7 @@ class AppointmentTable
 			    ));
 		}
 	}
+	// Inserting User input data via Form Submission
 
 	public function saveAppointment(Appointment $appointment)
 	{
