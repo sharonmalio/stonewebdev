@@ -1,9 +1,12 @@
-<div id="form"> </div>
+<div id="form"></div>
 <div class="col-4"></div>
 
 
 <?php
-
+$form->setAttribute('action', $this->url('stonelink/stonelink', array(
+    'action' => 'add'
+)));
+$form->prepare();
 
 $first_name = $form->get('first_name');
 $first_name->setAttribute('class', 'form-control');
@@ -46,11 +49,7 @@ $appointment_reason->setAttribute('class', 'form-control');
 $appointment_reason->setAttribute('placeholder', 'Reason for Appointment');
 // This provides CSS classes for the submit button:
 $submit = $form->get('submit');
-//$submit->setAttribute('class', 'btn btn-primary');
-
-//$form->setAttribute('action', $this->url('appointment', ['action' => 'add']));
-$form->setAttribute('action', $this->url('stonelink', array('action' => 'add')));
-$form->prepare();
+$submit->setAttribute('class', 'btn btn-primary');
 
 echo $this->form()->openTag($form);
 ?>
@@ -58,7 +57,7 @@ echo $this->form()->openTag($form);
 <div class="form-group">
     <?= $this->formLabel($first_name) ?>
     <?= $this->formElement($first_name) ?>
-    <?= $this->formElementErrors()->render($first_name, ['class' => 'help-block', 'id' =>'form-shape']) ?>
+    <?= $this->formElementErrors()->render($first_name, ['class' => 'help-block']) ?>
 </div>
 
 <div class="form-group">
@@ -111,10 +110,8 @@ echo $this->form()->openTag($form);
 </div>
 
 <?php
-
-
 echo $this->formSubmit($submit);
-//echo $this->formHidden($form->get('appointment_id'));
+echo $this->formHidden($form->get('appointment_id'));
 echo $this->form()->closeTag();
 ?>
 <script>
