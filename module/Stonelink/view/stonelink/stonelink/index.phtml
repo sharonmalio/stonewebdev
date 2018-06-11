@@ -13,8 +13,10 @@
          accessToken: 'pk.eyJ1Ijoia2FuaW5pbWFsaW8iLCJhIjoiY2poamh4ZjllMDB4ZTM2cWtoM2V3bWd1ZyJ9.rnF81uaCjIFtaEAfQ1ytBg'
      });
 		 var mymap = L.map('mapid', {center: [-1.121832846, 36.587164318], zoom:6.5, layers: tiles});
-		      	var markers = [
+		 
+	      	var markers = [
          	<?php foreach ($hospitals as $stonelink) : ?>
+   
              	[<?= $this->escapeHtml($stonelink->latitude)?>, 
              	 <?= $this->escapeHtml($stonelink->longitude)?>, 
              	 "<?= $this->escapeHtml($stonelink->facility_n)?>", 
@@ -44,16 +46,6 @@
     	        .bindPopup("You are here, approximately " + radius + " meters from this point").openPopup();
     	    L.circle(e.latlng, radius).addTo(mymap);
     	}
-     
-	   
-	    var onMapClick = function(L) {
-	    	var popup = L.popup();
-	        	popup
-	            .setLatLng(L.latlng)
-	            .setContent("You are here, <br> approximately " + radius + " meters from this point" + e.latlng.toString())
-	            .openOn(mymap);
-	        e.circle(e.latlng, radius).addTo(mymap);
-	    }
 	    mymap.on('locationfound', onLocationFound);
 	    mymap.on('click', onMapClick);
 	});

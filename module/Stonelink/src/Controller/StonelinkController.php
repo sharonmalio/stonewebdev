@@ -40,14 +40,14 @@ class StonelinkController extends AbstractActionController
         $request = $this->getRequest();
         
         if ($request->isPost()) {
+            $appointment = new Appointment();
             $form->setData($request->getPost());
+            $form->setInputFilter($appointment->getInputFilter());
+            
             if ($form->isValid()) {
-//                 var_dump($request->getPost());
-//                 exit;
-                $appointment = new Appointment();
-                // Setting data on appointment object from form object
-                $form->setInputFilter($appointment->getInputFilter());
                 $appointment->exchangeArray($form->getData());
+                echo"I am valid";
+                exit;
                 // Inserting appointment data in the datbase table
                 $this->getAppointmentTable()->saveAppointment($appointment);
             } else {

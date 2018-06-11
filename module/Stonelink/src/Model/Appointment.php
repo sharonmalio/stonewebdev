@@ -29,7 +29,7 @@ class Appointment implements InputFilterAwareInterface
 	public $specialty;
 	public $appointment_date;
 	public $appointment_time;
-	public $appoinment_reason;
+	public $appointment_reason;
 	protected $inputFilter;
 
 
@@ -45,7 +45,7 @@ class Appointment implements InputFilterAwareInterface
 		$this->specialty=(isset($data['specialty'])) ? $data['specialty'] : null;
 		$this->appointment_date=(isset($data['appointment_date'])) ? $data['appointment_date'] : null;
 		$this->appointment_time=(isset($data['appointment_time'])) ? $data['appointment_time'] : null;
-		$this->appoinment_reason=(isset($data['appoinment_reason'])) ? $data['appoinment_reason'] : null;
+		$this->appointment_reason=(isset($data['appointment_reason'])) ? $data['appointment_reason'] : null;
 	}
 
 
@@ -70,7 +70,7 @@ class Appointment implements InputFilterAwareInterface
 
 			$inputFilter->add(array(
 				'name'     => 'appointment_id',
-				'required' => true,
+				'required' => false,
 				'filters'  => array(
 					array('name' => 'StripTags'),
 					array('name' => 'StringTrim'),
@@ -114,7 +114,7 @@ class Appointment implements InputFilterAwareInterface
 			));
 
 			$inputFilter->add(array(
-				'name'     => 'email',
+				'name'     => 'email_address',
 				'required' => true,
 				'filters'  => array(
 					array('name' => 'StripTags'),
@@ -159,7 +159,7 @@ class Appointment implements InputFilterAwareInterface
 			));
 
 			$inputFilter->add(array(
-				'name'     => 'appoinment_reason',
+				'name'     => 'appointment_reason',
 				'required' => true,
 				'filters'  => array(
 					array('name' => 'StripTags'),

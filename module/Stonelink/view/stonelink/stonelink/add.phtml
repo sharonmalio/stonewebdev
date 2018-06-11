@@ -42,6 +42,8 @@ $appointment_date->setAttribute('class', 'form-control');
 $appointment_date->setAttribute('placeholder', 'Date of Appointment');
 
 $appointment_time = $form->get('appointment_time');
+$appointment_time->setAttribute('class', 'form-control');
+$appointment_time->setAttribute('placeholder', 'Time for Appointment');
 
 $appointment_reason = $form->get('appointment_reason');
 $appointment_reason->setAttribute('class', 'form-control');
@@ -96,7 +98,9 @@ echo $this->form()->openTag($form);
     <?= $this->formElementErrors()->render($appointment_date, ['class' => 'help-block']) ?>
 </div>
 <div class="form-group">
+    <?= $this->formLabel($appointment_time) ?>
     <?= $this->formElement($appointment_time) ?>
+    <?= $this->formElementErrors()->render($appointment_time, ['class' => 'help-block']) ?>
 </div>
 
 <div class="form-group">

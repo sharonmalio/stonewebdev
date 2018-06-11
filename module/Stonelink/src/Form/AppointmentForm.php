@@ -10,9 +10,7 @@ class AppointmentForm extends Form
     {
         parent::__construct('');
         $this->setAttribute('method', 'post');
-        $this->addInputFilter();
-        $this->setInputFilter();
-        $this->getInputFilter();
+     
         
         $this->add([
             'name' => 'appointment_id',
@@ -77,7 +75,10 @@ class AppointmentForm extends Form
         ]);
         $this->add([
             'name' => 'appointment_time',
-            'type' => 'hidden'
+            'type' => 'time',
+            'options' => [
+                'label' => 'Time for Appointment'
+            ]
         ]);
         
         $this->add([

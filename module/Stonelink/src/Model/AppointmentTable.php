@@ -178,7 +178,7 @@ class AppointmentTable
 			'specialty'=>$appointment->specialty,
 			'appointment_date'=>$appointment->appointment_date,
 			'appointment_time'=>$appointment->appointment_time,
-			'appoinment_reason'=>$appointment->appoinment_reason,
+			'appointment_reason'=>$appointment->appointment_reason,
 			);
 
 			$id = (int)$appointment->appointment_id;
