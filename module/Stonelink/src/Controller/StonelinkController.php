@@ -39,37 +39,31 @@ class StonelinkController extends AbstractActionController
         // submitted, and we need to display the form
         $request = $this->getRequest();
         
-        if (! $request->isPost()) {
-            
-            return [
-                'form' => $form
-            ];
+        if ($request->isPost()) {
+            $form->setData($request->getPost());
+            if ($form->isValid()) {
+//                 var_dump($request->getPost());
+//                 exit;
+                $appointment = new Appointment();
+                // Setting data on appointment object from form object
+                $form->setInputFilter($appointment->getInputFilter());
+                $appointment->exchangeArray($form->getData());
+                // Inserting appointment data in the datbase table
+                $this->getAppointmentTable()->saveAppointment($appointment);
+            } else {
+                echo "I am not valid";
+                exit();
+            }
         }
-        // create an Appointment instance, and pass its input filter on to the form;
-        $appointment = new Appointment();
-        $form->setInputFilter($appointment->getInputFilter());
-        $form->setData($request->getPost());
-        
-        if ($form->isValid()) {
-            
-            // Setting data on appointment object from form object
-            $form->exchangeArray($form->getData());
-            
-            // Inserting appointment data in the datbase table
-            $this->getAppointmentTable()->saveAppointment($appointment);
-        }
+        // else{
+        // echo"not post";
+        // exit;
+        // }
+        return array(
+            'form' => $form
+        );
         // if it is invalid return form
-        if (! $form->isValid()) {
-            
-            return [
-                'form' => $form
-            ];
-        }
-        
-        $appointment->exchangeArray($form->getData());
-        $this->table->saveAppointment($appointment);
         // we redirect back to the list of appointments using the Redirect
-        return $this->redirect()->toRoute('stonelink/stonelink');
     }
 
     public function editAction()

@@ -70,7 +70,7 @@ class Appointment implements InputFilterAwareInterface
 
 			$inputFilter->add(array(
 				'name'     => 'appointment_id',
-				'required' => false,
+				'required' => true,
 				'filters'  => array(
 					array('name' => 'StripTags'),
 					array('name' => 'StringTrim'),
@@ -79,7 +79,7 @@ class Appointment implements InputFilterAwareInterface
 
 			$inputFilter->add(array(
 				'name'     => 'first_name',
-				'required' => false,
+				'required' => true,
 				'filters'  => array(
 					array('name' => 'StripTags'),
 					array('name' => 'StringTrim'),
@@ -88,7 +88,7 @@ class Appointment implements InputFilterAwareInterface
 
 			$inputFilter->add(array(
 				'name'     => 'last_name',
-				'required' => false,
+				'required' => true,
 				'filters'  => array(
 					array('name' => 'StripTags'),
 					array('name' => 'StringTrim'),
@@ -106,7 +106,7 @@ class Appointment implements InputFilterAwareInterface
 
 			$inputFilter->add(array(
 				'name'     => 'phone_number',
-				'required' => false,
+				'required' => true,
 				'filters'  => array(
 					array('name' => 'StripTags'),
 					array('name' => 'StringTrim'),
@@ -115,7 +115,7 @@ class Appointment implements InputFilterAwareInterface
 
 			$inputFilter->add(array(
 				'name'     => 'email',
-				'required' => false,
+				'required' => true,
 				'filters'  => array(
 					array('name' => 'StripTags'),
 					array('name' => 'StringTrim'),
@@ -124,7 +124,7 @@ class Appointment implements InputFilterAwareInterface
 
 			$inputFilter->add(array(
 				'name'     => 'hospital_name',
-				'required' => false,
+				'required' => true,
 				'filters'  => array(
 					array('name' => 'StripTags'),
 					array('name' => 'StringTrim'),
@@ -133,7 +133,7 @@ class Appointment implements InputFilterAwareInterface
 
 			$inputFilter->add(array(
 				'name'     => 'specialty',
-				'required' => false,
+				'required' => true,
 				'filters'  => array(
 					array('name' => 'StripTags'),
 					array('name' => 'StringTrim'),
@@ -142,7 +142,7 @@ class Appointment implements InputFilterAwareInterface
 
 			$inputFilter->add(array(
 				'name'     => 'appointment_date',
-				'required' => false,
+				'required' => true,
 				'filters'  => array(
 					array('name' => 'StripTags'),
 					array('name' => 'StringTrim'),
@@ -160,7 +160,7 @@ class Appointment implements InputFilterAwareInterface
 
 			$inputFilter->add(array(
 				'name'     => 'appoinment_reason',
-				'required' => false,
+				'required' => true,
 				'filters'  => array(
 					array('name' => 'StripTags'),
 					array('name' => 'StringTrim'),

@@ -6,11 +6,12 @@
 $form->setAttribute('action', $this->url('stonelink/stonelink', array(
     'action' => 'add'
 )));
-$form->prepare();
 
+$form->prepare();
 $first_name = $form->get('first_name');
 $first_name->setAttribute('class', 'form-control');
 $first_name->setAttribute('placeholder', 'First Name');
+$first_name->setAttribute('type', 'required');
 
 $last_name = $form->get('last_name');
 $last_name->setAttribute('class', 'form-control');
@@ -41,8 +42,6 @@ $appointment_date->setAttribute('class', 'form-control');
 $appointment_date->setAttribute('placeholder', 'Date of Appointment');
 
 $appointment_time = $form->get('appointment_time');
-$appointment_time->setAttribute('class', 'form-control');
-$appointment_time->setAttribute('placeholder', 'Tome of Appointment');
 
 $appointment_reason = $form->get('appointment_reason');
 $appointment_reason->setAttribute('class', 'form-control');
@@ -96,11 +95,8 @@ echo $this->form()->openTag($form);
     <?= $this->formElement($appointment_date) ?>
     <?= $this->formElementErrors()->render($appointment_date, ['class' => 'help-block']) ?>
 </div>
-
 <div class="form-group">
-    <?= $this->formLabel($appointment_time) ?>
     <?= $this->formElement($appointment_time) ?>
-    <?= $this->formElementErrors()->render($appointment_time, ['class' => 'help-block']) ?>
 </div>
 
 <div class="form-group">
@@ -111,15 +107,15 @@ echo $this->form()->openTag($form);
 
 <?php
 echo $this->formSubmit($submit);
-echo $this->formHidden($form->get('appointment_id'));
+// $this->formHidden($form->get('appointment_id'));
 echo $this->form()->closeTag();
 ?>
 <script>
 function openNav() {
     document.getElementById("mySidenav").style.width = "200px";
 }
-
 /* Set the width of the side navigation to 0 */
 function closeNav() {
     document.getElementById("mySidenav").style.width = "0";
-}</script>
+}
+</script>

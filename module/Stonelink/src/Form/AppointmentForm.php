@@ -1,11 +1,18 @@
 <?php
 namespace Stonelink\Form;
+
 use Zend\Form\Form;
+
 class AppointmentForm extends Form
 {
+
     public function __construct($name = null)
     {
         parent::__construct('');
+        $this->setAttribute('method', 'post');
+        $this->addInputFilter();
+        $this->setInputFilter();
+        $this->getInputFilter();
         
         $this->add([
             'name' => 'appointment_id',
@@ -70,10 +77,7 @@ class AppointmentForm extends Form
         ]);
         $this->add([
             'name' => 'appointment_time',
-            'type' => 'time',
-            'options' => [
-                'label' => 'Appointment time'
-            ]
+            'type' => 'hidden'
         ]);
         
         $this->add([
