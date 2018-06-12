@@ -174,7 +174,7 @@ class AppointmentTable
 			'last_name'=>$appointment->last_name,
 			'gender'=>$appointment->gender,
 			'phone_number'=>$appointment->phone_number,
-			'email'=>$appointment->email,
+			'email_address'=>$appointment->email_address,
 			'hospital_name'=>$appointment->hospital_name,
 			'specialty'=>$appointment->specialty,
 			'appointment_date'=>$appointment->appointment_date,

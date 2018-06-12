@@ -12,23 +12,21 @@ use Zend\View\Model\ViewModel;
 class StonelinkController extends AbstractActionController
 {
     // Add this property:
-    private $table;
-    private $appointment;
+    private $kenyaHealthFacilitiestable;
+    private $appointmentTable;
+    
 
-    // Add this constructor:
-    public function __construct(KenyaMaps2015HealthFacilitiesTable $table)
+    // Add this constructor: //I added the parameter so as to incorporate the other table
+    public function __construct(KenyaMaps2015HealthFacilitiesTable $kenyaHealthFacilitiestable,AppointmentTable $appointmentTable)
     {
-        $this->table = $table;
+        $this->kenyaHealthFacilitiestable = $kenyaHealthFacilitiestable;
+        $this->appointmentTable = $appointmentTable;
     }
-
-    public function getAppointment(AppointmentTable $appointment)
-    {
-        $this->appointment = $appointment;
-    }
+    
     public function indexAction()
     {
         return new ViewModel([
-            'hospitals' => $this->table->fetchAll()
+            'hospitals' => $this->kenyaHealthFacilitiestable->fetchAll()
         ]);
     }
     
@@ -50,8 +48,7 @@ class StonelinkController extends AbstractActionController
                
                 $appointment->exchangeArray($form->getData());
                 // Inserting appointment data in the datbase table
-                $this->getAppointment()->saveAppointment($appointment);
-               
+                $this->appointmentTable->saveAppointment($appointment);
             } else {
              
                 return array(

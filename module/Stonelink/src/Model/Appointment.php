@@ -11,14 +11,11 @@
 
 namespace Stonelink\Model;
 
-use RuntimeException;
 use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\InputFilterAwareInterface;
 use Zend\InputFilter\InputFilterInterface;
-use Zend\Form\Element\DateTime;
-use Zend\Form\Element\Time;
-use Zend\Validator\Date;
-use Zend\Validator\Timezone;
+use RuntimeException;
+
 class Appointment implements InputFilterAwareInterface
 {
 
@@ -27,7 +24,7 @@ class Appointment implements InputFilterAwareInterface
 	public $last_name;
 	public $gender;
 	public $phone_number;
-	public $email;
+	public $email_address;
 	public $hospital_name;
 	public $specialty;
 	public $appointment_date;
@@ -43,7 +40,7 @@ class Appointment implements InputFilterAwareInterface
 		$this->last_name=(isset($data['last_name'])) ? $data['last_name'] : null;
 		$this->gender=(isset($data['gender'])) ? $data['gender'] : null;
 		$this->phone_number=(isset($data['phone_number'])) ? $data['phone_number'] : null;
-		$this->email=(isset($data['email'])) ? $data['email'] : null;
+		$this->email_address=(isset($data['email_address'])) ? $data['email_address'] : null;
 		$this->hospital_name=(isset($data['hospital_name'])) ? $data['hospital_name'] : null;
 		$this->specialty=(isset($data['specialty'])) ? $data['specialty'] : null;
 		$this->appointment_date=(isset($data['appointment_date'])) ? $data['appointment_date'] : null;
