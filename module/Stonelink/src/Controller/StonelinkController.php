@@ -6,7 +6,10 @@ use Stonelink\Model\Appointment;
 use Stonelink\Model\KenyaMaps2015HealthFacilitiesTable;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
-
+use Zend\Form\Element\DateTime;
+use Zend\Form\Element\Time;
+use Zend\Validator\Date;
+use Zend\Validator\Timezone;
 class StonelinkController extends AbstractActionController
 {
 
@@ -51,8 +54,10 @@ class StonelinkController extends AbstractActionController
                 // Inserting appointment data in the datbase table
                 $this->getAppointmentTable()->saveAppointment($appointment);
             } else {
-                echo "I am not valid";
-                exit();
+             
+                return array(
+                    'form' => $form
+                );
             }
         }
         // else{

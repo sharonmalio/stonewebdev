@@ -1,7 +1,9 @@
 <?php
 namespace Stonelink\Form;
 
+use Zend\Form\Element;
 use Zend\Form\Form;
+
 
 class AppointmentForm extends Form
 {
@@ -9,9 +11,7 @@ class AppointmentForm extends Form
     public function __construct($name = null)
     {
         parent::__construct('');
-        $this->setAttribute('method', 'post');
-     
-        
+    
         $this->add([
             'name' => 'appointment_id',
             'type' => 'hidden'
@@ -77,8 +77,10 @@ class AppointmentForm extends Form
             'name' => 'appointment_time',
             'type' => 'time',
             'options' => [
+                'format' => 'H:i',
                 'label' => 'Time for Appointment'
             ]
+            
         ]);
         
         $this->add([

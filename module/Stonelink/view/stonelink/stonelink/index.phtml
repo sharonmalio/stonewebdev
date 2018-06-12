@@ -1,10 +1,11 @@
 
-<div id="mapid" class= "mt-0"></div>
-<div id="form" class= "navbar"> </div>
+<div id="mapid" class="mt-0"></div>
+<div id="form" class="navbar"></div>
 <div id="main"></div>
 <div class="menu-button" id="menu-button"></div>
 
- <script>
+<script>
+
  $( document ).ready(function() {
 		var tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png?v=29&x={x}&y={y}&z={z}&language=en_GB?access_token={pk.eyJ1Ijoia2FuaW5pbWFsaW8iLCJhIjoiY2poamh4ZjllMDB4ZTM2cWtoM2V3bWd1ZyJ9.rnF81uaCjIFtaEAfQ1ytBg}', {
          attribution: 'Map data © <a href="https://www.openstreetmap.org/">KenyaHealthFacilitiess</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -13,7 +14,7 @@
          accessToken: 'pk.eyJ1Ijoia2FuaW5pbWFsaW8iLCJhIjoiY2poamh4ZjllMDB4ZTM2cWtoM2V3bWd1ZyJ9.rnF81uaCjIFtaEAfQ1ytBg'
      });
 		 var mymap = L.map('mapid', {center: [-1.121832846, 36.587164318], zoom:6.5, layers: tiles});
-		 
+	     
 	      	var markers = [
          	<?php foreach ($hospitals as $stonelink) : ?>
    
@@ -28,7 +29,7 @@
          	<?php endforeach; ?>
      	];
      mymap.locate({setView: true, maxZoom: 16});
-     
+
      
      var markerClusterGroup = L.markerClusterGroup();
      for (var i = 0; i < markers.length; i++) {
@@ -47,8 +48,15 @@
     	    L.circle(e.latlng, radius).addTo(mymap);
     	}
 	    mymap.on('locationfound', onLocationFound);
-	    mymap.on('click', onMapClick);
+	   // mymap.on('click', onMapClick);
 	});
+	
+// 	 	mymap.addLayer(markerClusterGroup);
+ 
+//  		var searchLayer = L.geoJson().addTo(mymap);
+// 	//... adding data in searchLayer ...
+// 		L.mymap('mapid', { searchControl: {layer: searchLayer} });
+	
  function onLocationError(e) {
 	    alert(e.message);
 	}
