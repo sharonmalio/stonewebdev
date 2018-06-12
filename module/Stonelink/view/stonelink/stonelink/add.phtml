@@ -91,7 +91,11 @@ echo $this->form()->openTag($form);
     <?= $this->formElement($specialty) ?>
     <?= $this->formElementErrors()->render($specialty, ['class' => 'help-block']) ?>
 </div>
-
+<div class="form-group">
+    <?= $this->formLabel($hospital_name) ?>
+    <?= $this->formElement($hospital_name) ?>
+    <?= $this->formElementErrors()->render($hospital_name, ['class' => 'help-block']) ?>
+</div>
 <div class="form-group">
     <?= $this->formLabel($appointment_date) ?>
     <?= $this->formElement($appointment_date) ?>

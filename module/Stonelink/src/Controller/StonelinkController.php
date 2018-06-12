@@ -6,10 +6,8 @@ use Stonelink\Model\Appointment;
 use Stonelink\Model\KenyaMaps2015HealthFacilitiesTable;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
-use Zend\Form\Element\DateTime;
-use Zend\Form\Element\Time;
-use Zend\Validator\Date;
-use Zend\Validator\Timezone;
+use RuntimeException;
+
 class StonelinkController extends AbstractActionController
 {
 
@@ -33,6 +31,7 @@ class StonelinkController extends AbstractActionController
         ]);
     }
 
+    
     public function addAction()
     {
         // instantiate AppointmentForm and set the label on the submit button to "Add"
@@ -48,11 +47,14 @@ class StonelinkController extends AbstractActionController
             $form->setInputFilter($appointment->getInputFilter());
             
             if ($form->isValid()) {
+               
                 $appointment->exchangeArray($form->getData());
-                echo"I am valid";
-                exit;
                 // Inserting appointment data in the datbase table
-                $this->getAppointmentTable()->saveAppointment($appointment);
+                $this->getAppointment()->saveAppointment($appointment);
+                echo "Your data has been successfully submitted";
+                return array(
+                    'form' => $form
+                );
             } else {
              
                 return array(
