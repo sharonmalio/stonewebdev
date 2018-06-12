@@ -13,8 +13,46 @@
          id: 'mapbox.streets',
          accessToken: 'pk.eyJ1Ijoia2FuaW5pbWFsaW8iLCJhIjoiY2poamh4ZjllMDB4ZTM2cWtoM2V3bWd1ZyJ9.rnF81uaCjIFtaEAfQ1ytBg'
      });
-		 var mymap = L.map('mapid', {center: [-1.121832846, 36.587164318], zoom:6.5, layers: tiles});
-	     
+		 var mymap = L.map('mapid', {
+			 center: [-1.121832846, 36.587164318],
+			 zoom:6.5, 
+			 layers: tiles
+			 });
+// 		  var searchbarConfig = {
+// 		          apiKey: "your_api_key_here",
+// 		          outdoorSearchMenuItems: [
+// 		              {name: "Around Me", searchTag: "", iconKey: "aroundme"},
+// 		              {name: "Tourism", searchTag: "tourist_info", iconKey: "tourist_info"}
+// 		          ],
+// 		          locationJumps: [
+// 		              {name: "San Francisco", latLng: [37.7952, -122.4028]}
+// 		          ]
+// 		      };
+// 		      var searchbar = new WrldSearchbar("widget-container", map, searchbarConfig);
+// 		      searchbar.on("searchresultsclear", clearMarkers);
+// 		      searchbar.on("searchresultsupdate", addSearchResultMarkers);
+// 		      searchbar.on("searchresultselect", openSelectedResultPopup);
+
+// 		      var markers = [];
+
+// 		      function clearMarkers() {
+// 		          markers.forEach(function(marker) { marker.remove(); });
+// 		      }
+
+// 		      function addSearchResultMarkers(event) {
+// 		          clearMarkers();
+// 		          for (var poiId in event.results) {
+// 		              var result = event.results[poiId];
+// 		              var marker = L.marker(result.location.latLng, { title: result.title });
+// 		              marker.addTo(mymap);
+// 		              markers.push(marker);
+// 		          }
+// 		      }
+
+// 		      function openSelectedResultPopup(event) {
+// 		          map.openPopup(event.result.title, event.result.location.latLng);
+// 		      }
+		      
 	      	var markers = [
          	<?php foreach ($hospitals as $stonelink) : ?>
    

@@ -3,16 +3,17 @@ namespace Stonelink\Controller;
 
 use Stonelink\Form\AppointmentForm;
 use Stonelink\Model\Appointment;
+use Stonelink\Model\AppointmentTable;
 use Stonelink\Model\KenyaMaps2015HealthFacilitiesTable;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
-use RuntimeException;
+
 
 class StonelinkController extends AbstractActionController
 {
-
     // Add this property:
     private $table;
+    private $appointment;
 
     // Add this constructor:
     public function __construct(KenyaMaps2015HealthFacilitiesTable $table)
@@ -20,17 +21,16 @@ class StonelinkController extends AbstractActionController
         $this->table = $table;
     }
 
-    // public function __construct(AppointmentTable $table)
-    // {
-    // $this->table = $table;
-    // }
+    public function getAppointment(AppointmentTable $appointment)
+    {
+        $this->appointment = $appointment;
+    }
     public function indexAction()
     {
         return new ViewModel([
             'hospitals' => $this->table->fetchAll()
         ]);
     }
-
     
     public function addAction()
     {
@@ -51,10 +51,7 @@ class StonelinkController extends AbstractActionController
                 $appointment->exchangeArray($form->getData());
                 // Inserting appointment data in the datbase table
                 $this->getAppointment()->saveAppointment($appointment);
-                echo "Your data has been successfully submitted";
-                return array(
-                    'form' => $form
-                );
+               
             } else {
              
                 return array(
@@ -62,10 +59,7 @@ class StonelinkController extends AbstractActionController
                 );
             }
         }
-        // else{
-        // echo"not post";
-        // exit;
-        // }
+       
         return array(
             'form' => $form
         );
