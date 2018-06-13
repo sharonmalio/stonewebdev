@@ -53,7 +53,25 @@
     </head>
 <body class="html">
 
-
+   <nav class="navbar navbar-color navbar-fixed-top " role="navigation">
+            <div class="container">
+                
+                <div class="sidenav "  id="mySidenav" >
+                <a href="javascript:void(0)" style="color:black;"class="closebtn" onclick="closeNav()">&times;</a>
+                    <ul class="nav  navbar-nav">
+                        <li class="active"><a href="<?=$this->url('stonelink/stonelink', array('action' => 'index'));?>">Home</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav ">
+                        <li class="active"><a href="<?=$this->url('stonelink/stonelink', array('action' => 'add'));?>">Book Appointment</a></li>
+                    </ul>
+                     <ul class="nav navbar-nav ">
+                        <li class="active"><a href="<?= $this->url('home') ?>">Search Clinician</a></li>
+                    </ul>
+                </div>
+                <span class= "navbar-left navbar-sticks" onclick="openNav()">&#9776;</span>
+               
+            </div>
+        </nav>
 
 	<div class="container">
             <?= $this->content ?>
