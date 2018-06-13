@@ -1,6 +1,9 @@
-<div class="row">
-	<div class="col-xs-6 col-sm-3 adverts" >We are here</div>
-	<div class="col-xs-6 col-sm-6" id="form">
+
+<div id="form">
+<?php
+$title = 'Appointment';
+$this->headTitle($title);
+?>
   <?php
 $form->setAttribute('action', $this->url('stonelink/stonelink', array(
     'action' => 'add'
@@ -126,10 +129,5 @@ function closeNav() {
     document.getElementById("mySidenav").style.width = "0";
 }
 </script>
-	</div>
-	<div class="col-xs-6 col-sm-3"></div>
-
-</div>
-
-
+	
 
