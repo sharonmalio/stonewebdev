@@ -23,11 +23,17 @@ class StonelinkController extends AbstractActionController
         $this->appointmentTable = $appointmentTable;
     }
     
+   
     public function indexAction()
     {
-        return new ViewModel([
-            'hospitals' => $this->kenyaHealthFacilitiestable->fetchAll()
-        ]);
+        try{
+            return new ViewModel([
+                'hospitals' => $this->kenyaHealthFacilitiestable->fetchAll()
+            ]);
+        } catch (\Exception $e) {
+            die($e);
+        }
+        
     }
     
     public function addAction()

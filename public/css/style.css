@@ -24,20 +24,21 @@
 
       }
 .mt-0 {
-  margin-top: 40px !important;
+  margin-top: 60px !important;
 }
-.col-4{
+.addcolour{
 	
 	
+	
 }
+
 #form {
 
 	height: 100%;
 	width: 100%;
 	float: right;
 	padding: 40px 2%;
-	
-	
+	margin-top: 60px !important;
 }
 form{
     margin: auto;
