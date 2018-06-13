@@ -24,12 +24,15 @@
 
       }
 .mt-0 {
-  margin-top: 60px !important;
+  margin-top: 40px !important;
 }
 .addcolour{
 	
 	
 	
+}
+.adverts{
+	margin-top:40px !important;
 }
 
 #form {
@@ -38,7 +41,6 @@
 	width: 100%;
 	float: right;
 	padding: 40px 2%;
-	margin-top: 60px !important;
 }
 form{
     margin: auto;

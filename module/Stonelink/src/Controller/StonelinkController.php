@@ -30,8 +30,8 @@ class StonelinkController extends AbstractActionController
             return new ViewModel([
                 'hospitals' => $this->kenyaHealthFacilitiestable->fetchAll()
             ]);
-        } catch (\Exception $e) {
-            die($e);
+        } catch (\Exception $exception){
+            die($exception);
         }
         
     }

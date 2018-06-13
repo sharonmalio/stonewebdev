@@ -3,7 +3,11 @@
 <div id="form" class="navbar"></div>
 <div id="main"></div>
 <div class="menu-button" id="menu-button"></div>
-
+<?php 
+$form->setAttribute('action', $this->url('stonelink/stonelink', array(
+    'action' => 'index'
+)));
+?>
 <script>
 
  $( document ).ready(function() {
