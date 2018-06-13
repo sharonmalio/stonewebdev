@@ -11,10 +11,10 @@
 
 namespace Stonelink\Model;
 
-use RuntimeException;
 use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\InputFilterAwareInterface;
 use Zend\InputFilter\InputFilterInterface;
+use RuntimeException;
 
 class Appointment implements InputFilterAwareInterface
 {
@@ -24,12 +24,12 @@ class Appointment implements InputFilterAwareInterface
 	public $last_name;
 	public $gender;
 	public $phone_number;
-	public $email;
+	public $email_address;
 	public $hospital_name;
 	public $specialty;
 	public $appointment_date;
 	public $appointment_time;
-	public $appoinment_reason;
+	public $appointment_reason;
 	protected $inputFilter;
 
 
@@ -40,12 +40,12 @@ class Appointment implements InputFilterAwareInterface
 		$this->last_name=(isset($data['last_name'])) ? $data['last_name'] : null;
 		$this->gender=(isset($data['gender'])) ? $data['gender'] : null;
 		$this->phone_number=(isset($data['phone_number'])) ? $data['phone_number'] : null;
-		$this->email=(isset($data['email'])) ? $data['email'] : null;
+		$this->email_address=(isset($data['email_address'])) ? $data['email_address'] : null;
 		$this->hospital_name=(isset($data['hospital_name'])) ? $data['hospital_name'] : null;
 		$this->specialty=(isset($data['specialty'])) ? $data['specialty'] : null;
 		$this->appointment_date=(isset($data['appointment_date'])) ? $data['appointment_date'] : null;
 		$this->appointment_time=(isset($data['appointment_time'])) ? $data['appointment_time'] : null;
-		$this->appoinment_reason=(isset($data['appoinment_reason'])) ? $data['appoinment_reason'] : null;
+		$this->appointment_reason=(isset($data['appointment_reason'])) ? $data['appointment_reason'] : null;
 	}
 
 
@@ -79,7 +79,7 @@ class Appointment implements InputFilterAwareInterface
 
 			$inputFilter->add(array(
 				'name'     => 'first_name',
-				'required' => false,
+				'required' => true,
 				'filters'  => array(
 					array('name' => 'StripTags'),
 					array('name' => 'StringTrim'),
@@ -88,7 +88,7 @@ class Appointment implements InputFilterAwareInterface
 
 			$inputFilter->add(array(
 				'name'     => 'last_name',
-				'required' => false,
+				'required' => true,
 				'filters'  => array(
 					array('name' => 'StripTags'),
 					array('name' => 'StringTrim'),
@@ -106,7 +106,7 @@ class Appointment implements InputFilterAwareInterface
 
 			$inputFilter->add(array(
 				'name'     => 'phone_number',
-				'required' => false,
+				'required' => true,
 				'filters'  => array(
 					array('name' => 'StripTags'),
 					array('name' => 'StringTrim'),
@@ -114,8 +114,8 @@ class Appointment implements InputFilterAwareInterface
 			));
 
 			$inputFilter->add(array(
-				'name'     => 'email',
-				'required' => false,
+				'name'     => 'email_address',
+				'required' => true,
 				'filters'  => array(
 					array('name' => 'StripTags'),
 					array('name' => 'StringTrim'),
@@ -124,7 +124,7 @@ class Appointment implements InputFilterAwareInterface
 
 			$inputFilter->add(array(
 				'name'     => 'hospital_name',
-				'required' => false,
+				'required' => true,
 				'filters'  => array(
 					array('name' => 'StripTags'),
 					array('name' => 'StringTrim'),
@@ -133,7 +133,7 @@ class Appointment implements InputFilterAwareInterface
 
 			$inputFilter->add(array(
 				'name'     => 'specialty',
-				'required' => false,
+				'required' => true,
 				'filters'  => array(
 					array('name' => 'StripTags'),
 					array('name' => 'StringTrim'),
@@ -142,7 +142,7 @@ class Appointment implements InputFilterAwareInterface
 
 			$inputFilter->add(array(
 				'name'     => 'appointment_date',
-				'required' => false,
+				'required' => true,
 				'filters'  => array(
 					array('name' => 'StripTags'),
 					array('name' => 'StringTrim'),
@@ -159,8 +159,8 @@ class Appointment implements InputFilterAwareInterface
 			));
 
 			$inputFilter->add(array(
-				'name'     => 'appoinment_reason',
-				'required' => false,
+				'name'     => 'appointment_reason',
+				'required' => true,
 				'filters'  => array(
 					array('name' => 'StripTags'),
 					array('name' => 'StringTrim'),

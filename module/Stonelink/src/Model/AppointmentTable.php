@@ -10,6 +10,7 @@
 */
 
 namespace Stonelink\Model;
+use Zend\Form\Element;
 
 use RuntimeException;
 use Zend\Db\Sql\Select;
@@ -163,6 +164,7 @@ class AppointmentTable
 			    ));
 		}
 	}
+	// Inserting User input data via Form Submission
 
 	public function saveAppointment(Appointment $appointment)
 	{
@@ -172,12 +174,12 @@ class AppointmentTable
 			'last_name'=>$appointment->last_name,
 			'gender'=>$appointment->gender,
 			'phone_number'=>$appointment->phone_number,
-			'email'=>$appointment->email,
+			'email_address'=>$appointment->email_address,
 			'hospital_name'=>$appointment->hospital_name,
 			'specialty'=>$appointment->specialty,
 			'appointment_date'=>$appointment->appointment_date,
 			'appointment_time'=>$appointment->appointment_time,
-			'appoinment_reason'=>$appointment->appoinment_reason,
+			'appointment_reason'=>$appointment->appointment_reason,
 			);
 
 			$id = (int)$appointment->appointment_id;

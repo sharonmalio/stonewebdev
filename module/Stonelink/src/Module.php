@@ -3,7 +3,6 @@ namespace Stonelink;
 
 use Zend\ModuleManager\Feature\ConfigProviderInterface;
 
-
 class Module implements ConfigProviderInterface
 {
 
@@ -29,8 +28,12 @@ class Module implements ConfigProviderInterface
         return [
             'factories' => [
                 Controller\StonelinkController::class => function ($container) {
-                    return new Controller\StonelinkController($container->get(Model\KenyaMaps2015HealthFacilitiesTable::class));
-                },
+                    try {
+                        return new Controller\StonelinkController($container->get(Model\KenyaMaps2015HealthFacilitiesTable::class), $container->get(Model\AppointmentTable::class));
+                    } catch (\Exception $e) {
+                        die($e);
+                    }
+                }
             ]
         
         ];

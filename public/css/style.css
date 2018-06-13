@@ -1,6 +1,4 @@
-navbar-nav li a{
-	color: black;
-}
+
 .navbar-color {
      background-color: 	#003366 !important;
      padding-bottom: 10px;
@@ -26,17 +24,28 @@ navbar-nav li a{
 
       }
 .mt-0 {
-  margin-top: 40px !important;
+  margin-top: 50px !important;
+}
+.addcolour{
+	
+	
+	
+}
+.adverts{
+	margin-top:50px !important;
 }
 
 #form {
+
 	height: 100%;
 	width: 100%;
 	float: right;
 	padding: 40px 2%;
 }
-
-
+form{
+    margin: auto;
+    max-width: 500px;
+}
 
       /* Optional: Makes the sample page fill the window. */
 html, body {

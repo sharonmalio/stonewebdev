@@ -1,73 +1,78 @@
-<?php 
+<?php
 namespace Stonelink\Controller;
 
-use Stonelink\Model\AppointmentTable;
+use Stonelink\Form\AppointmentForm;
 use Stonelink\Model\Appointment;
+use Stonelink\Model\AppointmentTable;
 use Stonelink\Model\KenyaMaps2015HealthFacilitiesTable;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
-use Stonelink\Form\AppointmentForm;
+
+
 class StonelinkController extends AbstractActionController
 {
-    
     // Add this property:
-    private $table;
+    private $kenyaHealthFacilitiestable;
+    private $appointmentTable;
     
-    // Add this constructor:
-    public function __construct(KenyaMaps2015HealthFacilitiesTable $table)
+
+    // Add this constructor: //I added the parameter so as to incorporate the other table
+    public function __construct(KenyaMaps2015HealthFacilitiesTable $kenyaHealthFacilitiestable,AppointmentTable $appointmentTable)
     {
-        $this->table = $table;
+        $this->kenyaHealthFacilitiestable = $kenyaHealthFacilitiestable;
+        $this->appointmentTable = $appointmentTable;
     }
-//     public function __construct(AppointmentTable $table)
-//     {
-//         $this->table = $table;
-//     }
     
+   
     public function indexAction()
     {
-        return new ViewModel([
-            'hospitals' => $this->table->fetchAll(),
-        ]);
+        try{
+            return new ViewModel([
+                'hospitals' => $this->kenyaHealthFacilitiestable->fetchAll()
+            ]);
+        } catch (\Exception $exception){
+            die($exception);
+        }
+        
     }
+    
     public function addAction()
     {
-       
-        
-        //instantiate AppointmentForm and set the label on the submit button to "Add"
+        // instantiate AppointmentForm and set the label on the submit button to "Add"
         $form = new AppointmentForm();
         $form->get('submit')->setValue('Add');
-        //If the request is not a POST request, then no form data has been
-        //submitted, and we need to display the form
+        // If the request is not a POST request, then no form data has been
+        // submitted, and we need to display the form
         $request = $this->getRequest();
         
-        if (! $request->isPost()) {
-            return ['form' => $form];
+        if ($request->isPost()) {
+            $appointment = new Appointment();
+            $form->setData($request->getPost());
+            $form->setInputFilter($appointment->getInputFilter());
+            
+            if ($form->isValid()) {
+               
+                $appointment->exchangeArray($form->getData());
+                // Inserting appointment data in the datbase table
+                $this->appointmentTable->saveAppointment($appointment);
+            } else {
+             
+                return array(
+                    'form' => $form
+                );
+            }
         }
-        //create an Appointment instance, and pass its input filter on to the form;
-        $appointment = new Appointment();
-        $form->setInputFilter($appointment->getInputFilter());
-        $form->setData($request->getPost());
-        
-        //if it is invalid return form
-        if (! $form->isValid()) {
-            return ['form' => $form];
-        }
-        
-        $appointment->exchangeArray($form->getData());
-        $this->table->saveAppointment($appointment);
-        //we redirect back to the list of appointments using the Redirect
-        return $this->redirect()->toRoute('stonelink');
+       
+        return array(
+            'form' => $form
+        );
+        // if it is invalid return form
+        // we redirect back to the list of appointments using the Redirect
     }
-    
-        
+
     public function editAction()
-    {
-        
-    }
-    
+    {}
+
     public function deleteAction()
-    {
-        
-    }
-   
+    {}
 }
