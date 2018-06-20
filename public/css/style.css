@@ -3,6 +3,7 @@
      background-color: 	#003366 !important;
      padding-bottom: 10px;
      padding-top:0;
+    
      
 }
 .navbar-collapse li a {
@@ -24,15 +25,7 @@
 
       }
 .mt-0 {
-  margin-top: 50px !important;
-}
-.addcolour{
-	
-	
-	
-}
-.adverts{
-	margin-top:50px !important;
+  margin-top: 25px !important;
 }
 
 #form {
