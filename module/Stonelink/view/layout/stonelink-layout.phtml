@@ -46,11 +46,12 @@
 	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
 <!-- Le styles -->
-        <?=$this->headLink(['rel' => 'shortcut icon','type' => 'image/vnd.microsoft.icon','href' => $this->basePath() . '/img/favicon.ico'])->prependStylesheet($this->basePath('css/bootstrap-theme.min.css'))->prependStylesheet($this->basePath('css/bootstrap.min.css'))->prependStylesheet($this->basePath('css/style.css'))->prependStylesheet($this->basePath('css/MarkerCluster.css'))->prependStylesheet($this->basePath('css/leaflet-marker-cluster.css'))?>
+        <?=$this->headLink(['rel' => 'shortcut icon','type' => 'image/vnd.microsoft.icon','href' => $this->basePath() . '/img/favicon.ico'])->prependStylesheet($this->basePath('css/bootstrap-theme.min.css'))->prependStylesheet($this->basePath('css/bootstrap.min.css'))->prependStylesheet($this->basePath('css/style.css'))->prependStylesheet($this->basePath('css/MarkerCluster.css'))->prependStylesheet($this->basePath('css/leaflet-marker-cluster.css'))
+        ->prependStylesheet($this->basePath('../src/css/leaflet-gplaces-autocomplete.css'))->prependStylesheet($this->basePath('https://unpkg.com/leaflet@0.7.7/dist/leaflet.css'))?>
 
         <!-- Scripts -->
         <?=$this->headScript()->prependFile($this->basePath('js/bootstrap.min.js'))->prependFile($this->basePath('js/jquery-3.1.0.min.js'))->prependFile($this->basePath('js/app.js'))->prependFile($this->basePath('js/leaflet-marker-cluster.js'))
-        ->prependFile($this->basePath('../src/js/leaflet-gplaces-autocomplete.js')) ->prependFile($this->basePath('https://unpkg.com/leaflet@0.7.7/dist/leaflet.js'))    		   		->prependFile($this->basePath('https://maps.googleapis.com/maps/api/js?libraries=places'))
+        ->prependFile($this->basePath('../src/js/leaflet-gplaces-autocomplete.js')) ->prependFile($this->basePath('https://unpkg.com/leaflet@0.7.7/dist/leaflet.js'))->prependFile($this->basePath('https://maps.googleapis.com/maps/api/js?libraries=places'))
         ?>
 
     </head>
