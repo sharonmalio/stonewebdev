@@ -19,5 +19,6 @@ return [
     'Zend\Form',
     'Application',
     'Stonelink',
-   
+    'Stonechat',
+    
     ];

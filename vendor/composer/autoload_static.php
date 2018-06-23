@@ -38,6 +38,7 @@ class ComposerStaticInit895333d59e09dc3407e78df597458b53
         'S' => 
         array (
             'Stonelink\\' => 10,
+            'Stonechat\\' => 10,
         ),
         'P' => 
         array (
@@ -142,6 +143,10 @@ class ComposerStaticInit895333d59e09dc3407e78df597458b53
         'Stonelink\\' => 
         array (
             0 => __DIR__ . '/../..' . '/module/Stonelink/src',
+        ),
+        'Stonechat\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/module/Stonechat/src',
         ),
         'Psr\\Container\\' => 
         array (

@@ -28,6 +28,7 @@ return array(
     'Zend\\ComponentInstaller\\' => array($vendorDir . '/zendframework/zend-component-installer/src'),
     'ZF\\DevelopmentMode\\' => array($vendorDir . '/zfcampus/zf-development-mode/src'),
     'Stonelink\\' => array($baseDir . '/module/Stonelink/src'),
+    'Stonechat\\' => array($baseDir . '/module/Stonechat/src'),
     'Psr\\Container\\' => array($vendorDir . '/psr/container/src'),
     'Interop\\Container\\' => array($vendorDir . '/container-interop/container-interop/src/Interop/Container'),
     'Application\\' => array($baseDir . '/module/Application/src'),

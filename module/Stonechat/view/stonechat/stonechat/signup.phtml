@@ -1,0 +1,78 @@
+
+<div id="form">
+<?php
+$title = 'Appointment';
+$this->headTitle($title);
+?>
+  <?php
+$form->setAttribute('action', $this->url('stonechat/stonechat', array(
+    'action' => 'signup'
+)));
+
+$form->prepare();
+$first_name = $form->get('first_name');
+$first_name->setAttribute('class', 'form-control');
+$first_name->setAttribute('placeholder', 'First Name');
+$first_name->setAttribute('type', 'required');
+
+$last_name = $form->get('last_name');
+$last_name->setAttribute('class', 'form-control');
+$last_name->setAttribute('placeholder', 'Last Name');
+
+$email_address = $form->get('email_address');
+$email_address->setAttribute('class', 'form-control');
+$email_address->setAttribute('placeholder', 'Email Address');
+
+$account_password = $form->get('account_password');
+$account_password->setAttribute('class', 'form-control');
+$account_password->setAttribute('placeholder', 'Password');
+// This provides CSS classes for the submit button:
+$submit = $form->get('submit');
+$submit->setAttribute('class', 'btn btn-primary');
+
+echo $this->form()->openTag($form);
+?>
+
+<div class="form-group">
+    <?= $this->formLabel($first_name) ?>
+    <?= $this->formElement($first_name) ?>
+    <?= $this->formElementErrors()->render($first_name, ['class' => 'help-block']) ?>
+</div>
+
+		<div class="form-group">
+    <?= $this->formLabel($last_name) ?>
+    <?= $this->formElement($last_name) ?>
+    <?= $this->formElementErrors()->render($last_name, ['class' => 'help-block']) ?>
+</div>
+
+
+		<div class="form-group">
+    <?= $this->formLabel($email_address) ?>
+    <?= $this->formElement($email_address) ?>
+    <?= $this->formElementErrors()->render($email_address, ['class' => 'help-block']) ?>
+</div>
+
+	
+
+		<div class="form-group">
+    <?= $this->formLabel($account_password) ?>
+    <?= $this->formElement($account_password) ?>
+    <?= $this->formElementErrors()->render($account_password, ['class' => 'help-block']) ?>
+</div>
+
+<?php
+echo $this->formSubmit($submit);
+// $this->formHidden($form->get('appointment_id'));
+echo $this->form()->closeTag();
+?>
+<script>
+function openNav() {
+    document.getElementById("mySidenav").style.width = "200px";
+}
+/* Set the width of the side navigation to 0 */
+function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+}
+</script>
+	
+
