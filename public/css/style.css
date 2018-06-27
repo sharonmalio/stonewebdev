@@ -1,3 +1,61 @@
+/*start*/
+body {
+    background-color: #f2ebce;
+}
+#chatholder {
+    background-color: #eada9d;
+    border: 2px groove #fd9a26;
+    padding-bottom: 5px;
+}
+.left {
+    width: 70%;
+    margin: 4px;
+    background-color: #ffffdd;
+    border: 1px solid #fd9a26;
+    float: left;
+}
+.right {
+    position: relative;
+    margin-left: 71%;
+    margin: 4px;
+    background-color: #ffffdd;
+    border: 1px solid #fd9a26;
+    overflow: hidden;
+}
+#chatpane.left {
+    height: 250px;
+    overflow: scroll;
+    margin-top: 0px;
+    background-color: #ffffff;
+}
+#userlist.right {
+    height: 250px;
+    background-color: #ffffff;
+}
+#control {
+    text-align: left;
+}
+#loading {
+    background-color: #fd9a26;
+    color: #eada9d;
+    font-weight: bold;
+    width: 90px;
+    margin-left: 100px;
+}
+p {
+    text-align: left;
+}
+p.message {
+    margin: 0px;
+}
+span.screenname, #screenname {
+    font-weight: bold;
+}
+.clear {
+    clear: both;
+}
+/*end*/
+
 
 .navbar-color {
      background-color: 	#003366 !important;
@@ -25,7 +83,8 @@
 
       }
 .mt-0 {
-  margin-top: 25px !important;
+  margin-top: 28px !important;
+  
 }
 
 #form {
@@ -275,3 +334,5 @@ div.container a.navbar-brand>img {
 	margin-right: 4px;
 	margin-top: -2px;
 }
+
+  

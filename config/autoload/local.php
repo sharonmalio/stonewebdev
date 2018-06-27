@@ -1,7 +1,7 @@
 <?php
 $dbHost = ($_SERVER['SERVER_PORT'] == 8085) ? '10.0.2.2' : 'localhost';
 $dbParams = [
-    'database' => 'stoneweb',
+    'database' => 'stone_developer','stoneweb',
     'username' => 'root',
     'password' => 'malio1234',
     'hostname' => $dbHost

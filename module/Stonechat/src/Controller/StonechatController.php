@@ -1,10 +1,9 @@
 <?php
 namespace Stonechat\Controller;
 
-use Stonechat\Model\Users;
-use Stonechat\Controller\StonechatController;
-// use Stonechat\
-use Stonechat\Model\UsersTable;
+use Stonechat\Form\RegPersonForm;
+use Stonechat\Model\RegPerson;
+use Stonechat\Model\RegPersonTable;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
@@ -12,58 +11,63 @@ use Zend\View\Model\ViewModel;
 class StonechatController extends AbstractActionController
 {
     // Add this property:
-    
-    private $usersTable;
-    
-    
-    // Add this constructor: //I added the parameter so as to incorporate the other table
-    public function __construct(UsersTable $usersTable)
-    {
    
-        $this->usersTable = $usersTable;
+    private $regPersonTable;
+
+    // Add this constructor: //I added the parameter so as to incorporate the other table
+    public function __construct(RegPersonTable $regPersonTable)
+    {
+    
+        $this->regPersonTable = $regPersonTable;
     }
     
-    
+   
     public function indexAction()
     {
-        return new ViewModel();
+        try{
+            return new ViewModel([
+         
+            ]);
+        } catch (\Exception $exception){
+            die($exception);
+        }
+        
     }
-    
-    public function signupAction()
+    public function regpersonAction()
     {
         // instantiate AppointmentForm and set the label on the submit button to "Add"
-        $form = new UsersForm();
+        $form = new RegPersonForm();
         $form->get('submit')->setValue('Add');
         // If the request is not a POST request, then no form data has been
         // submitted, and we need to display the form
         $request = $this->getRequest();
         
         if ($request->isPost()) {
-            $user = new Users();
+            $regperson = new RegPerson();
             $form->setData($request->getPost());
-            $form->setInputFilter($user->getInputFilter());
+            $form->setInputFilter($regperson->getInputFilter());
             
             if ($form->isValid()) {
-                
-                $user->exchangeArray($form->getData());
+                $regperson->exchangeArray($form->getData());
                 // Inserting appointment data in the datbase table
-                $this->usersTable->saveUsers($user);
+                $this->regPersonTable->saveRegPerson($regperson);
             } else {
-                
                 return array(
                     'form' => $form
                 );
             }
         }
-        
+       
         return array(
             'form' => $form
         );
         // if it is invalid return form
         // we redirect back to the list of appointments using the Redirect
     }
-    
-    public function loginAction()
+
+    public function editAction()
     {}
 
+    public function deleteAction()
+    {}
 }

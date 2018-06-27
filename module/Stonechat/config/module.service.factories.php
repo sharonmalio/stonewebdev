@@ -2,5 +2,5 @@
 
 return [
     
-    Stonechat\Model\UsersTable::class => Stonechat\Factory\Model\UsersTableFactory::class
+    Stonechat\Model\RegPersonTable::class => Stonechat\Factory\Model\RegPersonTableFactory::class
 ];

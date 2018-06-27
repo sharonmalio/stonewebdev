@@ -20,5 +20,4 @@ return [
     'Application',
     'Stonelink',
     'Stonechat',
-    
     ];

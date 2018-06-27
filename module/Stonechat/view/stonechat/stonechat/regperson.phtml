@@ -1,0 +1,114 @@
+
+<div id="form"></div>
+<?php
+$title = 'signup';
+$this->headTitle($title);
+?>
+  <?php
+$form->setAttribute('action', $this->url('stonechat/stonechat', array(
+    'action' => 'regperson'
+)));
+
+$form->prepare();
+$first_name = $form->get('first_name');
+$first_name->setAttribute('class', 'form-control');
+$first_name->setAttribute('placeholder', 'First Name');
+// $first_name->setAttribute('type', 'required');
+
+
+$second_name = $form->get('second_name');
+$second_name->setAttribute('class', 'form-control');
+$second_name->setAttribute('placeholder', 'Last Name');
+
+$third_name = $form->get('third_name');
+$third_name->setAttribute('class', 'form-control');
+$third_name->setAttribute('placeholder', 'Third name');
+
+$sex = $form->get('sex');
+$sex->setAttribute('class', 'form-control');
+$sex->setAttribute('placeholder', 'Gender');
+
+$date_of_birth = $form->get('date_of_birth');
+$date_of_birth->setAttribute('class', 'form-control');
+$date_of_birth->setAttribute('placeholder', 'Password');
+
+$national_id = $form->get('national_id');
+$national_id->setAttribute('class', 'form-control');
+$national_id->setAttribute('placeholder', 'Password');
+
+$nationality = $form->get('nationality');
+$nationality->setAttribute('class', 'form-control');
+$nationality->setAttribute('placeholder', 'Password');
+
+$date_registered = $form->get('date_registered');
+$date_registered->setAttribute('class', 'form-control');
+$date_registered->setAttribute('placeholder', 'Password');
+// $confirm_password = $form->get('$confirm_password');
+// $confirm_password->setAttribute('class', 'form-control');
+// $confirm_password->setAttribute('placeholder', 'Password');
+// This provides CSS classes for the submit button:
+$submit = $form->get('submit');
+$submit->setAttribute('class', 'btn btn-primary');
+
+echo $this->form()->openTag($form);
+?>
+
+<div class="form-group">
+    <?= $this->formLabel($first_name) ?>
+    <?= $this->formElement($first_name) ?>
+    <?= $this->formElementErrors()->render($first_name, ['class' => 'help-block']) ?>
+</div>
+
+	<div class="form-group">
+    <?= $this->formLabel($second_name) ?>
+    <?= $this->formElement($second_name) ?>
+    <?= $this->formElementErrors()->render($second_name, ['class' => 'help-block']) ?>
+</div>
+
+	<div class="form-group">
+    <?= $this->formLabel($third_name) ?>
+    <?= $this->formElement($third_name) ?>
+    <?= $this->formElementErrors()->render($third_name, ['class' => 'help-block']) ?>
+</div>
+
+	<div class="form-group">
+    <?= $this->formLabel($sex) ?>
+    <?= $this->formElement($sex) ?>
+    <?= $this->formElementErrors()->render($sex, ['class' => 'help-block']) ?>
+ </div> 
+ 
+ <div class="form-group">
+    <?= $this->formLabel($date_of_birth) ?>
+    <?= $this->formElement($date_of_birth) ?>
+    <?= $this->formElementErrors()->render($date_of_birth, ['class' => 'help-block']) ?>
+ </div>
+ <div class="form-group">
+    <?= $this->formLabel($national_id) ?>
+    <?= $this->formElement($national_id) ?>
+    <?= $this->formElementErrors()->render($national_id, ['class' => 'help-block']) ?>
+ </div>
+ <div class="form-group">
+    <?= $this->formLabel($nationality) ?>
+    <?= $this->formElement($nationality) ?>
+    <?= $this->formElementErrors()->render($nationality, ['class' => 'help-block']) ?>
+ </div>
+ <div class="form-group">
+    <?= $this->formLabel($date_registered) ?>
+    <?= $this->formElement($date_registered) ?>
+    <?= $this->formElementErrors()->render($date_registered, ['class' => 'help-block']) ?>
+ </div>
+
+<?php
+echo $this->formSubmit($submit);
+// $this->formHidden($form->get('appointment_id'));
+echo $this->form()->closeTag();
+?>
+<script>
+function openNav() {
+    document.getElementById("mySidenav").style.width = "200px";
+}
+/* Set the width of the side navigation to 0 */
+function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+}
+</script>
