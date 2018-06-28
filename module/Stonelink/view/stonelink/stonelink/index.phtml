@@ -74,15 +74,7 @@
    var group = L.featureGroup();
 
    places.forEach(function(place) {
-	 //autocomplete while user searches
 	 
-		 new L.Control.GPlaceAutocomplete({
-           callback: function(place){
-               var loc = place.geometry.location;
-               mymap.panTo([loc.lat(), loc.lng()]);
-               mymap.setZoom(18);
-           }
-       }).addTo(markerClusterGroup);
      // Create a marker for each place.
          var marker = L.marker([
            place.geometry.location.lat(),

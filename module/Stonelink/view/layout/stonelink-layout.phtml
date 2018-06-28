@@ -51,6 +51,7 @@
         ->prependStylesheet($this->basePath('css/leaflet-marker-cluster.css'))
         ->prependStylesheet($this->basePath('../src/css/leaflet-gplaces-autocomplete.css'))
         ->prependStylesheet($this->basePath('https://unpkg.com/leaflet@0.7.7/dist/leaflet.css'))
+        ->prependStylesheet($this->basePath('https://unpkg.com/leaflet-search@2.9.0/dist/leaflet-search.min.css'))
         ->prependStylesheet($this->basePath('css/leaflet.css'))
         ->prependStylesheet($this->basePath('css/style.css'))
         ?>
@@ -62,6 +63,7 @@
         ->prependFile($this->basePath('js/leaflet-marker-cluster.js'))
         ->prependFile($this->basePath('../src/js/leaflet-gplaces-autocomplete.js'))
         ->prependFile($this->basePath('https://unpkg.com/leaflet@0.7.7/dist/leaflet.js'))
+        ->prependFile($this->basePath('https://unpkg.com/leaflet-search@2.9.0/dist/leaflet-search.min.js'))
         ->prependFile($this->basePath('https://maps.googleapis.com/maps/api/js?libraries=places'))
         ->prependFile($this->basePath('js/leaflet.js'))
         ?>
