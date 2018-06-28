@@ -46,7 +46,15 @@
      	markerClusterGroup.addLayer(marker);
      }
      mymap.addLayer(markerClusterGroup);
-
+     // create the search box,
+ 	var controlSearch = new L.Control.Search({
+		position:'topright',		
+		layer: markerClusterGroup,
+		initial: false,
+		zoom: 21,
+		marker: false
+	});
+	mymap.addControl( controlSearch );
 
 //   implementing the Google Places search box in the Leaflet map because Leaflet-search plugin is complicated
 
