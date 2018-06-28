@@ -50,26 +50,7 @@
 
 //   implementing the Google Places search box in the Leaflet map because Leaflet-search plugin is complicated
 
- 	var GooglePlacesSearchBox = L.Control.extend({
-   	onAdd: function() {
-     var element = document.createElement("input");
-     element.id = "searchBox";
-     return element;
-   }
- });
-
- (new GooglePlacesSearchBox).addTo(mymap);
-
- var input = document.getElementById("searchBox");
- var searchBox = new google.maps.places.SearchBox(input);
-
- searchBox.addListener('places_changed', function() {
-	 
-   var places = searchBox.getPlaces();
-
-   if (places.length == 0) {
-     return;
-   }
+ 
 
    var group = L.featureGroup();
 
