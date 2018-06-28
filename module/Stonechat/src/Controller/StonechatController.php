@@ -51,6 +51,8 @@ class StonechatController extends AbstractActionController
                 $regperson->exchangeArray($form->getData());
                 // Inserting appointment data in the datbase table
                 $this->regPersonTable->saveRegPerson($regperson);
+                echo("not posted");
+                exit;
             } else {
                 return array(
                     'form' => $form
