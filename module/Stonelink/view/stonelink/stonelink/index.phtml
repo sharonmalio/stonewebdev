@@ -1,9 +1,4 @@
-
-<div id="mapid" class="mt-0"></div>
-<div id="form" class="navbar"></div>
-<div id="main"></div>
-<div class="menu-button" id="menu-button"></div>
-<script src="https://maps.googleapis.com/maps/api/js?libraries=places"></script>
+<div id="mapid"  class = "mt-0"></div>
 <script>
 
  $( document ).ready(function() {
@@ -16,11 +11,10 @@
 	     
 		 var mymap = L.map('mapid', {
 			 center: [-1.121832846, 36.587164318],
-			 zoom:6.5, 
+			 zoom:1, 
 			 layers: tiles
 			 });
-
-
+		 
     	    var markers = [
          	<?php foreach ($hospitals as $stonelink) : ?>
    
@@ -30,20 +24,21 @@
              	 "<?= $this->escapeHtml($stonelink->county)?>",
              	 "<?= $this->escapeHtml($stonelink->type)?>",
              	 "<?= $this->escapeHtml($stonelink->owner)?>"
+             	
              	 ],
          	 
          	<?php endforeach; ?>
      	];
-     mymap.locate({setView: true, maxZoom: 16});
+     mymap.locate({setView: true, maxZoom: 12});
 
      
      var markerClusterGroup = L.markerClusterGroup();
      for (var i = 0; i < markers.length; i++) {
-     	var a = markers[i];
-     	var title = 'Name:'+' '+ a[2]+'<br>'+'County:'+ ' '+ a[3]+'<br>'+'Type:'+' ' + a[4]+'<br>'+ 'Owner:'+' ' +a[5];
-     	var marker = L.marker(new L.LatLng(a[0], a[1]), { title: title });
-     	marker.bindPopup(title);
-     	markerClusterGroup.addLayer(marker);
+    	var a = markers[i];
+      	var popup = 'Name:'+' '+ a[2]+'<br>'+'County:'+ ' '+ a[3]+'<br>'+'Type:'+' ' + a[4]+'<br>'+ 'Owner:'+' ' +a[5];
+      	var marker = L.marker(new L.LatLng(a[0], a[1]), { title: a[2] + ',' + a[3] });
+      	marker.bindPopup(popup);
+      	markerClusterGroup.addLayer(marker);
      }
      mymap.addLayer(markerClusterGroup);
      // create the search box,
@@ -55,10 +50,6 @@
 		marker: false
 	});
  	 mymap.addControl( controlSearch );
-
-//   implementing the Google Places search box in the Leaflet map because Leaflet-search plugin is complicated
-
- 
 
    var group = L.featureGroup();
 
@@ -85,12 +76,6 @@
     	}
 	    mymap.on('locationfound', onLocationFound);
 	    mymap.on('click', onMapClick);
-	
-// 	 	mymap.addLayer(markerClusterGroup);
- 
-//  		var searchLayer = L.geoJson().addTo(mymap);
-// 	//... adding data in searchLayer ...
-// 		L.mymap('mapid', { searchControl: {layer: searchLayer} });
 	
  function onLocationError(e) {
 	    alert(e.message);
