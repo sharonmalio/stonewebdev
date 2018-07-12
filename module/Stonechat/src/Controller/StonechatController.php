@@ -7,32 +7,28 @@ use Stonechat\Model\RegPersonTable;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
-
 class StonechatController extends AbstractActionController
 {
+
     // Add this property:
-   
     private $regPersonTable;
 
     // Add this constructor: //I added the parameter so as to incorporate the other table
     public function __construct(RegPersonTable $regPersonTable)
     {
-    
         $this->regPersonTable = $regPersonTable;
     }
-    
-   
+
     public function indexAction()
     {
-        try{
+        try {
             return new ViewModel([
-         
             ]);
-        } catch (\Exception $exception){
+        } catch (\Exception $exception) {
             die($exception);
         }
-        
     }
+
     public function regpersonAction()
     {
         // instantiate AppointmentForm and set the label on the submit button to "Add"
@@ -51,21 +47,22 @@ class StonechatController extends AbstractActionController
                 $regperson->exchangeArray($form->getData());
                 // Inserting appointment data in the datbase table
                 $this->regPersonTable->saveRegPerson($regperson);
-                echo("not posted");
-                exit;
             } else {
                 return array(
                     'form' => $form
                 );
             }
         }
-       
+        
         return array(
             'form' => $form
         );
         // if it is invalid return form
         // we redirect back to the list of appointments using the Redirect
     }
+
+    public function loginAction()
+    {}
 
     public function editAction()
     {}

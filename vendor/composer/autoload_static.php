@@ -7,6 +7,7 @@ namespace Composer\Autoload;
 class ComposerStaticInit895333d59e09dc3407e78df597458b53
 {
     public static $files = array (
+        '5255c38a0faeba867671b61dfda6d864' => __DIR__ . '/..' . '/paragonie/random_compat/lib/random.php',
         '34901568a1e26d13dd475cb2c85e0284' => __DIR__ . '/..' . '/zendframework/zend-form/autoload/formElementManagerPolyfill.php',
     );
 
@@ -17,10 +18,14 @@ class ComposerStaticInit895333d59e09dc3407e78df597458b53
             'Zend\\Validator\\' => 15,
             'Zend\\Uri\\' => 9,
             'Zend\\Stdlib\\' => 12,
+            'Zend\\Session\\' => 13,
             'Zend\\ServiceManager\\' => 20,
             'Zend\\Router\\' => 12,
+            'Zend\\Mvc\\Plugin\\Prg\\' => 20,
+            'Zend\\Mvc\\Plugin\\FlashMessenger\\' => 31,
             'Zend\\Mvc\\' => 9,
             'Zend\\ModuleManager\\' => 19,
+            'Zend\\Math\\' => 10,
             'Zend\\Loader\\' => 12,
             'Zend\\InputFilter\\' => 17,
             'Zend\\I18n\\' => 10,
@@ -28,11 +33,16 @@ class ComposerStaticInit895333d59e09dc3407e78df597458b53
             'Zend\\Http\\' => 10,
             'Zend\\Form\\' => 10,
             'Zend\\Filter\\' => 12,
+            'Zend\\Expressive\\Session\\' => 24,
+            'Zend\\Expressive\\Authentication\\Session\\' => 39,
+            'Zend\\Expressive\\Authentication\\' => 31,
             'Zend\\EventManager\\' => 18,
             'Zend\\Escaper\\' => 13,
             'Zend\\Db\\' => 8,
+            'Zend\\Crypt\\' => 11,
             'Zend\\Config\\' => 12,
             'Zend\\ComponentInstaller\\' => 24,
+            'Zend\\Authentication\\' => 20,
             'ZF\\DevelopmentMode\\' => 19,
         ),
         'S' => 
@@ -42,6 +52,8 @@ class ComposerStaticInit895333d59e09dc3407e78df597458b53
         ),
         'P' => 
         array (
+            'Psr\\Http\\Server\\' => 16,
+            'Psr\\Http\\Message\\' => 17,
             'Psr\\Container\\' => 14,
         ),
         'I' => 
@@ -72,6 +84,10 @@ class ComposerStaticInit895333d59e09dc3407e78df597458b53
         array (
             0 => __DIR__ . '/..' . '/zendframework/zend-stdlib/src',
         ),
+        'Zend\\Session\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/zendframework/zend-session/src',
+        ),
         'Zend\\ServiceManager\\' => 
         array (
             0 => __DIR__ . '/..' . '/zendframework/zend-servicemanager/src',
@@ -80,6 +96,14 @@ class ComposerStaticInit895333d59e09dc3407e78df597458b53
         array (
             0 => __DIR__ . '/..' . '/zendframework/zend-router/src',
         ),
+        'Zend\\Mvc\\Plugin\\Prg\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/zendframework/zend-mvc-plugin-prg/src',
+        ),
+        'Zend\\Mvc\\Plugin\\FlashMessenger\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/zendframework/zend-mvc-plugin-flashmessenger/src',
+        ),
         'Zend\\Mvc\\' => 
         array (
             0 => __DIR__ . '/..' . '/zendframework/zend-mvc/src',
@@ -87,6 +111,10 @@ class ComposerStaticInit895333d59e09dc3407e78df597458b53
         'Zend\\ModuleManager\\' => 
         array (
             0 => __DIR__ . '/..' . '/zendframework/zend-modulemanager/src',
+        ),
+        'Zend\\Math\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/zendframework/zend-math/src',
         ),
         'Zend\\Loader\\' => 
         array (
@@ -116,6 +144,18 @@ class ComposerStaticInit895333d59e09dc3407e78df597458b53
         array (
             0 => __DIR__ . '/..' . '/zendframework/zend-filter/src',
         ),
+        'Zend\\Expressive\\Session\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/zendframework/zend-expressive-session/src',
+        ),
+        'Zend\\Expressive\\Authentication\\Session\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/zendframework/zend-expressive-authentication-session/src',
+        ),
+        'Zend\\Expressive\\Authentication\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/zendframework/zend-expressive-authentication/src',
+        ),
         'Zend\\EventManager\\' => 
         array (
             0 => __DIR__ . '/..' . '/zendframework/zend-eventmanager/src',
@@ -128,6 +168,10 @@ class ComposerStaticInit895333d59e09dc3407e78df597458b53
         array (
             0 => __DIR__ . '/..' . '/zendframework/zend-db/src',
         ),
+        'Zend\\Crypt\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/zendframework/zend-crypt/src',
+        ),
         'Zend\\Config\\' => 
         array (
             0 => __DIR__ . '/..' . '/zendframework/zend-config/src',
@@ -136,6 +180,10 @@ class ComposerStaticInit895333d59e09dc3407e78df597458b53
         array (
             0 => __DIR__ . '/..' . '/zendframework/zend-component-installer/src',
         ),
+        'Zend\\Authentication\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/zendframework/zend-authentication/src',
+        ),
         'ZF\\DevelopmentMode\\' => 
         array (
             0 => __DIR__ . '/..' . '/zfcampus/zf-development-mode/src',
@@ -143,10 +191,21 @@ class ComposerStaticInit895333d59e09dc3407e78df597458b53
         'Stonelink\\' => 
         array (
             0 => __DIR__ . '/../..' . '/module/Stonelink/src',
+            1 => __DIR__ . '/../..' . '/module/Stonelink/src',
         ),
         'Stonechat\\' => 
         array (
             0 => __DIR__ . '/../..' . '/module/Stonechat/src',
+            1 => __DIR__ . '/../..' . '/module/Stonechat/src',
+        ),
+        'Psr\\Http\\Server\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/http-server-handler/src',
+            1 => __DIR__ . '/..' . '/psr/http-server-middleware/src',
+        ),
+        'Psr\\Http\\Message\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
         'Psr\\Container\\' => 
         array (
@@ -166,11 +225,27 @@ class ComposerStaticInit895333d59e09dc3407e78df597458b53
         ),
     );
 
+    public static $prefixesPsr0 = array (
+        'Z' => 
+        array (
+            'ZfcUser' => 
+            array (
+                0 => __DIR__ . '/..' . '/zf-commons/zfc-user/src',
+            ),
+        ),
+    );
+
+    public static $classMap = array (
+        'ZfcUser\\Module' => __DIR__ . '/..' . '/zf-commons/zfc-user/Module.php',
+    );
+
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInit895333d59e09dc3407e78df597458b53::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit895333d59e09dc3407e78df597458b53::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit895333d59e09dc3407e78df597458b53::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInit895333d59e09dc3407e78df597458b53::$classMap;
 
         }, null, ClassLoader::class);
     }

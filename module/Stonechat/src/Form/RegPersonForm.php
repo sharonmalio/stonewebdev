@@ -5,20 +5,17 @@ use Zend\Form\Form;
 
 class RegPersonForm extends Form
 {
-
     public function __construct($name = null)
     {
-        $this->setName('regpersonform');
-        $this->setAttribute('id', 'regpersonform');
-        $this->setAttribute('method', 'post');
-        
+        // $this->setName('regpersonform');
+        // $this->setAttribute('id', 'form');
+        // $this->setAttribute('method', 'post');
         parent::__construct('');
         
         $this->add([
             'name' => 'reg_person_id',
             'type' => 'hidden'
         ]);
-        
         $this->add([
             'name' => 'first_name',
             'type' => 'text',
@@ -114,10 +111,6 @@ class RegPersonForm extends Form
                 'format' => 'Y-m-d'
             ]
         ]);
-        $this->add([
-            'name' => 'estimated_date_of_birth',
-            'type' => 'hidden'
-        ]);
         
         $this->add([
             'name' => 'national_id',
@@ -150,7 +143,7 @@ class RegPersonForm extends Form
                 'label' => 'Country of Origin',
                 'label_attributes' => [],
                 'disable_inarray_validator' => true
-                //'value_options' => $this->getSelectOptions()
+                // 'value_options' => $this->getSelectOptions()
             ]
         ]);
         
@@ -172,7 +165,11 @@ class RegPersonForm extends Form
                     'class' => 'label_date_of_birth'
                 ],
                 'format' => 'Y-m-d'
-                ]
+            ]
+        ]);
+        $this->add([
+            'name' => 'estimated_date_of_birth',
+            'type' => 'hidden'
         ]);
         
         $this->add([

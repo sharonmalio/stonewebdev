@@ -31,7 +31,8 @@ class Module implements ConfigProviderInterface
                 Controller\StonechatController::class => function ($container) {
                     try {
                         return new Controller\StonechatController($container->get(Model\RegPersonTable::class));
-                    } catch (\Exception $e) {
+                    } 
+                    catch (\Exception $e) {
                         die($e);
                     }
                 }

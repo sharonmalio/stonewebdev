@@ -1,0 +1,13 @@
+<?php /* @var $this \Zend\View\Renderer\PhpRenderer */?>
+<?php //$redirectUrl= $this->url('application',array('controller'=>'user','action'=>'register'))?>
+<?php //$this->partial('scripts/jsRedirect',$redirectUrl);?>
+<div class="page-header">
+	<h1><?php echo sprintf($this->translate('Register New User')); ?></h1>
+</div>
+<?php
+if (! $this->enableRegistration) {
+    print "Registration is disabled";
+    return;
+}
+// echo $this->MendUserLevel();
+echo $this->partial('forms/user/userRegisterForm');

@@ -22,18 +22,25 @@
 		"zendframework/zend-inputfilter" : "^2.8",
 		"zendframework/zend-form" : "^2.12",
 		"zendframework/zend-router" : "^3.0",
-		"zendframework/zend-i18n" : "^2.9"
+		"zendframework/zend-i18n" : "^2.9",
+		"zf-commons/zfc-user": "^3.0",
+		"zendframework/zend-authentication": "^2.6",
+		"zendframework/zend-expressive-authentication-session": "^0.5.0"
+
 	},
 	"autoload" : {
 		"psr-4" : {
 			"Application\\" : "module/Application/src/",
 			"Stonelink\\" : "module/Stonelink/src/", 
 			"Stonechat\\" : "module/Stonechat/src/"
+			
 		}
 	},
 	"autoload-dev" : {
 		"psr-4" : {
-			"ApplicationTest\\" : "module/Application/test/"
+			"ApplicationTest\\" : "module/Application/test/",
+			"Stonelink\\" : "module/Stonelink/src/", 
+			"Stonechat\\" : "module/Stonechat/src/"
 		}
 	},
 	"scripts" : {

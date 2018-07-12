@@ -23,12 +23,7 @@ use Stonechat\Model\RegPerson;
 class RegPersonTableFactory implements FactoryInterface
 {
 
-	/**
-	* Invoke
-	*
-	*@param ContainerInterface $container, $requestedName, *@params array $options = null
-	* @return mixed
-	*/
+	
 	public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
 	{
 		$serviceManager = $container->get('ServiceManager');
@@ -40,12 +35,7 @@ class RegPersonTableFactory implements FactoryInterface
 		$table = new RegPersonTable($tableGateway);
 		return $table;
 	}
-	/**
-	* Create service
-	*
-	* @param ServiceLocatorInterface $serviceLocator
-	* @return mixed
-	*/
+
 	public function createService(ServiceLocatorInterface $serviceLocator)
 	{
 		$db = $serviceLocator->get('Zend\Db\Adapter\Adapter');

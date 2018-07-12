@@ -1,4 +1,5 @@
-<div id="mapid"  class = "mt-0"></div>
+<div id="mapid" class="mt-0"></div>
+
 <script>
 
  $( document ).ready(function() {
@@ -8,10 +9,9 @@
          id: 'mapbox.streets',
          accessToken: 'pk.eyJ1Ijoia2FuaW5pbWFsaW8iLCJhIjoiY2poamh4ZjllMDB4ZTM2cWtoM2V3bWd1ZyJ9.rnF81uaCjIFtaEAfQ1ytBg'
      });
-	     
 		 var mymap = L.map('mapid', {
 			 center: [-1.121832846, 36.587164318],
-			 zoom:1, 
+			 zoom:16, 
 			 layers: tiles
 			 });
 		 
