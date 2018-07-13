@@ -17,9 +17,7 @@ body {
 	border: 2px groove #fd9a26;
 	padding-bottom: 5px;
 }
- #map {
-        height: 90%;
-      }
+
 .left {
 	width: 70%;
 	margin: 4px;
@@ -102,7 +100,6 @@ width:100vw;
 height: 100vh;
 }
 
-}
 
 #form {
 	height: 100%;

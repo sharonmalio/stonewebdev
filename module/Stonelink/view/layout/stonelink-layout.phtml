@@ -40,13 +40,14 @@
         <?=$this->headScript()->prependFile($this->basePath('js/bootstrap.min.js'))
         ->prependFile($this->basePath('js/jquery/jquery-3.1.0.min.js'))
         ->prependFile($this->basePath('js/jquery/app.js'))
-        ->prependFile('https://maps.googleapis.com/maps/api/js?key=AIzaSyCHj5_T9nC7gQrQbdHyY1MAbck6lxLuJDk&callback=initMap')
         ->prependFile($this->basePath('js/jquery/jquery.min.js'))
+        
         
         ?>
 
     </head>
 <body class="html mt-0">
+<input id="pac-input" class="controls" type="text" placeholder="Search Box">
 
 	<nav class="navbar navbar-color navbar-fixed-top " role="navigation">
 		<div class="container">
