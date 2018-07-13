@@ -1,0 +1,17 @@
+<?php
+$form = $this->loginForm;
+$form->prepare();
+$form->setAttribute('action', $this->url('zfcuser/login'));
+$form->setAttribute('method', 'post');
+echo $this->form()->openTag($form);
+foreach ($form as $element) {
+    $this->partial()->setObjectKey('element');
+    echo $this->partial('formWidgets/oneColumnForm', $element);
+}
+?>
+<input type="hidden" name="redirect"
+	value="<?php echo $this->escapeHtml($redirect); ?>" />
+<?php
+$this->partial()->setObjectKey('form');
+echo $this->partial('formWidgets/oneColumnFormButton', $form);
+echo $this->form()->closeTag();

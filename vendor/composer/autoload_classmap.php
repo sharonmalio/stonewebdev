@@ -6,4 +6,5 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'ZfcUser\\Module' => $vendorDir . '/zf-commons/zfc-user/Module.php',
 );

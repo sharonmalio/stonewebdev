@@ -14,7 +14,6 @@ class StonelinkController extends AbstractActionController
     // Add this property:
     private $kenyaHealthFacilitiestable;
     private $appointmentTable;
-    
 
     // Add this constructor: //I added the parameter so as to incorporate the other table
     public function __construct(KenyaMaps2015HealthFacilitiesTable $kenyaHealthFacilitiestable,AppointmentTable $appointmentTable)
@@ -35,7 +34,6 @@ class StonelinkController extends AbstractActionController
         }
         
     }
-    
     public function addAction()
     {
         // instantiate AppointmentForm and set the label on the submit button to "Add"

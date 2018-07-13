@@ -1,123 +1,68 @@
-
 <div id="mapid" class="mt-0"></div>
 <div id="form" class="navbar"></div>
 <div id="main"></div>
 <div class="menu-button" id="menu-button"></div>
 
 <script>
+function initMap() {
+var myLatLng = {lat: -1.2921, lng: 36.8219};
+var mapProp= {
+    center:myLatLng,
+    zoom:15,
+};
 
- $( document ).ready(function() {
-		var tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png?v=29&x={x}&y={y}&z={z}&language=en_GB?access_token={pk.eyJ1Ijoia2FuaW5pbWFsaW8iLCJhIjoiY2poamh4ZjllMDB4ZTM2cWtoM2V3bWd1ZyJ9.rnF81uaCjIFtaEAfQ1ytBg}', {
-         attribution: 'Map data © <a href="https://www.openstreetmap.org/">KenyaHealthFacilitiess</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-         maxZoom: 18,
-         id: 'mapbox.streets',
-         accessToken: 'pk.eyJ1Ijoia2FuaW5pbWFsaW8iLCJhIjoiY2poamh4ZjllMDB4ZTM2cWtoM2V3bWd1ZyJ9.rnF81uaCjIFtaEAfQ1ytBg'
-     });
-		 var mymap = L.map('mapid', {
-			 center: [-1.121832846, 36.587164318],
-			 zoom:6.5, 
-			 layers: tiles
-			 });
-// 		  var searchbarConfig = {
-// 		          apiKey: "your_api_key_here",
-// 		          outdoorSearchMenuItems: [
-// 		              {name: "Around Me", searchTag: "", iconKey: "aroundme"},
-// 		              {name: "Tourism", searchTag: "tourist_info", iconKey: "tourist_info"}
-// 		          ],
-// 		          locationJumps: [
-// 		              {name: "San Francisco", latLng: [37.7952, -122.4028]}
-// 		          ]
-// 		      };
-// 		      var searchbar = new WrldSearchbar("widget-container", map, searchbarConfig);
-// 		      searchbar.on("searchresultsclear", clearMarkers);
-// 		      searchbar.on("searchresultsupdate", addSearchResultMarkers);
-// 		      searchbar.on("searchresultselect", openSelectedResultPopup);
+var map=new google.maps.Map(document.getElementById("mapid"),mapProp);
 
-// 		      var markers = [];
-
-// 		      function clearMarkers() {
-// 		          markers.forEach(function(marker) { marker.remove(); });
-// 		      }
-
-// 		      function addSearchResultMarkers(event) {
-// 		          clearMarkers();
-// 		          for (var poiId in event.results) {
-// 		              var result = event.results[poiId];
-// 		              var marker = L.marker(result.location.latLng, { title: result.title });
-// 		              marker.addTo(mymap);
-// 		              markers.push(marker);
-// 		          }
-// 		      }
-
-// 		      function openSelectedResultPopup(event) {
-// 		          map.openPopup(event.result.title, event.result.location.latLng);
-// 		      }
-		      
-	      	var markers = [
-         	<?php foreach ($hospitals as $stonelink) : ?>
-   
-             	[<?= $this->escapeHtml($stonelink->latitude)?>, 
-             	 <?= $this->escapeHtml($stonelink->longitude)?>, 
-             	 "<?= $this->escapeHtml($stonelink->facility_n)?>", 
-             	 "<?= $this->escapeHtml($stonelink->county)?>",
-             	 "<?= $this->escapeHtml($stonelink->type)?>",
-             	 "<?= $this->escapeHtml($stonelink->owner)?>"
-             	 ],
-         	 
-         	<?php endforeach; ?>
-     	];
-     mymap.locate({setView: true, maxZoom: 16});
-
-     
-     var markerClusterGroup = L.markerClusterGroup();
-     for (var i = 0; i < markers.length; i++) {
-     	var a = markers[i];
-     	var title = 'Name:'+' '+ a[2]+'<br>'+'County:'+ ' '+ a[3]+'<br>'+'Type:'+' ' + a[4]+'<br>'+ 'Owner:'+' ' +a[5];
-     	var marker = L.marker(new L.LatLng(a[0], a[1]), { title: title });
-     	marker.bindPopup(title);
-     	markerClusterGroup.addLayer(marker);
-     }
-     mymap.addLayer(markerClusterGroup);
-     
-     var onLocationFound = function (e) {
-    	    var radius = e.accuracy / 2;
-    	    L.marker(e.latlng).addTo(mymap)
-    	        .bindPopup("You are here, approximately " + radius + " meters from this point").openPopup();
-    	    L.circle(e.latlng, radius).addTo(mymap);
-    	}
-	    mymap.on('locationfound', onLocationFound);
-	   // mymap.on('click', onMapClick);
-	});
+var image ='https://ajali.afyaresearch.org/images/hospital.png';
 	
-// 	 	mymap.addLayer(markerClusterGroup);
- 
-//  		var searchLayer = L.geoJson().addTo(mymap);
-// 	//... adding data in searchLayer ...
-// 		L.mymap('mapid', { searchControl: {layer: searchLayer} });
-	
- function onLocationError(e) {
-	    alert(e.message);
-	}
-		
- 	function openNav() {
-	 	    document.getElementById("mySidenav").style.width = "200px";
-	 	}
-	 
-	 	/* Set the width of the side navigation to 0 */
-	function closeNav() {
-	 	    document.getElementById("mySidenav").style.width = "0";
-	 	}
-	 $('#menu-button').click(function(e){
-		    e.stopPropagation();
-		    $('#hide-menu').toggleClass('show-menu');
-		    });
-		    
-		    $('#hide-menu').click(function(e){
-		        e.stopPropagation();
-		    });
-		    
-		    $('body,html').click(function(e){
-		       $('#hide-menu').removeClass('show-menu');
-		    });
+var marker = new google.maps.Marker({
+    position: myLatLng,
+    map: map,
+    title: 'Facilities!'
+  });
+
+var markers = [
+ 	<?php foreach ($hospitals as $stonelink) : ?>
+     	[<?= $this->escapeHtml($stonelink->latitude)?>, 
+     	 <?= $this->escapeHtml($stonelink->longitude)?>, 
+     	 "<?= $this->escapeHtml($stonelink->facility_n)?>", 
+     	 "<?= $this->escapeHtml($stonelink->county)?>",
+     	 "<?= $this->escapeHtml($stonelink->type)?>",
+     	 "<?= $this->escapeHtml($stonelink->owner)?>"
+     	 ],
+ 	<?php endforeach; ?>
+	];
+
+for (var i = 0; i < markers.length; i++) {
+	var a = markers[i];
+	var markerpos = {lat:a[0], lng:a[1]};
+ 	var title = 'Name:'+' '+ a[2]+'<br>'+'County:'+ ' '+ a[3]+'<br>'+'Type:'+' ' + a[4]+'<br>'+ 'Owner:'+' ' +a[5];
+ 	var infoWindow={title:title};
+ 	var marker = new google.maps.Marker({
+ 	      position: markerpos,
+ 	      map: map,
+ 	      title: title,
+ 	   	icon:image,
+ 	    });
+ 	marker.addListener('click', function() {
+ 	    infoWindow.open(map, marker);
+ 	  });(marker, a)
+ 	marker.setMap(map);
  	
- </script>
+ 	
+}
+	
+}
+//for the nav bar
+function openNav() {
+	    document.getElementById("mySidenav").style.width = "200px";
+	}
+
+	/* Set the width of the side navigation to 0 */
+function closeNav() {
+	    document.getElementById("mySidenav").style.width = "0";
+	}
+</script>
+<script async defer
+	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHj5_T9nC7gQrQbdHyY1MAbck6lxLuJDk&callback=initMap">
+</script>

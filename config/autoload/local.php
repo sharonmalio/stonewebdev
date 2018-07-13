@@ -1,16 +1,16 @@
 <?php
 $dbHost = ($_SERVER['SERVER_PORT'] == 8085) ? '10.0.2.2' : 'localhost';
 $dbParams = [
-    'database' => 'stoneweb',
-    'username' => 'root',
-    'password' => 'malio1234',
-    'hostname' => $dbHost
+    'mysql_database' => 'stoneweb_developer',
+    'mysql_username' => 'root',
+    'mysql_password' => 'malio1234',
+    'mysql_hostname' => $dbHost
 ];
 $pgSqlDbParams = [
-    'database' => 'stonelink',
-    'username' => 'postgres',
-    'password' => 'malio1234',
-    'hostname' => $dbHost
+    'pgsql_database' => 'stonelink',
+    'pgsql_username' => 'postgres',
+    'pgsql_password' => 'malio1234',
+    'pgsql_hostname' => $dbHost
 ];
 
 return [
@@ -18,11 +18,11 @@ return [
         // for primary db adapter that called
         // by $sm->get('Zend\Db\Adapter\Adapter')
         'driver' => 'mysqli',
-        'dsn' => 'mysql:dbname=' . $dbParams['database'] . ';host=' . $dbParams['hostname'],
-        'database' => $dbParams['database'],
-        'username' => $dbParams['username'],
-        'password' => $dbParams['password'],
-        'hostname' => $dbParams['hostname'],
+        'dsn' => 'mysql:dbname=' . $dbParams['mysql_database'] . ';host=' . $dbParams['mysql_hostname'],
+        'database' => $dbParams['mysql_database'],
+        'username' => $dbParams['mysql_username'],
+        'password' => $dbParams['mysql_password'],
+        'hostname' => $dbParams['mysql_hostname'],
         'options' => [
             'buffer_results' => true
         ],
@@ -31,9 +31,9 @@ return [
         'adapters' => [
             'pgsql' => [
                 'driver' => 'Pdo',
-                'dsn' => 'pgsql:host=' . $pgSqlDbParams['hostname'] . ';port=5432;dbname=' . $pgSqlDbParams['database'],
-                'user' => $pgSqlDbParams['username'],
-                'password' => $pgSqlDbParams['password']
+                'dsn' => 'pgsql:host=' . $pgSqlDbParams['pgsql_hostname'] . ';port=5432;dbname=' . $pgSqlDbParams['pgsql_database'],
+                'user' => $pgSqlDbParams['pgsql_username'],
+                'password' => $pgSqlDbParams['pgsql_password']
             
             ]
             
