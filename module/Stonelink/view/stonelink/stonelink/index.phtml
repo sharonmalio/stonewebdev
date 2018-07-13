@@ -8,20 +8,16 @@ function initMap() {
 var myLatLng = {lat: -1.2921, lng: 36.8219};
 var mapProp= {
     center:myLatLng,
-    zoom:7,
+    zoom:15,
 };
 
 var map=new google.maps.Map(document.getElementById("mapid"),mapProp);
 
-// var image =  {
-// 	url:"http://ajali.afyaresearch.org/images/hospital.png"
-// 	size: new google.maps.Size(20, 32),
-// };
-
+var image ='https://ajali.afyaresearch.org/images/hospital.png';
+	
 var marker = new google.maps.Marker({
     position: myLatLng,
     map: map,
-   // icon:image,
     title: 'Facilities!'
   });
 
@@ -39,23 +35,23 @@ var markers = [
 
 for (var i = 0; i < markers.length; i++) {
 	var a = markers[i];
-    var latLng = new google.maps.LatLng(a.latitude, a.longitude); 
+	var markerpos = {lat:a[0], lng:a[1]};
  	var title = 'Name:'+' '+ a[2]+'<br>'+'County:'+ ' '+ a[3]+'<br>'+'Type:'+' ' + a[4]+'<br>'+ 'Owner:'+' ' +a[5];
  	var infoWindow={title:title};
  	var marker = new google.maps.Marker({
- 	      position: latLng,
- 	 	//icon:image,
+ 	      position: markerpos,
  	      map: map,
  	      title: title,
+ 	   	icon:image,
  	    });
  	marker.addListener('click', function() {
- 	    infowindow.open(map, marker);
- 	  });
+ 	    infoWindow.open(map, marker);
+ 	  });(marker, a)
  	marker.setMap(map);
+ 	
+ 	
 }
 	
-
-
 }
 //for the nav bar
 function openNav() {
