@@ -2,6 +2,7 @@
 <div id="form" class="navbar"></div>
 <div id="main"></div>
 <div class="menu-button" id="menu-button"></div>
+
 <script>
 function initMap() {
 var myLatLng = {lat: -1.2921, lng: 36.8219};
@@ -10,16 +11,37 @@ var mapProp= {
     zoom:7,
 };
 var map=new google.maps.Map(document.getElementById("mapid"),mapProp);
+
 var marker = new google.maps.Marker({
     position: myLatLng,
     map: map,
-   icon: "http://ajali.afyaresearch.org/images/hospital.png"
+   //	icon: "http://ajali.afyaresearch.org/images/hospital.png"
     title: 'Hello World!'
   });
-marker.setMap(map);
+var markers = [
+ 	<?php foreach ($hospitals as $stonelink) : ?>
 
+     	[<?= $this->escapeHtml($stonelink->latitude)?>, 
+     	 <?= $this->escapeHtml($stonelink->longitude)?>, 
+     	 "<?= $this->escapeHtml($stonelink->facility_n)?>", 
+     	 "<?= $this->escapeHtml($stonelink->county)?>",
+     	 "<?= $this->escapeHtml($stonelink->type)?>",
+     	 "<?= $this->escapeHtml($stonelink->owner)?>"
+     	 ],
+ 	<?php endforeach; ?>
+	];
+
+for (var i = 0; i < markers.length; i++) {
+ 	var a = markers[i];
+ 	  var marker = new google.maps.Marker({
+ 	      position: myLatLng,
+ 	      map: map,
+ 	      title: a[0],
+ 	      zIndex: a[3]
+ 	    });
 }
-
+marker.setMap(map);
+}
 //for the nav bar
 function openNav() {
 	    document.getElementById("mySidenav").style.width = "200px";
