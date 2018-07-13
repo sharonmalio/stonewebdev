@@ -20,9 +20,7 @@
 
 <link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#5bbad5">
 <link rel="shortcut icon" href="/img/favicon.ico">
-<link rel="stylesheet" type="text/css" href="css/style.css"
-	media="screen, handheld" media="screen  and (min-width: 40.5em)" />
-
+<link rel="stylesheet" type="text/css" href="css/style.css" media="screen, handheld" media="screen  and (min-width: 40.5em)" />
 <meta name="apple-mobile-web-app-title" content="Stoneweb">
 <meta name="application-name" content="Stoneweb">
 <meta name="msapplication-TileColor" content="#da532c">
@@ -39,15 +37,25 @@
 
         <?= $this->headTitle('stoneweb')->setSeparator(' - ')->setAutoEscape(false) ?>
 
-        <?=$this->headMeta()->appendName('viewport', 'width=device-width, initial-scale=1.0, user-scalable=no')->appendName('viewport', 'width=device-width, initial-scale=1')->appendHttpEquiv('X-UA-Compatible', 'IE=edge')?>
-        <meta name="viewport"
-	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <?=$this->headMeta()
+        ->appendName('viewport', 'width=device-width, initial-scale=1.0, user-scalable=no')
+        ->appendName('viewport', 'width=device-width, initial-scale=1')
+        ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')?>
+        <meta name="viewport"content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
 <!-- Le styles -->
         <?=$this->headLink(['rel' => 'shortcut icon','type' => 'image/vnd.microsoft.icon','href' => $this->basePath() . '/img/favicon.ico'])->prependStylesheet($this->basePath('css/bootstrap-theme.min.css'))->prependStylesheet($this->basePath('css/bootstrap.min.css'))->prependStylesheet($this->basePath('css/MarkerCluster.css'))->prependStylesheet($this->basePath('css/leaflet-marker-cluster.css'))->prependStylesheet($this->basePath('../src/css/leaflet-gplaces-autocomplete.css'))->prependStylesheet('https://unpkg.com/leaflet@0.7.7/dist/leaflet.css')->prependStylesheet('https://unpkg.com/leaflet-search@2.9.0/dist/leaflet-search.min.css')->prependStylesheet($this->basePath('css/style.css'))?>
-
         <!-- Scripts -->
-        <?=$this->headScript()->prependFile($this->basePath('js/bootstrap.min.js'))->prependFile($this->basePath('js/jquery-3.1.0.min.js'))->prependFile($this->basePath('js/app.js'))->prependFile($this->basePath('js/leaflet-marker-cluster.js'))->prependFile($this->basePath('../src/js/leaflet-gplaces-autocomplete.js'))->prependFile($this->basePath('https://unpkg.com/leaflet@0.7.7/dist/leaflet.js'))->prependFile('https://unpkg.com/leaflet-search@2.9.0/dist/leaflet-search.min.js')->prependFile('https://maps.googleapis.com/maps/api/js?libraries=places')?>
+        <?=$this->headScript()->prependFile($this->basePath('js/bootstrap.min.js'))
+        ->prependFile($this->basePath('js/jquery/jquery-3.1.0.min.js'))
+        ->prependFile($this->basePath('js/jquery/app.js'))
+        ->prependFile($this->basePath('js/jquery/leaflet-marker-cluster.js'))
+        ->prependFile('https://unpkg.com/leaflet@0.7.7/dist/leaflet.js')
+        ->prependFile('https://unpkg.com/leaflet-search@2.9.0/dist/leaflet-search.min.js')
+        ->prependFile('https://maps.googleapis.com/maps/api/js?libraries=places')
+        ->prependFile('"https://maps.googleapis.com/maps/api/js?key=AIzaSyCHj5_T9nC7gQrQbdHyY1MAbck6lxLuJDk&callback=initMap')
+        ->prependFile($this->basePath('js/jquery/jquery.min.js'))
+        ?>
 
     </head>
 <body class="html mt-0">

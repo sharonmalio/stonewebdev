@@ -1,105 +1,35 @@
 <div id="mapid" class="mt-0"></div>
-
+<div id="form" class="navbar"></div>
+<div id="main"></div>
+<div class="menu-button" id="menu-button"></div>
 <script>
+function initMap() {
+var myLatLng = {lat: -1.2921, lng: 36.8219};
+var mapProp= {
+    center:myLatLng,
+    zoom:7,
+};
+var map=new google.maps.Map(document.getElementById("mapid"),mapProp);
+var marker = new google.maps.Marker({
+    position: myLatLng,
+    map: map,
+   icon: "http://ajali.afyaresearch.org/images/hospital.png"
+    title: 'Hello World!'
+  });
+marker.setMap(map);
 
- $( document ).ready(function() {
-		var tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png?v=29&x={x}&y={y}&z={z}&language=en_GB?access_token={pk.eyJ1Ijoia2FuaW5pbWFsaW8iLCJhIjoiY2poamh4ZjllMDB4ZTM2cWtoM2V3bWd1ZyJ9.rnF81uaCjIFtaEAfQ1ytBg}', {
-         attribution: 'Map data © <a href="https://www.openstreetmap.org/">KenyaHealthFacilitiess</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-         maxZoom: 18,
-         id: 'mapbox.streets',
-         accessToken: 'pk.eyJ1Ijoia2FuaW5pbWFsaW8iLCJhIjoiY2poamh4ZjllMDB4ZTM2cWtoM2V3bWd1ZyJ9.rnF81uaCjIFtaEAfQ1ytBg'
-     });
-		 var mymap = L.map('mapid', {
-			 center: [-1.121832846, 36.587164318],
-			 zoom:16, 
-			 layers: tiles
-			 });
-		 
-    	    var markers = [
-         	<?php foreach ($hospitals as $stonelink) : ?>
-   
-             	[<?= $this->escapeHtml($stonelink->latitude)?>, 
-             	 <?= $this->escapeHtml($stonelink->longitude)?>, 
-             	 "<?= $this->escapeHtml($stonelink->facility_n)?>", 
-             	 "<?= $this->escapeHtml($stonelink->county)?>",
-             	 "<?= $this->escapeHtml($stonelink->type)?>",
-             	 "<?= $this->escapeHtml($stonelink->owner)?>"
-             	
-             	 ],
-         	 
-         	<?php endforeach; ?>
-     	];
-     mymap.locate({setView: true, maxZoom: 12});
+}
 
-     
-     var markerClusterGroup = L.markerClusterGroup();
-     for (var i = 0; i < markers.length; i++) {
-    	var a = markers[i];
-      	var popup = 'Name:'+' '+ a[2]+'<br>'+'County:'+ ' '+ a[3]+'<br>'+'Type:'+' ' + a[4]+'<br>'+ 'Owner:'+' ' +a[5];
-      	var marker = L.marker(new L.LatLng(a[0], a[1]), { title: a[2] + ',' + a[3] });
-      	marker.bindPopup(popup);
-      	markerClusterGroup.addLayer(marker);
-     }
-     mymap.addLayer(markerClusterGroup);
-     // create the search box,
- 	var controlSearch = new L.Control.Search({
-		position:'topright',		
-		layer: markerClusterGroup,
-		initial: false,
-		zoom: 21,
-		marker: false
-	});
- 	 mymap.addControl( controlSearch );
-
-   var group = L.featureGroup();
-
-   places.forEach(function(place) {
-	 
-     // Create a marker for each place.
-         var marker = L.marker([
-           place.geometry.location.lat(),
-           place.geometry.location.lng()
-         ]);
-         mymap.addLayer(marker);
-       	});
-     
-       marker.addTo(markerClusterGroup);
-       markerClusterGroup.fitBounds(group.getBounds());
-     
-     });
- //my location
-     var onLocationFound = function (e) {
-    	    var radius = e.accuracy / 2;
-    	    L.marker(e.latlng).addTo(mymap)
-    	        .bindPopup("You are here, approximately " + radius + " meters from this point").openPopup();
-    	    L.circle(e.latlng, radius).addTo(mymap);
-    	}
-	    mymap.on('locationfound', onLocationFound);
-	    mymap.on('click', onMapClick);
-	
- function onLocationError(e) {
-	    alert(e.message);
+//for the nav bar
+function openNav() {
+	    document.getElementById("mySidenav").style.width = "200px";
 	}
-		
- 	function openNav() {
-	 	    document.getElementById("mySidenav").style.width = "200px";
-	 	}
-	 
-	 	/* Set the width of the side navigation to 0 */
-	function closeNav() {
-	 	    document.getElementById("mySidenav").style.width = "0";
-	 	}
-	 $('#menu-button').click(function(e){
-		    e.stopPropagation();
-		    $('#hide-menu').toggleClass('show-menu');
-		    });
-		    
-		    $('#hide-menu').click(function(e){
-		        e.stopPropagation();
-		    });
-		    
-		    $('body,html').click(function(e){
-		       $('#hide-menu').removeClass('show-menu');
-		    });
- 	
- </script>
+
+	/* Set the width of the side navigation to 0 */
+function closeNav() {
+	    document.getElementById("mySidenav").style.width = "0";
+	}
+</script>
+</script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHj5_T9nC7gQrQbdHyY1MAbck6lxLuJDk&callback=initMap">
+</script>
