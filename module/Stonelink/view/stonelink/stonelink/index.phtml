@@ -16,12 +16,14 @@ var map=new google.maps.Map(document.getElementById("mapid"),mapProp);
 // 	url:"http://ajali.afyaresearch.org/images/hospital.png"
 // 	size: new google.maps.Size(20, 32),
 // }
+
 var marker = new google.maps.Marker({
     position: myLatLng,
     map: map,
-    
-    title: 'Hello World!'
+   // icon:image,
+    title: 'Facilities!'
   });
+
 var markers = [
  	<?php foreach ($hospitals as $stonelink) : ?>
      	[<?= $this->escapeHtml($stonelink->latitude)?>, 
@@ -35,15 +37,20 @@ var markers = [
 	];
 
 for (var i = 0; i < markers.length; i++) {
- 	var a = markers[i];
+	var a = markers[i],
+    latLng = new google.maps.LatLng(a.latitude, a.longitude); 
  	var title = 'Name:'+' '+ a[2]+'<br>'+'County:'+ ' '+ a[3]+'<br>'+'Type:'+' ' + a[4]+'<br>'+ 'Owner:'+' ' +a[5];
+ 	var infoWindow={title:title};
  	var marker = new google.maps.Marker({
- 	      position: myLatLng,
+ 	      position: latLng,
  	 	//icon:image,
  	      map: map,
- 	      title: a[0],
+ 	      title: title,
  	    });
 }
+marker.addListener('click', function() {
+    infowindow.open(map, marker);
+  });(marker,a)
 marker.setMap(map);
 }
 //for the nav bar
@@ -57,5 +64,6 @@ function closeNav() {
 	}
 </script>
 </script>
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHj5_T9nC7gQrQbdHyY1MAbck6lxLuJDk&callback=initMap">
+<script async defer
+	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHj5_T9nC7gQrQbdHyY1MAbck6lxLuJDk&callback=initMap">
 </script>
