@@ -10,7 +10,9 @@ var mapProp= {
     center:myLatLng,
     zoom:15,
 };
-
+/**this line is for my location**/
+bounds  = new google.maps.LatLngBounds();
+//its end
 var infoWindow = new google.maps.InfoWindow({map: map});
     // Create the search box and link it to the UI element.
     var input = document.getElementById('pac-input');
@@ -86,8 +88,9 @@ var markers = [
 for (var i = 0; i < markers.length; i++) {
 	var a = markers[i];
 	//zoom to locatiion
-	//var loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
-	 //bounds.extend(loc);
+	var loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
+	 bounds.extend(loc);
+	 //end of zoom
 	var markerpos = {lat:a[0], lng:a[1]};
  	var title = 'Name:'+' '+ a[2]+'<br>'+'County:'+ ' '+ a[3]+'<br>'+'Type:'+' ' + a[4]+'<br>'+ 'Owner:'+' ' +a[5];
  	var infowindow = new google.maps.InfoWindow({
@@ -106,9 +109,11 @@ for (var i = 0; i < markers.length; i++) {
  	  
  	marker.setMap(map);
 }
-//map.fitBounds(bounds);       // auto-zoom
-//map.panToBounds(bounds);     // auto-center
-	
+//my location lines
+map.fitBounds(bounds);       // auto-zoom
+map.panToBounds(bounds);     // auto-center
+//my location end
+
 }
 //for the nav bar
 function openNav() {
