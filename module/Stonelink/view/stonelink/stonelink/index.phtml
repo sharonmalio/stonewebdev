@@ -1,15 +1,16 @@
 <div id="mapid" class="mt-0"></div>
 <div<input id="pac-input" class="controls" type="text" placeholder="Search Box"></div>
 <script>
+
 function initMap() {
 var myLatLng = {lat: -1.2921, lng: 36.8219};
 var mapProp= {
     center:myLatLng,
     zoom:15,
 };
-
+var map, infoWindow;
 /**this line is for my location**/
-bounds  = new google.maps.LatLngBounds();
+//bounds  = new google.maps.LatLngBounds();
 //its end
 var infoWindow = new google.maps.InfoWindow({map: map});
     // Create the search box and link it to the UI element.
@@ -85,11 +86,11 @@ var markers = [
 
 for (var i = 0; i < markers.length; i++) {
 	var a = markers[i];
-	//zoom to locatiion
-	var loc = new google.maps.LatLng(marker.position.lat(),
-			 marker.position.lng());
-	 			bounds.extend(loc);
-	 //end of zoom
+// 	//zoom to locatiion
+// 	var loc = new google.maps.LatLng(marker.position.lat(),
+// 			 marker.position.lng());
+// 	 			bounds.extend(loc);
+// 	 //end of zoom
 	var markerpos = {lat:a[0], lng:a[1]};
  	var title = 'Name:'+' '+ a[2]+'<br>'+'County:'+ ' '+ a[3]+'<br>'+'Type:'+' ' + a[4]+'<br>'+ 'Owner:'+' ' +a[5];
  	var marker = new google.maps.Marker({
@@ -108,17 +109,42 @@ for (var i = 0; i < markers.length; i++) {
        	map.setCenter(this.getPosition());
        	infowindow.open(map, this);
  	  });
- 	  
+ 
  	marker.setMap(map);
 
- 	//my location lines
- 	map.fitBounds(bounds);       // auto-zoom
- 	map.panToBounds(bounds);     // auto-center
- 	//my location end
-}
-
+//  	//my location lines
+//  	map.fitBounds(bounds);       // auto-zoom
+//  	map.panToBounds(bounds);     // auto-center
+//  	//my location end
 
 }
+////location find
+if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+      var pos = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+      };
+      infoWindow.setPosition(pos);
+      infoWindow.setContent('You are here!.');
+      infoWindow.open(map);
+      map.setCenter(getPosition());
+    }, function() {
+      handleLocationError(true, infoWindow, map.getCenter());
+    });
+  } 
+
+// function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+//   infoWindow.setPosition(pos);
+//   infoWindow.setContent(browserHasGeolocation ?
+//                         'Error: The Geolocation service failed.' :
+//                         'Error: Your browser doesn\'t support geolocation.');
+//   infoWindow.open(map);
+// }
+// //end
+
+}
+
 //for the nav bar
 function openNav() {
 	    document.getElementById("mySidenav").style.width = "200px";
