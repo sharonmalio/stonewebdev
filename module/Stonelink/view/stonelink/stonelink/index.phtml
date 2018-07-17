@@ -98,19 +98,22 @@ for (var i = 0; i < markers.length; i++) {
  	    title: title,
  	   	icon:image,
  	   });
- 	var infowindow = new google.maps.InfoWindow({
- 	 	position:markerpos,
-        content:title,
-       });
+ 	
  	marker.addListener('click', function() {
- 	    infowindow.open(map, marker);
+ 		var infowindow = new google.maps.InfoWindow({
+            position: this.getPosition(),
+            content: this.getTitle(),
+        });
+ 	   	map.setZoom(17);
+       	map.setCenter(this.getPosition());
+       	infowindow.open(map, this);
  	  });
  	  
  	marker.setMap(map);
 
-//  	//my location lines
-//  	map.fitBounds(bounds);       // auto-zoom
-//  	map.panToBounds(bounds);     // auto-center
+ 	//my location lines
+ 	map.fitBounds(bounds);       // auto-zoom
+ 	map.panToBounds(bounds);     // auto-center
  	//my location end
 }
 
