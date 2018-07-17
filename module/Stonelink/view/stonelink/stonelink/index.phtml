@@ -1,8 +1,5 @@
 <div id="mapid" class="mt-0"></div>
-<div id="form" class="navbar"></div>
-<div id="main"></div>
-<div class="menu-button" id="menu-button"></div>
-<input id="pac-input" class="controls" type="text" placeholder="Search Box">
+<div<input id="pac-input" class="controls" type="text" placeholder="Search Box"></div>
 <script>
 function initMap() {
 var myLatLng = {lat: -1.2921, lng: 36.8219};
@@ -10,59 +7,60 @@ var mapProp= {
     center:myLatLng,
     zoom:15,
 };
+
 /**this line is for my location**/
 bounds  = new google.maps.LatLngBounds();
 //its end
 var infoWindow = new google.maps.InfoWindow({map: map});
     // Create the search box and link it to the UI element.
-    var input = document.getElementById('pac-input');
+     var input = document.getElementById('pac-input');
     var searchBox = new google.maps.places.SearchBox(input);
-    map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+  // map.controls[google.maps.ControlPosition.TOP_RIGHT].push(input);
 
-    // Bias the SearchBox results towards current map's viewport.
-    map.addListener('bounds_changed', function() {
-      searchBox.setBounds(map.getBounds());
-    });
-    var markers = [];
-    // Listen for the event fired when the user selects a prediction and retrieve
-    // more details for that place.
-    searchBox.addListener('places_changed', function() {
-      var places = searchBox.getPlaces();
+//     // Bias the SearchBox results towards current map's viewport.
+//     map.addListener('bounds_changed', function() {
+//       searchBox.setBounds(map.getBounds());
+//     });
+//     var markers = [];
+//     // Listen for the event fired when the user selects a prediction and retrieve
+//     // more details for that place.
+//     searchBox.addListener('places_changed', function() {
+//       var places = searchBox.getPlaces();
 
-      if (places.length == 0) {
-        return;
-      }
+//       if (places.length == 0) {
+//         return;
+//       }
 
-      // Clear out the old markers.
-      markers.forEach(function(marker) {
-        marker.setMap(null);
-      });
-      markers = [];
+//       // Clear out the old markers.
+//       markers.forEach(function(marker) {
+//         marker.setMap(null);
+//       });
+//       markers = [];
 
-      // For each place, get the icon, name and location.
-      var bounds = new google.maps.LatLngBounds();
-      places.forEach(function(place) {
-        if (!place.geometry) {
-          console.log("Returned place contains no geometry");
-          return;
-        }
-        // Create a marker for each place.
-        markers.push(new google.maps.Marker({
-          map: map,
-          icon: image,
-          title: place.name,
-          position: place.geometry.location
-        }));
+//       // For each place, get the icon, name and location.
+//       var bounds = new google.maps.LatLngBounds();
+//       places.forEach(function(place) {
+//         if (!place.geometry) {
+//           console.log("Returned place contains no geometry");
+//           return;
+//         }
+//         // Create a marker for each place.
+//         markers.push(new google.maps.Marker({
+//           map: map,
+//           icon: image,
+//           title: place.name,
+//           position: place.geometry.location
+//         }));
 
-        if (place.geometry.viewport) {
-          // Only geocodes have viewport.
-          bounds.union(place.geometry.viewport);
-        } else {
-          bounds.extend(place.geometry.location);
-        }
-      });
-      map.fitBounds(bounds);
-    });
+//         if (place.geometry.viewport) {
+//           // Only geocodes have viewport.
+//           bounds.union(place.geometry.viewport);
+//         } else {
+//           bounds.extend(place.geometry.location);
+//         }
+//       });
+//       map.fitBounds(bounds);
+//     });
 
 var map=new google.maps.Map(document.getElementById("mapid"),mapProp);
 
@@ -71,7 +69,7 @@ var image ='https://ajali.afyaresearch.org/images/hospital.png';
 var marker = new google.maps.Marker({
     position: myLatLng,
     map: map,
-    title: 'Facilities!'
+    title: 'You are here!'
   });
 var markers = [
  	<?php foreach ($hospitals as $stonelink) : ?>
@@ -88,31 +86,34 @@ var markers = [
 for (var i = 0; i < markers.length; i++) {
 	var a = markers[i];
 	//zoom to locatiion
-	var loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
-	 bounds.extend(loc);
+	var loc = new google.maps.LatLng(marker.position.lat(),
+			 marker.position.lng());
+	 			bounds.extend(loc);
 	 //end of zoom
 	var markerpos = {lat:a[0], lng:a[1]};
  	var title = 'Name:'+' '+ a[2]+'<br>'+'County:'+ ' '+ a[3]+'<br>'+'Type:'+' ' + a[4]+'<br>'+ 'Owner:'+' ' +a[5];
- 	var infowindow = new google.maps.InfoWindow({
- 	 	position:markerpos,
-        content:title
-       });
  	var marker = new google.maps.Marker({
  	    position: markerpos,
  	    map: map,
  	    title: title,
- 	   	icon:image
+ 	   	icon:image,
  	   });
+ 	var infowindow = new google.maps.InfoWindow({
+ 	 	position:markerpos,
+        content:title,
+       });
  	marker.addListener('click', function() {
  	    infowindow.open(map, marker);
  	  });
  	  
  	marker.setMap(map);
+
+//  	//my location lines
+//  	map.fitBounds(bounds);       // auto-zoom
+//  	map.panToBounds(bounds);     // auto-center
+ 	//my location end
 }
-//my location lines
-map.fitBounds(bounds);       // auto-zoom
-map.panToBounds(bounds);     // auto-center
-//my location end
+
 
 }
 //for the nav bar
