@@ -1,7 +1,6 @@
 <div id="mapid" class="mt-0"></div>
 <div<input id="pac-input" class="controls" type="text" placeholder="Search Box"></div>
 <script>
-
 function initMap() {
 var myLatLng = {lat: -1.2921, lng: 36.8219};
 var mapProp= {
@@ -67,11 +66,7 @@ var map=new google.maps.Map(document.getElementById("mapid"),mapProp);
 
 var image ='https://ajali.afyaresearch.org/images/hospital.png';
 	
-var marker = new google.maps.Marker({
-    position: myLatLng,
-    map: map,
-    title: 'You are here!'
-  });
+
 var markers = [
  	<?php foreach ($hospitals as $stonelink) : ?>
      	[<?= $this->escapeHtml($stonelink->latitude)?>, 
@@ -86,11 +81,6 @@ var markers = [
 
 for (var i = 0; i < markers.length; i++) {
 	var a = markers[i];
-// 	//zoom to locatiion
-// 	var loc = new google.maps.LatLng(marker.position.lat(),
-// 			 marker.position.lng());
-// 	 			bounds.extend(loc);
-// 	 //end of zoom
 	var markerpos = {lat:a[0], lng:a[1]};
  	var title = 'Name:'+' '+ a[2]+'<br>'+'County:'+ ' '+ a[3]+'<br>'+'Type:'+' ' + a[4]+'<br>'+ 'Owner:'+' ' +a[5];
  	var marker = new google.maps.Marker({
@@ -112,11 +102,6 @@ for (var i = 0; i < markers.length; i++) {
  
  	marker.setMap(map);
 
-//  	//my location lines
-//  	map.fitBounds(bounds);       // auto-zoom
-//  	map.panToBounds(bounds);     // auto-center
-//  	//my location end
-
 }
 ////location find
 if (navigator.geolocation) {
@@ -125,26 +110,28 @@ if (navigator.geolocation) {
         lat: position.coords.latitude,
         lng: position.coords.longitude
       };
-      infoWindow.setPosition(pos);
-      infoWindow.setContent('You are here!.');
-      infoWindow.open(map);
-      map.setCenter(getPosition());
+      var marker = new google.maps.Marker({
+  	    position:pos,
+  	    map:map,
+  	  });
+      marker.addListener('click', function() {
+   		var infoWindow = new google.maps.InfoWindow({
+              position:pos,
+              title: 'You are here! Find clinics near you',
+          });
+     
+        infoWindow.setPosition(pos);
+        infoWindow.setContent('You are here! Find clinics near you');
+        infoWindow.open(map);
+        map.setCenter(pos);
+      });
+      marker.setMap(map);
+      
     }, function() {
       handleLocationError(true, infoWindow, map.getCenter());
     });
-  } 
-
-// function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-//   infoWindow.setPosition(pos);
-//   infoWindow.setContent(browserHasGeolocation ?
-//                         'Error: The Geolocation service failed.' :
-//                         'Error: Your browser doesn\'t support geolocation.');
-//   infoWindow.open(map);
-// }
-// //end
-
+  }  
 }
-
 //for the nav bar
 function openNav() {
 	    document.getElementById("mySidenav").style.width = "200px";
