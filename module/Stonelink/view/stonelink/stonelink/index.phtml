@@ -1,21 +1,21 @@
-<div id="mapid" class="mt-0"></div>
-<div<input id="pac-input" class="controls" type="text" placeholder="Search Box"></div>
+<div id="mapid" class="mt-0" ></div>
+<input id="pac-input" class="controls" type="text" placeholder="Search Box">
 <script>
 function initMap() {
-var myLatLng = {lat: -1.2921, lng: 36.8219};
-var mapProp= {
-    center:myLatLng,
-    zoom:15,
+	var myLatLng = {lat: -1.2921, lng: 36.8219};
+	var mapProp= {
+    	center:myLatLng,
+    	zoom:15,
 };
-var map, infoWindow;
-/**this line is for my location**/
-//bounds  = new google.maps.LatLngBounds();
-//its end
+var map = new google.maps.Map(document.getElementById("mapid"),
+	            mapProp);
+var infoWindow;
+
 var infoWindow = new google.maps.InfoWindow({map: map});
     // Create the search box and link it to the UI element.
      var input = document.getElementById('pac-input');
     var searchBox = new google.maps.places.SearchBox(input);
-  // map.controls[google.maps.ControlPosition.TOP_RIGHT].push(input);
+   map.controls[google.maps.ControlPosition.TOP_RIGHT].push(input);
 
 //     // Bias the SearchBox results towards current map's viewport.
 //     map.addListener('bounds_changed', function() {
@@ -103,7 +103,7 @@ for (var i = 0; i < markers.length; i++) {
  	marker.setMap(map);
 
 }
-////location find
+//location find
 if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function(position) {
       var pos = {
@@ -114,24 +114,26 @@ if (navigator.geolocation) {
   	    position:pos,
   	    map:map,
   	  });
-      marker.addListener('click', function() {
-   		var infoWindow = new google.maps.InfoWindow({
-              position:pos,
-              title: 'You are here! Find clinics near you',
-          });
-     
-        infoWindow.setPosition(pos);
-        infoWindow.setContent('You are here! Find clinics near you');
-        infoWindow.open(map);
-        map.setCenter(pos);
+      var infoWindow = new google.maps.InfoWindow({
+          position:pos,
       });
+      infoWindow.setPosition(pos);
+      infoWindow.setContent('You are here! Find clinics near you');
+      infoWindow.open(map);
+      map.setCenter(pos);
+//       marker.addListener('click', function() {
+       
+//       });
       marker.setMap(map);
       
     }, function() {
       handleLocationError(true, infoWindow, map.getCenter());
     });
-  }  
+  }
+google.maps.event.addDomListener(window, "load", initMap);  
 }
+
+
 //for the nav bar
 function openNav() {
 	    document.getElementById("mySidenav").style.width = "200px";
@@ -140,9 +142,6 @@ function openNav() {
 function closeNav() {
 	    document.getElementById("mySidenav").style.width = "0";
 	}
-</script>
-<script async defer
-	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHj5_T9nC7gQrQbdHyY1MAbck6lxLuJDk&callback=initMap">
 </script>
 <script async defer
 src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHj5_T9nC7gQrQbdHyY1MAbck6lxLuJDk&libraries=places&callback=initMap">

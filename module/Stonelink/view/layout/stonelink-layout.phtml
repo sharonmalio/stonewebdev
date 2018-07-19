@@ -35,7 +35,11 @@
         <meta name="viewport"content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
 <!-- Le styles -->
-        <?=$this->headLink(['rel' => 'shortcut icon','type' => 'image/vnd.microsoft.icon','href' => $this->basePath() . '/img/favicon.ico'])->prependStylesheet($this->basePath('css/bootstrap-theme.min.css'))->prependStylesheet($this->basePath('css/bootstrap.min.css'))->prependStylesheet($this->basePath('css/MarkerCluster.css'))->prependStylesheet($this->basePath('css/leaflet-marker-cluster.css'))->prependStylesheet($this->basePath('../src/css/leaflet-gplaces-autocomplete.css'))->prependStylesheet('https://unpkg.com/leaflet@0.7.7/dist/leaflet.css')->prependStylesheet('https://unpkg.com/leaflet-search@2.9.0/dist/leaflet-search.min.css')->prependStylesheet($this->basePath('css/style.css'))?>
+        <?=$this->headLink(['rel' => 'shortcut icon','type' => 'image/vnd.microsoft.icon','href' => $this->basePath() . '/img/favicon.ico'])
+        ->prependStylesheet($this->basePath('css/bootstrap-theme.min.css'))
+        ->prependStylesheet($this->basePath('css/bootstrap.min.css'))
+        ->prependStylesheet($this->basePath('css/style.css'))
+        ?>
         <!-- Scripts -->
         <?=$this->headScript()->prependFile($this->basePath('js/bootstrap.min.js'))
         ->prependFile($this->basePath('js/jquery/jquery-3.1.0.min.js'))
