@@ -1,0 +1,21 @@
+<?php
+foreach ($form as $element) {
+    $attributes = $element->getAttributes();
+    $label = $element->getLabel();
+    $type = $attributes['type'];
+    $name = $attributes['name'];
+    
+    if ($element instanceof Zend\Form\Element\Button) {
+        echo '<div class="form-group">';
+        echo '<div class="col-xs-offset-3 col-xs-9 ">';
+        echo $this->formButton($form->get('submit'));
+        echo "</div></div>";
+    }
+    
+    if ($element instanceof Zend\Form\Element\Submit) {
+        echo '<div class="form-group">';
+        echo '<div class="col-xs-offset-3 col-xs-9 ">';
+        echo $this->formButton($form->get('submit'));
+        echo "</div></div>";
+    }
+}

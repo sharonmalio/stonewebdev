@@ -23,23 +23,22 @@
 		"zendframework/zend-form" : "^2.12",
 		"zendframework/zend-router" : "^3.0",
 		"zendframework/zend-i18n" : "^2.9",
-		"zf-commons/zfc-user": "^3.0",
-		"zendframework/zend-authentication": "^2.6",
-		"zendframework/zend-expressive-authentication-session": "^0.5.0"
-
+		"zf-commons/zfc-user" : "^3.0",
+		"zf-commons/zfc-user-doctrine-orm": "dev-master",
+		"zendframework/zend-authentication" : "^2.6",
+		"zendframework/zend-expressive-authentication-session" : "^0.5.0"
 	},
 	"autoload" : {
 		"psr-4" : {
 			"Application\\" : "module/Application/src/",
-			"Stonelink\\" : "module/Stonelink/src/", 
+			"Stonelink\\" : "module/Stonelink/src/",
 			"Stonechat\\" : "module/Stonechat/src/"
-			
 		}
 	},
 	"autoload-dev" : {
 		"psr-4" : {
 			"ApplicationTest\\" : "module/Application/test/",
-			"Stonelink\\" : "module/Stonelink/src/", 
+			"Stonelink\\" : "module/Stonelink/src/",
 			"Stonechat\\" : "module/Stonechat/src/"
 		}
 	},

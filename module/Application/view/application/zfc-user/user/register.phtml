@@ -3,6 +3,15 @@
 <?php //$this->partial('scripts/jsRedirect',$redirectUrl);?>
 <div class="page-header">
 	<h1><?php echo sprintf($this->translate('Register New User')); ?></h1>
+	<script>
+function openNav() {
+    document.getElementById("mySidenav").style.width = "200px";
+}
+/* Set the width of the side navigation to 0 */
+function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+}
+</script>
 </div>
 <?php
 if (! $this->enableRegistration) {

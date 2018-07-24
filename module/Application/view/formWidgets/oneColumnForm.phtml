@@ -1,0 +1,180 @@
+<?php
+$attributes = $element->getAttributes();
+$label = $element->getLabel();
+$type = $attributes['type'];
+$name = $attributes['name'];
+$label = $element->getLabel();
+if (array_key_exists('hide', $attributes)) {
+    $hide = $attributes['hide'];
+} else {
+    $hide = NULL;
+}
+
+if ($type == 'hidden') {
+    echo $this->formHidden($element);
+}
+
+if ($type == 'textarea') {
+    echo '<div class="form-group">';
+    if ($label) {
+        echo '<div class="control-label col-xs-2">';
+        echo $this->formLabel($element);
+        echo '</div>';
+    }
+    echo $this->formTextarea($element);
+    if ($this->formElementErrors($element)) {
+        echo '<div class="form-group has-error">';
+        echo $this->formElementErrors($element, array(
+            'class' => 'help-block'
+        ));
+        echo '</div>';
+    }
+    echo '</div>';
+}
+
+if ($type == 'text') {
+    echo '<div class="form-group">';
+    if ($label) {
+        echo '<div class="control-label col-xs-2">';
+        echo $this->formLabel($element);
+        echo '</div>';
+    }
+    echo $this->formText($element);
+    if ($this->formElementErrors($element)) {
+        echo '<div class="form-group has-error">';
+        echo $this->formElementErrors($element, array(
+            'class' => 'help-block'
+        ));
+        echo '</div>';
+    }
+    echo '</div>';
+}
+
+if ($type == 'password') {
+    echo '<div class="form-group">';
+    if ($label) {
+        echo '<div class="control-label col-xs-2">';
+        echo $this->formLabel($element);
+        echo '</div>';
+    }
+    echo $this->formPassword($element);
+    if ($this->formElementErrors($element)) {
+        echo '<div class="form-group has-error">';
+        echo $this->formElementErrors($element, array(
+            'class' => 'help-block'
+        ));
+        echo '</div>';
+    }
+    echo '</div>';
+}
+
+if ($type == 'date') {
+    echo '<div class="form-group">';
+    if ($label) {
+        echo '<div class="control-label col-xs-2">';
+        echo $this->formLabel($element);
+        echo '</div>';
+    }
+    echo $this->formDate($element);
+    if ($this->formElementErrors($element)) {
+        echo '<div class="form-group has-error">';
+        echo $this->formElementErrors($element, array(
+            'class' => 'help-block'
+        ));
+        echo '</div>';
+    }
+    echo '</div>';
+}
+
+if ($type == 'select') {
+    echo '<div class="form-group">';
+    if ($label) {
+        echo '<div class="control-label col-xs-2">';
+        echo $this->formLabel($element);
+        echo '</div>';
+    }
+    echo $this->formSelect($element);
+    if ($this->formElementErrors($element)) {
+        echo '<div class="form-group has-error">';
+        echo $this->formElementErrors($element, array(
+            'class' => 'help-block'
+        ));
+        echo '</div>';
+    }
+    echo '</div>';
+}
+
+if ($type == 'time') {
+    echo '<div class="form-group">';
+    if ($label) {
+        echo '<div class="control-label col-xs-2">';
+        echo $this->formLabel($element);
+        echo '</div>';
+    }
+    echo $this->formTime($element);
+    if ($this->formElementErrors($element)) {
+        echo '<div class="form-group has-error">';
+        echo $this->formElementErrors($element, array(
+            'class' => 'help-block'
+        ));
+        echo '</div>';
+    }
+    echo '</div>';
+}
+
+if ($type == 'radio') {
+    echo '<div class="form-group">';
+    if ($label) {
+        echo '<div class="control-label col-xs-2">';
+        echo $this->formLabel($element);
+        echo '</div>';
+    }
+    echo $this->formRadio($element);
+    if ($this->formElementErrors($element)) {
+        echo '<div class="form-group has-error">';
+        echo $this->formElementErrors($element, array(
+            'class' => 'help-block'
+        ));
+        echo '</div>';
+    }
+    echo '</div>';
+}
+
+if ($type == 'checkbox') {
+    echo '<div class="form-group">';
+    if ($label) {
+        echo '<div class="control-label col-xs-2">';
+        echo $this->formLabel($element);
+        echo '</div>';
+    }
+    echo $this->formCheckbox($element);
+    if ($this->formElementErrors($element)) {
+        echo '<div class="form-group has-error">';
+        echo $this->formElementErrors($element, array(
+            'class' => 'help-block'
+        ));
+        echo '</div>';
+    }
+    echo '</div>';
+}
+
+if ($type == 'multi_checkbox') {
+    echo '<div class="form-group">';
+    if ($label) {
+        echo '<div class="control-label col-xs-12">';
+        echo $this->formLabel($element);
+        echo '</div>';
+    }
+    echo $this->formMultiCheckbox($element);
+    if ($this->formElementErrors($element)) {
+        echo '<div class="form-group has-error">';
+        echo $this->formElementErrors($element, array(
+            'class' => 'help-block'
+        ));
+        echo '</div>';
+    }
+    echo '</div>';
+}
+
+
+
