@@ -17,7 +17,6 @@
 
 <link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#5bbad5">
 <link rel="shortcut icon" href="/img/favicon.ico">
-<link rel="stylesheet" type="text/css" href="css/style.css" media="screen, handheld" media="screen  and (min-width: 40.5em)" />
 <meta name="apple-mobile-web-app-title" content="Stoneweb">
 <meta name="application-name" content="Stoneweb">
 <meta name="msapplication-TileColor" content="#da532c">
@@ -26,7 +25,8 @@
 
 
 
-        <?= $this->headTitle('stoneweb')->setSeparator(' - ')->setAutoEscape(false) ?>
+        <?= $this->headTitle('stoneweb')->setSeparator(' - ')
+        ->setAutoEscape(false) ?>
 
         <?=$this->headMeta()
         ->appendName('viewport', 'width=device-width, initial-scale=1.0, user-scalable=no')
@@ -41,12 +41,10 @@
         ->prependStylesheet($this->basePath('css/style.css'))
         ?>
         <!-- Scripts -->
-        <?=$this->headScript()->prependFile($this->basePath('js/bootstrap.min.js'))
-        ->prependFile($this->basePath('js/jquery/jquery-3.1.0.min.js'))
-        ->prependFile($this->basePath('js/jquery/app.js'))
-        ->prependFile($this->basePath('js/jquery/jquery.min.js'))
-        
-        
+        <?=$this->headScript()
+        ->prependFile($this->basePath('js/bootstrap.min.js'))
+        ->prependFile($this->basePath('js/jquery-3.1.0.min.js'))
+        ->prependFile($this->basePath('js/app.js'))
         ?>
 
     </head>
