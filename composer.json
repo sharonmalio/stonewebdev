@@ -26,7 +26,9 @@
 		"zf-commons/zfc-user" : "^3.0",
 		"zf-commons/zfc-user-doctrine-orm": "dev-master",
 		"zendframework/zend-authentication" : "^2.6",
-		"zendframework/zend-expressive-authentication-session" : "^0.5.0"
+		"zendframework/zend-expressive-authentication-session" : "^0.5.0",
+		"zendframework/zend-dom": "^2.7",
+		"zendframework/zend-debug": "^2.6"
 	},
 	"autoload" : {
 		"psr-4" : {

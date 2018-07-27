@@ -4,6 +4,7 @@ namespace Application\Factory\Controller\Plugin;
 use Zend\ServiceManager\Factory\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Application\Controller\Plugin\User;
+use Interop\Container\ContainerInterface;
 class UserFactory implements FactoryInterface
 {
 
@@ -19,5 +20,8 @@ class UserFactory implements FactoryInterface
 		$plugin->setServiceManager($serviceLocator->getServiceLocator());
 		return $plugin;
 	}
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
+    {}
+
 
 }

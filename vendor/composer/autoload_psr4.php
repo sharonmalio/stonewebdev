@@ -31,6 +31,8 @@ return array(
     'Zend\\Expressive\\Authentication\\' => array($vendorDir . '/zendframework/zend-expressive-authentication/src'),
     'Zend\\EventManager\\' => array($vendorDir . '/zendframework/zend-eventmanager/src'),
     'Zend\\Escaper\\' => array($vendorDir . '/zendframework/zend-escaper/src'),
+    'Zend\\Dom\\' => array($vendorDir . '/zendframework/zend-dom/src'),
+    'Zend\\Debug\\' => array($vendorDir . '/zendframework/zend-debug/src'),
     'Zend\\Db\\' => array($vendorDir . '/zendframework/zend-db/src'),
     'Zend\\Crypt\\' => array($vendorDir . '/zendframework/zend-crypt/src'),
     'Zend\\Config\\' => array($vendorDir . '/zendframework/zend-config/src'),

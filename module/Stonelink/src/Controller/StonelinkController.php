@@ -8,32 +8,29 @@ use Stonelink\Model\KenyaMaps2015HealthFacilitiesTable;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
-
 class StonelinkController extends AbstractActionController
 {
-    // Add this property:
-    private $kenyaHealthFacilitiestable;
-    private $appointmentTable;
 
-    // Add this constructor: //I added the parameter so as to incorporate the other table
-    public function __construct(KenyaMaps2015HealthFacilitiesTable $kenyaHealthFacilitiestable,AppointmentTable $appointmentTable)
+    protected $serviceManager;
+
+    public function setServiceManager($serviceManager)
     {
-        $this->kenyaHealthFacilitiestable = $kenyaHealthFacilitiestable;
-        $this->appointmentTable = $appointmentTable;
+        return $this->serviceManager = $serviceManager;
     }
-    
-   
+
     public function indexAction()
     {
-        try{
+        $stonelinkService=$this->serviceManager->get('Stonelink\Service\Stonelink');
+        echo "green dont lie";
+        try {
             return new ViewModel([
-                'hospitals' => $this->kenyaHealthFacilitiestable->fetchAll()
+                'hospitals' => $stonelinkService->getKenyaMaps2015HealthFacilitiesTable()->fetchAll()
             ]);
-        } catch (\Exception $exception){
+        } catch (\Exception $exception) {
             die($exception);
         }
-        
     }
+
     public function addAction()
     {
         // instantiate AppointmentForm and set the label on the submit button to "Add"
@@ -49,18 +46,18 @@ class StonelinkController extends AbstractActionController
             $form->setInputFilter($appointment->getInputFilter());
             
             if ($form->isValid()) {
-               
+                
                 $appointment->exchangeArray($form->getData());
                 // Inserting appointment data in the datbase table
                 $this->appointmentTable->saveAppointment($appointment);
             } else {
-             
+                
                 return array(
                     'form' => $form
                 );
             }
         }
-       
+        
         return array(
             'form' => $form
         );

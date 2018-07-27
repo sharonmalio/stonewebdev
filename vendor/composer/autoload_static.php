@@ -41,6 +41,8 @@ class ComposerStaticInit895333d59e09dc3407e78df597458b53
             'Zend\\Expressive\\Authentication\\' => 31,
             'Zend\\EventManager\\' => 18,
             'Zend\\Escaper\\' => 13,
+            'Zend\\Dom\\' => 9,
+            'Zend\\Debug\\' => 11,
             'Zend\\Db\\' => 8,
             'Zend\\Crypt\\' => 11,
             'Zend\\Config\\' => 12,
@@ -186,6 +188,14 @@ class ComposerStaticInit895333d59e09dc3407e78df597458b53
         'Zend\\Escaper\\' => 
         array (
             0 => __DIR__ . '/..' . '/zendframework/zend-escaper/src',
+        ),
+        'Zend\\Dom\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/zendframework/zend-dom/src',
+        ),
+        'Zend\\Debug\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/zendframework/zend-debug/src',
         ),
         'Zend\\Db\\' => 
         array (

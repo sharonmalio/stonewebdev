@@ -3,13 +3,8 @@ namespace Stonelink;
 
 use Zend\Router\Http\Segment;
 use Stonelink\Controller\StonelinkController;
+use Stonelink\Controller\ProvidersController;
 return [
-    // 'controllers' => [
-    // 'factories' => [
-    // Controller\StonelinkController::class => InvokableFactory::class
-    // ]
-    // ],
-    // The following section is new and should be added to your file:
     'router' => [
         'routes' => [
             'stonelink' => [
@@ -35,8 +30,22 @@ return [
                                 'action' => 'index'
                             ]
                         ]
+                    ],
+                    'providers' => [
+                        'type' => 'segment',
+                        'options' => [
+                            'route' => '/providers/[:action]',
+                            'constraints' => [
+                                'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                            ],
+                            'defaults' => [
+                                'controller' => ProvidersController::class,
+                                'action' => 'index'
+                            ]
+                        ]
                     ]
                 ]
+                
             ]
         ]
     ],
