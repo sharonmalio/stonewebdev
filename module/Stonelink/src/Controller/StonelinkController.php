@@ -33,6 +33,8 @@ class StonelinkController extends AbstractActionController
 
     public function addAction()
     {
+        
+        
         // instantiate AppointmentForm and set the label on the submit button to "Add"
         $form = new AppointmentForm();
         $form->get('submit')->setValue('Add');

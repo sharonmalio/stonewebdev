@@ -53,5 +53,8 @@
 		"post-create-project-cmd" : "@development-enable",
 		"serve" : "php -S 0.0.0.0:8080 -t public public/index.php",
 		"test" : "phpunit"
+	},
+	"require-dev": {
+		"symfony/web-server-bundle": "^4.1"
 	}
 }

@@ -24,7 +24,8 @@ return [
                 ],
                 
                 'may_terminate' => true,
-                'child_routes' => [
+                'child_routes' =>
+                [
                     'user' => [
                         'type' => Literal::class,
                         'options' => [
