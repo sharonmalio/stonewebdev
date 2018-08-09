@@ -23,14 +23,43 @@ use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Zend\Dom\Query;
 use \Zend\Debug\Debug;
+use Zend\Dom\DOMXPath;
 
 
 class ProvidersController extends AbstractActionController
 {   
- 
+    protected $serviceManager;
+    
+    public function setServiceManager($serviceManager)
+    {
+        return $this->serviceManager = $serviceManager;
+    }
+    
     public function indexAction()
     {
         echo "we love MAngoes";
+        $pagecontent = file_get_contents('http://medicalboard.co.ke/online-services/retention/');
+//         $doc = new \DOMDocument();
+        $doc = new \DOMDocument();
+        $doc->loadHTML($pagecontent);
+        $x = new \DOMXPath($doc);
+        $someArray=array();
+        foreach($x->query('//tr/td') as $td){
+            $stringToBeReplaced=$td->C14N();
+            $string=str_replace('<td> ', '', $stringToBeReplaced);
+            $string2=str_replace('</td> ', '', $string);
+            //echo $string;
+            $someArray[]= $string;
+            $splitArray=array_chunk($someArray, 8);
+            //echo $td->C14N().'<br>';
+            
+//             echo "\n";
+            //if just need the text use:
+            //echo $td->textContent;
+        }
+        
+       // $splitArray=array_chunk($someArray, 8);
+        \Zend\Debug\Debug::dump($splitArray);
         exit;
         return new ViewModel();
     }

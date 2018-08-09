@@ -1,11 +1,10 @@
 <?php
 namespace Stonelink\Factory\Controller;
 
-use Zend\Mvc\Controller\ControllerManager;
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
 use Interop\Container\ContainerInterface;
 use Stonelink\Controller\ProvidersController;
+use Zend\ServiceManager\FactoryInterface;
+use Zend\ServiceManager\ServiceLocatorInterface;
 
 class ProvidersControllerFactory implements FactoryInterface
 {
@@ -18,7 +17,10 @@ class ProvidersControllerFactory implements FactoryInterface
 	*/
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
-     
+        $serviceManager=$container->get('ServiceManager');
+        $controller= new ProvidersController();
+        $controller->setServiceManager($serviceManager);
+        return $controller;
     }
 	public function createService(ServiceLocatorInterface $serviceLocator)
 	{

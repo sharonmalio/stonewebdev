@@ -2,13 +2,12 @@
 
 ## Introduction
 
-This is a skeleton application using the Zend Framework MVC layer and module
-systems. This application is meant to be used as a starting place for those
-looking to get their feet wet with Zend Framework.
+This is a Progressive Website that connects the patients to the health providers through providing a chatting platform as well as providing a platform where patients can book appointments with the health providers. 
+The system works to connect the patients to the overall system called stoneHMIS, a digital platform that has all the modules for a hospital right from when the patient checks in in a health faclity to when they check out. 
 
 ## Installation using Composer
 
-The easiest way to create a new Zend Framework project is to use
+To install this you will need zendframework. The easiest way to create a new Zend Framework project is to use
 [Composer](https://getcomposer.org/).  If you don't have it already installed,
 then please install as per the [documentation](https://getcomposer.org/doc/00-intro.md).
 

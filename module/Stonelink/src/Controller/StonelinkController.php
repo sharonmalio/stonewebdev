@@ -3,8 +3,6 @@ namespace Stonelink\Controller;
 
 use Stonelink\Form\AppointmentForm;
 use Stonelink\Model\Appointment;
-use Stonelink\Model\AppointmentTable;
-use Stonelink\Model\KenyaMaps2015HealthFacilitiesTable;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
@@ -21,7 +19,6 @@ class StonelinkController extends AbstractActionController
     public function indexAction()
     {
         $stonelinkService=$this->serviceManager->get('Stonelink\Service\Stonelink');
-        echo "green dont lie";
         try {
             return new ViewModel([
                 'hospitals' => $stonelinkService->getKenyaMaps2015HealthFacilitiesTable()->fetchAll()
@@ -30,10 +27,20 @@ class StonelinkController extends AbstractActionController
             die($exception);
         }
     }
-
+    public function searchAction()
+    {
+        $stonelinkService=$this->serviceManager->get('Stonelink\Service\Stonelink');
+        try {
+            return new ViewModel([
+                'hospitals' => $stonelinkService->getKenyaMaps2015HealthFacilitiesTable()->fetchAll()
+            ]);
+        } catch (\Exception $exception) {
+            die($exception);
+        }
+    }
+    
     public function addAction()
     {
-        
         
         // instantiate AppointmentForm and set the label on the submit button to "Add"
         $form = new AppointmentForm();

@@ -1,7 +1,4 @@
 
-   #map {
-        height: 100%;
-      }
       /* Optional: Makes the sample page fill the window. */
 
       #description {
@@ -79,7 +76,7 @@
 	margin-top: 17px ;
 }
 .mt-0 {
-	margin-top: 17px !important;
+	margin-top: 27px !important;
 }
 body {
 	background-color: #f2ebce;
