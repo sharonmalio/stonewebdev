@@ -16,7 +16,9 @@ return [
  'Stonelink\Model\AppointmentTable' => 'Stonelink\Factory\Model\AppointmentTableFactory',
   Stonelink\Model\AppointmentTable::class => Stonelink\Factory\Model\AppointmentTableFactory::class,
  'Stonelink\Model\KenyaMaps2015HealthFacilitiesTable' => 'Stonelink\Factory\Model\KenyaMaps2015HealthFacilitiesTableFactory',
-  Stonelink\Model\KenyaMaps2015HealthFacilitiesTable::class => Stonelink\Factory\Model\KenyaMaps2015HealthFacilitiesTableFactory::class
+  Stonelink\Model\KenyaMaps2015HealthFacilitiesTable::class => Stonelink\Factory\Model\KenyaMaps2015HealthFacilitiesTableFactory::class,
+ 'Stonelink\Model\ProviderTable' => 'Stonelink\Factory\Model\ProviderTableFactory',
+  Stonelink\Model\ProviderTable::class => Stonelink\Factory\Model\ProviderTableFactory::class
     
   
 ];

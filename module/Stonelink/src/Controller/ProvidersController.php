@@ -24,6 +24,7 @@ use Zend\View\Model\ViewModel;
 use Zend\Dom\Query;
 use \Zend\Debug\Debug;
 use Zend\Dom\DOMXPath;
+use Stonelink\Model\Provider;
 
 
 class ProvidersController extends AbstractActionController
@@ -37,58 +38,42 @@ class ProvidersController extends AbstractActionController
     
     public function indexAction()
     {
-        echo "we love MAngoes";
-        $pagecontent = file_get_contents('http://medicalboard.co.ke/online-services/retention/');
-//         $doc = new \DOMDocument();
-        $doc = new \DOMDocument();
-        $doc->loadHTML($pagecontent);
-        $x = new \DOMXPath($doc);
-        $someArray=array();
-        foreach($x->query('//tr/td') as $td){
-            $stringToBeReplaced=$td->C14N();
-            $string=str_replace('<td> ', '', $stringToBeReplaced);
-            $string2=str_replace('</td> ', '', $string);
-            //echo $string;
-            $someArray[]= $string;
-            $splitArray=array_chunk($someArray, 8);
-            //echo $td->C14N().'<br>';
-            
-//             echo "\n";
-            //if just need the text use:
-            //echo $td->textContent;
+        $stonelinkService=$this->serviceManager->get('Stonelink\Service\Stonelink');
+        $currPage=347;
+        for ($i=1;$i<=$currPage;$i++){
+            $pagecontent = file_get_contents('http://medicalboard.co.ke/online-services/retention/?currpage='. $i);
+            $doc = new \DOMDocument();
+            $doc->loadHTML($pagecontent);
+            $x = new \DOMXPath($doc);
+            $someArray=array();
+            foreach($x->query('//tr/td') as $td){
+                $stringToBeReplaced=trim(strip_tags($td->C14N()));
+                $someArray[]= $stringToBeReplaced;
+                $splitArray=array_chunk($someArray, 8);
+            }
+            foreach ($splitArray as $provider){
+                $provider['name']=$provider[0];
+                $provider['reg_date']=$provider[1];
+                $provider['reg_number']=$provider[2];
+                $provider['address']=$provider[3];
+                $provider['qualifications']=$provider[4];
+                $provider['specialty']=$provider[5];
+                $provider['sub_specialty']=$provider[6];
+                
+                $doctor = array_slice($provider, 8);
+                $providerModel=new Provider();
+                $providerModel->exchangeArray($doctor);
+                // This is where you will pick each record and save to providers table
+                $stonelinkService->getProviderTable()->saveProvider($providerModel);
+                // \Zend\Debug\Debug::dump($doctor);
+            }
         }
-        
+
        // $splitArray=array_chunk($someArray, 8);
-        \Zend\Debug\Debug::dump($splitArray);
-        exit;
+        
+      //  exit;
         return new ViewModel();
     }
-    
-    public function fetchAction($url)
-    {   
-        $tags = [];
-        $site = fetch('http://medicalboard.co.ke/online-services/retention/');
-        $sdom = new Query($site);
-        $content = '';
-        $md5 = md5($url);
-        $path = __DIR__.'/cache/' . $md5;
-        if (!file_exists($path)) {
-            $content = file_get_contents($url);
-            $content = mb_convert_encoding($content, 'UTF-8', mb_detect_encoding($content, 'UTF-8, ISO-8859-1', true));
-            file_put_contents($path, $content);
-        } else {
-            $content = file_get_contents($path);
-        }
-        return $content;
-    
-  
-    foreach ($sdom->execute('div#main table.zebra tbody tr') as $href) {
-        $url = $href->getAttribute('href');
-        $ddom = new Query(fetch($url));
-      
-    
-    }
-    }
-    
-    
+   
+     
 }

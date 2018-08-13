@@ -17,6 +17,7 @@ class Stonelink
 {
     protected $kenyaMaps2015HealthFaicilities;
 	protected $serviceManager;
+	protected $provider;
 
 	public function getServiceManager()
 	{
@@ -36,6 +37,14 @@ class Stonelink
 	        $this->kenyaMaps2015HealthFaicilities = $sm->get('Stonelink\Model\KenyaMaps2015HealthFacilitiesTable');
 	    }
 	    return $this->kenyaMaps2015HealthFaicilities;
+	}
+	public function getProviderTable()
+	{
+	    if (! $this->provider) {
+	        $sm = $this->getServiceManager();
+	        $this->provider = $sm->get('Stonelink\Model\ProviderTable');
+	    }
+	    return $this->provider;
 	}
 	
 
