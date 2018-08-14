@@ -21,9 +21,7 @@ namespace Stonelink\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
-use Zend\Dom\Query;
-use \Zend\Debug\Debug;
-use Zend\Dom\DOMXPath;
+
 use Stonelink\Model\Provider;
 
 
@@ -38,6 +36,8 @@ class ProvidersController extends AbstractActionController
     
     public function indexAction()
     {
+        \ini_set('max_execution_time', 3600);
+        \ini_set('memory_limit', '10000M');
         $stonelinkService=$this->serviceManager->get('Stonelink\Service\Stonelink');
         $currPage=347;
         for ($i=1;$i<=$currPage;$i++){
