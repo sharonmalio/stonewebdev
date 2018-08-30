@@ -1,0 +1,134 @@
+<div id="mapid" class="mt-0" >
+<input id="pac-input" class="controls" type="text" placeholder="Search Box">
+<script>
+function initMap() {
+	var myLatLng = {lat: -1.2921, lng: 36.8219};
+	var mapProp= {
+    	center:myLatLng,
+    	zoom:15,
+};
+var map = new google.maps.Map(document.getElementById("mapid"),
+	            mapProp);
+var infoWindow;
+
+var infoWindow = new google.maps.InfoWindow({map: map});
+    // Create the search box and link it to the UI element.
+     var input = document.getElementById('pac-input');
+    var searchBox = new google.maps.places.SearchBox(input);
+   map.controls[google.maps.ControlPosition.TOP_RIGHT].push(input);
+
+//     // Bias the SearchBox results towards current map's viewport.
+    map.addListener('bounds_changed', function() {
+     searchBox.setBounds(map.getBounds());
+     });
+    var markers = [];
+    // Listen for the event fired when the user selects a prediction and retrieve
+    // more details for that place.
+    searchBox.addListener('places_changed', function() {
+      var places = searchBox.getPlaces();
+      if (places.length == 0) {
+        return;
+      }
+      // Clear out the old markers.
+      markers.forEach(function(marker) {
+        marker.setMap(null);
+      });
+      markers = [];
+
+      // For each place, get the icon, name and location.
+      var bounds = new google.maps.LatLngBounds();
+      places.forEach(function(place) {
+        if (!place.geometry) {
+          console.log("Returned place contains no geometry");
+          return;
+        }
+        // Create a marker for each place.
+        markers.push(new google.maps.Marker({
+          map: map,
+          icon: image,
+          title: place.name,
+          position: place.geometry.location
+        }));
+
+        if (place.geometry.viewport) {
+          // Only geocodes have viewport.
+          bounds.union(place.geometry.viewport);
+        } else {
+          bounds.extend(place.geometry.location);
+        }
+      });
+      map.fitBounds(bounds);
+    });
+
+//var map=new google.maps.Map(document.getElementById("mapid"),mapProp);
+
+
+var address = document.getElementById('input').value;
+var geocoder = new google.maps.Geocoder();
+geocoder.geocode({
+'address': address
+}, function(results, status) {
+if (status == google.maps.GeocoderStatus.OK) {
+pos = {
+lat: results[0].geometry.location.lat(),
+lng: results[0].geometry.location.lng()
+};
+var image ='https://ajali.afyaresearch.org/images/hospital.png';
+
+
+var markers = [
+ 	<?php foreach ($hospitals as $stonelink) : ?>
+     	[<?= $this->escapeHtml($stonelink->latitude)?>, 
+     	 <?= $this->escapeHtml($stonelink->longitude)?>, 
+     	 "<?= $this->escapeHtml($stonelink->facility_n)?>", 
+     	 "<?= $this->escapeHtml($stonelink->county)?>",
+     	 "<?= $this->escapeHtml($stonelink->type)?>",
+     	 "<?= $this->escapeHtml($stonelink->owner)?>"
+     	 ],
+ 	<?php endforeach; ?>
+	];
+  
+	for (var i = 0; i < markers.length; i++) {
+		var a = markers[i];
+		var markerpos = {lat:a[0], lng:a[1]};
+	 	var title = 'Name:'+' '+ a[2]+'<br>'+'County:'+ ' '+ a[3]+'<br>'+'Type:'+' ' + a[4]+'<br>'+ 'Owner:'+' ' +a[5];
+	 	var marker = new google.maps.Marker({
+	 	    position: markerpos,
+	 	    map: map,
+	 	    title: title,
+	 	   	icon:image,
+	 	   });
+	 	
+	 	marker.addListener('click', function() {
+	 		var infowindow = new google.maps.InfoWindow({
+	            position: this.getPosition(),
+	            content: this.getTitle(),
+	        });
+	 	   	map.setZoom(17);
+	       	map.setCenter(this.getPosition());
+	       	infowindow.open(map, this);
+	 	  });
+	 
+	 	marker.setMap(map);
+
+	}
+
+}
+});
+ 
+}
+var marker = new google.maps.event.addDomListener(window, "load", initMap); 
+
+//for the nav bar
+function openNav() {
+	    document.getElementById("mySidenav").style.width = "200px";
+	}
+	/* Set the width of the side navigation to 0 */
+function closeNav() {
+	    document.getElementById("mySidenav").style.width = "0";
+	}
+</script>
+<script async defer
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHj5_T9nC7gQrQbdHyY1MAbck6lxLuJDk&libraries=places&callback=initMap">
+</script>
+</div>

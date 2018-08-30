@@ -1,0 +1,46 @@
+{
+  "name": "dojo",
+  "main": "main.js",
+  "moduleType": [
+    "amd"
+  ],
+  "licenses": [
+    "BSD-3-Clause",
+    "AFL-2.1"
+  ],
+  "ignore": [
+    ".*",
+    "tests",
+    "testsDOH"
+  ],
+  "keywords": [
+    "JavaScript",
+    "Dojo",
+    "Toolkit"
+  ],
+  "authors": [],
+  "homepage": "http://dojotoolkit.org/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dojo/dojo.git"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "intern-geezer": "2.2.2",
+    "http-proxy": "0.10.3",
+    "glob": "3.2.7",
+    "jsgi-node": "0.3.1",
+    "formidable": "1.0.14",
+    "sinon": "1.12.2"
+  },
+  "version": "1.13.0",
+  "_release": "1.13.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "1.13.0",
+    "commit": "6e305b5e9cb007df7484d5a307728e541d224d4d"
+  },
+  "_source": "https://github.com/dojo/dojo.git",
+  "_target": "1.13.0",
+  "_originalSource": "dojo"
+}
