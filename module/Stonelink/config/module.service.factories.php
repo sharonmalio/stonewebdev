@@ -10,15 +10,10 @@
 */
 
 return [
- 'stonelink_service_stonelink' => 'Stonelink\Factory\Service\StonelinkFactory',
- 'Stonelink\Service\Stonelink' => 'Stonelink\Factory\Service\StonelinkFactory',
+  'stonelink_service_stonelink' => 'Stonelink\Factory\Service\StonelinkFactory',
+  'Stonelink\Service\Stonelink' => 'Stonelink\Factory\Service\StonelinkFactory',
   Stonelink\Service\Stonelink::class => Stonelink\Factory\Service\StonelinkFactory::class,
- 'Stonelink\Model\AppointmentTable' => 'Stonelink\Factory\Model\AppointmentTableFactory',
-  Stonelink\Model\AppointmentTable::class => Stonelink\Factory\Model\AppointmentTableFactory::class,
- 'Stonelink\Model\KenyaMaps2015HealthFacilitiesTable' => 'Stonelink\Factory\Model\KenyaMaps2015HealthFacilitiesTableFactory',
-  Stonelink\Model\KenyaMaps2015HealthFacilitiesTable::class => Stonelink\Factory\Model\KenyaMaps2015HealthFacilitiesTableFactory::class,
- 'Stonelink\Model\ProviderTable' => 'Stonelink\Factory\Model\ProviderTableFactory',
-  Stonelink\Model\ProviderTable::class => Stonelink\Factory\Model\ProviderTableFactory::class
-    
-  
+  'Stonelink\Model\AppointmentTable' => 'Stonelink\Factory\Model\AppointmentTableFactory',
+  'Stonelink\Model\KenyaMaps2015HealthFacilitiesTable' => 'Stonelink\Factory\Model\KenyaMaps2015HealthFacilitiesTableFactory',
+  'Stonelink\Model\ProviderTable' => 'Stonelink\Factory\Model\ProviderTableFactory'
 ];

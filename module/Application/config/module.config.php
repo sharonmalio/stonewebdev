@@ -10,7 +10,8 @@ use Zend\Router\Http\Literal;
 use Zend\Router\Http\Segment;
 use Zend\ServiceManager\Factory\InvokableFactory;
 use ZfcUser\Controller\UserController;
-
+use Application\Controller\Plugin\ZfcUserExtend;
+use Application\Service\Application;
 return [
     'router' => [
         'routes' => [
@@ -25,8 +26,7 @@ return [
                 ],
                 
                 'may_terminate' => true,
-                'child_routes' =>
-                [
+                'child_routes' => [
                     'user' => [
                         'type' => Literal::class,
                         'options' => [
@@ -53,10 +53,10 @@ return [
                                 'may_terminate' => true
                             ]
                         ]
-                        
+                    
                     ]
                 ]
-                
+            
             ],
             'application' => [
                 'type' => Segment::class,
@@ -75,6 +75,12 @@ return [
             Controller\IndexController::class => InvokableFactory::class
         ]
     ],
+    'controller_plugins' => [
+        'invokables' => [
+            'ZfcUserExtend' => \Application\Controller\Plugin\ZfcUserExtend::class,
+            \Application\Controller\Plugin\ZfcUserExtend::class => \Application\Controller\Plugin\ZfcUserExtend::class
+        ]
+    ],
     'view_manager' => [
         'display_not_found_reason' => true,
         'display_exceptions' => true,
@@ -86,6 +92,9 @@ return [
             'stonelink/stonelink/index' => __DIR__ . '/../view/stonelink/stonelink/index.phtml',
             'error/404' => __DIR__ . '/../view/error/404.phtml',
             'error/index' => __DIR__ . '/../view/error/index.phtml'
+        ],
+        'template_path_stack' => [
+            'zfc-user' => __DIR__ . '/../view'
         ],
         'template_path_stack' => [
             __DIR__ . '/../view'
