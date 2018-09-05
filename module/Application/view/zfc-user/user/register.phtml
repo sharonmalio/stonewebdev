@@ -1,0 +1,30 @@
+<div class = "margin" ></div>
+<h1><?php echo $this->translate('Register into my new website'); ?></h1>
+
+<?php
+if (!$this->enableRegistration) {
+    print "Registration is disabled";
+    return;
+}
+$form = $this->registerForm;
+$form->prepare();
+$form->setAttribute('action', $this->url('zfcuser/register'));
+$form->setAttribute('method', 'post');
+$form->setAttribute('autocomplete', 'off');
+?>
+
+<?php echo $this->partial('_form.phtml', ['form' => $form]); ?>
+<script type="text/javascript">
+
+
+function openNav() {
+	    document.getElementById("mySidenav").style.width = "200px";
+	}
+	/* Set the width of the side navigation to 0 */
+function closeNav() {
+	    document.getElementById("mySidenav").style.width = "0";
+	}
+
+
+
+</script>
