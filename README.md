@@ -1,10 +1,9 @@
-# ZendSkeletonApplication
+# Stoneweb PWA Application
 
 ## Introduction
 
-This is a skeleton application using the Zend Framework MVC layer and module
-systems. This application is meant to be used as a starting place for those
-looking to get their feet wet with Zend Framework.
+This is a PWA application using the Zend Framework MVC layer and module
+systems. This application is meant to be used by patients and the health providers, as a platform for them to communicate and for the patients to get services without really having to be colocated with thedoctor.
 
 ## Installation using Composer
 
