@@ -49,7 +49,7 @@
       #pac-input {
         background-color: #fff;
         font-family: Roboto;
-        font-size: 15px;
+        font-size: 20px;
         font-weight: 300;
         margin-left: 12px;
         padding: 0 11px 0 13px;
@@ -152,14 +152,16 @@ span.screenname, #screenname {
 	background-color: #003366 !important;
 	padding-bottom: 10px;
 	padding-top: 0;
+	margin-left:0;
 }
 
 .navbar-collapse li a {
 	color: #111;
 }
 
-.navcolor li a {
+.navcolor ul li a {
 	color: #ffffff;
+	font-size:40px;
 }
 
 .navbar-center li a {
@@ -236,34 +238,33 @@ html, body {
 	z-index: -1; /* Stay on top */
 	top: 53px;
 	bottom: 100px; /* Stay at the top */
-	left: 0;
+	left: -10;
 	background-color: #ffffff; /* Black*/
 	overflow-x: hidden; /* Disable horizontal scroll */
 	overflow-y: hidden; /* Disable horizontal scroll */
 	padding-top: 48px; /* Place content 60px from the top */
 	transition: 0.5s;
+	
+	
 	/* 0.5 second transition effect to slide in the sidenav */
 }
 
 /* The navigation menu links */
-.sidenav li a {
-	/*padding: 4px 4px 4px 8px;*/
+.sidenav ul li a {
+	padding: 4px 4px 4px 8px;
 	padding: 32px 32px;
 	text-decoration: none;
-	font-size: 20px;
+	font-size:17px;
 	color: #111;
 	display: block;
 	font-family: Serif;
 	transition: 0.3s;
 }
-
-.sidenav ul {
-	list-style-type: none;
-	margin: 0;
-	padding: 0;
-	display: block;
-	width: 200px;
+.closebtn {
+	
+	font-size: 30px;
 }
+
 
 /* When you mouse over the navigation links, change their color */
 /*.sidenav ul li a :hover{
@@ -271,13 +272,7 @@ html, body {
 }
 */
 /* Position and style the close button (top right corner) */
-.closebtn {
-	position: absolute;
-	top: 0;
-	Left: 150px;
-	font-size: 36px;
-	margin-left: 0px;
-}
+
 
 /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
 .navbar-sticks {
