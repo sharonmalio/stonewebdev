@@ -76,7 +76,7 @@
 	margin-top: 17px ;
 }
 .mt-0 {
-	margin-top: 27px !important;
+	margin-top: 55px !important;
 }
 body {
 	background-color: #f2ebce;
@@ -171,9 +171,14 @@ span.screenname, #screenname {
 /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
 #mapid {
-width:100vw;
-height: 100vh;
-}
+		height : 100%; 
+		width : 100%; 
+		top : 0; 
+		left : 0; 
+		position : absolute;
+		z-index : 200;
+		
+	}
 
 
 #form {
@@ -190,13 +195,10 @@ form {
 
 /* Optional: Makes the sample page fill the window. */
 html, body {
-	height: 100vh;
-	width: 100vw;
+	height: 100%;
+	width: 100%;
 	margin: 0;
-	padding: 0;
-	 height: 100%;
-        margin: 0;
-        padding: 0;
+    padding: 0;
 }
 
 .hide-menu {
@@ -232,7 +234,7 @@ html, body {
 }
 /* The side navigation menu */
 .sidenav {
-	height: 50%; /* 100% Full-height */
+	height: 100%; /* 100% Full-height */
 	width: 0; /* 0 width - change this with JavaScript */
 	position: fixed; /* Stay in place */
 	z-index: -1; /* Stay on top */
@@ -242,7 +244,7 @@ html, body {
 	background-color: #ffffff; /* Black*/
 	overflow-x: hidden; /* Disable horizontal scroll */
 	overflow-y: hidden; /* Disable horizontal scroll */
-	padding-top: 48px; /* Place content 60px from the top */
+	padding-top: 40px; /* Place content 60px from the top */
 	transition: 0.5s;
 	
 	
@@ -251,7 +253,7 @@ html, body {
 
 /* The navigation menu links */
 .sidenav ul li a {
-	padding: 4px 4px 4px 8px;
+	padding: 4px 4px 4px 4px;
 	padding: 32px 32px;
 	text-decoration: none;
 	font-size:17px;
@@ -260,9 +262,18 @@ html, body {
 	font-family: Serif;
 	transition: 0.3s;
 }
-.closebtn {
+.sidenav ul{
+	list-style: none;
+	padding: 0;
+	margin:0
 	
-	font-size: 30px;
+}
+.closebtn {
+		position: absolute;
+		top: 0;
+		Left: 80px;
+		margin-left: 0px;
+		font-size: 30px;
 }
 
 
@@ -284,21 +295,28 @@ html, body {
 /* On smaller screens, like a phone where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
 @media screen and (max-height: 40.5em) {
 	.sidenav {
-		padding-top: 12px;
-		width: auto;
-		float: none;
-		margin-left: 10px;
-		height: 100%; /* 100% Full-height */
-		width: 0; /* 0 width - change this with JavaScript */
+	height: 100%; /* 100% Full-height */
+	width: 0; /* 0 width - change this with JavaScript */
+	position: fixed; /* Stay in place */
+	z-index: -1; /* Stay on top */
+	top: 533px;
+	bottom: 100px; /* Stay at the top */
+	left: -10;
+	background-color: #ffffff; /* Black*/
+	overflow-x: hidden; /* Disable horizontal scroll */
+	overflow-y: hidden; /* Disable horizontal scroll */
+	padding-top: 20px; /* Place content 60px from the top */
+	transition: 0.5s;
 	}
 	.closebtn {
 		position: absolute;
 		top: 0;
 		Left: 80px;
 		margin-left: 0px;
+		font-size: 20px;
 	}
 	.navbar-sticks {
-		font-size: 30px;
+		font-size: 15px;
 		cursor: pointer;
 		color: #ffffff;
 	}
@@ -307,7 +325,7 @@ html, body {
 		width: auto;
 		float: none;
 	}
-	.sidenav li a {
+	.sidenav lu li a {
 		/*padding: 4px 4px 4px 8px;*/
 		padding: 32px 32px;
 		text-decoration: none;
@@ -330,13 +348,19 @@ html, body {
 		padding: 0;
 	}
 	#mapid {
-		height: 640px;
-		width: 100vw;
+		height : 100%; 
+		width : 100%; 
+		top : 0; 
+		left : 0; 
+		position : absolute;
+		z-index : 200;
+		
 	}
 }
 
 @media screen and (max-width: 40.5em) {
-	.sidenav li a {
+	
+	.sidenav lu li a {
 		/*padding: 4px 4px 4px 8px;*/
 		padding: 32px 32px;
 		text-decoration: none;
@@ -356,10 +380,15 @@ html, body {
 		height: 100%;
 		width: 100%;
 		padding: 0;
-	}
+	}	
 	#mapid {
-		height: 640px;
-		width: 100vw;
+		height : 100%; 
+		width : 100%; 
+		top : 0; 
+		left : 0; 
+		position : absolute;
+		z-index : 200;
+		
 	}
 	.sidenav ul {
 		list-style-type: none;
@@ -374,7 +403,7 @@ html, body {
 		color: #ffffff;
 	}
 	.sidenav {
-		height: 40%; /* 100% Full-height */
+		height: 100%; /* 100% Full-height */
 		width: 0; /* 0 width - change this with JavaScript */
 		position: fixed; /* Stay in place */
 		z-index: -1; /* Stay on top */
@@ -384,7 +413,7 @@ html, body {
 		background-color: #ffffff; /* Black*/
 		overflow-x: hidden; /* Disable horizontal scroll */
 		/* Disable vertical scroll */
-		padding-top: 15px; /* Place content 60px from the top */
+		padding-top: 20px; /* Place content 60px from the top */
 		transition: 0.5s;
 		/* 0.5 second transition effect to slide in the sidenav */
 	}

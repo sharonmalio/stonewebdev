@@ -19,7 +19,7 @@
 		"zendframework/zend-cache" : "^2.7.1",
 		"zendframework/zend-db" : "^2.8.1",
 		"zendframework/zend-mvc-form" : "^1.0",
-		"zendframework/zend-json" : "^3.0",
+		"zendframework/zend-json" : "^3.1",
 		"zendframework/zend-log" : "^2.9",
 		"zendframework/zend-mvc-console" : "^1.1.10",
 		"zendframework/zend-mvc-i18n" : "^1.0",
@@ -56,6 +56,6 @@
 		"test" : "phpunit"
 	},
 	"require-dev" : {
-		"zendframework/zend-test" : "^3.0.1"
+		"zendframework/zend-test" : "^3.2"
 	}
 }

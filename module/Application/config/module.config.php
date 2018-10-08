@@ -15,7 +15,7 @@ use Application\Service\Application;
 return [
     'router' => [
         'routes' => [
-            'user' => [
+            'home' => [
                 'type' => Literal::class,
                 'options' => [
                     'route' => '/',

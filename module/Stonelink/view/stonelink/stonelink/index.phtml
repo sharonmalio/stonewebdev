@@ -9,7 +9,6 @@ function initMap() {
 };
 var map = new google.maps.Map(document.getElementById("mapid"),
 	            mapProp);
-var infoWindow;
 
 var infoWindow = new google.maps.InfoWindow({map: map});
     // Create the search box and link it to the UI element.
@@ -163,4 +162,4 @@ function closeNav() {
 <div id="mapid" class="mt-0" ></div>
 <script async defer
 src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHj5_T9nC7gQrQbdHyY1MAbck6lxLuJDk&libraries=places&callback=initMap">
-</script>
+async defer</script>

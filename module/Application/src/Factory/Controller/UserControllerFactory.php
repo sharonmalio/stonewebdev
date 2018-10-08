@@ -5,6 +5,7 @@ use Zend\Mvc\Controller\ControllerManager;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Application\Controller\UserController;
+use Interop\Container\ContainerInterface;
 
 class UserControllerFactory implements FactoryInterface
 {
@@ -21,4 +22,12 @@ class UserControllerFactory implements FactoryInterface
 		$controller = new UserController();
 		return $controller;
 	}
-}
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
+    {
+        $serviceManager = $serviceLocator->getServiceLocator();
+        $controller = new UserController();
+        return $controller;
+    }
+    }
+
+
