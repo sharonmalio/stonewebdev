@@ -1,7 +1,7 @@
-<div class="margin"></div>
-<?= $this->doctype() ?>
 
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
 
 <meta charset="utf-8">
@@ -35,7 +35,10 @@
         <?=$this->headScript()->prependFile($this->basePath('js/bootstrap.min.js'))->prependFile($this->basePath('js/jquery-3.1.0.min.js'))->prependFile($this->basePath('js/app.js'))?>
 
     </head>
+
 <body class="html mt-0">
+<div class="margin"></div>
+<?= $this->doctype() ?>
 	<nav class="navbar navbar-color navbar-fixed-top " role="navigation">
 		<div class="container">
 			<div class="sidenav " id="mySidenav">
