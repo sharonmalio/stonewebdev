@@ -86,7 +86,7 @@
       lng: results[0].geometry.location.lng()
     };
 
-      $.getJSON("http://localhost/ubuntuHealth/nearby.php?lat="+pos.lat+"&lng="+pos.lng, function(data) {
+      $.getJSON("//localhost/ubuntuHealth/nearby.php?lat="+pos.lat+"&lng="+pos.lng, function(data) {
         
         for(var i in data){
 
@@ -102,7 +102,7 @@
               var county = obj.county;
               var type = obj.type_;
               var owner = obj.owner;
-              var link = "<a href='http://localhost/ubuntuHealth/book.php'>Book Appointment</a>"
+              var link = "<a href='//localhost/ubuntuHealth/book.php'>Book Appointment</a>"
               
 
               var marker = new google.maps.Marker({
@@ -110,7 +110,7 @@
                 map: map,
                 title: mtitle,
                 //content:contentString,
-                icon: "http://ajali.afyaresearch.org/images/hospital.png"
+                icon: "//ajali.afyaresearch.org/images/hospital.png"
                 });
 
                 //add event listener
