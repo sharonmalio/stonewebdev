@@ -42,8 +42,12 @@ class ProvidersController extends AbstractActionController
         $currPage=347;
         for ($i=1;$i<=$currPage;$i++){
             $pagecontent = file_get_contents('http://medicalboard.co.ke/online-services/retention/?currpage='. $i);
-            $doc = new \DOMDocument();
+            
+            $doc = new \DOMDocument('1.0', 'UTF-8');
+            $internalErrors = libxml_use_internal_errors(true);
+            
             $doc->loadHTML($pagecontent);
+            libxml_use_internal_errors($internalErrors);
             $x = new \DOMXPath($doc);
             $someArray=array();
             foreach($x->query('//tr/td') as $td){

@@ -29,20 +29,21 @@
 		"zendframework/zend-servicemanager-di" : "^1.0",
 		"zf-commons/zfc-user" : "^3.0",
 		"zendframework/zend-i18n-resources" : "^2.6",
-		"zendframework/zend-mvc-plugin-flashmessenger": "^1.1",
-		"zendframework/zend-mvc-plugin-fileprg": "^1.1",
-		"zendframework/zend-mvc-plugin-identity": "^1.1"
+		"zendframework/zend-mvc-plugin-flashmessenger" : "^1.1",
+		"zendframework/zend-mvc-plugin-fileprg" : "^1.1",
+		"zendframework/zend-mvc-plugin-identity" : "^1.1"
 	},
 	"autoload" : {
 		"psr-4" : {
 			"Application\\" : "module/Application/src/",
-			"Stonelink\\" : "module/Stonelink/src/"
+			"Stonelink\\" : "module/Stonelink/src/",
+			"Appointments\\": "module/Appointments/src",
+			"Appointment\\": "module/Appointment/src/"
 		}
 	},
 	"autoload-dev" : {
 		"psr-4" : {
 			"ApplicationTest\\" : "module/Application/test/"
-			
 		}
 	},
 	"scripts" : {

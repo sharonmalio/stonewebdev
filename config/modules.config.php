@@ -28,4 +28,5 @@ return [
     'Zend\Validator',
     'Application',
     'Stonelink',
+    'Appointments',
 ];
