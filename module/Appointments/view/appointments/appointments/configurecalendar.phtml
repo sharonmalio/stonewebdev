@@ -1,0 +1,50 @@
+<div id="form" class="margin" ></div>
+
+<?php
+$title = 'Dates';
+$this->headTitle($title);
+
+?>
+<head>
+<div style = "color: black; font-size:30px; text-align: center;">Choose the Dates and the Time</div>
+</head>
+<?php
+
+$form->setAttribute('action', $this->url('appointments', ['appointments' => 'configurecalendar'
+]));
+
+$form->prepare();
+
+// This provides a default CSS class and placeholder text for the dates element:
+$dates = $form->get('dates');
+$dates->setAttribute('class', 'form-control');
+$dates->setAttribute('placeholder', 'dates');
+
+$time = $form->get('time');
+$time->setAttribute('class', 'form-control');
+$time->setAttribute('placeholder', 'time');
+
+// This provides CSS classes for the submit button:
+$submit = $form->get('submit');
+$submit->setAttribute('class', 'btn btn-primary');
+
+echo $this->form()->openTag($form);
+
+?>
+
+<div class="form-group">
+    <?= $this->formLabel($dates) ?>
+    <?= $this->formElement($dates) ?>
+    <?= $this->formElementErrors()->render($dates, ['class' => 'help-block']) ?>
+</div>
+
+<div class="form-group">
+    <?= $this->formLabel($time) ?>
+    <?= $this->formElement($time) ?>
+    <?= $this->formElementErrors()->render($time, ['class' => 'help-block']) ?>
+</div>
+<?php
+
+echo $this->formSubmit($submit);
+
+echo $this->form()->closeTag();

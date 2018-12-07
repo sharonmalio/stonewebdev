@@ -28,51 +28,54 @@ class AppointmentsController extends AbstractActionController
     {
         
     }
+    
+    public function addpersondetailsAction()
+    {
+        $formElementManager=$this->serviceManager->get('FormElementManager');
+        
+        return [
+            'form' => $formElementManager->get('Appointments\Form\AppointmentsUsersForm')
+        ];
+    
+    }
     public function selectserviceproviderAction()
     {
+ 
       $formElementManager=$this->serviceManager->get('FormElementManager');
       return [
           'form' => $formElementManager->get('Appointments\Form\AppointmentsServiceProviderForm')
       ];
     }
+ 
+    public function configurecalendarAction()
+    {
+     
+        $formElementManager=$this->serviceManager->get('FormElementManager');
+        return [
+            'form' => $formElementManager->get('Appointments\Form\AppointmentsCalendarForm')
+        ];
+       
+    }
+    public function confirmsummeryAction()
+    {
+        
+        $formElementManager=$this->serviceManager->get('FormElementManager');
+        return [
+            'form' => $formElementManager->get('Appointments\Form\AppointmentsCalendarForm')
+        ];
+    }
     
-    public function addpersondetailsAction()
+    public function payAction()
     {
         $formElementManager=$this->serviceManager->get('FormElementManager');
         return [
-            'form' => $formElementManager->get('Appointments\Form\AppointmentsUsersForm')
+            'form' => $formElementManager->get('Appointments\Form\AppointmentsCalendarForm')
         ];
-        // return array(
-        // 'form' => $this->serviceManager->getConfig()->get('Appointments\Form\AppointmentsUsersForm')
-        // );
+        
     }
-
     public function addAction()
     {
-        $form = new AppointmentsUsersForm();
-        $form->get('submit')->setValue('Add');
-
-        $request = $this->getRequest();
-
-        if (! $request->isPost()) {
-            return [
-                'form' => $form
-            ];
-        }
-
-        $appointments = new AppointmentsUsers();
-        $form->setInputFilter($appointments->getInputFilter());
-        $form->setData($request->getPost());
-
-        if (! $form->isValid()) {
-            return [
-                'form' => $form
-            ];
-        }
-
-        $appointments->exchangeArray($form->getData());
-        $this->table->saveAppointmentsUsers($appointments);
-        return $this->redirect()->toRoute('appointments');
+        
 
         // // instantiate AppointmentForm and set the label on the submit button to "Add"
         // $form = new AppointmentsUsersForm();
@@ -103,10 +106,7 @@ class AppointmentsController extends AbstractActionController
         // we redirect back to the list of appointments using the Redirect
     }
 
-    public function cancelAction()
-    {
-        // return $this-> appointments -> $appointmentsService->AppointmentsUsersTable()->fetchAll();
-    }
+  
 
     public function deleteAction()
     {

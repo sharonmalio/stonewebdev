@@ -13,52 +13,26 @@ namespace Appointments\Form;
 use Zend\Form\Form;
 use Zend\ServiceManager\ServiceManager;
 
-class AppointmentsServiceProviderForm extends Form
+class AppointmentsPhoneForm extends Form
 {
     protected $serviceManager;
     
     public function init()
     {
-        $this->setName('appointmentsserviceproviderform');
-        $this->setAttribute('id', 'appointmentsserviceproviderform');
+        $this->setName('appointmentsphoneform');
+        $this->setAttribute('id', 'appointmentsphoneform');
         $this->setAttribute('method', 'post');
         
-        $this->add([
-            'name' => 'services',
-            'type' => 'Zend\Form\Element\Select',
-            'options' => [
-                'label' => 'Please select the service you need',
-                'value_options' => [
-                    '0' => 'Skin services ',
-                    '1' => 'Cancer',
-                    '2' => 'Gyn',
-                    '3' => 'Head',
-                ],
-            ]
-        ]);
         
-      $this->add([
-            'name' => 'provider',
-            'type' => 'Zend\Form\Element\Select',
+        $this->add([
+            'name' => 'phonenumber',
+            'type' => 'text',
             'options' => [
-                'label' => 'Please select your Provider',
-                'value_options' => [
-                    '0' => 'Sharon ',
-                    '1' => 'Moses',
-                    '2' => 'Mueni',
-                    '3' => 'Micah',
-                ],
+                'label' => 'Phone number'
             ]
         ]);
       
-      $this->add([
-          'name' => 'comments',
-          'type' => 'Zend\Form\Element\Textarea',
-          'attributes' => [
-              'value' => 'Say more about the problem you have',
-              
-          ]
-      ]);
+  
       
       $this->add([
           'name' => 'submit',

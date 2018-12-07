@@ -1,1 +1,60 @@
-sharon
+<div id="form" class="margin" ></div>
+<?php
+
+$title = 'services';
+$this->headTitle($title);
+
+?>
+<head>
+<div style = "color: black; font-size:30px; text-align: center;">Select the services and the Provider</div>
+</head>
+<?php
+
+$form->setAttribute('action', $this->url('appointments', ['appointments' => 'selectserviceprovider'
+]));
+
+$form->prepare();
+
+// This provides a default CSS class and placeholder text for the services element:
+$services = $form->get('services');
+$services->setAttribute('class', 'form-control');
+$services->setAttribute('placeholder', 'services');
+
+
+// This provides a default CSS class and placeholder text for the provider element:
+$provider= $form->get('provider');
+$provider->setAttribute('class', 'form-control');
+$provider->setAttribute('placeholder', 'provider');
+
+$comments= $form->get('comments');
+$comments->setAttribute('class', 'form-control');
+$comments->setAttribute('placeholder', 'comments');
+
+// This provides CSS classes for the submit button:
+$submit = $form->get('submit');
+$submit->setAttribute('class', 'btn btn-primary');
+
+echo $this->form()->openTag($form);
+
+?>
+
+  
+<div class="form-group">
+    <?= $this->formLabel($services) ?>
+    <?= $this->formElement($services) ?>
+    <?= $this->formElementErrors()->render($services, ['class' => 'help-block']) ?>
+</div>
+
+<div class="form-group">
+    <?= $this->formLabel($provider) ?>
+    <?= $this->formElement($provider) ?>
+    <?= $this->formElementErrors()->render($provider, ['class' => 'help-block']) ?>
+</div>
+
+
+
+<?php
+
+echo $this->formSubmit($submit);
+
+echo $this->form()->closeTag();

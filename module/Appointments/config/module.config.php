@@ -46,7 +46,7 @@ return [
         'exception_template' => 'error/index',
         'template_map' => [
             'layout/layout' => __DIR__ . '/../view/layout/stonelink-layout.phtml',
-            'appointments/appointments/index' => __DIR__ . '/../view/appointments/appointments/index.phtml',
+            'appointments/appointments/addpersondetails' => __DIR__ . '/../view/appointments/appointments/addpersondetails.phtml',
             'error/404' => __DIR__ . '/../view/error/404.phtml',
             'error/index' => __DIR__ . '/../view/error/index.phtml'
         ],
