@@ -12,16 +12,18 @@ use Zend\Validator\StringLength;
 
 class AppointmentsUsers implements InputFilterAwareInterface {
 
-	public $users_id;
+	public $appointments_users_id;
 	public $first_name;
 	public $second_name;
 	public $phone_number;
 	public $email;
+	
+	protected $inputFilter;
 
 
 	public function exchangeArray($data)
 	{
-		$this->users_id=(isset($data['users_id'])) ? $data['users_id'] : null;
+		$this->appointments_users_id=(isset($data['appointments_users_id'])) ? $data['appointments_users_id'] : null;
 		$this->first_name=(isset($data['first_name'])) ? $data['first_name'] : null;
 		$this->second_name=(isset($data['second_name'])) ? $data['second_name'] : null;
 		$this->phone_number=(isset($data['phone_number'])) ? $data['phone_number'] : null;
@@ -51,7 +53,7 @@ class AppointmentsUsers implements InputFilterAwareInterface {
 	    $inputFilter = new InputFilter();
 	    
 	    $inputFilter->add([
-	        'name' => 'users_id',
+	        'name' => 'appointments_users_id',
 	        'required' => false,
 	        'filters' => [
 	            ['name' => ToInt::class],

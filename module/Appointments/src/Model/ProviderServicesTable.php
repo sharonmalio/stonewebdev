@@ -6,7 +6,7 @@
 * @copyright Copyright (c) 2009-2018 Afya Research Africa Inc. (http://www.afyaresearch.org)
 * @license   http://stonehmis.afyaresearch.org/license/options License Options
 * @author    smalio
-* @since     16-11-2018
+* @since     10-12-2018
 */
 
 namespace Appointments\Model;
@@ -18,7 +18,7 @@ use Zend\Db\Sql\Where;
 use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\TableGateway\TableGateway;
 
-class AppointmentsUsersTable
+class ProviderServicesTable
 {
 
 	protected $tableGateway;
@@ -44,7 +44,7 @@ class AppointmentsUsersTable
 	{
 		$platform = $this->getAdapter()->getPlatform();
 		$table = $platform->quoteIdentifier($this->getTable());
-		$orderCol = $platform->quoteIdentifier('appointments_users_id');
+		$orderCol = $platform->quoteIdentifier('provider_service_id');
 		$stmt = $this->getAdapter()->createStatement("SELECT * FROM $table ORDER BY $orderCol DESC");
 		$result = $stmt->execute();
 		$result->buffer();
@@ -60,7 +60,7 @@ class AppointmentsUsersTable
 		}
 	}
 
-	public function fetchAllAppointmentsUsers(array $columns = NULL, array $joins = NULL, array $literals = NULL, $limit = NULL, $group = NULL, $order = NULL, $buffer = FALSE)
+	public function fetchAllProviderServices(array $columns = NULL, array $joins = NULL, array $literals = NULL, $limit = NULL, $group = NULL, $order = NULL, $buffer = FALSE, $having = NULL)
 	{
 		$platform = $this->getAdapter()->getPlatform();
 		$sql = new Sql($this->getAdapter());
@@ -111,7 +111,10 @@ class AppointmentsUsersTable
 		if ($order) {
 			$select->order($order);
 		}
-		$setstmt = $this->getAdapter()->createStatement("set @appointments_users_row_num = 0");
+		if ($having) {
+			$select->having($having);
+		}
+		$setstmt = $this->getAdapter()->createStatement("set @provider_services_row_num = 0");
 		$set = $setstmt->execute();
 		 //$statement = $sql->getSqlStringForSqlObject($select);
 		//return $statement;
@@ -129,10 +132,10 @@ class AppointmentsUsersTable
 			return ;
 		}
 	}
-	public function getAppointmentsUsers($id)
+	public function getProviderServices($id)
 	{
 		$id  = (int) $id;
-		$rowset = $this->tableGateway->select(array('appointments_users_id' => $id));
+		$rowset = $this->tableGateway->select(array('provider_service_id' => $id));
 		$row = $rowset->current();
 		if (!$row) {
 			throw new RuntimeException(sprintf(
@@ -143,12 +146,12 @@ class AppointmentsUsersTable
 		return $row;
 		}
 
-	public function getAppointmentsUsersObject($id)
+	public function getProviderServicesObject($id)
 	{
 		$id  = (int) $id;
 		$platform = $this->getAdapter()->getPlatform();
 		$table = $platform->quoteIdentifier($this->getTable());
-		$Col = $platform->quoteIdentifier('appointments_users_id');
+		$Col = $platform->quoteIdentifier('provider_service_id');
 		$stmt = $this->getAdapter()->CreateStatement(
 			"SELECT *  FROM $table WHERE $Col = $id");
 		$result = $stmt->execute();
@@ -164,23 +167,25 @@ class AppointmentsUsersTable
 		}
 	}
 
-	public function saveAppointmentsUsers(AppointmentsUsers $appointmentsusers)
+	public function saveProviderServices(ProviderServices $providerservices)
 	{
 		$data = array(
-		    'appointments_users_id'=>$appointmentsusers->appointments_users_id,
-			'first_name'=>$appointmentsusers->first_name,
-			'second_name'=>$appointmentsusers->second_name,
-			'phone_number'=>$appointmentsusers->phone_number,
-			'email'=>$appointmentsusers->email,
+			'provider_service_id'=>$providerservices->provider_service_id,
+			'service_name'=>$providerservices->service_name,
+			'duration'=>$providerservices->duration,
+			'price'=>$providerservices->price,
+			'currency'=>$providerservices->currency,
+			'description'=>$providerservices->description,
+			'provider_id'=>$providerservices->provider_id,
 			);
 
-			$id = (int)$appointmentsusers->appointments_users_id;
+			$id = (int)$providerservices->provider_service_id;
 			if ($id == 0) {
 				$this->tableGateway->insert($data);
 				return $this->tableGateway->lastInsertValue;
 		} else {
-			if ($this->getAppointmentsUsers($id)) {
-				$this->tableGateway->update($data, array('appointments_users_id' => $id));
+			if ($this->getProviderServices($id)) {
+				$this->tableGateway->update($data, array('provider_service_id' => $id));
 			} else {
 			throw new RuntimeException(sprintf(
 			        'Could not find row with identifier %d',
@@ -190,19 +195,19 @@ class AppointmentsUsersTable
 		}
 	}
 
-	public function updateAppointmentsUsers($data,$id)
+	public function updateProviderServices($data,$id)
 	{
-		$this->tableGateway->update($data, array('appointments_users_id' => $id));
+		$this->tableGateway->update($data, array('provider_service_id' => $id));
 	}
 
-	public function conditionalUpdateAppointmentsUsers($data,array $condition)
+	public function conditionalUpdateProviderServices($data,array $condition)
 	{
 		$this->tableGateway->update($data,$condition);
 	}
 
-	public function deleteAppointmentsUsers($id)
+	public function deleteProviderServices($id)
 	{
-		$this->tableGateway->delete(array('appointments_users_id' => $id));
+		$this->tableGateway->delete(array('provider_service_id' => $id));
 	}
 
 	public function getDistinctCol($Col)
@@ -237,11 +242,11 @@ class AppointmentsUsersTable
 		}
 	}
 
-	public function getAppointmentsUsersCol($Col)
+	public function getProviderServicesCol($Col)
 	{
 		$platform = $this->getAdapter()->getPlatform();
 		$Col = $platform->quoteIdentifier($Col); 
-		$id = $platform->quoteIdentifier('appointments_users_id');
+		$id = $platform->quoteIdentifier('provider_service_id');
 		$table = $platform->quoteIdentifier($this->getTable());
 		$stmt = $this->getAdapter()->CreateStatement("SELECT $Col,$id FROM $table");
 		$result = $stmt->execute();
@@ -252,7 +257,7 @@ class AppointmentsUsersTable
 		}
 	}
 
-	public function getAppointmentsUsersRecordsCount()
+	public function getProviderServicesRecordsCount()
 	{
 		$platform = $this->getAdapter()->getPlatform();
 		$table = $platform->quoteIdentifier($this->getTable());
@@ -265,7 +270,7 @@ class AppointmentsUsersTable
 		}
 	}
 
-	public function fetchAppointmentsUsersByCol($searchTerm,$WhereCol)
+	public function fetchProviderServicesByCol($searchTerm,$WhereCol)
 	{
 		$platform = $this->getAdapter()->getPlatform();
 		$WhereCol = $platform->quoteIdentifier($WhereCol);

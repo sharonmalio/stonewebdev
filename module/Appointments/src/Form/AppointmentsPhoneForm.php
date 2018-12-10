@@ -25,7 +25,7 @@ class AppointmentsPhoneForm extends Form
         
         
         $this->add([
-            'name' => 'phonenumber',
+            'name' => 'phone_number',
             'type' => 'text',
             'options' => [
                 'label' => 'Phone number'
@@ -38,7 +38,7 @@ class AppointmentsPhoneForm extends Form
           'name' => 'submit',
           'type' => 'Zend\Form\Element\Button',
           'attributes' => [
-              'value' => 'Submit',
+              'value' => 'Confirm',
               'id' => 'submitbutton'
           ]
       ]);

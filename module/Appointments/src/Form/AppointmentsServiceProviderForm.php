@@ -25,6 +25,12 @@ class AppointmentsServiceProviderForm extends Form
         
         $this->add([
             'name' => 'services',
+            'type' => 'Zend\Form\Element\Hidden',
+            
+        ]);
+        
+        $this->add([
+            'name' => 'service',
             'type' => 'Zend\Form\Element\Select',
             'options' => [
                 'label' => 'Please select the service you need',

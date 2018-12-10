@@ -13,7 +13,7 @@ namespace Appointments\Form;
 use Zend\Form\Form;
 use Zend\ServiceManager\ServiceManager;
 
-class AppointmentsUsersForm extends Form
+class ProviderServicesForm extends Form
 {
 
     /**
@@ -24,26 +24,20 @@ class AppointmentsUsersForm extends Form
 
     public function init()
     {
-        $this->setName('appointmentsusersform');
-        $this->setAttribute('id', 'appointmentsusersform');
+        $this->setName('providerservicesform');
+        $this->setAttribute('id', 'providerservicesform');
         $this->setAttribute('method', 'post');
+        $appointmentService = $this->serviceManager->get('Appointments\Service\Appointments');
         $this->add([
-            'name' => 'appointments_users_id',
-            'type' => 'hidden',
-            'options' => [
-                'label' => 'Users id'
-                
-            ],
-            'attributes' => [
-                'required' => true
-            ]
+            'name' => 'provider_service_id',
+            'type' => 'hidden'
         ]);
 
         $this->add([
-            'name' => 'first_name',
+            'name' => 'service_name',
             'type' => 'text',
             'options' => [
-                'label' => 'First name'
+                'label' => 'Service'
             ],
             'attributes' => [
                 'required' => true
@@ -51,10 +45,21 @@ class AppointmentsUsersForm extends Form
         ]);
 
         $this->add([
-            'name' => 'second_name',
+            'name' => 'provider_id',
+            'type' => 'Zend\Form\Element\Select',
+            'options' => [
+                'label' => 'Provider',
+                'value_options' => $appointmentService->fetchProviderNames(),
+                'attributes' => [
+                    'required' => true
+                ]
+            ]
+        ]);
+        $this->add([
+            'name' => 'duration',
             'type' => 'text',
             'options' => [
-                'label' => 'Second name'
+                'label' => 'Duration'
             ],
             'attributes' => [
                 'required' => true
@@ -62,24 +67,35 @@ class AppointmentsUsersForm extends Form
         ]);
 
         $this->add([
-            'name' => 'phone_number',
+            'name' => 'price',
             'type' => 'text',
             'options' => [
-                'label' => 'Phone number'
+                'label' => 'Cost'
             ],
             'attributes' => [
                 'required' => true
             ]
         ]);
+        $this->add([
+            'name' => 'currency',
+            'type' => 'Zend\Form\Element\Select',
+            'options' => [
+                'label' => 'Currency',
+                'value_options' => [
+                    'Ksh' => 'Ksh ',
+                    'dollars' => 'dollars'
+                ],
+                'attributes' => [
+                    'required' => true
+                ]
+            ]
+        ]);
 
         $this->add([
-            'name' => 'email',
-            'type' => 'Zend\Form\Element\Text',
+            'name' => 'description',
+            'type' => 'text',
             'options' => [
-                'label' => 'Email'
-            ],
-            'attributes' => [
-                'required' => true
+                'label' => 'Comments'
             ]
         ]);
 
@@ -87,11 +103,10 @@ class AppointmentsUsersForm extends Form
             'name' => 'submit',
             'type' => 'Zend\Form\Element\Button',
             'attributes' => [
-                'value' => 'Submit',
+                'value' => 'Add Service',
                 'id' => 'submitbutton'
             ]
         ]);
-        
     }
 
     /**

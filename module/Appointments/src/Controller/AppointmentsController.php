@@ -10,10 +10,9 @@
  */
 namespace Appointments\Controller;
 
-use Zend\Mvc\Controller\AbstractActionController;
-use Zend\View\Model\ViewModel;
-use Appointments\Form\AppointmentsUsersForm;
 use Appointments\Model\AppointmentsUsers;
+use Zend\Mvc\Controller\AbstractActionController;
+use Zend\Mvc\Controller\Plugin\Redirect;
 
 class AppointmentsController extends AbstractActionController
 {
@@ -24,89 +23,87 @@ class AppointmentsController extends AbstractActionController
     {
         return $this->serviceManager = $serviceManager;
     }
-    public  function indexAction()
-    {
-        
-    }
-    
+
+    public function indexAction()
+    {}
+
     public function addpersondetailsAction()
     {
-        $formElementManager=$this->serviceManager->get('FormElementManager');
-        
+        $formElementManager = $this->serviceManager->get('FormElementManager');
+        $form = $formElementManager->get('Appointments\Form\AppointmentsUsersForm');
+        $appointmentsTable = $this->serviceManager->get('Appointments\Model\AppointmentsUsersTable');
+        // instantiate AppointmentForm and set the label on the submit button to "Add"
+        // $form = new AppointmentsUsersForm();
+        $form->get('submit')->setValue('Add');
+
+        // If the request is not a POST request, then no form data has been
+        // submitted, and we need to display the form
+        $request = $this->getRequest();
+
+        if ($request->isPost()) {
+         
+            $appointment = new AppointmentsUsers();
+            $form->setData($request->getPost());
+            $form->setInputFilter($appointment->getInputFilter());
+
+            if ($form->isValid()) {
+                $appointment->exchangeArray($form->getData());
+                // Inserting appointment data in the database table
+              $user_id = $appointmentsTable->saveAppointmentsUsers($appointment);
+              
+                return $this->redirect()->toRoute('appointments/appointments', array(
+                    'action'=>'selectserviceprovider'
+                ));
+            } else {
+
+                return [
+                    'form' => $form
+                ];
+            }
+        }
+        $formElementManager = $this->serviceManager->get('FormElementManager');
         return [
             'form' => $formElementManager->get('Appointments\Form\AppointmentsUsersForm')
         ];
-    
     }
+
     public function selectserviceproviderAction()
     {
- 
-      $formElementManager=$this->serviceManager->get('FormElementManager');
-      return [
-          'form' => $formElementManager->get('Appointments\Form\AppointmentsServiceProviderForm')
-      ];
+        
+        $formElementManager = $this->serviceManager->get('FormElementManager');
+        $form = $formElementManager->get('Appointments\Form\AppointmentsServiceProviderForm');
+       // $appointmentsTable = $this->serviceManager->get('Appointments\Model\AppointmentsUsersTable');
+        return [
+            'form' => $formElementManager->get('Appointments\Form\AppointmentsServiceProviderForm')
+        ];
     }
- 
+
     public function configurecalendarAction()
     {
-     
-        $formElementManager=$this->serviceManager->get('FormElementManager');
+        $formElementManager = $this->serviceManager->get('FormElementManager');
         return [
             'form' => $formElementManager->get('Appointments\Form\AppointmentsCalendarForm')
         ];
-       
     }
+
     public function confirmsummeryAction()
     {
-        
-        $formElementManager=$this->serviceManager->get('FormElementManager');
+        $formElementManager = $this->serviceManager->get('FormElementManager');
         return [
             'form' => $formElementManager->get('Appointments\Form\AppointmentsCalendarForm')
         ];
     }
-    
+
     public function payAction()
     {
-        $formElementManager=$this->serviceManager->get('FormElementManager');
+        $formElementManager = $this->serviceManager->get('FormElementManager');
         return [
-            'form' => $formElementManager->get('Appointments\Form\AppointmentsCalendarForm')
+            'form' => $formElementManager->get('Appointments\Form\AppointmentsPhoneForm')
         ];
-        
     }
+
     public function addAction()
-    {
-        
-
-        // // instantiate AppointmentForm and set the label on the submit button to "Add"
-        // $form = new AppointmentsUsersForm();
-        // $form->get('submit')->setValue('Add');
-        // // If the request is not a POST request, then no form data has been
-        // // submitted, and we need to display the form
-        // $request = $this->getRequest();
-
-        // if ($request->isPost()) {
-        // $appointment = new AppointmentsUsers();
-        // $form->setData($request->getPost());
-        // $form->setInputFilter($appointment->getInputFilter());
-
-        // if ($form->isValid()) {
-
-        // $appointment->exchangeArray($form->getData());
-        // // Inserting appointment data in the datbase table
-        // $this->appointmentUsersTable->saveAppointmentsUsers($appointment);
-        // } else {
-
-        // return [
-        // 'form' => $form
-        // ];
-        // }
-        // }
-
-        // if it is invalid return form
-        // we redirect back to the list of appointments using the Redirect
-    }
-
-  
+    {}
 
     public function deleteAction()
     {

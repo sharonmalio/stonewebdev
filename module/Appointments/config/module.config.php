@@ -3,6 +3,7 @@ namespace Appointments;
 
 use Zend\Router\Http\Segment;
 use Appointments\Controller\AppointmentsController;
+use Appointments\Controller\ProviderController;
 
 return [
     'router' => [
@@ -13,7 +14,7 @@ return [
                     'route' => '/appointments',
                     'defaults' => [
                         'controller' => AppointmentsController::class,
-                        'action' => 'index'
+                        'action' => 'addpersondetails'
                     ]
                 ],
                 'may_terminate' => true,
@@ -27,10 +28,23 @@ return [
                             ],
                             'defaults' => [
                                 'controller' => AppointmentsController::class,
-                                'action' => 'index'
+                                'action' => 'addpersondetails'
                             ]
                         ]
                     ],
+                    'provider' => [
+                        'type' => 'segment',
+                        'options' => [
+                            'route' => '/provider/[:action]',
+                            'constraints' => [
+                                'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                            ],
+                            'defaults' => [
+                                'controller' => ProviderController::class,
+                                'action' => 'addproviderservices'
+                            ]
+                        ]
+                    ]
                 
                 ]
                 
@@ -47,6 +61,7 @@ return [
         'template_map' => [
             'layout/layout' => __DIR__ . '/../view/layout/stonelink-layout.phtml',
             'appointments/appointments/addpersondetails' => __DIR__ . '/../view/appointments/appointments/addpersondetails.phtml',
+            //'appointments/provider/addproviderservices' => __DIR__ . '/../view/appointments/provider/addproviderservices.phtml',
             'error/404' => __DIR__ . '/../view/error/404.phtml',
             'error/index' => __DIR__ . '/../view/error/index.phtml'
         ],

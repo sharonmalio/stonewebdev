@@ -6,7 +6,7 @@
 * @copyright Copyright (c) 2009-2018 Afya Research Africa Inc. (http://www.afyaresearch.org)
 * @license   http://stonehmis.afyaresearch.org/license/options License Options
 * @author    smalio
-* @since     16-11-2018
+* @since     10-12-2018
 */
 
 namespace Appointments\Factory\Model;
@@ -16,23 +16,11 @@ use Zend\Db\TableGateway\TableGateway;
 use Zend\Hydrator\ObjectProperty;
 use Zend\Db\ResultSet\HydratingResultSet;
 use Interop\Container\ContainerInterface;
-use Appointments\Model\AppointmentsUsersTable;
-use Appointments\Model\AppointmentsUsers;
+use Appointments\Model\ProviderTable;
+use Appointments\Model\Provider;
 
-use Zend\ServiceManager\ServiceLocatorInterface;
-
-class AppointmentsUsersTableFactory implements FactoryInterface
-{   
-   public function createService(ServiceLocatorInterface $serviceLocator)
-        {
-            $db = $serviceLocator->get('Zend\Db\Adapter\Adapter');
-            $resultSetPrototype =new HydratingResultSet();
-            $resultSetPrototype->setHydrator(new ObjectProperty());
-            $resultSetPrototype->setObjectPrototype(new AppointmentsUsers());
-            $tableGateway = new TableGateway('appointments_users', $db, null, $resultSetPrototype);
-            $table = new AppointmentsUsersTable($tableGateway);
-            return $table;
-        }
+class ProviderTableFactory implements FactoryInterface
+{
 
 	/**
 	* Invoke
@@ -46,10 +34,9 @@ class AppointmentsUsersTableFactory implements FactoryInterface
 		$db = $serviceManager->get('Zend\Db\Adapter\Adapter');
 		$resultSetPrototype = new HydratingResultSet();
 		$resultSetPrototype->setHydrator(new ObjectProperty());
-		$resultSetPrototype->setObjectPrototype(new AppointmentsUsers($db));
-		$tableGateway = new TableGateway('appointments_users',$db,null,$resultSetPrototype);
-		$table = new AppointmentsUsersTable($tableGateway);
+		$resultSetPrototype->setObjectPrototype(new Provider($db));
+		$tableGateway = new TableGateway('provider',$db,null,$resultSetPrototype);
+		$table = new ProviderTable($tableGateway);
 		return $table;
 	}
-	
 }

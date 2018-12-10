@@ -10,11 +10,12 @@
 */
 
 namespace Appointments\Factory\Form;
+
 use Zend\ServiceManager\Factory\FactoryInterface;
 use Interop\Container\ContainerInterface;
-use Appointments\Form\AppointmentsPhoneForm;
+use Appointments\Form\ProviderServicesForm;
 
-class AppointmentsPhoneFormFactory implements FactoryInterface
+class ProviderServicesFormFactory implements FactoryInterface
 {
 
     /**
@@ -24,7 +25,7 @@ class AppointmentsPhoneFormFactory implements FactoryInterface
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
         $fem = $container->get('FormElementManager');
-        $form = new AppointmentsPhoneForm();
+        $form = new ProviderServicesForm();
         $form->getFormFactory()->setFormElementManager($fem);
         $form->setServiceManager($container->get('ServiceManager'));
         return $form;
