@@ -17,3 +17,4 @@ return [
   'Stonelink\Model\KenyaMaps2015HealthFacilitiesTable' => 'Stonelink\Factory\Model\KenyaMaps2015HealthFacilitiesTableFactory',
   'Stonelink\Model\ProviderTable' => 'Stonelink\Factory\Model\ProviderTableFactory'
 ];
+

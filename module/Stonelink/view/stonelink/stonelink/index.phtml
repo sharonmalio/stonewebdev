@@ -1,5 +1,5 @@
 
-<input id="pac-input" class="controls" type="text" placeholder="Search Box">
+<input style = "font-family: Serif; "id="pac-input" class="controls" type="text" placeholder="Search nearby hospitals">
 <script>
 function initMap() {
 	var myLatLng = {lat: -1.2921, lng: 36.8219};
@@ -9,58 +9,9 @@ function initMap() {
 };
 var map = new google.maps.Map(document.getElementById("mapid"),
 	            mapProp);
-var infoWindow;
 
 var infoWindow = new google.maps.InfoWindow({map: map});
-    // Create the search box and link it to the UI element.
-     var input = document.getElementById('pac-input');
-    var searchBox = new google.maps.places.SearchBox(input,
-    	     {bounds: myLatLng});
-   map.controls[google.maps.ControlPosition.TOP_RIGHT].push(input);
-
-//     // Bias the SearchBox results towards current map's viewport.
-    map.addListener('bounds_changed', function() {
-     searchBox.setBounds(map.getBounds());
-     });
-    var markers = [];
-    // Listen for the event fired when the user selects a prediction and retrieve
-    // more details for that place.
-    searchBox.addListener('places_changed', function() {
-      var places = searchBox.getPlaces();
-      if (places.length == 0) {
-        return;
-      }
-      // Clear out the old markers.
-      markers.forEach(function(marker) {
-        marker.setMap(null);
-      });
-      markers = [];
-
-      // For each place, get the icon, name and location.
-      
-      var bounds = new google.maps.LatLngBounds();
-      places.forEach(function(place) {
-        if (!place.geometry) {
-          console.log("Returned place contains no geometry");
-          return;
-        }
-        // Create a marker for each place.
-        markers.push(new google.maps.Marker({
-          map: map,
-          icon: image,
-          title: place.name,
-          position: place.geometry.location
-        }));
-
-        if (place.geometry.viewport) {
-          // Only geocodes have viewport.
-          bounds.union(place.geometry.viewport);
-        } else {
-          bounds.extend(place.geometry.location);
-        }
-      });
-      map.fitBounds(bounds);
-    });
+   
 
 //var map=new google.maps.Map(document.getElementById("mapid"),mapProp);
 
@@ -163,4 +114,4 @@ function closeNav() {
 <div id="mapid" class="mt-0" ></div>
 <script async defer
 src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHj5_T9nC7gQrQbdHyY1MAbck6lxLuJDk&libraries=places&callback=initMap">
-</script>
+async defer</script>

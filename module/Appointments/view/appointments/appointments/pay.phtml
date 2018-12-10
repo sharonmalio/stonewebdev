@@ -1,0 +1,49 @@
+<div id="form" class="margin" ></div>
+
+<?php
+$title = 'Appointment';
+$this->headTitle($title);
+
+?>
+<head>
+<div style = "color: black; font-size:30px; text-align: center;">Please pay to confirm your Appointment</div>
+</head>
+
+<?php
+
+$form->setAttribute('action', $this->url('appointments', ['appointments' => 'pay'
+]));
+
+$form->prepare();
+
+$phone_number = $form->get('phone_number');
+$phone_number->setAttribute('class', 'form-control');
+$phone_number->setAttribute('placeholder', 'Phone Number');
+
+// This provides CSS classes for the submit button:
+$submit = $form->get('submit');
+$submit->setAttribute('class', 'btn btn-primary');
+
+echo $this->form()->openTag($form);
+?>
+
+<div class="form-group">
+    <?= $this->formLabel($phone_number) ?>
+    <?= $this->formElement($phone_number) ?>
+    <?= $this->formElementErrors()->render($phone_number, ['class' => 'help-block']) ?>
+</div>
+
+<?php
+echo $this->formSubmit($submit);
+
+echo $this->form()->closeTag();
+?>
+<script>
+function openNav() {
+    document.getElementById("mySidenav").style.width = "200px";
+}
+/* Set the width of the side navigation to 0 */
+function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+}
+</script>

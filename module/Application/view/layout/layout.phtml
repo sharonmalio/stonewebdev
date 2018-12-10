@@ -43,6 +43,7 @@
                 </div>
             </div>
         </nav>
+        
         <div class="container">
             <?= $this->content ?>
             <hr>
@@ -52,4 +53,12 @@
         </div>
         <?= $this->inlineScript() ?>
     </body>
+    <script type="text/javascript">//for the nav bar
+function openNav() {
+	    document.getElementById("mySidenav").style.width = "200px";
+	}
+	/* Set the width of the side navigation to 0 */
+function closeNav() {
+	    document.getElementById("mySidenav").style.width = "0";
+	}</script>
 </html>

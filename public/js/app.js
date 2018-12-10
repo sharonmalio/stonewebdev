@@ -8,3 +8,6 @@ if ('serviceWorker' in navigator) {
         });
     });
 }
+//navigator.serviceWorker && navigator.serviceWorker.register('/worker.js').then(function(registration) {
+//	  console.log('Excellent, registered with scope: ', registration.scope);
+//	});

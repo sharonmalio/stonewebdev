@@ -1,0 +1,101 @@
+<div id="form" class="margin" ></div>
+
+<?php
+$title = 'Service';
+$this->headTitle($title);
+?>
+<head>
+<div style = "color: black; font-size:30px; text-align: center;">Enter Person Details</div>
+</head>
+<?php
+
+$form->setAttribute('action', $this->url('appointments/provider', ['action' => 'addproviderservices'
+]));
+
+$form->prepare();
+
+$service_name = $form->get('service_name');
+$service_name->setAttribute('class', 'form-control');
+$service_name->setAttribute('placeholder', 'Service Name');
+$service_name->setAttribute('type', 'required');
+
+$provider_name = $form->get('provider_id');
+$provider_name->setAttribute('class', 'form-control');
+$provider_name->setAttribute('placeholder', 'Provider Name');
+
+$duration = $form->get('duration');
+$duration->setAttribute('class', 'form-control');
+$duration->setAttribute('placeholder', 'Duration');
+
+$price = $form->get('price');
+$price->setAttribute('class', 'form-control');
+$price->setAttribute('placeholder', 'Service cost');
+
+$currency = $form->get('currency');
+$currency->setAttribute('class', 'form-control');
+$currency->setAttribute('placeholder', 'Price currency ');
+
+$description = $form->get('description');
+$description->setAttribute('class', 'form-control');
+$description->setAttribute('placeholder', 'Description ');
+// This provides CSS classes for the submit button:
+$submit = $form->get('submit');
+$submit->setAttribute('class', 'btn btn-primary');
+
+echo $this->form()->openTag($form);
+?>
+
+<div class="form-group">
+    <?= $this->formLabel($service_name) ?>
+    <?= $this->formElement($service_name) ?>
+    <?= $this->formElementErrors()->render($service_name, ['class' => 'help-block']) ?>
+</div>
+
+	<div class="form-group">
+    <?= $this->formLabel($provider_name) ?>
+    <?= $this->formElement($provider_name) ?>
+    <?= $this->formElementErrors()->render($provider_name, ['class' => 'help-block']) ?>
+</div>
+
+
+	<div class="form-group">
+    <?= $this->formLabel($duration) ?>
+    <?= $this->formElement($duration) ?>
+    <?= $this->formElementErrors()->render($duration, ['class' => 'help-block']) ?>
+</div>
+
+	<div class="form-group">
+    <?= $this->formLabel($price) ?>
+    <?= $this->formElement($price) ?>
+    <?= $this->formElementErrors()->render($price, ['class' => 'help-block']) ?>
+
+
+
+	<div class="form-group">
+    <?= $this->formLabel($currency) ?>
+    <?= $this->formElement($currency) ?>
+    <?= $this->formElementErrors()->render($currency, ['class' => 'help-block']) ?>
+    
+    
+	<div class="form-group">
+    <?= $this->formLabel($description) ?>
+    <?= $this->formElement($description) ?>
+    <?= $this->formElementErrors()->render($description, ['class' => 'help-block']) ?>
+    
+  
+
+
+<?php
+echo $this->formSubmit($submit);
+
+echo $this->form()->closeTag();
+?>
+<script>
+function openNav() {
+    document.getElementById("mySidenav").style.width = "200px";
+}
+/* Set the width of the side navigation to 0 */
+function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+}
+</script>

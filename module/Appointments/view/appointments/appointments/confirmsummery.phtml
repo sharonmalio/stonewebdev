@@ -1,0 +1,39 @@
+<head>
+<div style = "color: black; font-size:30px; text-align: center;">Please confirm the details</div>
+</head>
+
+<?php 
+$form -> prepare();
+?>
+<div style = "text-align:center">
+<?php 
+$submit = $form->get('submit');
+$submit->setAttribute('class', 'btn btn-primary');
+?>
+
+<div><b>Name</b>: Sharon Malio</div>
+<div><b>Date/Time</b>: 13th, November 2018</div>
+<div><b>Service</b>: Skin Allergies</div>
+<div><b>Provider</b>: Sharon Malio</div>
+<div><b>Amount</b>: Ksh.30</div>
+
+
+
+
+
+<?php
+echo $this->formSubmit($submit);
+
+echo $this->form()->closeTag();
+?>
+
+</div>
+<script>
+function openNav() {
+    document.getElementById("mySidenav").style.width = "200px";
+}
+/* Set the width of the side navigation to 0 */
+function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+}
+</script>

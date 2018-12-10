@@ -1,0 +1,61 @@
+<div id="form" class="margin" ></div>
+
+<?php
+$title = 'Appointment';
+$this->headTitle($title);
+?>
+<head>
+<div style = "color: black; font-size:30px; text-align: center;">Enter Person Details</div>
+</head>
+<?php
+
+$form->setAttribute('action', $this->url('appointments', ['appointments' => 'selectserviceprovider'
+]));
+
+$form->prepare();
+
+$service = $form->get('service');
+$service->setAttribute('class', 'form-control');
+$service->setAttribute('placeholder', 'Service');
+
+
+$provider = $form->get('provider');
+$provider->setAttribute('class', 'form-control');
+$provider->setAttribute('placeholder', 'provider');
+
+
+// This provides CSS classes for the submit button:
+$submit = $form->get('submit');
+$submit->setAttribute('class', 'btn btn-primary');
+
+echo $this->form()->openTag($form);
+?>
+
+<div class="form-group">
+    <?= $this->formLabel($service) ?>
+    <?= $this->formElement($service) ?>
+    <?= $this->formElementErrors()->render($service, ['class' => 'help-block']) ?>
+</div>
+
+	<div class="form-group">
+    <?= $this->formLabel($provider) ?>
+    <?= $this->formElement($provider) ?>
+    <?= $this->formElementErrors()->render($provider, ['class' => 'help-block']) ?>
+</div>
+
+
+
+<?php
+echo $this->formSubmit($submit);
+
+echo $this->form()->closeTag();
+?>
+<script>
+function openNav() {
+    document.getElementById("mySidenav").style.width = "200px";
+}
+/* Set the width of the side navigation to 0 */
+function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+}
+</script>

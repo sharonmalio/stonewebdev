@@ -8,7 +8,6 @@ use Zend\ServiceManager\ServiceLocatorInterface;
 
 class ProvidersControllerFactory implements FactoryInterface
 {
-
 	/**
 	* Create service
 	*
@@ -26,6 +25,7 @@ class ProvidersControllerFactory implements FactoryInterface
 	{
 		$serviceManager = $serviceLocator->getServiceLocator();
 		$controller = new ProvidersController();
+		$controller->setServiceManager($serviceManager);
 		return $controller;
 	}
    

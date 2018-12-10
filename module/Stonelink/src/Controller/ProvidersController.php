@@ -36,21 +36,31 @@ class ProvidersController extends AbstractActionController
     
     public function indexAction()
     {
+       
         \ini_set('max_execution_time', 3600);
         \ini_set('memory_limit', '10000M');
+        
         $stonelinkService=$this->serviceManager->get('Stonelink\Service\Stonelink');
         $currPage=347;
+   
         for ($i=1;$i<=$currPage;$i++){
             $pagecontent = file_get_contents('http://medicalboard.co.ke/online-services/retention/?currpage='. $i);
-            $doc = new \DOMDocument();
+         
+            $doc = new \DOMDocument('1.0', 'UTF-8');
+            $internalErrors = libxml_use_internal_errors(true);
+          
             $doc->loadHTML($pagecontent);
+            libxml_use_internal_errors($internalErrors);
+           
             $x = new \DOMXPath($doc);
             $someArray=array();
+           
             foreach($x->query('//tr/td') as $td){
                 $stringToBeReplaced=trim(strip_tags($td->C14N()));
                 $someArray[]= $stringToBeReplaced;
                 $splitArray=array_chunk($someArray, 8);
             }
+           
             foreach ($splitArray as $provider){
                 $provider['name']=$provider[0];
                 $provider['reg_date']=$provider[1];
@@ -59,16 +69,18 @@ class ProvidersController extends AbstractActionController
                 $provider['qualifications']=$provider[4];
                 $provider['specialty']=$provider[5];
                 $provider['sub_specialty']=$provider[6];
-                
+               
                 $doctor = array_slice($provider, 8);
                 $providerModel=new Provider();
                 $providerModel->exchangeArray($doctor);
+                
                 // This is where you will pick each record and save to providers table
                 $stonelinkService->getProviderTable()->saveProvider($providerModel);
+               
                 // \Zend\Debug\Debug::dump($doctor);
             }
         }
-
+      
        // $splitArray=array_chunk($someArray, 8);
         
       //  exit;
