@@ -32,17 +32,22 @@ class Appointments
     {
         return $this->serviceManager->get('Appointments\Model\ProviderTable');
     }
+
     public function fetchProviderNames()
     {
         $data = $this->getProviderTable()->fetchAll();
         $selectData = [
-            
-            ''=>''
+            '' => ''
         ];
-        foreach ($data as $selectOption){
-            $selectData [$selectOption->provider_id] = $selectOption->name;
+        foreach ($data as $selectOption) {
+            $selectData[$selectOption->provider_id] = $selectOption->name;
         }
         ksort($selectData);
         return $selectData;
+    }
+
+    public function getAppntHealthFacilityTable()
+    {
+        return $this->serviceManager->get('Appointments\Model\AppntHealthFacilityTable');
     }
 }

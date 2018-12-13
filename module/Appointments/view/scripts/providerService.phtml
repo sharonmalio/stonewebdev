@@ -1,0 +1,42 @@
+<?php /* @var $this \Zend\View\Renderer\PhpRenderer */?>
+<script>
+
+function openNav() {
+    document.getElementById("mySidenav").style.width = "200px";
+}
+/* Set the width of the side navigation to 0 */
+function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+}
+
+function showPractitioner(practitioner_div){
+    if(practitioner_div)
+    {
+         $("#provider").show();
+         $("#facility").hide();
+    }
+    else
+    {
+         $("#provider").hide();
+         $("#facility").show();
+    }
+}
+
+function searchAppntHealthFacility(obj){
+	var id = obj.name;
+	var term = $('#'+id).val();
+	var url = "<?php echo $this->basePath()?>/appointments/search/fetchhealthfacility?term="+term;
+	console.log(term);
+	var len = term.length;
+	
+	if (len>0){
+		$(function() {
+		    $("#"+id).autocomplete({
+		        source: url,
+		    });
+		});
+		}
+	
+}
+
+</script>

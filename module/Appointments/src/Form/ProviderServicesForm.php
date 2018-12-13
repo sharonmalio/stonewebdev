@@ -28,6 +28,7 @@ class ProviderServicesForm extends Form
         $this->setAttribute('id', 'providerservicesform');
         $this->setAttribute('method', 'post');
         $appointmentService = $this->serviceManager->get('Appointments\Service\Appointments');
+        
         $this->add([
             'name' => 'provider_service_id',
             'type' => 'hidden'

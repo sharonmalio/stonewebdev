@@ -51,9 +51,9 @@ class AppointmentsController extends AbstractActionController
                 // Inserting appointment data in the database table
               $user_id = $appointmentsTable->saveAppointmentsUsers($appointment);
               
-                return $this->redirect()->toRoute('appointments/appointments', array(
+                return $this->redirect()->toRoute('appointments/appointments', [
                     'action'=>'selectserviceprovider'
-                ));
+                ]);
             } else {
 
                 return [
@@ -69,13 +69,14 @@ class AppointmentsController extends AbstractActionController
 
     public function selectserviceproviderAction()
     {
-        
+      
         $formElementManager = $this->serviceManager->get('FormElementManager');
-        $form = $formElementManager->get('Appointments\Form\AppointmentsServiceProviderForm');
-       // $appointmentsTable = $this->serviceManager->get('Appointments\Model\AppointmentsUsersTable');
+       // $this->ControllerNav()->initializeNav();
         return [
             'form' => $formElementManager->get('Appointments\Form\AppointmentsServiceProviderForm')
         ];
+        echo "testing";
+        exit;
     }
 
     public function configurecalendarAction()
