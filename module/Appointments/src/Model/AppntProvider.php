@@ -6,7 +6,7 @@
 * @copyright Copyright (c) 2009-2018 Afya Research Africa Inc. (http://www.afyaresearch.org)
 * @license   http://stonehmis.afyaresearch.org/license/options License Options
 * @author    smalio
-* @since     10-12-2018
+* @since     14-12-2018
 */
 
 namespace Appointments\Model;
@@ -17,39 +17,44 @@ use Zend\InputFilter\InputFilterAwareInterface;
 use Zend\InputFilter\InputFilterInterface;
 use Zend\Db\Adapter\Adapter;
 
-class ProviderServices implements InputFilterAwareInterface
+class AppntProvider implements InputFilterAwareInterface
 {
 
-	public $provider_service_id;
+	public $appnt_provider_id;
 
-	public $service_name;
+	public $name;
 
-	public $duration;
+	public $reg_date;
 
-	public $price;
+	public $reg_number;
 
-	public $currency;
+	public $address;
 
-	public $description;
+	public $qualifications;
 
-	public $provider_id;
+	public $specialty;
+
+	public $sub_specialty;
 
     protected $inputFilter;
 
-    protected $providerServicesTable;
+    protected $appntProviderTable;
 
-    protected $tableName = 'provider_services';
+    protected $tableName = 'appnt_provider';
 
+
+   
 
 	public function exchangeArray($data)
 	{
-		$this->provider_service_id=(isset($data['provider_service_id'])) ? $data['provider_service_id'] : null;
-		$this->service_name=(isset($data['service_name'])) ? $data['service_name'] : null;
-		$this->duration=(isset($data['duration'])) ? $data['duration'] : null;
-		$this->price=(isset($data['price'])) ? $data['price'] : null;
-		$this->currency=(isset($data['currency'])) ? $data['currency'] : null;
-		$this->description=(isset($data['description'])) ? $data['description'] : null;
-		$this->provider_id=(isset($data['provider_id'])) ? $data['provider_id'] : null;
+		$this->appnt_provider_id=(isset($data['appnt_provider_id'])) ? $data['appnt_provider_id'] : null;
+		$this->name=(isset($data['name'])) ? $data['name'] : null;
+		$this->reg_date=(isset($data['reg_date'])) ? $data['reg_date'] : null;
+		$this->reg_number=(isset($data['reg_number'])) ? $data['reg_number'] : null;
+		$this->address=(isset($data['address'])) ? $data['address'] : null;
+		$this->qualifications=(isset($data['qualifications'])) ? $data['qualifications'] : null;
+		$this->specialty=(isset($data['specialty'])) ? $data['specialty'] : null;
+		$this->sub_specialty=(isset($data['sub_specialty'])) ? $data['sub_specialty'] : null;
 	}
 
 
@@ -73,7 +78,7 @@ class ProviderServices implements InputFilterAwareInterface
 			$inputFilter = new InputFilter();
 
 			$inputFilter->add(array(
-				'name'     => 'provider_service_id',
+				'name'     => 'appnt_provider_id',
 				'required' => false,
 				'filters'  => array(
 					array('name' => 'StripTags'),
@@ -82,7 +87,7 @@ class ProviderServices implements InputFilterAwareInterface
 			));
 
 			$inputFilter->add(array(
-				'name'     => 'service_name',
+				'name'     => 'name',
 				'required' => false,
 				'filters'  => array(
 					array('name' => 'StripTags'),
@@ -91,7 +96,7 @@ class ProviderServices implements InputFilterAwareInterface
 			));
 
 			$inputFilter->add(array(
-				'name'     => 'duration',
+				'name'     => 'reg_date',
 				'required' => false,
 				'filters'  => array(
 					array('name' => 'StripTags'),
@@ -100,7 +105,7 @@ class ProviderServices implements InputFilterAwareInterface
 			));
 
 			$inputFilter->add(array(
-				'name'     => 'price',
+				'name'     => 'reg_number',
 				'required' => false,
 				'filters'  => array(
 					array('name' => 'StripTags'),
@@ -109,7 +114,7 @@ class ProviderServices implements InputFilterAwareInterface
 			));
 
 			$inputFilter->add(array(
-				'name'     => 'currency',
+				'name'     => 'address',
 				'required' => false,
 				'filters'  => array(
 					array('name' => 'StripTags'),
@@ -118,7 +123,7 @@ class ProviderServices implements InputFilterAwareInterface
 			));
 
 			$inputFilter->add(array(
-				'name'     => 'description',
+				'name'     => 'qualifications',
 				'required' => false,
 				'filters'  => array(
 					array('name' => 'StripTags'),
@@ -127,7 +132,16 @@ class ProviderServices implements InputFilterAwareInterface
 			));
 
 			$inputFilter->add(array(
-				'name'     => 'provider_id',
+				'name'     => 'specialty',
+				'required' => false,
+				'filters'  => array(
+					array('name' => 'StripTags'),
+					array('name' => 'StringTrim'),
+				),
+			));
+
+			$inputFilter->add(array(
+				'name'     => 'sub_specialty',
 				'required' => false,
 				'filters'  => array(
 					array('name' => 'StripTags'),

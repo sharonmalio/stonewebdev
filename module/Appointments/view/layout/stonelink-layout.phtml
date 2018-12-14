@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
-
+<?php /* @var $this \Zend\View\Renderer\PhpRenderer */?>
 <head>
 
 <meta charset="utf-8">
@@ -30,39 +30,30 @@
 	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
 <!-- Le styles -->
-        <?=$this->headLink(['rel' => 'shortcut icon','type' => 'image/vnd.microsoft.icon','href' => $this->basePath() . '/img/favicon.ico'])
-        ->prependStylesheet($this->basePath('css/bootstrap-theme.min.css'))
-        ->prependStylesheet($this->basePath('css/bootstrap.min.css'))
-        
-        ->prependStylesheet($this->basePath('css/style.css'))
-        ->prependStylesheet($this->basePath('js/jquery-ui/jquery-ui.css'))
-       ?>
+        <?=$this->headLink(['rel' => 'shortcut icon','type' => 'image/vnd.microsoft.icon','href' => $this->basePath() . '/img/favicon.ico'])->prependStylesheet($this->basePath('css/bootstrap-theme.min.css'))->prependStylesheet($this->basePath('css/bootstrap.min.css'))->prependStylesheet($this->basePath('css/style.css'))->prependStylesheet($this->basePath('js/jquery-ui/jquery-ui.css'))?>
         
        
         <!-- Scripts -->
-        <?=$this->headScript()->prependFile($this->basePath('js/bootstrap.min.js'))
-        ->prependFile($this->basePath('js/jquery-ui/jquery-ui.min.js'))
-        ->prependFile($this->basePath('js/jquery-3.1.0.min.js'))
-        ->prependFile($this->basePath('js/app.js'))
-        ?>
+        <?=$this->headScript()->prependFile($this->basePath('js/bootstrap.min.js'))->prependFile($this->basePath('js/jquery-ui/jquery-ui.min.js'))->prependFile($this->basePath('js/jquery-3.1.0.min.js'))->prependFile($this->basePath('js/app.js'))?>
 
     </head>
 
 <body class="html mt-0">
-<div class="margin"></div>
+	<div class="margin"></div>
 <?= $this->doctype() ?>
 <nav class="navbar navbar-color navbar-fixed-top " role="navigation">
 		<div class="container">
 			<div class="sidenav " id="mySidenav">
-				<a href="javascript:void(0)"  style="padding:10px 3px 10px 3px;display:inline:block;margin-bottom: 10px; padding: 15px;color: black; font-size: 30px; margin-left: 150px;" onclick="closeNav()">&times;</a>
+				<a href="javascript:void(0)"
+					style="padding: 10px 3px 10px 3px; display: inline:block; margin-bottom: 10px; padding: 15px; color: black; font-size: 30px; margin-left: 150px;"
+					onclick="closeNav()">&times;</a>
 				<ul class="  navbar-nav">
 					<li class="active"><a
 						href="<?=$this->url('stonelink/stonelink', array('action' => 'index'));?>">View
 							Hopitals</a></li>
 				</ul>
 				<ul class="navbar-nav ">
-					<li class="active"><a
-						href="//easyappointments.localhost/index.php">Book
+					<li class="active"><a href="//easyappointments.localhost/index.php">Book
 							Appointment</a></li>
 				</ul>
 				<ul class=" navbar-nav ">
@@ -76,7 +67,7 @@
 							Clinic </a></li>
 				</ul>
 
-			
+
 			</div>
 			<span class="navbar-left navbar-sticks" onclick="openNav()">&#9776;</span>
 

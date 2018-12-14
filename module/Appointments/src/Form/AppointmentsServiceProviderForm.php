@@ -31,33 +31,26 @@ class AppointmentsServiceProviderForm extends Form
 
         $this->add([
             'name' => 'service',
-            'type' => 'Zend\Form\Element\Select',
+            'type' => 'Zend\Form\Element\Text',
             'attributes' => [
-                'id' => 'service'
+                'id' => 'service',
+                'onchange'=>'searchAppntProviderService(this)'
             ],
             'options' => [
-                'label' => 'Please select the service you need',
-                'value_options' => [
-                    ''=>'',
-                    '0' => 'Skin services ',
-                    '1' => 'Cancer',
-                    '2' => 'Gyn',
-                    '3' => 'Head'
+                'label' => 'Start typing the name of the service',
                 ]
-            ]
-        ]);
+            ]);
 
 
         $this->add([
             'name' => 'provider',
-            'type' => 'Zend\Form\Element\Select',
+            'type' => 'Zend\Form\Element\Text',
             'attributes' => [
                 'id' => 'provider',
-                'class' =>'provider',
-                'onchange'=>'searchAppntHealthFacility(this)'
+                'onchange'=>'searchAppntProvider(this)'
             ],
             'options' => [
-               'label' => 'Start typing the name of your provider',
+               'label' => 'Start typing the name of the provider',
                
             ]
         ]);
@@ -67,17 +60,19 @@ class AppointmentsServiceProviderForm extends Form
             'type' => 'Zend\Form\Element\Text',
             'attributes' => [
                 'id' => 'facility',
-                'class' =>'facility',
-                'onchange'=>'searchAppntHealthFacility(this)'
+                'onchange'=>'searchAppntHealthFacility(this)',
             ],
             'options' => [
-                'label' => 'Start typing the name of your facility',
+                'label' => 'Start typing the name of the facility',
             ]
         ]);
 
         $this->add([
             'name' => 'comments',
             'type' => 'text',
+            'attributes' => [
+                'id' => 'comments',
+            ],
             'options' => [
                 'label' => 'Add comments'
             ]

@@ -13,7 +13,7 @@ namespace Appointments\Form;
 use Zend\Form\Form;
 use Zend\ServiceManager\ServiceManager;
 
-class ProviderServicesForm extends Form
+class AppntProviderServiceForm extends Form
 {
 
     /**
@@ -27,10 +27,9 @@ class ProviderServicesForm extends Form
         $this->setName('providerservicesform');
         $this->setAttribute('id', 'providerservicesform');
         $this->setAttribute('method', 'post');
-        $appointmentService = $this->serviceManager->get('Appointments\Service\Appointments');
         
         $this->add([
-            'name' => 'provider_service_id',
+            'name' => 'appnt_provider_service_id',
             'type' => 'hidden'
         ]);
 
@@ -50,7 +49,12 @@ class ProviderServicesForm extends Form
             'type' => 'Zend\Form\Element\Select',
             'options' => [
                 'label' => 'Provider',
-                'value_options' => $appointmentService->fetchProviderNames(),
+                'value_options' => [
+                    '1' => 'sharon ',
+                    '2' => 'malio ',
+                    '3' => 'kanini ',
+                    '4' => 'lydia ',
+                ],
                 'attributes' => [
                     'required' => true
                 ]

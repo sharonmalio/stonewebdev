@@ -1,18 +1,17 @@
 <?php
+namespace Appointments\Controller;
+
 /**
  * StoneHMIS (http://stonehmis.afyaresearch.org/)
  *
- * @link      http://github.com/stonehmis/stone for the canonical source repository
+ * @link http://github.com/stonehmis/stone for the canonical source repository
  * @copyright Copyright (c) 2009-2018 Afya Research Africa Inc. (http://www.afyaresearch.org)
- * @license   http://stonehmis.afyaresearch.org/license/options License Options
- * @author    smalio
- * @since     16-11-2018
+ * @license http://stonehmis.afyaresearch.org/license/options License Options
+ * @author smalio
+ * @since 16-11-2018
  */
-namespace Appointments\Controller;
-
 use Zend\Mvc\Controller\AbstractActionController;
-use Appointments\Model\ProviderServices;
-
+use Appointments\Model\AppntProviderService;
 class ProviderController extends AbstractActionController
 {
 
@@ -29,45 +28,39 @@ class ProviderController extends AbstractActionController
     public function addproviderservicesAction()
     {
         $formElementManager = $this->serviceManager->get('FormElementManager');
-
-        $form = $formElementManager->get('Appointments\Form\ProviderServicesForm');
-
-        $providerservicesTable = $this->serviceManager->get('Appointments\Model\ProviderServicesTable');
-
+        $form = $formElementManager->get('Appointments\Form\AppntProviderServiceForm');
+        $appntProviderServiceTable = $this->serviceManager->get('Appointments\Model\AppntProviderServiceTable');
         // instantiate AppointmentForm and set the label on the submit button to "Add"
         // $form = new AppointmentsUsersForm();
         $form->get('submit')->setValue('Add');
-
+        
         // If the request is not a POST request, then no form data has been
         // submitted, and we need to display the form
         $request = $this->getRequest();
-        // echo $request->isPost();
-        // exit();
+        
         if ($request->isPost()) {
-
-            $providerService = new ProviderServices();
-
+            $appointment = new AppntProviderService();
             $form->setData($request->getPost());
-
-            $form->setInputFilter($providerService->getInputFilter());
-
+            $form->setInputFilter($appointment->getInputFilter());
+            
             if ($form->isValid()) {
-                $providerService->exchangeArray($form->getData());
-                // Inserting appointment data in the database table
-                $user_id = $providerservicesTable->saveProviderServices($providerService);
-
-                // return $this->redirect()->toRoute('appointments/appointments', array(
-                // 'action' => 'selectserviceprovider'
-                // ));
+                $appointment->exchangeArray($form->getData());
+                // Inserting service data in the database table
+                $appntProviderServiceTable->saveAppntProviderService($appointment);
+                
+                return $this->redirect()->toRoute('appointments/appointments', [
+                    'action'=>'selectserviceprovider'
+                ]);
             } else {
-
+                
                 return [
                     'form' => $form
                 ];
             }
         }
+        $formElementManager = $this->serviceManager->get('FormElementManager');
         return [
-            'form' => $form
+            'form' => $formElementManager->get('Appointments\Form\AppointmentsServiceProviderForm')
         ];
     }
 }

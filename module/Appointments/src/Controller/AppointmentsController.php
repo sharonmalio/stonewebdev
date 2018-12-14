@@ -49,7 +49,7 @@ class AppointmentsController extends AbstractActionController
             if ($form->isValid()) {
                 $appointment->exchangeArray($form->getData());
                 // Inserting appointment data in the database table
-              $user_id = $appointmentsTable->saveAppointmentsUsers($appointment);
+               $appointmentsTable->saveAppointmentsUsers($appointment);
               
                 return $this->redirect()->toRoute('appointments/appointments', [
                     'action'=>'selectserviceprovider'
