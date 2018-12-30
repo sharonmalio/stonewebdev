@@ -9,9 +9,6 @@ $this->headTitle($title);
 </head>
 <?php
 
-$form->setAttribute('action', $this->url('appointments', ['appointments' => 'addpersondetails'
-]));
-
 $form->prepare();
 
 $first_name = $form->get('first_name');

@@ -56,23 +56,22 @@ function searchAppntProvider(objp){
 		}
 	
 }
-
-function searchAppntProviderService(objs){
-	var id = objs.name;
+function searchAppntProviderService(obj){
+	var id = obj.name;
 	var term = $('#'+id).val();
 	var url = "<?php echo $this->basePath()?>/appointments/search/fetchproviderservice?term="+term;
 	var len = term.length;
 	
 	if (len>0){
-    		$(function() {
-    		    $("#"+id).autocomplete({
-    		        delay: 0,
-    		    });
-    		    $("#"+id).autocomplete({
-    		        source: url,
-    		    });
-    		});
-		}
-	
+		$(function() {
+		    $("#"+id).autocomplete({
+		        delay: 0,
+		    });
+		    $("#"+id).autocomplete({
+		        source: url,
+		    });
+		    
+		});
+	}
 }
 </script>

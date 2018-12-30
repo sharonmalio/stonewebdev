@@ -140,7 +140,6 @@ class AppntHealthFacility implements InputFilterAwareInterface
         $this->dbAdapter = $adapter;
     }
 
-
 	public function exchangeArray($data)
 	{
 		$this->appnt_health_facility_id=(isset($data['appnt_health_facility_id'])) ? $data['appnt_health_facility_id'] : null;

@@ -14,7 +14,7 @@ namespace Appointments\Factory\Controller;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Interop\Container\ContainerInterface;
-use Appointments\Controller\ProviderController;
+use Appointments\Controller\AppntproviderController;
 
 class ProviderControllerFactory implements FactoryInterface
 {
@@ -27,7 +27,7 @@ class ProviderControllerFactory implements FactoryInterface
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
         $serviceManager = $container->get('ServiceManager');
-        $controller = new ProviderController();
+        $controller = new AppntproviderController();
         $controller->setServiceManager($serviceManager);
         return $controller;
     }
@@ -41,7 +41,7 @@ class ProviderControllerFactory implements FactoryInterface
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         $serviceManager = $serviceLocator->getServiceLocator();
-        $controller = new ProviderController();
+        $controller = new AppntproviderController();
         $controller->setServiceManager($serviceManager);
         return $controller;
     }

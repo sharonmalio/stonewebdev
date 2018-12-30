@@ -6,16 +6,20 @@
 * @copyright Copyright (c) 2009-2018 Afya Research Africa Inc. (http://www.afyaresearch.org)
 * @license   http://stonehmis.afyaresearch.org/license/options License Options
 * @author    smalio
-* @since     10-12-2018
+* @since     18-12-2018
 */
 
 namespace Appointments\Factory\Model;
 
 use Zend\ServiceManager\Factory\FactoryInterface;
+use Zend\Db\TableGateway\TableGateway;
+use Zend\Hydrator\ObjectProperty;
+use Zend\Db\ResultSet\HydratingResultSet;
 use Interop\Container\ContainerInterface;
-use Appointments\Model\AppntProviderService;
+use Appointments\Model\TestPhoneTable;
+use Appointments\Model\TestPhone;
 
-class ProviderServicesFactory implements FactoryInterface
+class TestPhoneTableFactory implements FactoryInterface
 {
 
 	/**
@@ -26,8 +30,13 @@ class ProviderServicesFactory implements FactoryInterface
 	*/
 	public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
 	{
-		$dbAdapter = $container->get('ServiceManager')->get('Zend\Db\Adapter\Adapter');
-		$model = new AppntProviderService($dbAdapter);
-		return $model;
+		$serviceManager = $container->get('ServiceManager');
+		$db = $serviceManager->get('Zend\Db\Adapter\Adapter');
+		$resultSetPrototype = new HydratingResultSet();
+		$resultSetPrototype->setHydrator(new ObjectProperty());
+		$resultSetPrototype->setObjectPrototype(new TestPhone($db));
+		$tableGateway = new TableGateway('test_phone',$db,null,$resultSetPrototype);
+		$table = new TestPhoneTable($tableGateway);
+		return $table;
 	}
 }

@@ -3,8 +3,8 @@ namespace Appointments;
 
 use Zend\Router\Http\Segment;
 use Appointments\Controller\AppointmentsController;
-use Appointments\Controller\ProviderController;
 use Appointments\Controller\SearchController;
+use Appointments\Controller\AppntproviderController;
 return [
     'router' => [
         'routes' => [
@@ -14,7 +14,7 @@ return [
                     'route' => '/appointments',
                     'defaults' => [
                         'controller' => AppointmentsController::class,
-                        'action' => 'addpersondetails'
+                        'action' => 'index'
                     ]
                 ],
                 'may_terminate' => true,
@@ -22,13 +22,13 @@ return [
                     'appointments' => [
                         'type' => 'segment',
                         'options' => [
-                            'route' => '/appointments/[:action]',
+                            'route' => '/appointments/[:action][/id/:id]',
                             'constraints' => [
                                 'action' => '[a-zA-Z][a-zA-Z0-9_-]*'
                             ],
                             'defaults' => [
                                 'controller' => AppointmentsController::class,
-                                'action' => 'addpersondetails'
+                                'action' => 'index'
                             ]
                         ]
                     ],
@@ -40,8 +40,8 @@ return [
                                 'action' => '[a-zA-Z][a-zA-Z0-9_-]*'
                             ],
                             'defaults' => [
-                                'controller' => ProviderController::class,
-                                'action' => 'addproviderservices'
+                                'controller' => AppntproviderController::class,
+                                'action' => 'index'
                             ]
                         ]
                     ],

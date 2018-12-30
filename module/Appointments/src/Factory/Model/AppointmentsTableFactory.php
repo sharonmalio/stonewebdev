@@ -6,7 +6,7 @@
 * @copyright Copyright (c) 2009-2018 Afya Research Africa Inc. (http://www.afyaresearch.org)
 * @license   http://stonehmis.afyaresearch.org/license/options License Options
 * @author    smalio
-* @since     10-12-2018
+* @since     30-12-2018
 */
 
 namespace Appointments\Factory\Model;
@@ -16,10 +16,10 @@ use Zend\Db\TableGateway\TableGateway;
 use Zend\Hydrator\ObjectProperty;
 use Zend\Db\ResultSet\HydratingResultSet;
 use Interop\Container\ContainerInterface;
-use Appointments\Model\AppntProviderServiceTable;
-use Appointments\Model\AppntProviderService;
+use Appointments\Model\AppointmentsTable;
+use Appointments\Model\Appointments;
 
-class ProviderServicesTableFactory implements FactoryInterface
+class AppointmentsTableFactory implements FactoryInterface
 {
 
 	/**
@@ -34,9 +34,9 @@ class ProviderServicesTableFactory implements FactoryInterface
 		$db = $serviceManager->get('Zend\Db\Adapter\Adapter');
 		$resultSetPrototype = new HydratingResultSet();
 		$resultSetPrototype->setHydrator(new ObjectProperty());
-		$resultSetPrototype->setObjectPrototype(new AppntProviderService($db));
-		$tableGateway = new TableGateway('provider_services',$db,null,$resultSetPrototype);
-		$table = new AppntProviderServiceTable($tableGateway);
+		$resultSetPrototype->setObjectPrototype(new Appointments($db));
+		$tableGateway = new TableGateway('appointments',$db,null,$resultSetPrototype);
+		$table = new AppointmentsTable($tableGateway);
 		return $table;
 	}
 }

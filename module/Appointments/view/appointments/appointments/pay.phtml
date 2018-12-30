@@ -1,6 +1,7 @@
 <div id="form" class="margin" ></div>
-
+<?php /* @var $this \Zend\View\Renderer\PhpRenderer */?>
 <?php
+
 $title = 'Appointment';
 $this->headTitle($title);
 
@@ -11,20 +12,20 @@ $this->headTitle($title);
 
 <?php
 
-$form->setAttribute('action', $this->url('appointments', ['appointments' => 'pay'
+$this->form->setAttribute('action', $this->url('appointments', ['appointments' => 'pay'
 ]));
 
-$form->prepare();
+$this->form->prepare();
 
-$phone_number = $form->get('phone_number');
+$phone_number = $this->form->get('phone_number');
 $phone_number->setAttribute('class', 'form-control');
 $phone_number->setAttribute('placeholder', 'Phone Number');
 
 // This provides CSS classes for the submit button:
-$submit = $form->get('submit');
+$submit = $this->form->get('submit');
 $submit->setAttribute('class', 'btn btn-primary');
 
-echo $this->form()->openTag($form);
+echo $this->form()->openTag($this->form);
 ?>
 
 <div class="form-group">

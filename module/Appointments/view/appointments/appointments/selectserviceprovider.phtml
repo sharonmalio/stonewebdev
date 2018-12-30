@@ -12,27 +12,26 @@ $this->headTitle($title);
 </head>
 <?php
 
-$this->form->setAttribute('action', $this->url('appointments', [
-    'appointments' => 'selectserviceprovider'
-]));
 
 $this->form->prepare();
+// $id = $this->form->get('appointment_id');
 
-$service = $this->form->get('service');
+$user = $this->form->get('appointments_users_id');
+
+
+// $date = $this->form->get('appointment_datetime');
+
+$status = $this->form->get('appointment_status');
+
+$service = $this->form->get('appnt_provider_service_id');
 $service->setAttribute('class', 'form-control');
 $service->setAttribute('placeholder', 'Service');
 
-// $practitioner_option = $this->form->get('practitioner_option');
-// $practitioner_option->setAttribute('class', 'btn btn-info btn-block');
-
-// $facility_option = $this->form->get('facility_option');
-// $facility_option->setAttribute('class', 'btn btn-info btn-block');
-
-$provider = $this->form->get('provider');
+$provider = $this->form->get('appnt_provider_id');
 $provider->setAttribute('class', 'form-control');
 $provider->setAttribute('placeholder', 'provider');
 
-$facility = $this->form->get('facility');
+$facility = $this->form->get('facility_code');
 $facility->setAttribute('class', 'form-control');
 $facility->setAttribute('placeholder', 'facility');
 
@@ -83,7 +82,8 @@ echo $this->form()->openTag($this->form);
 
 
 <?php
-
+echo $this->formHidden($user);
+echo $this->formHidden($status);
 echo $this->formSubmit($submit);
 
 echo $this->form()->closeTag();

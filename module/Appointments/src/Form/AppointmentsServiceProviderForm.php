@@ -25,15 +25,27 @@ class AppointmentsServiceProviderForm extends Form
         $this->setAttribute('method', 'post');
 
         $this->add([
-            'name' => 'services_id',
+            'name' => 'appointment_id',
+            'type' => 'Zend\Form\Element\Hidden'
+        ]);
+        $this->add([
+            'name' => 'appointments_users_id',
+            'type' => 'Zend\Form\Element\Hidden'
+        ]);
+        $this->add([
+            'name' => 'appointment_datetime',
+            'type' => 'Zend\Form\Element\Hidden'
+        ]);
+        $this->add([
+            'name' => 'appointment_status',
             'type' => 'Zend\Form\Element\Hidden'
         ]);
 
         $this->add([
-            'name' => 'service',
+            'name' => 'appnt_provider_service_id',
             'type' => 'Zend\Form\Element\Text',
             'attributes' => [
-                'id' => 'service',
+                'id' => 'appnt_provider_service_id',
                 'onchange'=>'searchAppntProviderService(this)'
             ],
             'options' => [
@@ -43,10 +55,10 @@ class AppointmentsServiceProviderForm extends Form
 
 
         $this->add([
-            'name' => 'provider',
+            'name' => 'appnt_provider_id',
             'type' => 'Zend\Form\Element\Text',
             'attributes' => [
-                'id' => 'provider',
+                'id' => 'appnt_provider_id',
                 'onchange'=>'searchAppntProvider(this)'
             ],
             'options' => [
@@ -56,10 +68,10 @@ class AppointmentsServiceProviderForm extends Form
         ]);
 
         $this->add([
-            'name' => 'facility',
+            'name' => 'facility_code',
             'type' => 'Zend\Form\Element\Text',
             'attributes' => [
-                'id' => 'facility',
+                'id' => 'facility_code',
                 'onchange'=>'searchAppntHealthFacility(this)',
             ],
             'options' => [

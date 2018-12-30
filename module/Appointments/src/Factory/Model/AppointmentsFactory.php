@@ -6,16 +6,16 @@
 * @copyright Copyright (c) 2009-2018 Afya Research Africa Inc. (http://www.afyaresearch.org)
 * @license   http://stonehmis.afyaresearch.org/license/options License Options
 * @author    smalio
-* @since     10-12-2018
+* @since     30-12-2018
 */
 
 namespace Appointments\Factory\Model;
 
 use Zend\ServiceManager\Factory\FactoryInterface;
 use Interop\Container\ContainerInterface;
-use Appointments\Model\AppntProviderService;
+use Appointments\Model\Appointments;
 
-class ProviderServicesFactory implements FactoryInterface
+class AppointmentsFactory implements FactoryInterface
 {
 
 	/**
@@ -27,7 +27,7 @@ class ProviderServicesFactory implements FactoryInterface
 	public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
 	{
 		$dbAdapter = $container->get('ServiceManager')->get('Zend\Db\Adapter\Adapter');
-		$model = new AppntProviderService($dbAdapter);
+		$model = new Appointments($dbAdapter);
 		return $model;
 	}
 }

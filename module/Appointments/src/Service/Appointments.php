@@ -52,4 +52,8 @@ class Appointments
     {
         return $this->serviceManager->get('Appointments\Model\AppntProviderServiceTable');
     }
+    public function getAppntMpesaPaymentTable()
+    {
+        return $this->serviceManager->get('Appointments\Model\AppntMpesaPaymentTable');
+    }
 }
