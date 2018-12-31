@@ -175,7 +175,8 @@ class AppointmentsTable
 			'appnt_provider_id'=>$appointments->appnt_provider_id,
 			'facility_code'=>$appointments->facility_code,
 			'appnt_provider_service_id'=>$appointments->appnt_provider_service_id,
-			'appointment_datetime'=>$appointments->appointment_datetime,
+			'appointment_date'=>$appointments->appointment_date,
+		    'appointment_time'=>$appointments->appointment_time,
 			'appointment_status'=>$appointments->appointment_status,
 		    'comments'=>$appointments->comments,
 			);

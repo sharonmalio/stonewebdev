@@ -14,7 +14,6 @@ namespace Appointments\Controller;
 use Appointments\Model\AppointmentsUsers;
 use Zend\Mvc\Controller\AbstractActionController;
 use Exception;
-use Appointments\Model\AppntProviderService;
 use Appointments\Model\Appointments;
 
 class AppointmentsController extends AbstractActionController
@@ -83,6 +82,7 @@ class AppointmentsController extends AbstractActionController
         $request = $this->getRequest();
         
         if ($request->isPost()){
+            
            // var_dump($request->getPost());exit;
             $serviceprovider=new Appointments();
             $form->setData($request->getPost());
@@ -110,18 +110,48 @@ class AppointmentsController extends AbstractActionController
 
     public function configurecalendarAction()
     {
+        $id=$this->params()->fromRoute('id');
+
         $formElementManager = $this->serviceManager->get('FormElementManager');
+        $form = $formElementManager->get('Appointments\Form\AppointmentsCalendarForm');
+        $appointmentsTable = $this->serviceManager->get('Appointments\Model\AppointmentsTable');
+        
+        $form->get('appointment_id')->setValue($id);
+        $request = $this->getRequest();
+        $appointmentdetails = $appointmentsTable->fetchRowset('appointment_id', $id);
+        if ($request->isPost()){
+//             var_dump($request->getPost('appointment_date'));exit;
+            $calendar=new Appointments();
+            $form->setData($request->getPost());
+            $form->setInputFilter($calendar->getInputFilter());
+            
+            if ($form->isValid()) {
+                
+                $appointmentdetails->appointment_date= $request->getPost('appointment_date');
+                $appointmentdetails->appointment_time= $request->getPost('appointment_time');
+                // Inserting appointment data in the database table
+                $appointmentsTable->saveAppointments($appointmentdetails);
+                
+                return $this->redirect()->toRoute('appointments/appointments', [
+                    'action' => 'confirmsummery',
+                    
+                ]);
+            } else {
+                return [
+                    'form' => $form
+                ];
+            }
+        }
         return [
-            'form' => $formElementManager->get('Appointments\Form\AppointmentsCalendarForm')
+            'form' =>$form,
         ];
+
     }
 
     public function confirmsummeryAction()
     {
-        $formElementManager = $this->serviceManager->get('FormElementManager');
-        return [
-            'form' => $formElementManager->get('Appointments\Form\AppointmentsCalendarForm')
-        ];
+    
+        
     }
 
     public function callback()
@@ -163,41 +193,29 @@ class AppointmentsController extends AbstractActionController
         $formElementManager = $this->serviceManager->get('FormElementManager');
         $form = $formElementManager->get('Appointments\Form\AppointmentsPhoneForm');
 
-        // $appointmentsTable = $this->serviceManager->get('Appointments\Model\AppointmentsUsersTable');
-        // instantiate AppointmentForm and set the label on the submit button to "Add"
-        // $form = new AppointmentsUsersForm();
-        $form->get('submit')->setValue('Add');
-
-        // If the request is not a POST request, then no form data has been
-        // submitted, and we need to display the form
         $request = $this->getRequest();
         
-        echo "training";
-        exit;
+    
         if ($request->isPost()) {
-           var_dump( $request->getPost());
-           exit;
+           
             header("Content-Type:application/json");
-            $phone = $form->get('phone_number');
-
-            // if(empty($phone)){echo "Please Enter the phone number in this format: 254722000000";}
-
+            $phone = $request->getPost('phone_number');
             $shortcode = '174379';
             $passkey = 'bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919';
             $consumerkey = "mxHfXZgmIrq6aGkm0D4UOUV3ECp4g1OI";
             $consumersecret = "4KmjMiOe0sIIcnZS";
-            $validationurl = "http://stonewebdev.localhost/mpesaapi/mpesa_validate";
-            $confirmationurl = "http://stonewebdev.localhost/mpesaapi/mpesa_confirm";
-
+            //$validationurl = "enteryourvalidationurlhere";
+            //$confirmationurl = "enteryourconfirmationurlhere";
+            
             /* testing environment, comment the below two lines if on production */
             $authenticationurl = 'https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials';
             $registerurl = 'https://sandbox.safaricom.co.ke/mpesa/c2b/v1/registerurl';
-
+            
             /* production un-comment the below two lines if you are in production */
             // $authenticationurl=’https://api.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials’;
             // $registerurl = ‘https://api.safaricom.co.ke/mpesa/c2b/v1/registerurl’;
             // $credentials = base64_encode($consumerkey . ':' . $consumersecret);
-
+            
             // Request headers
             $headers = array(
                 'Content-Type: application/json; charset=utf-8'
@@ -213,38 +231,17 @@ class AppointmentsController extends AbstractActionController
             // echo $result;
             $status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
             $result = json_decode($result);
-
+            
             $access_token = $result->access_token;
-            // var_dump($access_token);
+            var_dump($access_token);
+            exit;
             curl_close($ch);
-
-            // Register urls
-            $curl = curl_init();
-            curl_setopt($curl, CURLOPT_URL, $registerurl);
-            curl_setopt($curl, CURLOPT_HTTPHEADER, array(
-                'Content-Type:application/json',
-                'Authorization:Bearer ' . $access_token
-            ));
-            $curl_post_data1 = array(
-                // Fill in the request parameters with valid values
-                'ShortCode' => $shortcode,
-                'ResponseType' => 'Cancelled',
-                'ConfirmationURL' => $confirmationurl,
-                'ValidationURL' => $validationurl
-            );
-
-            $data_string = json_encode($curl_post_data1);
-            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($curl, CURLOPT_POST, true);
-            curl_setopt($curl, CURLOPT_POSTFIELDS, $data_string);
-            $curl_response1 = curl_exec($curl);
-            echo $curl_response1;
-            // done with registration
+            
             $date = time();
             $timestamp = date("Ymdhms", $date);
-
+            
             $password = base64_encode($shortcode . $passkey . $timestamp);
-
+            
             // echo $password;
             $transactiondesc = "Successful";
             $url = 'https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest';
@@ -254,8 +251,8 @@ class AppointmentsController extends AbstractActionController
                 'Content-Type:application/json',
                 'Authorization:Bearer ' . $access_token
             )); // setting custom header
-
-            $curl_post_data = [
+            
+            $curl_post_data = array(
                 // Fill in the request parameters with valid values
                 'BusinessShortCode' => $shortcode,
                 'Password' => $password,
@@ -265,25 +262,25 @@ class AppointmentsController extends AbstractActionController
                 'PartyA' => $phone,
                 'PartyB' => $shortcode,
                 'PhoneNumber' => $phone,
-                'CallBackURL' => 'http://stonewebdev.localhost/appointments/appointments/callback',
+                'CallBackURL' => 'https://710529a7.ngrok.io/appointments/appointments/callback',
                 'AccountReference' => 'Sharon',
                 'TransactionDesc' => $transactiondesc
-            ];
+            );
             // $CallbackURL = 'https://webhook.site/adca9f7a-5471-4464-b493-4d05251ec658';
             $data_string = json_encode($curl_post_data);
             curl_setopt($curlInitResult, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($curlInitResult, CURLOPT_POST, true);
             curl_setopt($curlInitResult, CURLOPT_POSTFIELDS, $data_string);
-
+            
             $curl_response = curl_exec($curlInitResult);
             print_r($curl_response);
             $file = 'http://easyappointments.localhost/messages.log';
             fopen($file, "r");
             $safResp = file_get_contents($file);
             $decoded = json_decode($safResp, true);
-
-            // $flatArray = new RecursiveIteratorIterator(new RecursiveArrayIterator($decoded));
-            $list = iterator_to_array($decoded, false);
+            
+            $flatArray = new \RecursiveIteratorIterator(new \RecursiveArrayIterator($decoded));
+            $list = iterator_to_array($flatArray, false);
             var_dump($list);
         } else {
 

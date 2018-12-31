@@ -30,7 +30,8 @@ class Appointments implements InputFilterAwareInterface
 
 	public $appnt_provider_service_id;
 
-	public $appointment_datetime;
+	public $appointment_date;
+	public $appointment_time;
 
 	public $appointment_status;
 	public $comments;
@@ -51,7 +52,8 @@ class Appointments implements InputFilterAwareInterface
 		$this->appnt_provider_id=(isset($data['appnt_provider_id'])) ? $data['appnt_provider_id'] : null;
 		$this->facility_code=(isset($data['facility_code'])) ? $data['facility_code'] : null;
 		$this->appnt_provider_service_id=(isset($data['appnt_provider_service_id'])) ? $data['appnt_provider_service_id'] : null;
-		$this->appointment_datetime=(isset($data['appointment_datetime'])) ? $data['appointment_datetime'] : null;
+		$this->appointment_date=(isset($data['appointment_date'])) ? $data['appointment_date'] : null;
+		$this->appointment_time=(isset($data['appointment_time'])) ? $data['appointment_time'] : null;
 		$this->appointment_status=(isset($data['appointment_status'])) ? $data['appointment_status'] : null;
 		$this->comments=(isset($data['comments'])) ? $data['comments'] : null;
 	}
@@ -122,12 +124,21 @@ class Appointments implements InputFilterAwareInterface
 			));
 
 			$inputFilter->add(array(
-				'name'     => 'appointment_datetime',
+				'name'     => 'appointment_date',
 				'required' => false,
 				'filters'  => array(
 					array('name' => 'StripTags'),
 					array('name' => 'StringTrim'),
 				),
+			));
+			
+			$inputFilter->add(array(
+			    'name'     => 'appointment_time',
+			    'required' => false,
+			    'filters'  => array(
+			        array('name' => 'StripTags'),
+			        array('name' => 'StringTrim'),
+			    ),
 			));
 
 			$inputFilter->add(array(

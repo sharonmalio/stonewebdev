@@ -1,4 +1,4 @@
-<div id="form" class="margin" ></div>
+<div id="form" class="margin"></div>
 <?php /* @var $this \Zend\View\Renderer\PhpRenderer */?>
 <?php
 
@@ -7,13 +7,10 @@ $this->headTitle($title);
 
 ?>
 <head>
-<div style = "color: black; font-size:30px; text-align: center;">Please pay to confirm your Appointment</div>
+<div style="color: black; font-size: 30px; text-align: center;">Please
+	pay to confirm your Appointment</div>
 </head>
-
 <?php
-
-$this->form->setAttribute('action', $this->url('appointments', ['appointments' => 'pay'
-]));
 
 $this->form->prepare();
 
