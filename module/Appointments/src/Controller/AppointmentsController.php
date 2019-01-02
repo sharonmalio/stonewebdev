@@ -15,6 +15,7 @@ use Appointments\Model\AppointmentsUsers;
 use Zend\Mvc\Controller\AbstractActionController;
 use Exception;
 use Appointments\Model\Appointments;
+use Zend\Http\Client\Adapter\Curl;
 
 class AppointmentsController extends AbstractActionController
 {
@@ -154,38 +155,42 @@ class AppointmentsController extends AbstractActionController
         
     }
 
-    public function callback()
+    public function callbackAction()
     {
         try {
             // Set the response content type to application/json
-            header("Content-Type:application/json");
-            $resp = '{"ResultCode":0,"ResultDesc":"Confirmation recieved successfully"}';
-            // read incoming request
+            //header("Content-Type:application/json");
+            $resp='{"ResultCode":0,"ResultDesc":"Result message well received"}';
+            // read incoming request message body
             $postData = file_get_contents('php://input');
-            // log file
-            $filePath = "\opt\appLogs\messages.log";
-            // error log
-            $errorLog = "\opt\appLogs\errors.log";
-            // Parse payload to json
-            $jdata = json_decode($postData, true);
-            // perform business operations on $jdata here
             // open text file for logging messages by appending
-            $file = fopen($filePath, "a");
-            // log incoming request
-            fwrite($file, $postData);
-            fwrite($file, "\r\n");
+            
+            $file = fopen("messages.log", "a");
+            
             // log response and close file
-            fwrite($file, $resp);
-            fclose($file);
-        } catch (Exception $ex) {
-            // append exception to errorLog
+            fwrite($file, $postData);
+            //fwrite($file, $resp);
+            // fclose($file);
+            // Parse message body to json payload
+            $jdata = json_decode($postData, true);
+            echo $jdata;
+       
+            
+        }
+        catch (Exception $ex) {
+            // append exception to file
+            $errorLog = "errors.log";
             $logErr = fopen($errorLog, "a");
             fwrite($logErr, $ex->getMessage());
             fwrite($logErr, "\r\n");
-            fclose($logErr);
+            
+            // $resp = '{"ResultCode": 1, "ResultDesc":"Validation failure due to internal service error"}';
         }
-        // echo response
+        fwrite($file,$resp);
+        fclose($file);
+        //echo response
         echo $resp;
+    
     }
 
     public function payAction()
@@ -198,50 +203,59 @@ class AppointmentsController extends AbstractActionController
     
         if ($request->isPost()) {
            
-            header("Content-Type:application/json");
+           // header("Content-Type:application/json");
             $phone = $request->getPost('phone_number');
+
             $shortcode = '174379';
+            
             $passkey = 'bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919';
+          
             $consumerkey = "mxHfXZgmIrq6aGkm0D4UOUV3ECp4g1OI";
+           
             $consumersecret = "4KmjMiOe0sIIcnZS";
+            
             //$validationurl = "enteryourvalidationurlhere";
             //$confirmationurl = "enteryourconfirmationurlhere";
             
             /* testing environment, comment the below two lines if on production */
-            $authenticationurl = 'https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials';
-            $registerurl = 'https://sandbox.safaricom.co.ke/mpesa/c2b/v1/registerurl';
+           $authenticationurl = 'https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials';
+       
+           $registerurl = 'https://sandbox.safaricom.co.ke/mpesa/c2b/v1/registerurl';
             
             /* production un-comment the below two lines if you are in production */
             // $authenticationurl=’https://api.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials’;
             // $registerurl = ‘https://api.safaricom.co.ke/mpesa/c2b/v1/registerurl’;
             // $credentials = base64_encode($consumerkey . ':' . $consumersecret);
-            
+          
             // Request headers
-            $headers = array(
+            $headers = [
                 'Content-Type: application/json; charset=utf-8'
-            );
+            ];
+           
             // Request
             $ch = curl_init($authenticationurl);
+         
+     
             curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
             // curl_setopt($ch, CURLOPT_HEADER, TRUE); // Includes the header in the output
             curl_setopt($ch, CURLOPT_HEADER, FALSE); // excludes the header in the output
             curl_setopt($ch, CURLOPT_USERPWD, $consumerkey . ":" . $consumersecret); // HTTP Basic Authentication
             $result = curl_exec($ch);
-            // echo $result;
+            
             $status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
             $result = json_decode($result);
             
             $access_token = $result->access_token;
-            var_dump($access_token);
-            exit;
+          
             curl_close($ch);
             
             $date = time();
+          
             $timestamp = date("Ymdhms", $date);
-            
+           
             $password = base64_encode($shortcode . $passkey . $timestamp);
-            
+          
             // echo $password;
             $transactiondesc = "Successful";
             $url = 'https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest';
@@ -262,7 +276,7 @@ class AppointmentsController extends AbstractActionController
                 'PartyA' => $phone,
                 'PartyB' => $shortcode,
                 'PhoneNumber' => $phone,
-                'CallBackURL' => 'https://710529a7.ngrok.io/appointments/appointments/callback',
+                'CallBackURL' => 'http://stonewebdev.localhost/appointments/appointments/callback',
                 'AccountReference' => 'Sharon',
                 'TransactionDesc' => $transactiondesc
             );
@@ -273,10 +287,13 @@ class AppointmentsController extends AbstractActionController
             curl_setopt($curlInitResult, CURLOPT_POSTFIELDS, $data_string);
             
             $curl_response = curl_exec($curlInitResult);
-            print_r($curl_response);
-            $file = 'http://easyappointments.localhost/messages.log';
+            var_dump($curl_response);
+            
+            $file = 'http://stonewebdev.localhost/messages.log';
             fopen($file, "r");
             $safResp = file_get_contents($file);
+            var_dump($safResp);
+            exit;
             $decoded = json_decode($safResp, true);
             
             $flatArray = new \RecursiveIteratorIterator(new \RecursiveArrayIterator($decoded));
