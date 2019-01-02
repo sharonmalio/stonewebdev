@@ -10,19 +10,21 @@ $this->headTitle($title);
 </head>
 <?php
 
-$form->setAttribute('action', $this->url('appointments', ['appointments' => 'configurecalendar'
-]));
+// $form->setAttribute('action', $this->url('appointments', ['appointments' => 'configurecalendar'
+// ]));
 
 $form->prepare();
 
 // This provides a default CSS class and placeholder text for the dates element:
-$dates = $form->get('dates');
-$dates->setAttribute('class', 'form-control');
-$dates->setAttribute('placeholder', 'dates');
+$appnt_id = $form->get('appointment_id');
 
-$time = $form->get('time');
+$dates = $form->get('appointment_date');
+$dates->setAttribute('class', 'form-control');
+// $dates->setAttribute('placeholder', 'dates');
+
+$time = $form->get('appointment_time');
 $time->setAttribute('class', 'form-control');
-$time->setAttribute('placeholder', 'time');
+// $time->setAttribute('placeholder', 'time');
 
 // This provides CSS classes for the submit button:
 $submit = $form->get('submit');
@@ -44,6 +46,7 @@ echo $this->form()->openTag($form);
     <?= $this->formElementErrors()->render($time, ['class' => 'help-block']) ?>
 </div>
 <?php
+echo $this->formHidden($appnt_id);
 
 echo $this->formSubmit($submit);
 

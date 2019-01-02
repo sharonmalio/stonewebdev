@@ -16,8 +16,8 @@ use Zend\Db\TableGateway\TableGateway;
 use Zend\Hydrator\ObjectProperty;
 use Zend\Db\ResultSet\HydratingResultSet;
 use Interop\Container\ContainerInterface;
-use Appointments\Model\ProviderServicesTable;
-use Appointments\Model\ProviderServices;
+use Appointments\Model\AppntProviderServiceTable;
+use Appointments\Model\AppntProviderService;
 
 class ProviderServicesTableFactory implements FactoryInterface
 {
@@ -34,9 +34,9 @@ class ProviderServicesTableFactory implements FactoryInterface
 		$db = $serviceManager->get('Zend\Db\Adapter\Adapter');
 		$resultSetPrototype = new HydratingResultSet();
 		$resultSetPrototype->setHydrator(new ObjectProperty());
-		$resultSetPrototype->setObjectPrototype(new ProviderServices($db));
+		$resultSetPrototype->setObjectPrototype(new AppntProviderService($db));
 		$tableGateway = new TableGateway('provider_services',$db,null,$resultSetPrototype);
-		$table = new ProviderServicesTable($tableGateway);
+		$table = new AppntProviderServiceTable($tableGateway);
 		return $table;
 	}
 }

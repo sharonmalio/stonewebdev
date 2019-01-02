@@ -13,7 +13,7 @@ namespace Appointments\Factory\Model;
 
 use Zend\ServiceManager\Factory\FactoryInterface;
 use Interop\Container\ContainerInterface;
-use Appointments\Model\ProviderServices;
+use Appointments\Model\AppntProviderService;
 
 class ProviderServicesFactory implements FactoryInterface
 {
@@ -27,7 +27,7 @@ class ProviderServicesFactory implements FactoryInterface
 	public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
 	{
 		$dbAdapter = $container->get('ServiceManager')->get('Zend\Db\Adapter\Adapter');
-		$model = new ProviderServices($dbAdapter);
+		$model = new AppntProviderService($dbAdapter);
 		return $model;
 	}
 }

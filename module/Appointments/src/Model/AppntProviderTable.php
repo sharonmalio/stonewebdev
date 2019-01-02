@@ -6,7 +6,7 @@
 * @copyright Copyright (c) 2009-2018 Afya Research Africa Inc. (http://www.afyaresearch.org)
 * @license   http://stonehmis.afyaresearch.org/license/options License Options
 * @author    smalio
-* @since     10-12-2018
+* @since     14-12-2018
 */
 
 namespace Appointments\Model;
@@ -18,7 +18,7 @@ use Zend\Db\Sql\Where;
 use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\TableGateway\TableGateway;
 
-class ProviderServicesTable
+class AppntProviderTable
 {
 
 	protected $tableGateway;
@@ -44,7 +44,7 @@ class ProviderServicesTable
 	{
 		$platform = $this->getAdapter()->getPlatform();
 		$table = $platform->quoteIdentifier($this->getTable());
-		$orderCol = $platform->quoteIdentifier('provider_service_id');
+		$orderCol = $platform->quoteIdentifier('appnt_provider_id');
 		$stmt = $this->getAdapter()->createStatement("SELECT * FROM $table ORDER BY $orderCol DESC");
 		$result = $stmt->execute();
 		$result->buffer();
@@ -60,9 +60,9 @@ class ProviderServicesTable
 		}
 	}
 
-	public function fetchAllProviderServices(array $columns = NULL, array $joins = NULL, array $literals = NULL, $limit = NULL, $group = NULL, $order = NULL, $buffer = FALSE, $having = NULL)
+	public function fetchAllAppntProvider(array $columns = NULL, array $joins = NULL, array $literals = NULL, $limit = NULL, $group = NULL, $order = NULL, $buffer = FALSE, $having = NULL)
 	{
-		$platform = $this->getAdapter()->getPlatform();
+		$this->getAdapter()->getPlatform();
 		$sql = new Sql($this->getAdapter());
 		$select = $sql->select($this->getTable());
 		if ($columns) {
@@ -114,7 +114,7 @@ class ProviderServicesTable
 		if ($having) {
 			$select->having($having);
 		}
-		$setstmt = $this->getAdapter()->createStatement("set @provider_services_row_num = 0");
+		$setstmt = $this->getAdapter()->createStatement("set @appnt_provider_row_num = 0");
 		$set = $setstmt->execute();
 		 //$statement = $sql->getSqlStringForSqlObject($select);
 		//return $statement;
@@ -132,10 +132,10 @@ class ProviderServicesTable
 			return ;
 		}
 	}
-	public function getProviderServices($id)
+	public function getAppntProvider($id)
 	{
 		$id  = (int) $id;
-		$rowset = $this->tableGateway->select(array('provider_service_id' => $id));
+		$rowset = $this->tableGateway->select(array('appnt_provider_id' => $id));
 		$row = $rowset->current();
 		if (!$row) {
 			throw new RuntimeException(sprintf(
@@ -146,12 +146,12 @@ class ProviderServicesTable
 		return $row;
 		}
 
-	public function getProviderServicesObject($id)
+	public function getAppntProviderObject($id)
 	{
 		$id  = (int) $id;
 		$platform = $this->getAdapter()->getPlatform();
 		$table = $platform->quoteIdentifier($this->getTable());
-		$Col = $platform->quoteIdentifier('provider_service_id');
+		$Col = $platform->quoteIdentifier('appnt_provider_id');
 		$stmt = $this->getAdapter()->CreateStatement(
 			"SELECT *  FROM $table WHERE $Col = $id");
 		$result = $stmt->execute();
@@ -167,25 +167,26 @@ class ProviderServicesTable
 		}
 	}
 
-	public function saveProviderServices(ProviderServices $providerservices)
+	public function saveAppntProvider(AppntProvider $appntprovider)
 	{
 		$data = array(
-			'provider_service_id'=>$providerservices->provider_service_id,
-			'service_name'=>$providerservices->service_name,
-			'duration'=>$providerservices->duration,
-			'price'=>$providerservices->price,
-			'currency'=>$providerservices->currency,
-			'description'=>$providerservices->description,
-			'provider_id'=>$providerservices->provider_id,
+			'appnt_provider_id'=>$appntprovider->appnt_provider_id,
+			'name'=>$appntprovider->name,
+			'reg_date'=>$appntprovider->reg_date,
+			'reg_number'=>$appntprovider->reg_number,
+			'address'=>$appntprovider->address,
+			'qualifications'=>$appntprovider->qualifications,
+			'specialty'=>$appntprovider->specialty,
+			'sub_specialty'=>$appntprovider->sub_specialty,
 			);
 
-			$id = (int)$providerservices->provider_service_id;
+			$id = (int)$appntprovider->appnt_provider_id;
 			if ($id == 0) {
 				$this->tableGateway->insert($data);
 				return $this->tableGateway->lastInsertValue;
 		} else {
-			if ($this->getProviderServices($id)) {
-				$this->tableGateway->update($data, array('provider_service_id' => $id));
+			if ($this->getAppntProvider($id)) {
+				$this->tableGateway->update($data, array('appnt_provider_id' => $id));
 			} else {
 			throw new RuntimeException(sprintf(
 			        'Could not find row with identifier %d',
@@ -195,19 +196,19 @@ class ProviderServicesTable
 		}
 	}
 
-	public function updateProviderServices($data,$id)
+	public function updateAppntProvider($data,$id)
 	{
-		$this->tableGateway->update($data, array('provider_service_id' => $id));
+		$this->tableGateway->update($data, array('appnt_provider_id' => $id));
 	}
 
-	public function conditionalUpdateProviderServices($data,array $condition)
+	public function conditionalUpdateAppntProvider($data,array $condition)
 	{
 		$this->tableGateway->update($data,$condition);
 	}
 
-	public function deleteProviderServices($id)
+	public function deleteAppntProvider($id)
 	{
-		$this->tableGateway->delete(array('provider_service_id' => $id));
+		$this->tableGateway->delete(array('appnt_provider_id' => $id));
 	}
 
 	public function getDistinctCol($Col)
@@ -242,11 +243,11 @@ class ProviderServicesTable
 		}
 	}
 
-	public function getProviderServicesCol($Col)
+	public function getAppntProviderCol($Col)
 	{
 		$platform = $this->getAdapter()->getPlatform();
 		$Col = $platform->quoteIdentifier($Col); 
-		$id = $platform->quoteIdentifier('provider_service_id');
+		$id = $platform->quoteIdentifier('appnt_provider_id');
 		$table = $platform->quoteIdentifier($this->getTable());
 		$stmt = $this->getAdapter()->CreateStatement("SELECT $Col,$id FROM $table");
 		$result = $stmt->execute();
@@ -257,7 +258,7 @@ class ProviderServicesTable
 		}
 	}
 
-	public function getProviderServicesRecordsCount()
+	public function getAppntProviderRecordsCount()
 	{
 		$platform = $this->getAdapter()->getPlatform();
 		$table = $platform->quoteIdentifier($this->getTable());
@@ -270,7 +271,7 @@ class ProviderServicesTable
 		}
 	}
 
-	public function fetchProviderServicesByCol($searchTerm,$WhereCol)
+	public function fetchAppntProviderByCol($searchTerm,$WhereCol)
 	{
 		$platform = $this->getAdapter()->getPlatform();
 		$WhereCol = $platform->quoteIdentifier($WhereCol);

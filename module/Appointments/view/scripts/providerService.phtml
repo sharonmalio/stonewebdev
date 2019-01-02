@@ -1,0 +1,77 @@
+<?php /* @var $this \Zend\View\Renderer\PhpRenderer */?>
+<script>
+
+function openNav() {
+    document.getElementById("mySidenav").style.width = "200px";
+}
+/* Set the width of the side navigation to 0 */
+function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+}
+
+function showPractitioner()
+{
+    $("#practitioner_div").show();
+	$("#facility_div").hide();
+}
+
+function showFacility()
+{
+	$("#facility_div").show();
+ 	$("#practitioner_div").hide();
+}
+function searchAppntHealthFacility(obj){
+	var id = obj.name;
+	var term = $('#'+id).val();
+	var url = "<?php echo $this->basePath()?>/appointments/search/fetchhealthfacility?term="+term;
+	var len = term.length;
+	
+	if (len>0){
+		$(function() {
+		    $("#"+id).autocomplete({
+		        delay: 0,
+		    });
+		    $("#"+id).autocomplete({
+		        source: url,
+		    });
+		});
+	}
+}
+
+function searchAppntProvider(objp){
+	var id = objp.name;
+	var term = $('#'+id).val();
+	var url = "<?php echo $this->basePath()?>/appointments/search/fetchprovider?term="+term;
+	var len = term.length;
+	
+	if (len>0){
+    		$(function() {
+    		    $("#"+id).autocomplete({
+    		        delay: 0,
+    		    });
+    		    $("#"+id).autocomplete({
+    		        source: url,
+    		    });
+    		});
+		}
+	
+}
+function searchAppntProviderService(obj){
+	var id = obj.name;
+	var term = $('#'+id).val();
+	var url = "<?php echo $this->basePath()?>/appointments/search/fetchproviderservice?term="+term;
+	var len = term.length;
+	
+	if (len>0){
+		$(function() {
+		    $("#"+id).autocomplete({
+		        delay: 0,
+		    });
+		    $("#"+id).autocomplete({
+		        source: url,
+		    });
+		    
+		});
+	}
+}
+</script>

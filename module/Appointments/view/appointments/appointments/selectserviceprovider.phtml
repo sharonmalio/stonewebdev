@@ -1,61 +1,89 @@
-<div id="form" class="margin" ></div>
-
+<?php /* @var $this \Zend\View\Renderer\PhpRenderer */?>
+<?php echo $this->partial('scripts/providerService')?>
+<div id="form" class="margin"></div>
 <?php
 $title = 'Appointment';
 $this->headTitle($title);
 ?>
+
 <head>
-<div style = "color: black; font-size:30px; text-align: center;">Enter Person Details</div>
+<div style="color: black; font-size: 30px; text-align: center;">Select
+	Service and the Provider</div>
 </head>
 <?php
 
-$form->setAttribute('action', $this->url('appointments', ['appointments' => 'selectserviceprovider'
-]));
+$this->form->prepare();
+// $id = $this->form->get('appointment_id');
 
-$form->prepare();
+$user = $this->form->get('appointments_users_id');
 
-$service = $form->get('service');
+
+// $date = $this->form->get('appointment_datetime');
+
+$status = $this->form->get('appointment_status');
+
+$service = $this->form->get('appnt_provider_service_id');
 $service->setAttribute('class', 'form-control');
 $service->setAttribute('placeholder', 'Service');
 
-
-$provider = $form->get('provider');
+$provider = $this->form->get('appnt_provider_id');
 $provider->setAttribute('class', 'form-control');
 $provider->setAttribute('placeholder', 'provider');
 
+$facility = $this->form->get('facility_code');
+$facility->setAttribute('class', 'form-control');
+$facility->setAttribute('placeholder', 'facility');
+
+$comments = $this->form->get('comments');
+$comments->setAttribute('class', 'form-control');
+$comments->setAttribute('placeholder', 'comments');
 
 // This provides CSS classes for the submit button:
-$submit = $form->get('submit');
-$submit->setAttribute('class', 'btn btn-primary');
+$submit = $this->form->get('submit');
+$submit->setAttribute('class', 'btn btn-primary btn-block');
 
-echo $this->form()->openTag($form);
+echo $this->form()->openTag($this->form);
 ?>
-
 <div class="form-group">
     <?= $this->formLabel($service) ?>
     <?= $this->formElement($service) ?>
     <?= $this->formElementErrors()->render($service, ['class' => 'help-block']) ?>
 </div>
+<div class="row">
+	<div class="col-sm-6">
+		<a href="#practitioner_div" class=" btn btn-info btn-block"  onclick= "showPractitioner()"data-toggle="collapse"> Select
+			Practitioner</a>
+	 </div>
+	 
+	<div class="col-sm-6">
+		<a href="#facility_div" class=" btn btn-info btn-block"  onclick="showFacility()"  data-toggle="collapse"> Select
+			Facility</a></div>
+</div>
 
-	<div class="form-group">
+
+<div class="form-group collapse" id="practitioner_div">
     <?= $this->formLabel($provider) ?>
     <?= $this->formElement($provider) ?>
     <?= $this->formElementErrors()->render($provider, ['class' => 'help-block']) ?>
 </div>
 
+<div class="form-group collapse" id="facility_div">
+    <?= $this->formLabel($facility) ?>
+    <?= $this->formElement($facility) ?>
+    <?= $this->formElementErrors()->render($facility, ['class' => 'help-block']) ?>
+</div>
+
+<div class="form-group">
+    <?= $this->formLabel($comments) ?>
+    <?= $this->formElement($comments) ?>
+    <?= $this->formElementErrors()->render($comments, ['class' => 'help-block']) ?>
+</div>
 
 
 <?php
+echo $this->formHidden($user);
+echo $this->formHidden($status);
 echo $this->formSubmit($submit);
 
 echo $this->form()->closeTag();
 ?>
-<script>
-function openNav() {
-    document.getElementById("mySidenav").style.width = "200px";
-}
-/* Set the width of the side navigation to 0 */
-function closeNav() {
-    document.getElementById("mySidenav").style.width = "0";
-}
-</script>

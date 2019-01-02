@@ -11,6 +11,7 @@ namespace Stonelink;
 */
 
 return [
+  
   Controller\ProvidersController::class => Factory\Controller\ProvidersControllerFactory::class,
   Controller\StonelinkController::class => Factory\Controller\StonelinkControllerFactory::class
 ];

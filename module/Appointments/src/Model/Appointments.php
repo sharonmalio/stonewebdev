@@ -6,7 +6,7 @@
 * @copyright Copyright (c) 2009-2018 Afya Research Africa Inc. (http://www.afyaresearch.org)
 * @license   http://stonehmis.afyaresearch.org/license/options License Options
 * @author    smalio
-* @since     10-12-2018
+* @since     30-12-2018
 */
 
 namespace Appointments\Model;
@@ -17,39 +17,45 @@ use Zend\InputFilter\InputFilterAwareInterface;
 use Zend\InputFilter\InputFilterInterface;
 use Zend\Db\Adapter\Adapter;
 
-class ProviderServices implements InputFilterAwareInterface
+class Appointments implements InputFilterAwareInterface
 {
 
-	public $provider_service_id;
+	public $appointment_id;
 
-	public $service_name;
+	public $appointments_users_id;
 
-	public $duration;
+	public $appnt_provider_id;
 
-	public $price;
+	public $facility_code;
 
-	public $currency;
+	public $appnt_provider_service_id;
 
-	public $description;
+	public $appointment_date;
+	public $appointment_time;
 
-	public $provider_id;
+	public $appointment_status;
+	public $comments;
 
     protected $inputFilter;
 
-    protected $providerServicesTable;
 
-    protected $tableName = 'provider_services';
+    protected $appointmentsTable;
+
+    protected $tableName = 'appointments';
+
 
 
 	public function exchangeArray($data)
 	{
-		$this->provider_service_id=(isset($data['provider_service_id'])) ? $data['provider_service_id'] : null;
-		$this->service_name=(isset($data['service_name'])) ? $data['service_name'] : null;
-		$this->duration=(isset($data['duration'])) ? $data['duration'] : null;
-		$this->price=(isset($data['price'])) ? $data['price'] : null;
-		$this->currency=(isset($data['currency'])) ? $data['currency'] : null;
-		$this->description=(isset($data['description'])) ? $data['description'] : null;
-		$this->provider_id=(isset($data['provider_id'])) ? $data['provider_id'] : null;
+		$this->appointment_id=(isset($data['appointment_id'])) ? $data['appointment_id'] : null;
+		$this->appointments_users_id=(isset($data['appointments_users_id'])) ? $data['appointments_users_id'] : null;
+		$this->appnt_provider_id=(isset($data['appnt_provider_id'])) ? $data['appnt_provider_id'] : null;
+		$this->facility_code=(isset($data['facility_code'])) ? $data['facility_code'] : null;
+		$this->appnt_provider_service_id=(isset($data['appnt_provider_service_id'])) ? $data['appnt_provider_service_id'] : null;
+		$this->appointment_date=(isset($data['appointment_date'])) ? $data['appointment_date'] : null;
+		$this->appointment_time=(isset($data['appointment_time'])) ? $data['appointment_time'] : null;
+		$this->appointment_status=(isset($data['appointment_status'])) ? $data['appointment_status'] : null;
+		$this->comments=(isset($data['comments'])) ? $data['comments'] : null;
 	}
 
 
@@ -73,7 +79,7 @@ class ProviderServices implements InputFilterAwareInterface
 			$inputFilter = new InputFilter();
 
 			$inputFilter->add(array(
-				'name'     => 'provider_service_id',
+				'name'     => 'appointment_id',
 				'required' => false,
 				'filters'  => array(
 					array('name' => 'StripTags'),
@@ -82,7 +88,7 @@ class ProviderServices implements InputFilterAwareInterface
 			));
 
 			$inputFilter->add(array(
-				'name'     => 'service_name',
+				'name'     => 'appointments_users_id',
 				'required' => false,
 				'filters'  => array(
 					array('name' => 'StripTags'),
@@ -91,7 +97,7 @@ class ProviderServices implements InputFilterAwareInterface
 			));
 
 			$inputFilter->add(array(
-				'name'     => 'duration',
+				'name'     => 'appnt_provider_id',
 				'required' => false,
 				'filters'  => array(
 					array('name' => 'StripTags'),
@@ -100,7 +106,7 @@ class ProviderServices implements InputFilterAwareInterface
 			));
 
 			$inputFilter->add(array(
-				'name'     => 'price',
+				'name'     => 'facility_code',
 				'required' => false,
 				'filters'  => array(
 					array('name' => 'StripTags'),
@@ -109,7 +115,7 @@ class ProviderServices implements InputFilterAwareInterface
 			));
 
 			$inputFilter->add(array(
-				'name'     => 'currency',
+				'name'     => 'appnt_provider_service_id',
 				'required' => false,
 				'filters'  => array(
 					array('name' => 'StripTags'),
@@ -118,21 +124,38 @@ class ProviderServices implements InputFilterAwareInterface
 			));
 
 			$inputFilter->add(array(
-				'name'     => 'description',
+				'name'     => 'appointment_date',
 				'required' => false,
 				'filters'  => array(
 					array('name' => 'StripTags'),
 					array('name' => 'StringTrim'),
 				),
 			));
+			
+			$inputFilter->add(array(
+			    'name'     => 'appointment_time',
+			    'required' => false,
+			    'filters'  => array(
+			        array('name' => 'StripTags'),
+			        array('name' => 'StringTrim'),
+			    ),
+			));
 
 			$inputFilter->add(array(
-				'name'     => 'provider_id',
+				'name'     => 'appointment_status',
 				'required' => false,
 				'filters'  => array(
 					array('name' => 'StripTags'),
 					array('name' => 'StringTrim'),
 				),
+			));
+			$inputFilter->add(array(
+			    'name'     => 'comments',
+			    'required' => false,
+			    'filters'  => array(
+			        array('name' => 'StripTags'),
+			        array('name' => 'StringTrim'),
+			    ),
 			));
 
 			$this->inputFilter = $inputFilter;
