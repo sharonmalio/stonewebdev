@@ -1,3 +1,4 @@
+<?php /* @var $this \Zend\View\Renderer\PhpRenderer */?>
 <div id="form" class="margin" ></div>
 
 <?php
@@ -10,27 +11,27 @@ $this->headTitle($title);
 </head>
 <?php
 
-// $form->setAttribute('action', $this->url('appointments', ['appointments' => 'configurecalendar'
+// $this->form->setAttribute('action', $this->url('appointments', ['appointments' => 'configurecalendar'
 // ]));
 
-$form->prepare();
+$this->form->prepare();
 
 // This provides a default CSS class and placeholder text for the dates element:
-$appnt_id = $form->get('appointment_id');
+$appnt_id = $this->form->get('appointment_id');
 
-$dates = $form->get('appointment_date');
+$dates = $this->form->get('appointment_date');
 $dates->setAttribute('class', 'form-control');
 // $dates->setAttribute('placeholder', 'dates');
 
-$time = $form->get('appointment_time');
+$time = $this->form->get('appointment_time');
 $time->setAttribute('class', 'form-control');
 // $time->setAttribute('placeholder', 'time');
 
 // This provides CSS classes for the submit button:
-$submit = $form->get('submit');
-$submit->setAttribute('class', 'btn btn-primary');
+$submit = $this->form->get('submit');
+$submit->setAttribute('class', 'btn btn-primary btn-block');
 
-echo $this->form()->openTag($form);
+echo $this->form()->openTag($this->form);
 
 ?>
 
@@ -45,6 +46,7 @@ echo $this->form()->openTag($form);
     <?= $this->formElement($time) ?>
     <?= $this->formElementErrors()->render($time, ['class' => 'help-block']) ?>
 </div>
+
 <?php
 echo $this->formHidden($appnt_id);
 

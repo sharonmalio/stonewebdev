@@ -3,10 +3,10 @@
 * StoneHMIS (http://stonehmis.afyaresearch.org/)
 *
 * @link      http://github.com/stonehmis/stone for the canonical source repository
-* @copyright Copyright (c) 2009-2018 Afya Research Africa Inc. (http://www.afyaresearch.org)
+* @copyright Copyright (c) 2009-2019 Afya Research Africa Inc. (http://www.afyaresearch.org)
 * @license   http://stonehmis.afyaresearch.org/license/options License Options
 * @author    smalio
-* @since     18-12-2018
+* @since     03-01-2019
 */
 
 namespace Appointments\Model;
@@ -18,7 +18,7 @@ use Zend\Db\Sql\Where;
 use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\TableGateway\TableGateway;
 
-class AppntMpesaPaymentTable
+class AppntPaymentConfirmationTable
 {
 
 	protected $tableGateway;
@@ -44,7 +44,7 @@ class AppntMpesaPaymentTable
 	{
 		$platform = $this->getAdapter()->getPlatform();
 		$table = $platform->quoteIdentifier($this->getTable());
-		$orderCol = $platform->quoteIdentifier('appnt_mpesa_payment_id');
+		$orderCol = $platform->quoteIdentifier('appnt_payment_confirmation_id');
 		$stmt = $this->getAdapter()->createStatement("SELECT * FROM $table ORDER BY $orderCol DESC");
 		$result = $stmt->execute();
 		$result->buffer();
@@ -60,7 +60,7 @@ class AppntMpesaPaymentTable
 		}
 	}
 
-	public function fetchAllAppntMpesaPayment(array $columns = NULL, array $joins = NULL, array $literals = NULL, $limit = NULL, $group = NULL, $order = NULL, $buffer = FALSE, $having = NULL)
+	public function fetchAllAppntPaymentConfirmation(array $columns = NULL, array $joins = NULL, array $literals = NULL, $limit = NULL, $group = NULL, $order = NULL, $buffer = FALSE, $having = NULL)
 	{
 		$platform = $this->getAdapter()->getPlatform();
 		$sql = new Sql($this->getAdapter());
@@ -114,7 +114,7 @@ class AppntMpesaPaymentTable
 		if ($having) {
 			$select->having($having);
 		}
-		$setstmt = $this->getAdapter()->createStatement("set @appnt_mpesa_payment_row_num = 0");
+		$setstmt = $this->getAdapter()->createStatement("set @appnt_payment_confirmation_row_num = 0");
 		$set = $setstmt->execute();
 		 //$statement = $sql->getSqlStringForSqlObject($select);
 		//return $statement;
@@ -132,10 +132,10 @@ class AppntMpesaPaymentTable
 			return ;
 		}
 	}
-	public function getAppntMpesaPayment($id)
+	public function getAppntPaymentConfirmation($id)
 	{
 		$id  = (int) $id;
-		$rowset = $this->tableGateway->select(array('appnt_mpesa_payment_id' => $id));
+		$rowset = $this->tableGateway->select(array('appnt_payment_confirmation_id' => $id));
 		$row = $rowset->current();
 		if (!$row) {
 			throw new RuntimeException(sprintf(
@@ -146,12 +146,12 @@ class AppntMpesaPaymentTable
 		return $row;
 		}
 
-	public function getAppntMpesaPaymentObject($id)
+	public function getAppntPaymentConfirmationObject($id)
 	{
 		$id  = (int) $id;
 		$platform = $this->getAdapter()->getPlatform();
 		$table = $platform->quoteIdentifier($this->getTable());
-		$Col = $platform->quoteIdentifier('appnt_mpesa_payment_id');
+		$Col = $platform->quoteIdentifier('appnt_payment_confirmation_id');
 		$stmt = $this->getAdapter()->CreateStatement(
 			"SELECT *  FROM $table WHERE $Col = $id");
 		$result = $stmt->execute();
@@ -167,29 +167,27 @@ class AppntMpesaPaymentTable
 		}
 	}
 
-	public function saveAppntMpesaPayment(AppntMpesaPayment $appntmpesapayment)
+	public function saveAppntPaymentConfirmation(AppntPaymentConfirmation $appntpaymentconfirmation)
 	{
 		$data = array(
-			'appnt_mpesa_payment_id'=>$appntmpesapayment->appnt_mpesa_payment_id,
-			'MerchantRequestID'=>$appntmpesapayment->MerchantRequestID,
-			'CheckoutRequestID'=>$appntmpesapayment->CheckoutRequestID,
-			'ResultCode'=>$appntmpesapayment->ResultCode,
-			'ResultDesc'=>$appntmpesapayment->ResultDesc,
-			'Amount'=>$appntmpesapayment->Amount,
-			'MpesaReceiptNumber'=>$appntmpesapayment->MpesaReceiptNumber,
-			'Balance'=>$appntmpesapayment->Balance,
-			'TransactionDate'=>$appntmpesapayment->TransactionDate,
-			'PhoneNumber'=>$appntmpesapayment->PhoneNumber,
-			'MpesaStatus'=>$appntmpesapayment->MpesaStatus,
+			'appnt_payment_confirmation_id'=>$appntpaymentconfirmation->appnt_payment_confirmation_id,
+			'merchant_request_id'=>$appntpaymentconfirmation->merchant_request_id,
+			'checkout_request_id'=>$appntpaymentconfirmation->checkout_request_id,
+			'result_code'=>$appntpaymentconfirmation->result_code,
+			'result_desc'=>$appntpaymentconfirmation->result_desc,
+			'service_cost'=>$appntpaymentconfirmation->service_cost,
+			'mpesa_transaction_id'=>$appntpaymentconfirmation->mpesa_transaction_id,
+			'mpesa_transaction_date'=>$appntpaymentconfirmation->mpesa_transaction_date,
+			'appnt_user_phone_number'=>$appntpaymentconfirmation->appnt_user_phone_number,
 			);
 
-			$id = (int)$appntmpesapayment->appnt_mpesa_payment_id;
+			$id = (int)$appntpaymentconfirmation->appnt_payment_confirmation_id;
 			if ($id == 0) {
 				$this->tableGateway->insert($data);
 				return $this->tableGateway->lastInsertValue;
 		} else {
-			if ($this->getAppntMpesaPayment($id)) {
-				$this->tableGateway->update($data, array('appnt_mpesa_payment_id' => $id));
+			if ($this->getAppntPaymentConfirmation($id)) {
+				$this->tableGateway->update($data, array('appnt_payment_confirmation_id' => $id));
 			} else {
 			throw new RuntimeException(sprintf(
 			        'Could not find row with identifier %d',
@@ -199,19 +197,19 @@ class AppntMpesaPaymentTable
 		}
 	}
 
-	public function updateAppntMpesaPayment($data,$id)
+	public function updateAppntPaymentConfirmation($data,$id)
 	{
-		$this->tableGateway->update($data, array('appnt_mpesa_payment_id' => $id));
+		$this->tableGateway->update($data, array('appnt_payment_confirmation_id' => $id));
 	}
 
-	public function conditionalUpdateAppntMpesaPayment($data,array $condition)
+	public function conditionalUpdateAppntPaymentConfirmation($data,array $condition)
 	{
 		$this->tableGateway->update($data,$condition);
 	}
 
-	public function deleteAppntMpesaPayment($id)
+	public function deleteAppntPaymentConfirmation($id)
 	{
-		$this->tableGateway->delete(array('appnt_mpesa_payment_id' => $id));
+		$this->tableGateway->delete(array('appnt_payment_confirmation_id' => $id));
 	}
 
 	public function getDistinctCol($Col)
@@ -246,11 +244,11 @@ class AppntMpesaPaymentTable
 		}
 	}
 
-	public function getAppntMpesaPaymentCol($Col)
+	public function getAppntPaymentConfirmationCol($Col)
 	{
 		$platform = $this->getAdapter()->getPlatform();
 		$Col = $platform->quoteIdentifier($Col); 
-		$id = $platform->quoteIdentifier('appnt_mpesa_payment_id');
+		$id = $platform->quoteIdentifier('appnt_payment_confirmation_id');
 		$table = $platform->quoteIdentifier($this->getTable());
 		$stmt = $this->getAdapter()->CreateStatement("SELECT $Col,$id FROM $table");
 		$result = $stmt->execute();
@@ -261,7 +259,7 @@ class AppntMpesaPaymentTable
 		}
 	}
 
-	public function getAppntMpesaPaymentRecordsCount()
+	public function getAppntPaymentConfirmationRecordsCount()
 	{
 		$platform = $this->getAdapter()->getPlatform();
 		$table = $platform->quoteIdentifier($this->getTable());
@@ -274,7 +272,7 @@ class AppntMpesaPaymentTable
 		}
 	}
 
-	public function fetchAppntMpesaPaymentByCol($searchTerm,$WhereCol)
+	public function fetchAppntPaymentConfirmationByCol($searchTerm,$WhereCol)
 	{
 		$platform = $this->getAdapter()->getPlatform();
 		$WhereCol = $platform->quoteIdentifier($WhereCol);
