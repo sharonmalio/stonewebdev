@@ -1,0 +1,16 @@
+<?php
+/* @var $this \Zend\View\Renderer\PhpRenderer */
+/* @var $this \Zend\View\Renderer\PhpRenderer */
+$this->form->prepare();
+$this->form->setAttribute('action', $this->url('users/user', array(
+    'action' => 'edit'
+)));
+$this->form->setAttribute('method', 'post');
+echo $this->form()->openTag($this->form);
+foreach ($this->form as $element) {
+    $this->partial()->setObjectKey('element');
+    echo $this->partial('formWidgets/oneColumnForm', $element);
+}
+$this->partial()->setObjectKey('form');
+echo $this->partial('formWidgets/oneColumnFormButton', $this->form);
+echo $this->form()->closeTag();

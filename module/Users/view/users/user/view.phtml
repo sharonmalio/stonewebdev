@@ -1,0 +1,45 @@
+<?php /* @var $this \Zend\View\Renderer\PhpRenderer */?>
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h3 class="panel-title text-left">
+         <?php echo "<strong class='text-info'>".$this->pageName.' - '.$this->menu[$this->layout()->action]."</strong>";?>
+        </h3>
+	</div>
+        <?php
+
+        echo $this->partial('menu/dropdownMenu', array(
+            'menu' => $this->menu,
+            'menuTitle' => $this->menuTitle,
+            'menuUrl' => strtolower($this->layout()->module) . '/' . strtolower($this->layout()->controller)
+        ))?>
+
+        <div class="panel-body">
+                <?php echo $this->partial('flash/flashMessages');?>
+                <div class="row">
+			<div class="col-md-6">
+				<table class="table table-striped table-bordered">
+					<tr>
+						<th>ID:</th>
+						<td><?= $this->escapeHtml($this->user->getId()) ?></td>
+					</tr>
+					<tr>
+						<th>E-mail:</th>
+						<td><?= $this->escapeHtml($this->user->getEmail()) ?></td>
+					</tr>
+					<tr>
+						<th>Full Name:</th>
+						<td><?= $this->escapeHtml($this->user->getDisplayName()) ?></td>
+					</tr>
+					<tr>
+						<th>Date Created:</th>
+						<td><?= $this->escapeHtml($this->user->getDateRegistered()) ?></td>
+					</tr>
+					<tr>
+						<th>State:</th>
+						<td><?= $this->escapeHtml($this->user->getStateAsString()) ?></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

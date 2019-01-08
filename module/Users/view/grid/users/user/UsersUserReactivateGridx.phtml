@@ -1,0 +1,83 @@
+<?php /* @var $this \Zend\View\Renderer\PhpRenderer */?>
+<script type="text/javascript">
+require([
+        'dojo/_base/declare',
+        'dojo/_base/xhr',
+        'dojo/date/locale',
+        'dojo/date/stamp',
+        'gridx/allModules',
+        'dojo/store/Memory',
+        'gridx/Grid',
+        'gridx/core/model/cache/Sync'
+     ], 
+     function(declare, xhr, locale, stamp, mods, Store, Grid,Cache){
+	    xhr.get({
+		    url:"<?php echo $this->basePath()?>/application/search/fetchretireduser",
+		    handleAs: "json"
+		}).then(function (response) {
+         var store = new Store({data: response,idProperty:"user_id" });
+         
+		 function formatName(data){
+			 return data.first_name+" "+data.second_name
+		 }
+
+		 function formatStatus(data){
+			 var status=data.state
+			 if (status==1){
+				 var userstatus="Active";
+			 }else if (status==666){
+				 var userstatus="Retired";
+			 }else{
+				 var userstatus="Unknown";
+			 }
+			 return userstatus
+		}
+
+	        function formatDate(date){
+        	 var nDate= locale.format(new Date(date.date_registered), {datePattern: "dd.MM.yyyy", selector: "date"});
+        	 var badDate=new RegExp("NaN.NaN.0NaN");
+        	 if(nDate.search(badDate)){
+            	 return nDate;
+        	 }
+         };
+
+		  function stampToDate(timestamp){
+				var tsDate = locale.format(new Date(timestamp.replace(/-/g,"/")),{datePattern: "dd.MM.yyyy", selector: "date"});
+				return tsDate;
+			};
+         var columns = [
+                        {field: "name", name: "<b>Name</b>",width:"35%",formatter: formatName},
+                        {field: "username", name: "<b>Username</b>"},
+                        {field: "email", name: "<b>Email</b>"},
+                        {field: "cell_phone", name: "<b>Phone</b>"},
+                        {field: "role", name: "<b>Role</b>"},
+                        {field: "state", name: "<b>State</b>",formatter: formatStatus},
+                        {field: "date_registered", name: "<b>Date of Registration</b>",formatter: formatDate},
+         ];
+         var grid = new Grid({
+        	    cacheClass: Cache,
+        	    store: store,
+        	    structure: columns,
+        	    autoHeight: true,
+        	    modules: [
+        	              mods.SingleSort,       
+        	              mods.Pagination,       
+        	              mods.PaginationBar,       
+        	              mods.Filter,       
+        	              mods.QuickFilter,       
+        	              mods.Persist,       
+        	              mods.ColumnResizer,   
+        	          ]
+         }, 'gridNode'); 
+        grid.startup();
+        grid.connect(grid, "onRowClick", function(evt){
+            var row=grid.row(evt.rowIndex);
+            var data = row.rawData();
+            var id=data.user_id;
+            var url = "<?php echo $this->basePath()?>/users/user/reactivate/id/"+id;
+            self.location=url;
+         });
+        });
+     });
+</script>
+<div id="gridNode"></div>

@@ -1,0 +1,19 @@
+<?php /* @var $this \Zend\View\Renderer\PhpRenderer */?>
+<?php $mendconfig = $this->MendConfig();?>
+<?php $menu = $this->FlatenArray($mendconfig['UsersHomeNav']);?>
+<div id="menuBar" data-dojo-type="dijit/MenuBar">
+	<?php foreach ($menu as $name=>$label):?>
+	<?php if ($name==lcfirst($this->controller)):?>
+	<div id="<?php echo $name;?>" class="dijitMenuItemSelected"
+		data-dojo-type="dijit/MenuBarItem"
+		data-dojo-props='onClick:function(){window.location.href="<?php echo $this->url('users/'.$name);?>"}'>
+		<strong><?php echo $label;?></strong>
+	</div>
+	<?php else:?>
+	<div id="<?php echo $name;?>" data-dojo-type="dijit/MenuBarItem"
+		data-dojo-props='onClick:function(){window.location.href="<?php echo $this->url('users/'.$name);?>"}'>
+		<strong><?php echo $label;?></strong>
+	</div>
+	<?php endif;?>
+	<?php endforeach;?>
+</div>

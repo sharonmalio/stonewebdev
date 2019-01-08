@@ -32,20 +32,14 @@
 		"zendframework/zend-mvc-plugin-flashmessenger" : "^1.1",
 		"zendframework/zend-mvc-plugin-fileprg" : "^1.1",
 		"zendframework/zend-mvc-plugin-identity" : "^1.1",
-		"zendframework/zend-debug" : "^2.6",
-		"doctrine/doctrine-orm-module" : "^2.1",
-		"zendframework/zend-authentication" : "^2.6",
-		"zendframework/zend-captcha" : "^2.8",
-		"zendframework/zend-permissions-acl" : "^2.7",
-		"league/oauth2-server" : "^7.3",
-		"zfcampus/zf-oauth2" : "^1.5"
+		"zendframework/zend-debug": "^2.6"
 	},
 	"autoload" : {
 		"psr-4" : {
-            "Application\\": "module/Application/src/",
-            "Appointments\\": "module/Appointments/src/",
-            "Stonelink\\": "module/Stonelink/src/",
-            "Users\\": "module/Users/src/"
+			"Application\\" : "module/Application/src/",
+			"Stonelink\\" : "module/Stonelink/src/",
+			"Appointments\\": "module/Appointments/src",
+			"Appointment\\": "module/Appointment/src/"
 		}
 	},
 	"autoload-dev" : {

@@ -35,7 +35,7 @@ var infoWindow = new google.maps.InfoWindow();
 for (var i = 0; i < markers.length; i++) {
 	var a = markers[i];
 	var markerpos = {lat:a[0], lng:a[1]};
- 	var title = 'Name:'+' '+ a[2]+'<br>'+'County:'+ ' '+ a[3]+'<br>'+'Type:'+' ' + a[4]+'<br>'+ 'Owner:'+' ' +a[5]+'<br>'+'<a href="http://easyappointments.localhost/index.php">Book Appointment</a>';
+ 	var title = 'Name:'+' '+ a[2]+'<br>'+'County:'+ ' '+ a[3]+'<br>'+'Type:'+' ' + a[4]+'<br>'+ 'Owner:'+' ' +a[5]+'<br>'+'<a href="http://stonewebdev.localhost/appointments/appointments/addpersondetails">Book Appointment</a>';
  	var marker = new google.maps.Marker({
  	    position: markerpos,
  	    map: map,

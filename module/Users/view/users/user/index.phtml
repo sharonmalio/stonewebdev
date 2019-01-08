@@ -1,0 +1,35 @@
+<?php /* @var $this \Zend\View\Renderer\PhpRenderer */?>
+<?php $mendconfig=$this->MendConfig();?>
+<?php $dashActions=$mendconfig['UsersUserHomeDash'];?>
+<?php $buttonClassStack=$mendconfig['ButtonClassStack'];?>
+<?php $arrayObjectsFormat=$this->StoneViewService()->get('ControllerPluginManager')->get('ArrayObjectsFormat');?>
+<?php $infoActions=$arrayObjectsFormat->flipArray($arrayObjectsFormat->getArrayOfBasenames($arrayObjectsFormat->flipArray($dashActions)));?>
+<br>
+<br>
+<div class="jumbotron mend-rounded-edges">
+	<h2 class="text-center stone-blue bold">
+		<?php echo sprintf($this->translate('Manage Users'))?>
+		<?php echo $this->partial('flash/flashMessages');?>
+	</h2>
+	<table class="table table-condensed">
+	<?php $i=0;?>
+	<?php foreach ($dashActions as $dashs):?>
+	<tr>
+	   <?php foreach ($dashs as $dash=>$dashLabel):?>
+	   <?php $width='width:'.(100/(sizeof($dashs))).'%';?>
+		<td style="<?php echo $width;?>"><a style="width: 100%"
+				class="btn <?php echo $buttonClassStack[$i];?> btn-lg raised"
+				id="<?php echo basename($dash);?>"
+				href="<?php echo $this->basePath()?>/<?php echo $dash;?>"
+				target="_self"
+				data-content="<?php echo $this->partial("info/users/user/".basename($dash))?>"><?php echo $this->translate("$dashLabel")?>
+			&raquo;
+		</a></td>
+	<?php endforeach;?>
+	</tr>
+	<?php $i++;?>
+	<?php if ($i>4){$i=0;}?>
+	<?php endforeach;?>
+	</table>
+</div>
+<?php echo $this->partial('scripts/simpleInfoIterator',array('infoActions'=>$infoActions));?>

@@ -288,11 +288,11 @@ class AppointmentsController extends AbstractActionController
 
             $curl_response = curl_exec($curlInitResult);
             // THIS IS WHERE THE ERROR IS
-            
+
             $file = "/home/smalio/Sites/stonewebdev/messages.log";
-//             if(file_exists($file)){
-                
-//             }
+            // if(file_exists($file)){
+
+            // }
             $opended_file = fopen($file, "r");
             $safResp = file_get_contents($file);
 
@@ -321,12 +321,11 @@ class AppointmentsController extends AbstractActionController
                 $appntPaymentmodel->exchangeArray($mpesapayment_details);
 
                 $payment_id = $appointmentPaymentTable->saveAppntPaymentConfirmation($appntPaymentmodel);
-                
-                if ($payment_id!=null){
+
+                if ($payment_id != null) {
                     $appointmentdetails = $appointmentsTable->fetchRowset('appointment_id', $id);
-                    $appointmentdetails->appointment_status=1;
+                    $appointmentdetails->appointment_status = 1;
                     $appointmentsTable->saveAppointments($appointmentdetails);
-                    
                 }
             } else {
                 echo "please check your details carefully";

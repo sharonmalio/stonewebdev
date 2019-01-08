@@ -1,0 +1,19 @@
+<?php /* @var $this \Zend\View\Renderer\PhpRenderer */?>
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h3 class="panel-title text-left">
+         <?php echo "<strong class='text-info'>".$this->pageName.' - '.$this->menu[$this->layout()->action]."</strong>";?>
+        </h3>
+	</div>
+<?php
+echo $this->partial('menu/dropdownMenu', array(
+    'menu' => $this->menu,
+    'menuTitle' => $this->menuTitle,
+    'menuUrl' => strtolower($this->layout()->module) . '/' . strtolower($this->layout()->controller)
+));
+?>
+        <div class="panel-body">
+            <?php echo $this->partial('flash/flashMessages');?>
+            <?php echo $this->partial('forms/users/userRegisterForm');?>
+        </div>
+</div>
