@@ -38,7 +38,9 @@
 		"zendframework/zend-captcha" : "^2.8",
 		"zendframework/zend-permissions-acl" : "^2.7",
 		"league/oauth2-server" : "^7.3",
-		"zfcampus/zf-oauth2" : "^1.5"
+		"zfcampus/zf-oauth2" : "^1.5",
+		"doctrine/dbal": "^2.9",
+		"zendframework/zend-mail": "^2.10"
 	},
 	"autoload" : {
 		"psr-4" : {

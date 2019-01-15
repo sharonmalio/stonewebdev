@@ -16,6 +16,7 @@ use Appointments\Model\AppointmentsUsers;
 use Zend\Mvc\Controller\AbstractActionController;
 use Exception;
 use Appointments\Model\AppntPaymentConfirmation;
+use Zend\Mail;
 
 class AppointmentsController extends AbstractActionController
 {
@@ -55,7 +56,8 @@ class AppointmentsController extends AbstractActionController
 
                 return $this->redirect()->toRoute('appointments/appointments', [
                     'action' => 'selectserviceprovider',
-                    'id' => $appnts_user_id
+                    'id' => $appnts_user_id,
+                    'email'=> $request->getPost('email_address')
                 ]);
             } else {
                 return [
@@ -72,6 +74,7 @@ class AppointmentsController extends AbstractActionController
     public function selectserviceproviderAction()
     {
         $id = $this->params()->fromRoute('id');
+        $email=$this->params()->fromRoute('email');
         $formElementManager = $this->serviceManager->get('FormElementManager');
 
         $form = $formElementManager->get('Appointments\Form\AppointmentsServiceProviderForm');
@@ -95,7 +98,8 @@ class AppointmentsController extends AbstractActionController
 
                 return $this->redirect()->toRoute('appointments/appointments', [
                     'action' => 'configurecalendar',
-                    'id' => $appnt_id
+                    'id' => $appnt_id,
+                    'email'=>$email
                 ]);
             } else {
                 return [
@@ -112,7 +116,7 @@ class AppointmentsController extends AbstractActionController
     public function configurecalendarAction()
     {
         $id = $this->params()->fromRoute('id');
-
+        $email=$this->params()->fromRoute('email');
         $formElementManager = $this->serviceManager->get('FormElementManager');
         $form = $formElementManager->get('Appointments\Form\AppointmentsCalendarForm');
         $appointmentsTable = $this->serviceManager->get('Appointments\Model\AppointmentsTable');
@@ -135,7 +139,8 @@ class AppointmentsController extends AbstractActionController
 
                 return $this->redirect()->toRoute('appointments/appointments', [
                     'action' => 'confirmsummery',
-                    'id' => $id
+                    'id' => $id,
+                    'email'=>$email
                 ]);
             } else {
                 return [
@@ -151,9 +156,11 @@ class AppointmentsController extends AbstractActionController
     public function confirmsummeryAction()
     {
         $id = $this->params()->fromRoute('id');
+        $email=$this->params()->fromRoute('email');
         return $this->redirect()->toRoute('appointments/appointments', [
             'action' => 'pay',
-            'id' => $id
+            'id' => $id,
+            'email'=>$email
         ]);
     }
 
@@ -165,9 +172,9 @@ class AppointmentsController extends AbstractActionController
             $resp = '{"ResultCode":0,"ResultDesc":"Validation passed successfully"}';
             // read incoming request
             $postData = file_get_contents('php://input');
-            $filePath = "/home/smalio/Sites/stonewebdev/messages.log";
+            $filePath = "/home/dmueni/Sites/stonewebdev/messages.log";
             // error log
-            $errorLog = "/home/smalio/Sites/stonewebdev/errors.log";
+            $errorLog = "/home/dmueni/Sites/stonewebdev/errors.log";
             // Parse payload to json
             $jdata = json_decode($postData, true);
             // perform business operations here
@@ -195,6 +202,7 @@ class AppointmentsController extends AbstractActionController
     public function payAction()
     {
         $id = $this->params()->fromRoute('id');
+        $email=$this->params()->fromRoute('email');
         $formElementManager = $this->serviceManager->get('FormElementManager');
         $form = $formElementManager->get('Appointments\Form\AppointmentsPhoneForm');
 
@@ -289,7 +297,7 @@ class AppointmentsController extends AbstractActionController
             $curl_response = curl_exec($curlInitResult);
             // THIS IS WHERE THE ERROR IS
 
-            $file = "/home/smalio/Sites/stonewebdev/messages.log";
+            $file = "/home/dmueni/Sites/stonewebdev/messages.log";
             // if(file_exists($file)){
 
             // }
@@ -326,6 +334,15 @@ class AppointmentsController extends AbstractActionController
                     $appointmentdetails = $appointmentsTable->fetchRowset('appointment_id', $id);
                     $appointmentdetails->appointment_status = 1;
                     $appointmentsTable->saveAppointments($appointmentdetails);
+                    $mail_client=new Mail\Message();
+                    
+                    $mail_client->setBody('This is the text of the email.');
+                    $mail_client->setFrom('afyaresearch@gmail.com', 'Afya Research Africa');
+                    $mail_client->addTo($email, 'Client');
+                    $mail_client->setSubject('Booking Appointment');
+                    
+                    $transport = new Mail\Transport\Sendmail();
+                    $transport->send($mail_client);
                 }
             } else {
                 echo "please check your details carefully";
