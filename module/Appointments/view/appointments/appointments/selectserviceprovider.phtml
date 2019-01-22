@@ -5,10 +5,10 @@
 $title = 'Appointment';
 $this->headTitle($title);
 ?>
-
-<head>
 <div style="color: black; font-size: 30px; text-align: center;">Select
 	Service and the Provider</div>
+<head>
+
 </head>
 <?php
 
@@ -59,7 +59,6 @@ echo $this->form()->openTag($this->form);
 		<a href="#facility_div" class=" btn btn-info btn-block"  onclick="showFacility()"  data-toggle="collapse"> Select
 			Facility</a></div>
 </div>
-
 
 <div class="form-group collapse" id="practitioner_div">
     <?= $this->formLabel($provider) ?>

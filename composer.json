@@ -40,7 +40,8 @@
 		"league/oauth2-server" : "^7.3",
 		"zfcampus/zf-oauth2" : "^1.5",
 		"doctrine/dbal": "^2.9",
-		"zendframework/zend-mail": "^2.10"
+		"zendframework/zend-mail": "^2.10",
+		"africastalking/africastalking": "^2.1"
 	},
 	"autoload" : {
 		"psr-4" : {

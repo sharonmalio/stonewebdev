@@ -12,11 +12,13 @@
 namespace Appointments\Controller;
 
 use Appointments\Model\Appointments;
+use AfricasTalking\SDK\AfricasTalking;
 use Appointments\Model\AppointmentsUsers;
 use Zend\Mvc\Controller\AbstractActionController;
 use Exception;
 use Appointments\Model\AppntPaymentConfirmation;
 use Zend\Mail;
+use Zend\Mvc\Console\View\ViewModel;
 
 class AppointmentsController extends AbstractActionController
 {
@@ -53,11 +55,19 @@ class AppointmentsController extends AbstractActionController
                 $appointment->exchangeArray($form->getData());
                 // Inserting appointment data in the database table
                 $appnts_user_id = $appointmentsTable->saveAppointmentsUsers($appointment);
-
                 return $this->redirect()->toRoute('appointments/appointments', [
                     'action' => 'selectserviceprovider',
-                    'id' => $appnts_user_id,
-                    'email'=> $request->getPost('email_address')
+                    'id' => $appnts_user_id
+                ], [
+                    "query" => [
+                        'email' => $request->getPost('email')
+                    ],
+                    "query" => [
+                        'first_name' => $request->getPost('first_name')
+                    ],
+                    "query" => [
+                        'phone_number' => $request->getPost('phone_number')
+                    ]
                 ]);
             } else {
                 return [
@@ -74,7 +84,9 @@ class AppointmentsController extends AbstractActionController
     public function selectserviceproviderAction()
     {
         $id = $this->params()->fromRoute('id');
-        $email=$this->params()->fromRoute('email');
+        $email = $this->params()->fromQuery('email');
+        $phone_number = $this->params()->fromQuery('phone_number');
+        $first_name = $this->params()->fromQuery('first_name');
         $formElementManager = $this->serviceManager->get('FormElementManager');
 
         $form = $formElementManager->get('Appointments\Form\AppointmentsServiceProviderForm');
@@ -98,8 +110,17 @@ class AppointmentsController extends AbstractActionController
 
                 return $this->redirect()->toRoute('appointments/appointments', [
                     'action' => 'configurecalendar',
-                    'id' => $appnt_id,
-                    'email'=>$email
+                    'id' => $appnt_id
+                ], [
+                    "query" => [
+                        'email' => $email
+                    ],
+                    "query" => [
+                        'first_name' => $first_name
+                    ],
+                    "query" => [
+                        'phone_number' => $phone_number
+                    ]
                 ]);
             } else {
                 return [
@@ -116,7 +137,9 @@ class AppointmentsController extends AbstractActionController
     public function configurecalendarAction()
     {
         $id = $this->params()->fromRoute('id');
-        $email=$this->params()->fromRoute('email');
+        $email = $this->params()->fromQuery('email');
+        $phone_number = $this->params()->fromQuery('phone_number');
+        $first_name = $this->params()->fromQuery('first_name');
         $formElementManager = $this->serviceManager->get('FormElementManager');
         $form = $formElementManager->get('Appointments\Form\AppointmentsCalendarForm');
         $appointmentsTable = $this->serviceManager->get('Appointments\Model\AppointmentsTable');
@@ -139,8 +162,17 @@ class AppointmentsController extends AbstractActionController
 
                 return $this->redirect()->toRoute('appointments/appointments', [
                     'action' => 'confirmsummery',
-                    'id' => $id,
-                    'email'=>$email
+                    'id' => $id
+                ], [
+                    "query" => [
+                        'email' => $email
+                    ],
+                    "query" => [
+                        'first_name' => $first_name
+                    ],
+                    "query" => [
+                        'phone_number' => $phone_number
+                    ]
                 ]);
             } else {
                 return [
@@ -156,11 +188,25 @@ class AppointmentsController extends AbstractActionController
     public function confirmsummeryAction()
     {
         $id = $this->params()->fromRoute('id');
-        $email=$this->params()->fromRoute('email');
+        $email = $this->params()->fromQuery('email');
+        $phone_number = $this->params()->fromQuery('phone_number');
+        $first_name = $this->params()->fromQuery('first_name');
+        return new ViewModel();
+        
         return $this->redirect()->toRoute('appointments/appointments', [
             'action' => 'pay',
-            'id' => $id,
-            'email'=>$email
+            'id' => $id
+        ], 
+        [
+            "query" => [
+                'email' => $email
+            ],
+            "query" => [
+                'first_name' => $first_name
+            ],
+            "query" => [
+                'phone_number' => $phone_number
+            ]
         ]);
     }
 
@@ -172,9 +218,9 @@ class AppointmentsController extends AbstractActionController
             $resp = '{"ResultCode":0,"ResultDesc":"Validation passed successfully"}';
             // read incoming request
             $postData = file_get_contents('php://input');
-            $filePath = "/home/dmueni/Sites/stonewebdev/messages.log";
+            $filePath = "/home/smalio/Sites/stonewebdev/messages.log";
             // error log
-            $errorLog = "/home/dmueni/Sites/stonewebdev/errors.log";
+            $errorLog = "/home/smalio/Sites/stonewebdev/errors.log";
             // Parse payload to json
             $jdata = json_decode($postData, true);
             // perform business operations here
@@ -202,7 +248,7 @@ class AppointmentsController extends AbstractActionController
     public function payAction()
     {
         $id = $this->params()->fromRoute('id');
-        $email=$this->params()->fromRoute('email');
+        $email = $this->params()->fromQuery('email');
         $formElementManager = $this->serviceManager->get('FormElementManager');
         $form = $formElementManager->get('Appointments\Form\AppointmentsPhoneForm');
 
@@ -273,7 +319,7 @@ class AppointmentsController extends AbstractActionController
                 'Content-Type:application/json',
                 'Authorization:Bearer ' . $access_token
             )); // setting custom header
-            $callbackurl = 'https://61b04548.ngrok.io/appointments/appointments/callback';
+            $callbackurl = 'https://5a2b8ad8.ngrok.io/appointments/appointments/callback';
             $curl_post_data = [
                 // Fill in the request parameters with valid values
                 'BusinessShortCode' => $shortcode,
@@ -297,12 +343,11 @@ class AppointmentsController extends AbstractActionController
             $curl_response = curl_exec($curlInitResult);
             // THIS IS WHERE THE ERROR IS
 
-            $file = "/home/dmueni/Sites/stonewebdev/messages.log";
+            $file = "/home/smalio/Sites/stonewebdev/messages.log";
             // if(file_exists($file)){
-
             // }
             $opended_file = fopen($file, "r");
-            $safResp = file_get_contents($file);
+            $safResp = filek_get_contents($file);
 
             $decoded = json_decode($safResp, true);
 
@@ -323,7 +368,6 @@ class AppointmentsController extends AbstractActionController
                     'mpesa_transaction_date' => $list[6],
                     'appnt_user_phone_number' => $list[7]
                 ];
-
                 // save to the database
                 $appntPaymentmodel = new AppntPaymentConfirmation();
                 $appntPaymentmodel->exchangeArray($mpesapayment_details);
@@ -334,21 +378,30 @@ class AppointmentsController extends AbstractActionController
                     $appointmentdetails = $appointmentsTable->fetchRowset('appointment_id', $id);
                     $appointmentdetails->appointment_status = 1;
                     $appointmentsTable->saveAppointments($appointmentdetails);
-                    $mail_client=new Mail\Message();
-                    
+                    // send an email to the user
+
+                    $subject = 'Appointment Booking Successfull';
+
+                    $mail_client = new Mail\Message();
                     $mail_client->setBody('This is the text of the email.');
                     $mail_client->setFrom('afyaresearch@gmail.com', 'Afya Research Africa');
                     $mail_client->addTo($email, 'Client');
-                    $mail_client->setSubject('Booking Appointment');
-                    
+                    $mail_client->setSubject($subject);
                     $transport = new Mail\Transport\Sendmail();
                     $transport->send($mail_client);
                 }
             } else {
                 echo "please check your details carefully";
+                $mail_client = new Mail\Message();
+                $mail_client->setBody('You tried. Did you manage?.');
+                $mail_client->setFrom('afyaresearch@gmail.com', 'Afya Rfesearch Africa');
+                $mail_client->addTo($email, 'Client');
+                $mail_client->setSubject('Booking Appointment');
+
+                $transport = new Mail\Transport\Sendmail();
+                $transport->send($mail_client);
             }
         } else {
-
             return [
                 'form' => $form
             ];
@@ -360,8 +413,40 @@ class AppointmentsController extends AbstractActionController
         ];
     }
 
-    public function addAction()
-    {}
+    public function smsAction()
+    {
+        require 'vendor/autoload.php';
+        // Set your app credentials
+        $username = "sandbox";
+        $apikey = "6f097b35fd65753c911004538e1a3b3960835abfb216d5663bd55762fabf5757";
+        
+        // Initialize the SDK
+        $AT = new AfricasTalking($username, $apikey);
+        
+        // Get the SMS service
+        $sms = $AT->sms();
+        
+        // Set the numbers you want to send to in international format
+        $recipients = "+254701926294";
+        
+        // Set your message
+        $message = "I'm a lumberjack and its ok, I sleep all night and I work all day";
+        
+        // Set your shortCode or senderId
+        $from = "66140";
+        
+        try {
+            // Thats it, hit send and we'll take care of the rest
+            $result = $sms->send([
+                'to'      => $recipients,
+                'message' => $message,
+                'from'    => $from
+            ]);
+            print_r($result);
+        } catch (Exception $e) {
+            echo "Error: ".$e->getMessage();
+        }
+    }
 
     public function deleteAction()
     {

@@ -1,4 +1,10 @@
-FROM php:7.0-apache
+FROM php:7.1-apache
+
+MAINTAINER Sharon Malio
+
+
+
+COPY . /var/www/html/stonewebdev
 
 RUN apt-get update \
  && apt-get install -y git zlib1g-dev \
@@ -8,5 +14,4 @@ RUN apt-get update \
  && mv /var/www/html /var/www/public \
  && curl -sS https://getcomposer.org/installer \
   | php -- --install-dir=/usr/local/bin --filename=composer
-
-WORKDIR /var/www
+WORKDIR /var/www/html/stonewebdev

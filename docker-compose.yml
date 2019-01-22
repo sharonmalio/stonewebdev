@@ -1,7 +1,32 @@
-zf:
-  build: .
-  dockerfile: Dockerfile
-  ports:
-   - "8080:80"
-  volumes:
-   - .:/var/www
+version: '2'
+
+volumes:
+    database_data:
+        driver: local
+        
+services:
+    php:
+      build: ./docker/php
+      expose:
+          - 9000
+      volumes:
+          - .:/var/www/html
+    
+    apache2:
+        image: webdevops/apache
+        volumes:
+            - ./php/www:/var/www/html
+        ports:
+            - 8000:8000
+            - 443:443
+        links:
+            - php
+            
+    mysql:
+      image: mysql
+      expose:
+          - 3306
+      volumes:
+          - database_data:/var/lib/mysql
+     
+          
