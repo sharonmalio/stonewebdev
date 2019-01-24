@@ -35,4 +35,5 @@ return [
     'Application',
     'Stonelink',
     'Appointments',
+    'Users'
 ];

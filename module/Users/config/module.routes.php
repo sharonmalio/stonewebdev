@@ -1,6 +1,7 @@
 <?php
 use Zend\Router\Http\Literal;
 use Zend\Router\Http\Segment;
+use Users\Controller\UsersController;
 
 return [
     'users' => [
@@ -8,8 +9,7 @@ return [
         'options' => [
             'route' => '/users',
             'defaults' => [
-                '__NAMESPACE__' => 'Users\Controller',
-                'controller' => 'Users',
+                'controller' => UsersController::class,
                 'action' => 'index'
             ]
         ],

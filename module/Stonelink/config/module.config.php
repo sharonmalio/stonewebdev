@@ -21,7 +21,7 @@ return [
                     'stonelink' => [
                         'type' => 'segment',
                         'options' => [
-                            'route' => '/stonelink/[:action]',
+                            'route' => '/stonelink[/:action]',
                             'constraints' => [
                                 'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
                             ],
@@ -34,7 +34,7 @@ return [
                     'providers' => [
                         'type' => 'segment',
                         'options' => [
-                            'route' => '/providers/[:action]',
+                            'route' => '/providers[/:action]',
                             'constraints' => [
                                 'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
                             ],

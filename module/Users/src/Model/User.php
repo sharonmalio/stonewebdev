@@ -15,7 +15,7 @@ use Zend\InputFilter\InputFilterAwareInterface;
 use Zend\InputFilter\InputFilterInterface;
 use RuntimeException;
 use Zend\Db\Adapter\Adapter;
-use Mendbase\Validator\PhoneValidator;
+use Stonebase\Validator\PhoneValidator;
 
 class User implements InputFilterAwareInterface
 {

@@ -47,13 +47,18 @@
 		"psr-4" : {
             "Application\\": "module/Application/src/",
             "Appointments\\": "module/Appointments/src/",
+            "Stonebase\\": "module/Stonebase/src/",
             "Stonelink\\": "module/Stonelink/src/",
             "Users\\": "module/Users/src/"
 		}
 	},
 	"autoload-dev" : {
 		"psr-4" : {
-			"ApplicationTest\\" : "module/Application/test/"
+            "ApplicationTest\\": "module/Application/test/",
+            "AppointmentsTest\\": "module/Appointments/test/",
+            "StonebaseTest\\": "module/Stonebase/test/",
+            "StonelinkTest\\": "module/Stonelink/test/",
+            "UsersTest\\": "module/Users/test/"
 		}
 	},
 	"scripts" : {

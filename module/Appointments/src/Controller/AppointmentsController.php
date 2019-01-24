@@ -25,13 +25,52 @@ class AppointmentsController extends AbstractActionController
 
     protected $serviceManager;
 
+    protected $saf_shortcode;
+
+    protected $saf_passkey;
+
+    protected $saf_consumerkey;
+
+    protected $saf_consumersecret;
+
+    protected $saf_callbackurl;
+
     public function setServiceManager($serviceManager)
     {
         return $this->serviceManager = $serviceManager;
     }
 
+    public function setSafShortCode($saf_shortcode)
+    {
+        return $this->saf_shortcode = $saf_shortcode;
+    }
+
+    public function setSafPassKey($saf_passkey)
+    {
+        return $this->saf_passkey = $saf_passkey;
+    }
+
+    public function setSafConsumerKey($saf_consumerkey)
+    {
+        return $this->saf_consumerkey = $saf_consumerkey;
+    }
+
+    public function setSafConsumerSecret($saf_consumersecret)
+    {
+        return $this->saf_consumersecret = $saf_consumersecret;
+    }
+
+    public function setSafCallBackUrl($saf_callbackurl)
+    {
+        return $this->saf_callbackurl = $saf_callbackurl;
+    }
+
     public function indexAction()
-    {}
+    {
+        return [
+            
+        ];
+    }
 
     public function addpersondetailsAction()
     {
@@ -192,12 +231,11 @@ class AppointmentsController extends AbstractActionController
         $phone_number = $this->params()->fromQuery('phone_number');
         $first_name = $this->params()->fromQuery('first_name');
         return new ViewModel();
-        
+
         return $this->redirect()->toRoute('appointments/appointments', [
             'action' => 'pay',
             'id' => $id
-        ], 
-        [
+        ], [
             "query" => [
                 'email' => $email
             ],
@@ -261,14 +299,6 @@ class AppointmentsController extends AbstractActionController
             // header("Content-Type:application/json");
             $phone = $request->getPost('phone_number');
 
-            $shortcode = '174379';
-
-            $passkey = 'bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919';
-
-            $consumerkey = "mxHfXZgmIrq6aGkm0D4UOUV3ECp4g1OI";
-
-            $consumersecret = "4KmjMiOe0sIIcnZS";
-
             // $validationurl = "enteryourvalidationurlhere";
             // $confirmationurl = "enteryourconfirmationurlhere";
 
@@ -294,22 +324,15 @@ class AppointmentsController extends AbstractActionController
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
             // curl_setopt($ch, CURLOPT_HEADER, TRUE); // Includes the header in the output
             curl_setopt($ch, CURLOPT_HEADER, FALSE); // excludes the header in the output
-            curl_setopt($ch, CURLOPT_USERPWD, $consumerkey . ":" . $consumersecret); // HTTP Basic Authentication
+            curl_setopt($ch, CURLOPT_USERPWD, $this->saf_consumerkey . ":" . $this->saf_consumersecret); // HTTP Basic Authentication
             $result = curl_exec($ch);
-
-            $status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+            curl_getinfo($ch, CURLINFO_HTTP_CODE);
             $result = json_decode($result);
-
             $access_token = $result->access_token;
-
             curl_close($ch);
-
             $date = time();
-
             $timestamp = date("Ymdhms", $date);
-
-            $password = base64_encode($shortcode . $passkey . $timestamp);
-
+            $password = base64_encode($this->saf_shortcode . $this->saf_passkey . $timestamp);
             // echo $password;
             $transactiondesc = "Successful";
             $url = 'https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest';
@@ -319,18 +342,17 @@ class AppointmentsController extends AbstractActionController
                 'Content-Type:application/json',
                 'Authorization:Bearer ' . $access_token
             )); // setting custom header
-            $callbackurl = 'https://5a2b8ad8.ngrok.io/appointments/appointments/callback';
             $curl_post_data = [
                 // Fill in the request parameters with valid values
-                'BusinessShortCode' => $shortcode,
+                'BusinessShortCode' => $this->saf_shortcode,
                 'Password' => $password,
                 'Timestamp' => $timestamp,
                 'TransactionType' => 'CustomerPayBillOnline',
                 'Amount' => '5',
                 'PartyA' => $phone,
-                'PartyB' => $shortcode,
+                'PartyB' => $this->saf_shortcode,
                 'PhoneNumber' => $phone,
-                'CallBackURL' => $callbackurl,
+                'CallBackURL' => $this->saf_callbackurl,
                 'AccountReference' => 'Afya',
                 'TransactionDesc' => $transactiondesc
             ];
@@ -340,19 +362,16 @@ class AppointmentsController extends AbstractActionController
             curl_setopt($curlInitResult, CURLOPT_POST, true);
             curl_setopt($curlInitResult, CURLOPT_POSTFIELDS, $data_string);
 
-            $curl_response = curl_exec($curlInitResult);
+            curl_exec($curlInitResult);
             // THIS IS WHERE THE ERROR IS
 
             $file = "/home/smalio/Sites/stonewebdev/messages.log";
             // if(file_exists($file)){
             // }
-            $opended_file = fopen($file, "r");
+            fopen($file, "r");
             $safResp = filek_get_contents($file);
-
             $decoded = json_decode($safResp, true);
-
             $flatArray = new \RecursiveIteratorIterator(new \RecursiveArrayIterator($decoded));
-
             $list = iterator_to_array($flatArray, false);
             if (count($list) == 13) {
                 unset($list[4], $list[6], $list[8], $list[9], $list[11]);
@@ -371,17 +390,13 @@ class AppointmentsController extends AbstractActionController
                 // save to the database
                 $appntPaymentmodel = new AppntPaymentConfirmation();
                 $appntPaymentmodel->exchangeArray($mpesapayment_details);
-
                 $payment_id = $appointmentPaymentTable->saveAppntPaymentConfirmation($appntPaymentmodel);
-
                 if ($payment_id != null) {
                     $appointmentdetails = $appointmentsTable->fetchRowset('appointment_id', $id);
                     $appointmentdetails->appointment_status = 1;
                     $appointmentsTable->saveAppointments($appointmentdetails);
                     // send an email to the user
-
                     $subject = 'Appointment Booking Successfull';
-
                     $mail_client = new Mail\Message();
                     $mail_client->setBody('This is the text of the email.');
                     $mail_client->setFrom('afyaresearch@gmail.com', 'Afya Research Africa');
@@ -397,7 +412,6 @@ class AppointmentsController extends AbstractActionController
                 $mail_client->setFrom('afyaresearch@gmail.com', 'Afya Rfesearch Africa');
                 $mail_client->addTo($email, 'Client');
                 $mail_client->setSubject('Booking Appointment');
-
                 $transport = new Mail\Transport\Sendmail();
                 $transport->send($mail_client);
             }
@@ -417,34 +431,34 @@ class AppointmentsController extends AbstractActionController
     {
         require 'vendor/autoload.php';
         // Set your app credentials
-        $username = "sandbox";
-        $apikey = "6f097b35fd65753c911004538e1a3b3960835abfb216d5663bd55762fabf5757";
-        
+        $username = "stoneweb";
+        $apikey = "66b45264697cff69fd0f61b0f81ee0607e9a8ec976f22608ed8895360ba3ac90";
+
         // Initialize the SDK
         $AT = new AfricasTalking($username, $apikey);
-        
+
         // Get the SMS service
         $sms = $AT->sms();
-        
+
         // Set the numbers you want to send to in international format
         $recipients = "+254701926294";
-        
+
         // Set your message
-        $message = "I'm a lumberjack and its ok, I sleep all night and I work all day";
-        
+        $message = "Lets chnage the topic for a moment. Why is it not possible anyway";
+
         // Set your shortCode or senderId
         $from = "66140";
-        
+
         try {
             // Thats it, hit send and we'll take care of the rest
             $result = $sms->send([
-                'to'      => $recipients,
+                'to' => $recipients,
                 'message' => $message,
-                'from'    => $from
+                'from' => $from
             ]);
             print_r($result);
         } catch (Exception $e) {
-            echo "Error: ".$e->getMessage();
+            echo "Error: " . $e->getMessage();
         }
     }
 

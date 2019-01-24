@@ -139,9 +139,6 @@ class UserController extends AbstractActionController
 
     public function registerAction()
     {
-        // Check Editor has Admin Resources
-        $this->CheckOwner()->isAdmin($this->MendUrl()
-            ->getRefererUrl());
         $request = $this->getRequest();
         $form = $this->FormUsersForm()->getUserRegisterForm();
         $form->get('submit')->setLabel('Register User');
