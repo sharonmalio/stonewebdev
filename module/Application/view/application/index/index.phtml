@@ -1,30 +1,28 @@
-<div class="jumbotron">
-    <h1>Welcome to Stoneweb</h1>
+<?php /* @var $this \Zend\View\Renderer\PhpRenderer */?>
 
+<div class="jumbotron ">
+    <h1>Online Appointment Booking</h1>
     <p>
-        Welcome to stoneweb. 
-        You can book online appointments with your doctors and Connect with anyone you with to as well as chat with any doctor you would wish to. 
-        On the top left of this page, we have the menu that guides you through navigating this website. Kindly make use of it. 
-    </p>
-
-    
+     Book online appointments with your prefered doctor or clinic. You can also onnect with any doctor 
+     or fellow customers that you wish to as well as chat with them. 
+      
+    </p> 
 </div>
-
+<div class="container">
 <div class="row">
-
     <div class="col-md-4">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3 class="panel-title">Stoneweb</h3>
             </div>
             <div class="panel-body">
-                <p>
-                 This is the combination of both stonelink and stonechat that is borrowed from the StoneHMIS platform. 
-                 The term refers to the website version of the StoneHMIS platform that enables specialists
-                 to take care of the patients digitally and in a systematic way 
+               <p>
+                Stoneweb houses the appointments. This is where you get to schedule an application with your doctors.
+                This is also where you can view your appointments details as well as view all the available doctors
+                and also the available services offered by our doctors.
                 </p>
 
-                <p><a class="btn btn-primary pull-right zf-green "   href="//stonewebdev.localhost/stonelink/stonelink/" target="_blank">Stoneweb</a></p>
+                <p><a class="btn btn-primary pull-right zf-green "  href="<?php echo $this->basePath()?>/appointments/appointments" target="_blank">Book Appointments</a></p>
             </div>
         </div>
     </div>
@@ -40,7 +38,7 @@
                   This platform enables one identify the hospitals near them and those that they might be interested into. 
                 </p>
 
-                <p><a class="btn btn-primary pull-right zf-green"   href="//stonewebdev.localhost/stonelink/stonelink/" target="_blank">Stonelink</a></p>
+                <p><a class="btn btn-primary pull-right zf-green" href="<?php echo $this->basePath()?>/stonelink/stonelink" target="_blank">Stonelink</a></p>
             </div>
         </div>
     </div>
@@ -55,10 +53,10 @@
                    If you need any help or talking to any specialist or a colleague. We have a platform called <a href="https://stonechat.net/" target="_blank">Stonechat</a> for you.
                    Please ensure that you register and post any burning questions in the platform. Use the button below to visit the page
                 </p>
-
                 <p><a class="btn btn-primary pull-right " href="https://stonechat.net/" target="_blank">Stonechat</a></p>
             </div>
         </div>
+    </div>
     </div>
       <script type="text/javascript">//for the nav bar
 function openNav() {

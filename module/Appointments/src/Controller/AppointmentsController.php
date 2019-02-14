@@ -67,9 +67,11 @@ class AppointmentsController extends AbstractActionController
 
     public function indexAction()
     {
-        return [
-            
-        ];
+      return [
+          
+          
+      ];
+       
     }
 
     public function addpersondetailsAction()
@@ -94,6 +96,8 @@ class AppointmentsController extends AbstractActionController
                 $appointment->exchangeArray($form->getData());
                 // Inserting appointment data in the database table
                 $appnts_user_id = $appointmentsTable->saveAppointmentsUsers($appointment);
+                echo $appnts_user_id;
+                
                 return $this->redirect()->toRoute('appointments/appointments', [
                     'action' => 'selectserviceprovider',
                     'id' => $appnts_user_id
@@ -137,7 +141,6 @@ class AppointmentsController extends AbstractActionController
         $request = $this->getRequest();
 
         if ($request->isPost()) {
-
             // var_dump($request->getPost());exit;
             $serviceprovider = new Appointments();
             $form->setData($request->getPost());
@@ -230,7 +233,9 @@ class AppointmentsController extends AbstractActionController
         $email = $this->params()->fromQuery('email');
         $phone_number = $this->params()->fromQuery('phone_number');
         $first_name = $this->params()->fromQuery('first_name');
-        return new ViewModel();
+        return [
+            
+        ];
 
         return $this->redirect()->toRoute('appointments/appointments', [
             'action' => 'pay',
@@ -246,6 +251,7 @@ class AppointmentsController extends AbstractActionController
                 'phone_number' => $phone_number
             ]
         ]);
+     
     }
 
     public function callbackAction()

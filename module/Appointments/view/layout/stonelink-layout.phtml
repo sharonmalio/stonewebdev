@@ -1,7 +1,8 @@
+<?php /* @var $this \Zend\View\Renderer\PhpRenderer */?>
 
 <!DOCTYPE html>
 <html lang="en">
-<?php /* @var $this \Zend\View\Renderer\PhpRenderer */?>
+
 <head>
 
 <meta charset="utf-8">
@@ -30,18 +31,25 @@
 	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
 <!-- Le styles -->
-        <?=$this->headLink(['rel' => 'shortcut icon','type' => 'image/vnd.microsoft.icon','href' => $this->basePath() . '/img/favicon.ico'])->prependStylesheet($this->basePath('css/bootstrap-theme.min.css'))->prependStylesheet($this->basePath('css/bootstrap.min.css'))->prependStylesheet($this->basePath('css/style.css'))->prependStylesheet($this->basePath('js/jquery-ui/jquery-ui.css'))?>
+        <?=$this->headLink(['rel' => 'shortcut icon','type' => 'image/vnd.microsoft.icon','href' => $this->basePath() . '/img/favicon.ico'])
+        ->prependStylesheet($this->basePath('css/bootstrap-theme.min.css'))
+        ->prependStylesheet($this->basePath('css/bootstrap.min.css'))
+        ->prependStylesheet($this->basePath('css/style.css'))
+        ->prependStylesheet($this->basePath('js/jquery-ui/jquery-ui.min.css'))?>
         
-       
         <!-- Scripts -->
-        <?=$this->headScript()->prependFile($this->basePath('js/bootstrap.min.js'))->prependFile($this->basePath('js/jquery-ui/jquery-ui.min.js'))->prependFile($this->basePath('js/jquery-3.1.0.min.js'))->prependFile($this->basePath('js/app.js'))?>
+        <?=$this->headScript()->prependFile($this->basePath('js/bootstrap.min.js'))
+        ->prependFile($this->basePath('js/jquery-3.1.0.min.js'))
+        ->prependFile($this->basePath('js/app.js'))
+        ->prependFile($this->basePath('js/jquery-ui/jquery-ui.min.js'))?>
+       
 
     </head>
 
 <body class="html mt-0">
 	<div class="margin"></div>
 <?= $this->doctype() ?>
-<nav class="navbar navbar-color navbar-fixed-top " role="navigation">
+	<nav class="navbar navbar-color navbar-fixed-top " role="navigation">
 		<div class="container">
 			<div class="sidenav " id="mySidenav">
 				<a href="javascript:void(0)"
@@ -53,13 +61,13 @@
 							Hopitals</a></li>
 				</ul>
 				<ul class="navbar-nav ">
-					<li class="active"><a href="http://stonewebdev.localhost/appointments/appointments/addpersondetails">Book
+					<li class="active"><a href="<?php echo $this->basePath()?>/appointments/appointments">Book
 							Appointment</a></li>
 				</ul>
-				
 				<ul class=" navbar-nav ">
 					<li class="active"><a href="https://stonechat.net/">Talk to
 							Somebody</a></li>
+
 				</ul>
 				<ul class="navbar-nav ">
 					<li class="active"><a
