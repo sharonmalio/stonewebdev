@@ -31,19 +31,34 @@
 		"zendframework/zend-i18n-resources" : "^2.6",
 		"zendframework/zend-mvc-plugin-flashmessenger" : "^1.1",
 		"zendframework/zend-mvc-plugin-fileprg" : "^1.1",
-		"zendframework/zend-mvc-plugin-identity" : "^1.1"
+		"zendframework/zend-mvc-plugin-identity" : "^1.1",
+		"zendframework/zend-debug" : "^2.6",
+		"doctrine/doctrine-orm-module" : "^2.1",
+		"zendframework/zend-authentication" : "^2.6",
+		"zendframework/zend-captcha" : "^2.8",
+		"zendframework/zend-permissions-acl" : "^2.7",
+		"league/oauth2-server" : "^7.3",
+		"zfcampus/zf-oauth2" : "^1.5",
+		"doctrine/dbal": "^2.9",
+		"zendframework/zend-mail": "^2.10",
+		"africastalking/africastalking": "^2.1"
 	},
 	"autoload" : {
 		"psr-4" : {
-			"Application\\" : "module/Application/src/",
-			"Stonelink\\" : "module/Stonelink/src/",
-			"Appointments\\": "module/Appointments/src",
-			"Appointment\\": "module/Appointment/src/"
+            "Application\\": "module/Application/src/",
+            "Appointments\\": "module/Appointments/src/",
+            "Stonebase\\": "module/Stonebase/src/",
+            "Stonelink\\": "module/Stonelink/src/",
+            "Users\\": "module/Users/src/"
 		}
 	},
 	"autoload-dev" : {
 		"psr-4" : {
-			"ApplicationTest\\" : "module/Application/test/"
+            "ApplicationTest\\": "module/Application/test/",
+            "AppointmentsTest\\": "module/Appointments/test/",
+            "StonebaseTest\\": "module/Stonebase/test/",
+            "StonelinkTest\\": "module/Stonelink/test/",
+            "UsersTest\\": "module/Users/test/"
 		}
 	},
 	"scripts" : {

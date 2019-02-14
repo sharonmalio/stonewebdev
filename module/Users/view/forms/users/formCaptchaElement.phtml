@@ -1,0 +1,7 @@
+<?php /* @var $this \Zend\View\Renderer\PhpRenderer */?>
+<div class="form-group">
+  <?php echo $this->formLabel($this->form->get('captcha')); ?>
+  <?php echo $this->formElement($this->form->get('captcha')); ?>
+  <?php echo $this->formElementErrors($this->form->get('captcha')); ?>
+  <p class="help-block">Enter the letters above as you see them.</p>
+</div>

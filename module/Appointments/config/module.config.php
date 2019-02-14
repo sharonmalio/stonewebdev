@@ -1,10 +1,9 @@
 <?php
 namespace Appointments;
 
-use Zend\Router\Http\Segment;
 use Appointments\Controller\AppointmentsController;
 use Appointments\Controller\SearchController;
-use Appointments\Controller\AppntproviderController;
+use Zend\Router\Http\Segment;
 return [
     'router' => [
         'routes' => [
@@ -20,9 +19,9 @@ return [
                 'may_terminate' => true,
                 'child_routes' => [
                     'appointments' => [
-                        'type' => 'segment',
+                        'type' =>  Segment::class,
                         'options' => [
-                            'route' => '/appointments/[:action][/id/:id]',
+                            'route' => '/appointments[/:action][/id/:id]',
                             'constraints' => [
                                 'action' => '[a-zA-Z][a-zA-Z0-9_-]*'
                             ],
@@ -32,23 +31,11 @@ return [
                             ]
                         ]
                     ],
-                    'provider' => [
-                        'type' => 'segment',
-                        'options' => [
-                            'route' => '/provider/[:action]',
-                            'constraints' => [
-                                'action' => '[a-zA-Z][a-zA-Z0-9_-]*'
-                            ],
-                            'defaults' => [
-                                'controller' => AppntproviderController::class,
-                                'action' => 'index'
-                            ]
-                        ]
-                    ],
+                   
                     'search' => [
-                        'type' => 'segment',
+                        'type' =>  Segment::class,
                         'options' => [
-                            'route' => '/search/[:action]',
+                            'route' => '/search[/:action]',
                             'constraints' => [
                                 'action' => '[a-zA-Z][a-zA-Z0-9_-]*'
                             ],

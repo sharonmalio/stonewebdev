@@ -1,0 +1,13 @@
+<?php /* @var $this \Zend\View\Renderer\PhpRenderer */?>
+<div class="anchor_login_form">
+	<div class="page-header">
+		<h3 class="stone-darkslategray-title"><?php echo sprintf($this->translate('Sign In')); ?></h3>
+	</div>
+<?php echo $this->partial('forms/users/userLoginForm');?>
+<?php if ($this->isLoginError): ?>
+    <div class="alert alert-warning" role="alert">
+		Incorrect login and/or password. <a
+			href="<?php echo $this->url('resetpassword') ?>">Forgot password?</a>
+	</div>
+<?php endif; ?>
+</div>

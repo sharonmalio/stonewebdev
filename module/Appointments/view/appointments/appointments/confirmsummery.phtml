@@ -1,7 +1,17 @@
-<head>
+<?php /* @var $this \Zend\View\Renderer\PhpRenderer */?>
+<div id="form" class="margin" ></div>
+<?php
+$title = 'Confirm Details';
+$this->headTitle($title);
+?>
 <div style="color: black; font-size: 30px; text-align: center;">Please
 	confirm the details</div>
 </head>
+<head>
+
+<?php
+
+?>
 
 <div style="text-align: center">
 
@@ -22,8 +32,8 @@
 	</div>
 	<div style="width:500px; margin:0 auto;">
         <div class= "row">
-			<a href="pay" class=" btn btn-info btn-block"
-				> Confirm</a>
+			<a href="#" class=" btn btn-info btn-block" data-toggle="collapse">
+			Confirm</a></div>
 	</div>
     </div>
 

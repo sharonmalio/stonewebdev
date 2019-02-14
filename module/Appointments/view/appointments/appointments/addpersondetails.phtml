@@ -1,38 +1,40 @@
+<?php /* @var $this \Zend\View\Renderer\PhpRenderer */?>
 <div id="form" class="margin" ></div>
 
 <?php
 $title = 'Appointment';
 $this->headTitle($title);
 ?>
-<head>
 <div style = "color: black; font-size:30px; text-align: center;">Enter Person Details</div>
+<head>
+
 </head>
 <?php
 
-$form->prepare();
+$this->form->prepare();
 
-$first_name = $form->get('first_name');
+$first_name = $this->form->get('first_name');
 $first_name->setAttribute('class', 'form-control');
 $first_name->setAttribute('placeholder', 'First Name');
 $first_name->setAttribute('type', 'required');
 
-$second_name = $form->get('second_name');
+$second_name = $this->form->get('second_name');
 $second_name->setAttribute('class', 'form-control');
 $second_name->setAttribute('placeholder', 'Last Name');
 
-$phone_number = $form->get('phone_number');
+$phone_number = $this->form->get('phone_number');
 $phone_number->setAttribute('class', 'form-control');
 $phone_number->setAttribute('placeholder', 'Phone Number');
 
-$email = $form->get('email');
+$email = $this->form->get('email');
 $email->setAttribute('class', 'form-control');
 $email->setAttribute('placeholder', 'Email Address');
 
 // This provides CSS classes for the submit button:
-$submit = $form->get('submit');
-$submit->setAttribute('class', 'btn btn-primary');
+$submit = $this->form->get('submit');
+$submit->setAttribute('class', 'btn btn-primary btn-block');
 
-echo $this->form()->openTag($form);
+echo $this->form()->openTag($this->form);
 ?>
 
 <div class="form-group">
@@ -60,7 +62,7 @@ echo $this->form()->openTag($form);
     <?= $this->formElementErrors()->render($email, ['class' => 'help-block']) ?>
 
 
-
+</div>
 <?php
 echo $this->formSubmit($submit);
 

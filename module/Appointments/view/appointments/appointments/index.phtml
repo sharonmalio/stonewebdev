@@ -1,0 +1,69 @@
+<?php /* @var $this \Zend\View\Renderer\PhpRenderer */?>
+
+<div class="jumbotron ">
+    <h1>Online Appointment Booking</h1>
+    <p>
+     Book online appointments with your prefered doctor or clinic. You can also onnect with any doctor 
+     or fellow customers that you wish to as well as chat with them. 
+      
+    </p> 
+</div>
+<div class="container">
+<div class="row">
+    <div class="col-md-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Stoneweb</h3>
+            </div>
+            <div class="panel-body">
+               <p>
+                Stoneweb houses the appointments. This is where you get to schedule an application with your doctors.
+                This is also where you can view your appointments details as well as view all the available doctors
+                and also the available services offered by our doctors.
+                </p>
+
+                <p><a class="btn btn-primary pull-right zf-green "  href="<?php echo $this->basePath()?>/appointments/appointments/addpersondetails" target="_blank">Book Appointments</a></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Stonelink</h3>
+            </div>
+            <div class="panel-body">
+                <p>
+                  Shows a network of the available registered hospitals in Kenya displayed on a map for easy visualization.
+                  This platform enables one identify the hospitals near them and those that they might be interested into. 
+                </p>
+
+                <p><a class="btn btn-primary pull-right zf-green" href="<?php echo $this->basePath()?>/stonelink/stonelink" target="_blank">Stonelink</a></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Stonechat</h3>
+            </div>
+            <div class="panel-body">
+                <p>
+                   If you need any help or talking to any specialist or a colleague. We have a platform called <a href="https://stonechat.net/" target="_blank">Stonechat</a> for you.
+                   Please ensure that you register and post any burning questions in the platform. Use the button below to visit the page
+                </p>
+                <p><a class="btn btn-primary pull-right " href="https://stonechat.net/" target="_blank">Stonechat</a></p>
+            </div>
+        </div>
+    </div>
+    </div>
+      <script type="text/javascript">//for the nav bar
+function openNav() {
+	    document.getElementById("mySidenav").style.width = "200px";
+	}
+	/* Set the width of the side navigation to 0 */
+function closeNav() {
+	    document.getElementById("mySidenav").style.width = "0";
+	}</script>
+</div>
