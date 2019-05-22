@@ -10,19 +10,21 @@ GEM
       http_parser.rb (~> 0.6.0)
     eventmachine (1.2.5)
     eventmachine (1.2.5-x64-mingw32)
-    ffi (1.9.23)
+#     ffi (1.9.23)
+    ffi>= 1.9.24
     ffi (1.9.23-x64-mingw32)
     forwardable-extended (2.6.0)
     http_parser.rb (0.6.0)
     i18n (0.9.5)
       concurrent-ruby (~> 1.0)
-    jekyll (3.8.0)
+  jekyll>= 3.8.4
       addressable (~> 2.4)
       colorator (~> 1.0)
       em-websocket (~> 0.5)
       i18n (~> 0.7)
       jekyll-sass-converter (~> 1.0)
       jekyll-watch (~> 2.0)
+
       kramdown (~> 1.14)
       liquid (~> 4.0)
       mercenary (~> 0.3.3)
@@ -47,9 +49,10 @@ GEM
       ruby_dep (~> 1.2)
     mercenary (0.3.6)
     mini_portile2 (2.3.0)
-    nokogiri (1.8.2)
+   gem "nokogiri", ">= 1.8.5"
       mini_portile2 (~> 2.3.0)
     nokogiri (1.8.2-x64-mingw32)
+  
       mini_portile2 (~> 2.3.0)
     pathutil (0.16.1)
       forwardable-extended (~> 2.6)
